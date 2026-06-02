@@ -23,125 +23,93 @@
     <!-- Header -->
     <header class="bg-white border-b border-slate-200 sticky top-0 z-50">
         <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-            <a href="/zh/index.html" class="flex items-center space-x-2">
+            <a href="index.html" class="flex items-center space-x-2">
                 <img src="https://sc01.alicdn.com/kf/Sf065640f6d3c4b5bbacc4e3384e0a41ap.png" alt="Logo" class="h-8 w-auto">
                 <span class="text-xl font-bold tracking-tight text-industrial-navy">京建供应链</span>
             </a>
             <div class="flex items-center space-x-4">
                 <div class="flex items-center space-x-2 bg-slate-100 p-1 rounded-md text-xs font-bold">
-                    <a href="/lightbox-details.html" class="px-2 py-1 rounded hover:bg-white transition text-slate-400">日本語</a>
-                    <a href="/en/lightbox-details.html" class="px-2 py-1 rounded hover:bg-white transition text-slate-400">EN</a>
+                    <a href="../lightbox-details.html" class="px-2 py-1 rounded hover:bg-white transition text-slate-400">日本語</a>
+                    <a href="../en/lightbox-details.html" class="px-2 py-1 rounded hover:bg-white transition text-slate-400">EN</a>
                     <span class="px-2 py-1 rounded bg-white shadow-sm border border-slate-200 text-slate-900">中文</span>
                 </div>
             </div>
         </div>
     </header>
 
-    <!-- Product Hero -->
-    <section class="bg-white py-12 md:py-20">
-        <div class="container mx-auto px-4 flex flex-col md:flex-row items-center">
-            <div class="md:w-1/2 mb-10 md:mb-0 md:pr-12">
-                <span class="text-blue-600 font-bold text-sm tracking-widest uppercase">High Resolution Print</span>
-                <h1 class="text-3xl md:text-5xl font-bold mt-4 mb-6 leading-tight">
-                    灯箱画片<br>
-                    <span class="text-2xl md:text-3xl text-slate-600">让餐饮菜单，更加鲜艳。</span>
-                </h1>
-                <p class="text-slate-600 text-lg mb-8 leading-relaxed">
-                    专为内照式灯箱开发的超清胶片印刷。采用PET材质，在背光开启时色彩不发暗，最大程度还原菜品的诱人质感。耐热、防水处理，长期使用依然如新。
-                </p>
-                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-                    <a href="https://line.me/R/ti/p/@566wlcvz" class="line-button text-white px-8 py-4 rounded-lg font-bold text-center flex items-center justify-center">
+    <!-- Product Hero + Quick Specs Combined -->
+    <section class="bg-white py-10">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row gap-10">
+                <!-- Left: Visual -->
+                <div class="md:w-5/12">
+                    <img src="https://sc02.alicdn.com/kf/A008a51aaccb244b3bdf1d407b23ccb567.png" alt="Lightbox Film" class="rounded-xl shadow-lg w-full mb-4">
+                    <div class="grid grid-cols-2 gap-2 text-center text-[10px] font-bold text-slate-500">
+                        <div class="bg-slate-100 py-2 rounded">高透光PET</div>
+                        <div class="bg-slate-100 py-2 rounded">防水防紫外线</div>
+                    </div>
+                </div>
+                <!-- Right: Critical Info -->
+                <div class="md:w-7/12">
+                    <div class="flex items-center space-x-2 mb-4">
+                        <span class="bg-blue-100 text-blue-700 text-[10px] font-bold px-2 py-1 rounded">2400dpi超清</span>
+                        <span class="bg-emerald-100 text-emerald-700 text-[10px] font-bold px-2 py-1 rounded">耐热不变形</span>
+                        <span class="bg-slate-100 text-slate-700 text-[10px] font-bold px-2 py-1 rounded">餐饮看板专用</span>
+                    </div>
+                    <h1 class="text-3xl font-bold mb-4">灯箱画片<span class="text-slate-400 font-normal ml-2 text-xl">/ 餐饮·零售·影院</span></h1>
+                    <p class="text-slate-600 mb-6 text-sm leading-relaxed">
+                        专为内照式灯箱设计的超高像素喷绘胶片。采用顶级PET基材，即使在强光背投下也能保持色彩饱和度与极高的画质精度。
+                    </p>
+                    
+                    <div class="bg-slate-50 border border-slate-200 rounded-lg p-4 mb-6">
+                        <h2 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">技术规格 (Specs)</h2>
+                        <div class="grid grid-cols-2 gap-y-2 text-sm">
+                            <div class="text-slate-500">打印工艺</div><div class="font-medium text-slate-800">8色超清UV喷绘</div>
+                            <div class="text-slate-500">材质</div><div class="font-medium text-slate-800">PET灯箱专用胶片</div>
+                            <div class="text-slate-500">厚度</div><div class="font-medium text-slate-800">125μ / 175μ</div>
+                            <div class="text-slate-500">订制</div><div class="font-medium text-slate-800">支持自由尺寸剪裁</div>
+                        </div>
+                    </div>
+
+                    <a href="https://line.me/R/ti/p/@566wlcvz" class="line-button text-white w-full py-4 rounded-lg font-bold text-center flex items-center justify-center">
                         <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/LINE_logo.svg" class="w-6 h-6 mr-2" alt="LINE">
-                        数据入稿 · 询价咨询
+                        图纸入稿 · 询价 (LINE)
                     </a>
                 </div>
             </div>
-            <div class="md:w-1/2">
-                <img src="https://sc02.alicdn.com/kf/A008a51aaccb244b3bdf1d407b23ccb567.png" alt="Lightbox Details" class="rounded-2xl shadow-2xl w-full">
-            </div>
         </div>
     </section>
 
-    <!-- Key Features -->
-    <section class="py-16 bg-slate-900 text-white">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center mb-16">专业品质的秘密</h2>
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="text-center">
-                    <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl">💡</div>
-                    <h3 class="font-bold text-xl mb-3">高显色PET胶片</h3>
-                    <p class="text-slate-400 text-sm">经过透光率精确计算的专用胶片。内照时色彩饱满，画质生动。</p>
-                </div>
-                <div class="text-center">
-                    <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl">🎨</div>
-                    <h3 class="font-bold text-xl mb-3">高精细UV印刷</h3>
-                    <p class="text-slate-400 text-sm">能够还原细微文字及食物质感。耐候性极佳，不易褪色。</p>
-                </div>
-                <div class="text-center">
-                    <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl">🚿</div>
-                    <h3 class="font-bold text-xl mb-3">防水·防潮·耐热</h3>
-                    <p class="text-slate-400 text-sm">材质可抵御厨房附近的油烟与热气。方便在菜单更新时随时更换。</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Technical Specs -->
-    <section class="py-16 bg-white">
-        <div class="container mx-auto px-4 max-w-4xl">
-            <h2 class="text-2xl md:text-3xl font-bold text-center mb-12">产品规格</h2>
-            <div class="overflow-hidden border border-slate-200 rounded-xl">
-                <table class="w-full text-left">
-                    <tbody class="divide-y divide-slate-200">
-                        <tr>
-                            <th class="bg-slate-50 p-4 w-1/3 font-bold">介质材质</th>
-                            <td class="p-4">背光专用 PET胶片</td>
-                        </tr>
-                        <tr>
-                            <th class="bg-slate-50 p-4 font-bold">印刷方式</th>
-                            <td class="p-4">1200dpi 高精细UV印刷</td>
-                        </tr>
-                        <tr>
-                            <th class="bg-slate-50 p-4 font-bold">厚度</th>
-                            <td class="p-4">125μ / 185μ / 210μ (可选)</td>
-                        </tr>
-                        <tr>
-                            <th class="bg-slate-50 p-4 font-bold">最大印刷宽度</th>
-                            <td class="p-4">1500mm (长度可按卷材定制)</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </section>
-
-    <!-- Use Case Examples -->
-    <section class="py-16 bg-slate-50">
-        <div class="container mx-auto px-4">
-            <h2 class="text-2xl md:text-3xl font-bold text-center mb-12">应用案例与款式选择</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-                <div class="bg-white rounded-xl overflow-hidden shadow-sm">
-                    <img src="https://s.alicdn.com/@sc04/kf/H3bb284a070e04698b04a33b975f54b82M.jpg_640x640.jpg" alt="Semi Gloss PET" class="w-full h-64 object-cover">
-                    <div class="p-6">
-                        <h3 class="font-bold text-lg mb-2">灯箱菜单与餐饮海报</h3>
-                        <p class="text-slate-600 text-sm">采用高透光性PET薄膜，确保画面在背光状态下色彩鲜艳夺目。</p>
-                    </div>
-                </div>
-                <div class="bg-white rounded-xl overflow-hidden shadow-sm">
-                    <img src="https://s.alicdn.com/@sc04/kf/A7e2df3a0ae9047a580339d12bee5e6093.png_640x640.png" alt="UV Backlit" class="w-full h-64 object-cover">
-                    <div class="p-6">
-                        <h3 class="font-bold text-lg mb-2">大型织物拉布灯箱</h3>
-                        <p class="text-slate-600 text-sm">专用的织物UV打印技术，可实现大面积无缝拼接的视觉展示。</p>
-                    </div>
-                </div>
+    <!-- Project Gallery (Compact) -->
+    <section class="py-10 border-t border-slate-100 bg-slate-50">
+        <div class="container mx-auto px-4 text-center">
+            <h3 class="text-lg font-bold mb-6">应用案例展示</h3>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <img src="https://s.alicdn.com/@sc04/kf/H3bb284a070e04698b04a33b975f54b82M.jpg_640x640.jpg" class="aspect-square object-cover rounded-lg shadow-sm" alt="Case 1">
+                <img src="https://s.alicdn.com/@sc04/kf/H3bb284a070e04698b04a33b975f54b82M.jpg_640x640.jpg" class="aspect-square object-cover rounded-lg shadow-sm" alt="Case 2">
+                <img src="https://s.alicdn.com/@sc04/kf/H3bb284a070e04698b04a33b975f54b82M.jpg_640x640.jpg" class="aspect-square object-cover rounded-lg shadow-sm" alt="Case 3">
+                <img src="https://s.alicdn.com/@sc04/kf/H3bb284a070e04698b04a33b975f54b82M.jpg_640x640.jpg" class="aspect-square object-cover rounded-lg shadow-sm" alt="Case 4">
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-slate-900 text-slate-400 py-12 pb-24 md:pb-12 text-sm text-center">
+    <footer class="bg-white border-t border-slate-200 py-6 pb-24 md:pb-6">
         <div class="container mx-auto px-4">
-            <p>&copy; 2026 京建供应链. All Rights Reserved.</p>
+            <div class="flex flex-col md:flex-row justify-between items-center text-xs text-slate-500 space-y-4 md:space-y-0">
+                <div class="flex flex-col md:flex-row md:items-center md:space-x-4 space-y-1 md:space-y-0 text-center md:text-left">
+                    <span class="font-bold text-slate-800">京建不动产开发株式会社</span>
+                    <span>〒103-0027 中央区日本桥3-7-7-4F</span>
+                    <span>TEL: 03-6555-1306</span>
+                    <div class="space-x-2">
+                        <a href="../tokushoho.html" class="underline hover:text-blue-600">特定商业交易法</a>
+                        <a href="../legal.html" class="underline hover:text-blue-600">服务条款</a>
+                    </div>
+                </div>
+                <div class="text-slate-400">
+                    &copy; 2026 Kyoken Real Estate Development Co., Ltd.
+                </div>
+            </div>
         </div>
     </footer>
 
