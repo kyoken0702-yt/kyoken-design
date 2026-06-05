@@ -33,14 +33,14 @@
     </header>
 
     <!-- Hero -->
-    <section class="bg-industrial-navy text-white py-20 relative overflow-hidden">
+    <section class="bg-industrial-navy text-white py-20 relative overflow-hidden text-center md:text-left">
         <div class="container mx-auto px-4 relative z-10">
             <div class="max-w-3xl">
                 <h1 class="text-4xl md:text-5xl font-extrabold mb-6 leading-tight">中国建材の工場直販 ×<br>日本国内の現場サポート</h1>
                 <p class="text-lg text-slate-300 mb-8 leading-relaxed">京建サプライは、中国メーカーの圧倒的なコストメリットと、日本の施工現場で必要な「実測・設計・配送・取付」の安心感を両立させた、プロ向けサプライチェーンプラットフォームです。</p>
-                <div class="flex flex-wrap gap-4">
-                    <a href="#products" class="bg-white text-industrial-navy px-8 py-3 rounded-lg font-bold hover:bg-slate-100 transition">取扱製品を見る</a>
-                    <a href="https://line.me/R/ti/p/@566wlcvz" class="line-button text-white px-8 py-3 rounded-lg font-bold flex items-center">
+                <div class="flex flex-wrap justify-center md:justify-start gap-4">
+                    <a href="#products" class="bg-white text-industrial-navy px-8 py-3 rounded-lg font-bold hover:bg-slate-100 transition shadow-lg">取扱製品を見る</a>
+                    <a href="https://line.me/R/ti/p/@566wlcvz" class="line-button text-white px-8 py-3 rounded-lg font-bold flex items-center shadow-lg">
                         <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/LINE_logo.svg" class="w-5 h-5 mr-2" alt="LINE">
                         LINEで問い合わせ
                     </a>
@@ -49,8 +49,40 @@
         </div>
     </section>
 
+    <!-- Core Advantages (FIXED ALIGNMENT & ICONS) -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="p-8 bg-slate-50 rounded-3xl border border-slate-100 text-center flex flex-col items-center">
+                    <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-slate-800">【工場直販のコスト優位性】</h3>
+                    <p class="text-sm text-slate-500 leading-relaxed">中間業者を徹底排除。中国の優良メーカーから直接調達することで、圧倒的な低コストを実現します。</p>
+                </div>
+                <!-- Card 2 -->
+                <div class="p-8 bg-slate-50 rounded-3xl border border-slate-100 text-center flex flex-col items-center text-center">
+                    <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-slate-800">【日本現地の測定・施工】</h3>
+                    <p class="text-sm text-slate-500 leading-relaxed">単なる納品に留まらず、日本国内での実測、詳細設計、取付施工までを一貫してサポートいたします。</p>
+                </div>
+                <!-- Card 3 (FIXED) -->
+                <div class="p-8 bg-slate-50 rounded-3xl border border-slate-100 text-center flex flex-col items-center">
+                    <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H4a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-slate-800">【DDP現場直送・一貫管理】</h3>
+                    <p class="text-sm text-slate-500 leading-relaxed">複雑な輸出入、関税手続きは全てお任せください。中国の工場から日本の施工現場まで直送いたします。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Product Matrix -->
-    <section id="products" class="py-20">
+    <section id="products" class="py-20 bg-slate-50">
         <div class="container mx-auto px-4">
             <h2 class="text-3xl font-bold text-center mb-12">取り扱い製品マトリックス</h2>
             
@@ -61,8 +93,8 @@
                         <img src="https://sc04.alicdn.com/kf/S2f96f5a570a447ad94da1fff0dc46723i.png" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="Curtain">
                     </div>
                     <div class="p-4">
-                        <h3 class="font-bold text-slate-800">オーダーカーテン</h3>
-                        <p class="text-[10px] text-slate-400 mt-1">1級遮光・形状記憶加工・1.8倍ヒダ</p>
+                        <h3 class="font-bold text-slate-800 text-sm">オーダーカーテン</h3>
+                        <p class="text-[10px] text-slate-400 mt-1">1級遮光・形態安定加工・1.8倍ヒダ</p>
                         <span class="text-blue-600 text-xs font-bold mt-2 inline-block">詳細を見る →</span>
                     </div>
                 </a>
@@ -73,7 +105,7 @@
                         <img src="https://sc04.alicdn.com/kf/S8f949826a760439b9868772322307I.png" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="Acrylic Sign">
                     </div>
                     <div class="p-4">
-                        <h3 class="font-bold text-slate-800">アクリルサイン</h3>
+                        <h3 class="font-bold text-slate-800 text-sm">アクリルサイン</h3>
                         <p class="text-[10px] text-slate-400 mt-1">オフィス・店舗向け高級切り文字</p>
                         <span class="text-blue-600 text-xs font-bold mt-2 inline-block">詳細を見る →</span>
                     </div>
@@ -85,7 +117,7 @@
                         <img src="https://sc04.alicdn.com/kf/Sa390234149812349182390481230948O.png" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="Lightbox">
                     </div>
                     <div class="p-4">
-                        <h3 class="font-bold text-slate-800">バックライトフィルム</h3>
+                        <h3 class="font-bold text-slate-800 text-sm">バックライトフィルム</h3>
                         <p class="text-[10px] text-slate-400 mt-1">高精細UVプリント・内照式看板用</p>
                         <span class="text-blue-600 text-xs font-bold mt-2 inline-block">詳細を見る →</span>
                     </div>
@@ -97,7 +129,7 @@
                         <img src="https://sc04.alicdn.com/kf/S72384123904812309481203948123094O.png" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="PVC Sign">
                     </div>
                     <div class="p-4">
-                        <h3 class="font-bold text-slate-800">PVC看板・プレート</h3>
+                        <h3 class="font-bold text-slate-800 text-sm">PVC看板・プレート</h3>
                         <p class="text-[10px] text-slate-400 mt-1">案内板・駐車場サイン・低コスト看板</p>
                         <span class="text-blue-600 text-xs font-bold mt-2 inline-block">詳細を見る →</span>
                     </div>
@@ -109,8 +141,8 @@
                         <img src="https://sc04.alicdn.com/kf/Hfdca7def05104055851f6f16117c9e62a.jpg" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="Enamel">
                     </div>
                     <div class="p-4">
-                        <h3 class="font-bold text-slate-800">ホーローキッチンパネル</h3>
-                        <p class="text-[10px] text-slate-400 mt-1">耐火・防汚・マグネット収納対応</p>
+                        <h3 class="font-bold text-slate-800 text-sm">ホーローキッチンパネル</h3>
+                        <p class="text-[10px] text-slate-400 mt-1">耐火・防汚・磁石収納対応</p>
                         <span class="text-blue-600 text-xs font-bold mt-2 inline-block">詳細を見る →</span>
                     </div>
                 </a>
@@ -121,9 +153,9 @@
                         <img src="https://sc04.alicdn.com/kf/H7423904812309481239048123094812O.png" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="Acoustic">
                     </div>
                     <div class="p-4">
-                        <h3 class="font-bold text-slate-800">吸音フェルトパネル</h3>
+                        <h3 class="font-bold text-slate-800 text-sm">吸音フェルトパネル</h3>
                         <p class="text-[10px] text-slate-400 mt-1">オフィス環境の吸音・装飾・断熱</p>
-                        <span class="text-blue-600 text-xs font-bold mt-2 inline-block">详细を見る →</span>
+                        <span class="text-blue-600 text-xs font-bold mt-2 inline-block">詳細を見る →</span>
                     </div>
                 </a>
 
@@ -133,7 +165,7 @@
                         <img src="https://sc04.alicdn.com/kf/S2638b112aafe748ceb0c16d520ce4a1fc.jpg" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="WPC">
                     </div>
                     <div class="p-4">
-                        <h3 class="font-bold text-slate-800">屋外用人工木材 (WPC)</h3>
+                        <h3 class="font-bold text-slate-800 text-sm">屋外用人工木材 (WPC)</h3>
                         <p class="text-[10px] text-slate-400 mt-1">3D木目・高耐候・防腐防虫</p>
                         <span class="text-blue-600 text-xs font-bold mt-2 inline-block">详细を見る →</span>
                     </div>
@@ -141,7 +173,7 @@
 
                 <!-- 8. Contact Card -->
                 <div class="bg-industrial-navy rounded-xl p-6 flex flex-col justify-center items-center text-center">
-                    <p class="text-white text-xs mb-4">お探しの建材が見つかりませんか？</p>
+                    <p class="text-white text-[10px] mb-4">お探しの建材が見つかりませんか？</p>
                     <a href="https://line.me/R/ti/p/@566wlcvz" class="bg-white text-industrial-navy w-full py-2 rounded-lg font-bold text-[10px]">案件ごとに問い合わせ</a>
                 </div>
             </div>
@@ -152,8 +184,9 @@
     <footer class="bg-white border-t border-slate-200 py-10 pb-24 md:pb-10">
         <div class="container mx-auto px-4 text-center">
             <div class="text-xs text-slate-400">
-                <span class="font-bold text-slate-800">京建不動産開発株式会社</span> | 〒103-0027 中央区日本橋3-7-7-4F
-                <p class="mt-2">&copy; 2026 Kyoken Real Estate Development Co., Ltd.</p>
+                <span class="font-bold text-slate-800 uppercase tracking-widest">Kyoken Real Estate Development Co., Ltd.</span>
+                <p class="mt-2">〒103-0027 東京都中央区日本橋3-7-7-4F</p>
+                <p class="mt-1">&copy; 2026 Kyoken Real Estate Development Co., Ltd.</p>
             </div>
         </div>
     </footer>
