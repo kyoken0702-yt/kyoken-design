@@ -7,7 +7,7 @@
     <meta name="description" content="1级遮光、防炎认证、形状记忆加工。为您提供高标准、低成本方案。">
     <!-- Open Graph -->
     <meta property="og:title" content="オーダーカーテン | 京建サプライ">
-    <meta property="og:description" content="1级遮光、防炎认证、形状记忆加工。为您提供高标准、低成本方案。">
+    <meta property="og:description" content="1级遮光、防炎认证、形状記憶加工。为您提供高标准、低成本方案。">
     <meta property="og:image" content="https://sc02.alicdn.com/kf/Af7db278fe58e4e08b34a56079e7a4d78y.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
@@ -16,13 +16,9 @@
         .bg-industrial-navy { background-color: #1e293b; }
         .text-industrial-navy { color: #1e293b; }
         .line-button { background-color: #06C755; }
-        .config-card { border: 2px solid #f1f5f9; transition: all 0.2s; cursor: pointer; }
-        .config-card.active { border-color: #3b82f6; background-color: #eff6ff; }
-        .color-dot { width: 32px; height: 32px; border-radius: 50%; border: 2px solid white; box-shadow: 0 0 0 1px #e2e8f0; }
         .price-table { width: 100%; border-collapse: collapse; font-size: 11px; }
         .price-table th { background-color: #f8fafc; font-weight: bold; padding: 8px; border: 1px solid #e2e8f0; }
         .price-table td { padding: 8px; border: 1px solid #e2e8f0; text-align: center; }
-        .price-table tr:hover { background-color: #f1f5f9; }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800">
@@ -45,207 +41,145 @@
     </header>
 
     <!-- Product Hero -->
-    <section class="bg-white py-8">
+    <section class="bg-white py-10">
         <div class="container mx-auto px-4">
-            <div class="flex flex-col md:flex-row gap-10">
-                <!-- Left: Visual -->
-                <div class="md:w-5/12">
-                    <img src="https://sc01.alicdn.com/kf/S638b112aafe748ceb0c16d520ce4a1fcl.jpg" alt="Curtain" class="rounded-xl shadow-lg w-full mb-4">
-                    <div class="grid grid-cols-2 gap-2 text-center text-[10px] font-bold text-slate-500 uppercase tracking-tighter">
-                        <div class="bg-slate-100 py-2 rounded">JAPAN FIRE RETARDANT</div>
-                        <div class="bg-slate-100 py-2 rounded">99.99% BLACKOUT</div>
+            <div class="max-w-4xl mx-auto text-center mb-10">
+                <div class="flex justify-center items-center space-x-2 mb-4">
+                    <span class="bg-red-50 text-red-600 border border-red-200 text-[10px] font-bold px-2 py-1 rounded">工場直販</span>
+                    <span class="bg-blue-100 text-blue-700 text-[10px] font-bold px-2 py-1 rounded">1.8倍ヒダ贅沢仕様</span>
+                </div>
+                <h1 class="text-3xl font-bold mb-4">オーダーカーテン プレミアムセット</h1>
+                <p class="text-slate-600 text-sm leading-relaxed">
+                    日本の一般住宅に最適な3つの「2重セット（厚地+レース）」プランをご用意しました。
+                    <br>基本価格には本体・縫製・形態安定加工・配送が含まれます。
+                </p>
+            </div>
+
+            <!-- Major Plans (Restored Big Cards) -->
+            <div class="grid grid-cols-1 gap-6 mb-12">
+                <!-- Plan A -->
+                <div class="bg-white border-2 border-slate-100 rounded-2xl p-4 md:p-6 flex flex-col md:flex-row items-center gap-6 hover:border-blue-500 transition shadow-sm">
+                    <img src="https://sc04.alicdn.com/kf/S2f96f5a570a447ad94da1fff0dc46723i.png" class="w-full md:w-48 h-48 object-cover rounded-xl shadow-inner" alt="Plan A">
+                    <div class="flex-1 text-center md:text-left">
+                        <h3 class="text-xl font-bold text-slate-800 mb-2">Plan A: 標準腰窓セット</h3>
+                        <p class="text-xs text-slate-500 mb-4 leading-relaxed">日本の分譲住宅で最も一般的なサイズ。適度な透け感のレースと高密度遮光布のセットです。</p>
+                        <div class="inline-flex items-center space-x-4 text-xs bg-slate-50 px-3 py-2 rounded-lg">
+                            <span>目安：H140 × W200cm まで</span>
+                            <span class="text-blue-600 font-bold">1.8倍ヒダ / 形状記憶込</span>
+                        </div>
+                    </div>
+                    <div class="text-center md:text-right min-w-[150px]">
+                        <span class="text-[10px] text-slate-400 block leading-none">2重セット参考価格</span>
+                        <span class="text-3xl font-bold text-blue-600">¥15,800～</span>
+                        <span class="text-[10px] text-slate-400 block mt-1">（税込）</span>
                     </div>
                 </div>
-                <!-- Right: Configurator Simulation -->
-                <div class="md:w-7/12">
-                    <div class="flex items-center space-x-2 mb-2">
-                        <span class="bg-red-50 text-red-600 border border-red-200 text-[10px] font-bold px-2 py-1 rounded">工場直販</span>
-                        <span class="text-blue-600 text-xl font-bold">¥15,800～</span><span class="text-slate-400 text-xs">(税込)</span>
-                    </div>
-                    <h1 class="text-2xl font-bold mb-6">オーダーカーテン プレミアムセット</h1>
 
-                    <!-- STEP 1: Color -->
-                    <div class="mb-6">
-                        <label class="block text-xs font-bold text-slate-400 uppercase mb-3">01. カラーを選択</label>
-                        <div class="flex flex-wrap gap-4">
-                            <div class="text-center"><div class="color-dot bg-[#D2B48C] mb-1"></div><span class="text-[10px] text-slate-500">ベージュ</span></div>
-                            <div class="text-center"><div class="color-dot bg-[#4A5D68] mb-1"></div><span class="text-[10px] text-slate-500">ブルー</span></div>
-                            <div class="text-center"><div class="color-dot bg-[#6F4E37] mb-1 border-blue-500 ring-2 ring-blue-100"></div><span class="text-[10px] text-blue-600 font-bold">ブラウン</span></div>
-                            <div class="text-center"><div class="color-dot bg-[#8F9779] mb-1"></div><span class="text-[10px] text-slate-500">グリーン</span></div>
-                            <div class="text-center"><div class="color-dot bg-[#808080] mb-1"></div><span class="text-[10px] text-slate-500">グレー</span></div>
-                            <div class="text-center"><div class="color-dot bg-[#1A232E] mb-1"></div><span class="text-[10px] text-slate-500">ネイビー</span></div>
+                <!-- Plan B -->
+                <div class="bg-white border-2 border-slate-100 rounded-2xl p-4 md:p-6 flex flex-col md:flex-row items-center gap-6 hover:border-blue-500 transition shadow-sm">
+                    <img src="https://sc04.alicdn.com/kf/S864dac9df4254e6a9fee3b93d2724917V.jpg" class="w-full md:w-48 h-48 object-cover rounded-xl shadow-inner" alt="Plan B">
+                    <div class="flex-1 text-center md:text-left">
+                        <h3 class="text-xl font-bold text-slate-800 mb-2">Plan B: 出窓・ワイド窓セット</h3>
+                        <p class="text-xs text-slate-500 mb-4 leading-relaxed">奥行きのある出窓や、少し幅広の窓に対応。1.8倍ヒダによる深いウェーブが窓辺を彩ります。</p>
+                        <div class="inline-flex items-center space-x-4 text-xs bg-slate-50 px-3 py-2 rounded-lg">
+                            <span>目安：H140 × W300cm まで</span>
+                            <span class="text-blue-600 font-bold">1.8倍ヒダ / 形状記憶込</span>
                         </div>
                     </div>
-
-                    <!-- STEP 2: Style (Fixed to 1.8x) -->
-                    <div class="mb-6">
-                        <label class="block text-xs font-bold text-slate-400 uppercase mb-3">02. スタイル（ヒダ倍率）</label>
-                        <div class="grid grid-cols-1 gap-2">
-                            <div class="config-card active p-3 rounded flex justify-between items-center">
-                                <div>
-                                    <span class="block text-sm font-bold text-blue-600">1.8倍ヒダ（贅沢仕様）</span>
-                                    <span class="text-[10px] text-blue-400 text-left">美しさとコストの黄金比 / 形態安定加工 標準装備</span>
-                                </div>
-                                <svg class="w-5 h-5 text-blue-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-                            </div>
-                        </div>
+                    <div class="text-center md:text-right min-w-[150px]">
+                        <span class="text-[10px] text-slate-400 block leading-none">2重セット参考価格</span>
+                        <span class="text-3xl font-bold text-blue-600">¥18,800～</span>
+                        <span class="text-[10px] text-slate-400 block mt-1">（税込）</span>
                     </div>
-
-                    <!-- STEP 3: Size -->
-                    <div class="mb-8">
-                        <label class="block text-xs font-bold text-slate-400 uppercase mb-3">03. 概算サイズを入力 (cm)</label>
-                        <div class="flex items-center space-x-4">
-                            <div class="flex-1 relative">
-                                <span class="absolute left-3 top-2 text-[9px] text-slate-400 uppercase">幅 (W)</span>
-                                <input type="text" placeholder="200" class="w-full pt-6 pb-2 px-3 border border-slate-200 rounded text-sm focus:border-blue-500 outline-none">
-                            </div>
-                            <span class="text-slate-300">×</span>
-                            <div class="flex-1 relative">
-                                <span class="absolute left-3 top-2 text-[9px] text-slate-400 uppercase">丈 (H)</span>
-                                <input type="text" placeholder="200" class="w-full pt-6 pb-2 px-3 border border-slate-200 rounded text-sm focus:border-blue-500 outline-none">
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Price Reference Table (New: Mimicking Perfect Space) -->
-                    <div class="mb-8 overflow-hidden rounded-lg border border-slate-200">
-                        <div class="bg-slate-100 px-3 py-2 text-[10px] font-bold text-slate-600 flex justify-between items-center">
-                            <span>1.8倍ヒダ 2重セット価格表 (厚地+レース)</span>
-                            <span class="text-blue-600 italic">Factory Direct Price</span>
-                        </div>
-                        <div class="overflow-x-auto">
-                            <table class="price-table">
-                                <thead>
-                                    <tr>
-                                        <th class="w-20">丈 \ 幅(cm)</th>
-                                        <th>50～100</th>
-                                        <th>101～200</th>
-                                        <th>201～300</th>
-                                        <th>301～400</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <th>50～140</th>
-                                        <td>¥11,800</td>
-                                        <td class="bg-blue-50 font-bold">¥15,800～</td>
-                                        <td>¥26,800</td>
-                                        <td>¥35,800</td>
-                                    </tr>
-                                    <tr>
-                                        <th>141～200</th>
-                                        <td>¥16,800</td>
-                                        <td class="bg-blue-50 font-bold">¥24,800～</td>
-                                        <td>¥38,800</td>
-                                        <td>¥52,800</td>
-                                    </tr>
-                                    <tr>
-                                        <th>201～260</th>
-                                        <td>¥19,800</td>
-                                        <td>¥29,800</td>
-                                        <td>¥46,800</td>
-                                        <td>¥62,800</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="p-2 bg-slate-50 text-[9px] text-slate-400 text-right italic">
-                            ※価格は消費税込みです。特殊サイズはLINEにて別途お見積りいたします。
-                        </div>
-                    </div>
-
-                    <!-- Final Action -->
-                    <div class="bg-slate-900 p-4 rounded-xl shadow-xl">
-                        <a href="https://line.me/R/ti/p/@566wlcvz" class="line-button text-white w-full py-4 rounded-lg font-bold text-center flex items-center justify-center hover:opacity-90 transition">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/LINE_logo.svg" class="w-6 h-6 mr-2" alt="LINE">
-                            LINEで無料見積・相談
-                        </a>
-                        <p class="mt-3 text-center text-[10px] text-slate-400 uppercase tracking-widest">Multiple Window Discount Available</p>
-                    </div>
-
                 </div>
+
+                <!-- Plan C -->
+                <div class="bg-white border-2 border-blue-500 ring-2 ring-blue-50 rounded-2xl p-4 md:p-6 flex flex-col md:flex-row items-center gap-6 shadow-md relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-blue-500 text-white text-[9px] px-3 py-1 font-bold rounded-bl-lg">POPULAR</div>
+                    <img src="https://sc04.alicdn.com/kf/S77153923e157483b86eca11f1f4ddd3ds.png" class="w-full md:w-48 h-48 object-cover rounded-xl shadow-inner" alt="Plan C">
+                    <div class="flex-1 text-center md:text-left">
+                        <h3 class="text-xl font-bold text-slate-800 mb-2">Plan C: 掃き出し窓（落地窓）セット</h3>
+                        <p class="text-xs text-slate-500 mb-4 leading-relaxed">リビングの主役となる大型窓用。床までの美しいドレープを実現する贅沢な用料を使用。</p>
+                        <div class="inline-flex items-center space-x-4 text-xs bg-slate-50 px-3 py-2 rounded-lg">
+                            <span>目安：H200 × W200cm まで</span>
+                            <span class="text-blue-600 font-bold">1.8倍ヒダ / 形状記憶込</span>
+                        </div>
+                    </div>
+                    <div class="text-center md:text-right min-w-[150px]">
+                        <span class="text-[10px] text-slate-400 block leading-none">2重セット参考価格</span>
+                        <span class="text-3xl font-bold text-blue-600">¥24,800～</span>
+                        <span class="text-[10px] text-slate-400 block mt-1">（税込）</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Price Matrix -->
+            <div class="mb-16">
+                <h3 class="text-lg font-bold mb-6 text-center italic">1.8倍ヒダ 詳細価格マトリックス (厚地+レース)</h3>
+                <div class="overflow-x-auto rounded-xl border border-slate-200">
+                    <table class="price-table">
+                        <thead>
+                            <tr><th class="w-24">丈 \ 幅(cm)</th><th>～100</th><th>～200</th><th>～300</th><th>～400</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><th>～140</th><td>¥11,800</td><td class="bg-blue-50 font-bold">¥15,800</td><td>¥26,800</td><td>¥35,800</td></tr>
+                            <tr><th>～200</th><td>¥16,800</td><td class="bg-blue-50 font-bold">¥24,800</td><td>¥38,800</td><td>¥52,800</td></tr>
+                            <tr><th>～260</th><td>¥19,800</td><td>¥29,800</td><td>¥46,800</td><td>¥62,800</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Color & Fabric (The 3 Images) -->
+            <div class="py-12 border-t border-slate-100">
+                <h3 class="text-2xl font-bold text-center mb-10 text-industrial-navy text-[20px]">カラーバリエーション & 素材</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <img src="https://sc04.alicdn.com/kf/Sa86f6b4d2467459a9715c76cb7de2ebev.jpg" class="w-full rounded-xl shadow-md" alt="Color 1">
+                    <img src="https://sc04.alicdn.com/kf/Sf2b52eb6414f416c8a1b49e54189cb09p.jpg" class="w-full rounded-xl shadow-md" alt="Color 2">
+                    <img src="https://sc04.alicdn.com/kf/Sd494812825694c4d9562e9af95bdff54c.jpg" class="w-full rounded-xl shadow-md" alt="Fabric chips">
+                </div>
+            </div>
+
+            <!-- Action Area -->
+            <div class="bg-slate-900 rounded-3xl p-8 text-center text-white mt-12 shadow-2xl">
+                <h3 class="text-xl font-bold mb-4">お見積り・お問い合わせ</h3>
+                <p class="text-sm text-slate-400 mb-8 max-w-xl mx-auto">既存レールの有無、穴あけ可否、特殊サイズなど、現場に合わせて最適なプランをご提案します。LINEで写真を送るだけで概算見積が可能です。</p>
+                <a href="https://line.me/R/ti/p/@566wlcvz" class="line-button text-white px-10 py-4 rounded-xl font-bold inline-flex items-center text-lg shadow-lg hover:scale-105 transition duration-300">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/LINE_logo.svg" class="w-7 h-7 mr-3" alt="LINE">
+                    LINEで無料見積・相談
+                </a>
             </div>
         </div>
     </section>
 
-    <!-- Why Us Section -->
-    <section class="py-12 bg-slate-50 border-t border-slate-100">
-        <div class="container mx-auto px-4 max-w-5xl">
-            <h2 class="text-2xl font-bold text-center mb-12">高品質へのこだわり <span class="block text-sm text-slate-400 font-normal mt-2">Professional Specifications</span></h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-                <div class="bg-white p-6 rounded-2xl shadow-sm">
-                    <div class="bg-blue-50 w-12 h-12 rounded-full flex items-center justify-center mb-4"><svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 18v1m9-9h-1M3 12h-1m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.364l-.707-.707M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg></div>
-                    <h3 class="font-bold mb-2">1級遮光 (99.99%+)</h3>
-                    <p class="text-xs text-slate-500 leading-relaxed">日中でも光を完全に遮り、プライバシーと安眠を守ります。西日の強い窓や寝室に最適です。</p>
+    <!-- Measurement Section -->
+    <section class="py-16 bg-slate-50 border-y border-slate-200">
+        <div class="container mx-auto px-4 max-w-4xl text-center">
+            <h3 class="text-2xl font-bold mb-12">採寸ガイド <span class="text-slate-400 font-normal">/ Measuring Guide</span></h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <div>
+                    <h4 class="font-bold mb-4">01. 横幅 (W) の測り方</h4>
+                    <img src="https://perfectspace.itembox.cloud/item/img/f/f_cu_measure_w.png" class="w-full mb-4 rounded-xl border border-slate-100" alt="Measure W">
+                    <p class="text-xs text-slate-500">固定ランナー間の距離を測定。余白は弊社で計算します。</p>
                 </div>
-                <div class="bg-white p-6 rounded-2xl shadow-sm">
-                    <div class="bg-emerald-50 w-12 h-12 rounded-full flex items-center justify-center mb-4"><svg class="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg></div>
-                    <h3 class="font-bold mb-2">形態安定加工 (標準)</h3>
-                    <p class="text-xs text-slate-500 leading-relaxed">熱セットによる形状記憶加工を全品に。洗濯を繰り返しても、美しいウェーブが持続します。</p>
+                <div>
+                    <h4 class="font-bold mb-4">02. 高さ (H) の測り方</h4>
+                    <img src="https://perfectspace.itembox.cloud/item/img/f/f_cu_measure_h.png" class="w-full mb-4 rounded-xl border border-slate-100" alt="Measure H">
+                    <p class="text-xs text-slate-500">掃き出し窓は床から-1cm。腰窓は窓枠から+15cm。</p>
                 </div>
-                <div class="bg-white p-6 rounded-2xl shadow-sm">
-                    <div class="bg-orange-50 w-12 h-12 rounded-full flex items-center justify-center mb-4"><svg class="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.642.321a2 2 0 01-1.584 0l-.642-.321a6 6 0 00-3.86-.517l-2.387.477a2 2 0 00-1.022.547l-.34.34a2 2 0 000 2.828l1.245 1.245a2 2 0 002.828 0l.547-.547a2 2 0 011.022-.547l2.387-.477a6 6 0 013.86.517l.642.321a2 2 0 001.584 0l.642-.321a6 6 0 013.86-.517l2.387.477a2 2 0 011.022.547l.34.34a2 2 0 010 2.828l-1.245 1.245a2 2 0 01-2.828 0l-.547-.547a2 2 0 00-1.022-.547"></path></svg></div>
-                    <h3 class="font-bold mb-2">1.8倍ヒダの美学</h3>
-                    <p class="text-xs text-slate-500 leading-relaxed">一般的な1.5倍より深く、2倍より軽やか。現代日本のインテリアに最も馴染む波形を実現。</p>
-                </div>
-            </div>
-
-            <!-- Measurement Section -->
-            <div class="bg-white rounded-3xl p-8 shadow-sm border border-slate-100">
-                <h3 class="text-xl font-bold mb-8 flex items-center"><span class="bg-industrial-navy text-white text-xs px-2 py-1 rounded mr-3">STEP BY STEP</span> 採寸・注文の流れ</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-                    <div>
-                        <div class="flex items-center space-x-3 mb-4">
-                            <span class="text-2xl font-black text-slate-200 italic">01</span>
-                            <h4 class="font-bold">横幅 (W) を測る</h4>
-                        </div>
-                        <img src="https://perfectspace.itembox.cloud/item/img/f/f_cu_measure_w.png" class="w-full mb-4 bg-slate-50 rounded-xl" alt="Measure Width">
-                        <p class="text-xs text-slate-600">レールの両端にある「固定ランナー」の距離を測ります。余裕分(x1.05)はこちらで計算しますので、実寸をお知らせください。</p>
-                    </div>
-                    <div>
-                        <div class="flex items-center space-x-3 mb-4">
-                            <span class="text-2xl font-black text-slate-200 italic">02</span>
-                            <h4 class="font-bold">高さ (H) を測る</h4>
-                        </div>
-                        <img src="https://perfectspace.itembox.cloud/item/img/f/f_cu_measure_h.png" class="w-full mb-4 bg-slate-50 rounded-xl" alt="Measure Height">
-                        <p class="text-xs text-slate-600"><b>掃き出し窓：</b>床から-1cm<br><b>腰窓：</b>窓枠から+15cm<br>が標準的な美しい仕上がりです。</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Case Grid -->
-    <section class="py-12 bg-white border-t border-slate-100">
-        <div class="container mx-auto px-4 text-center">
-            <h3 class="text-lg font-bold mb-8">施工イメージ</h3>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <img src="https://sc04.alicdn.com/kf/Hd64af2046b8044a7ab8489a996d3cdd3b.jpg" class="aspect-square object-cover rounded-lg shadow-sm" alt="Case 1">
-                <img src="https://sc04.alicdn.com/kf/S2f96f5a570a447ad94da1fff0dc46723i.png" class="aspect-square object-cover rounded-lg shadow-sm" alt="Case 2">
-                <img src="https://sc04.alicdn.com/kf/S864dac9df4254e6a9fee3b93d2724917V.jpg" class="aspect-square object-cover rounded-lg shadow-sm" alt="Case 3">
-                <img src="https://sc04.alicdn.com/kf/S77153923e157483b86eca11f1f4ddd3ds.png" class="aspect-square object-cover rounded-lg shadow-sm" alt="Case 5">
             </div>
         </div>
     </section>
 
     <!-- Footer -->
     <footer class="bg-white border-t border-slate-200 py-6 pb-24 md:pb-6">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-col md:flex-row justify-between items-center text-xs text-slate-500 space-y-4 md:space-y-0 text-center md:text-left">
-                <div class="flex flex-col md:flex-row md:items-center md:space-x-4 space-y-1 md:space-y-0">
-                    <span class="font-bold text-slate-800">京建不動産開発株式会社</span>
-                    <span>〒103-0027 中央区日本橋3-7-7-4F</span>
-                    <span>TEL: 03-6555-1306</span>
-                    <div class="space-x-2">
-                        <a href="tokushoho.html" class="underline hover:text-blue-600">特定商取引法</a>
-                        <a href="legal.html" class="underline hover:text-blue-600">利用規約</a>
-                    </div>
-                </div>
-                <div class="text-slate-400">
-                    &copy; 2026 Kyoken Real Estate Development Co., Ltd.
-                </div>
+        <div class="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center text-xs text-slate-500">
+            <div class="flex flex-col md:flex-row md:items-center md:space-x-4 space-y-1 md:space-y-0 text-center md:text-left">
+                <span class="font-bold text-slate-800">京建不動産開発株式会社</span>
+                <span>〒103-0027 中央区日本橋3-7-7-4F</span>
+                <span>TEL: 03-6555-1306</span>
             </div>
+            <div class="text-slate-400 mt-4 md:mt-0">&copy; 2026 Kyoken Real Estate Development Co., Ltd.</div>
         </div>
     </footer>
 
