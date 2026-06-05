@@ -16,6 +16,9 @@
         .bg-industrial-navy { background-color: #1e293b; }
         .text-industrial-navy { color: #1e293b; }
         .line-button { background-color: #06C755; }
+        .config-card { border: 2px solid #f1f5f9; transition: all 0.2s; cursor: pointer; }
+        .config-card.active { border-color: #3b82f6; background-color: #eff6ff; }
+        .color-dot { width: 32px; height: 32px; border-radius: 50%; border: 2px solid white; box-shadow: 0 0 0 1px #e2e8f0; }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800">
@@ -37,8 +40,8 @@
         </div>
     </header>
 
-    <!-- Product Hero + Quick Specs Combined -->
-    <section class="bg-white py-10">
+    <!-- Product Hero -->
+    <section class="bg-white py-8">
         <div class="container mx-auto px-4">
             <div class="flex flex-col md:flex-row gap-10">
                 <!-- Left: Visual -->
@@ -49,190 +52,183 @@
                         <div class="bg-slate-100 py-2 rounded">99.99% BLACKOUT</div>
                     </div>
                 </div>
-                <!-- Right: Critical Info -->
+                <!-- Right: Configurator Simulation -->
                 <div class="md:w-7/12">
-                    <div class="flex items-center space-x-2 mb-4">
+                    <div class="flex items-center space-x-2 mb-2">
                         <span class="bg-red-50 text-red-600 border border-red-200 text-[10px] font-bold px-2 py-1 rounded">Factory Direct</span>
-                        <span class="bg-blue-100 text-blue-700 text-[10px] font-bold px-2 py-1 rounded">Class 1 Blackout</span>
-                        <span class="bg-emerald-100 text-emerald-700 text-[10px] font-bold px-2 py-1 rounded">1.8x Fullness</span>
-                        <span class="bg-slate-100 text-slate-700 text-[10px] font-bold px-2 py-1 rounded">Shape Memory</span>
+                        <span class="text-blue-600 text-xl font-bold">¥15,800～</span><span class="text-slate-400 text-xs">(Tax Incl.)</span>
                     </div>
-                    <h1 class="text-3xl font-bold mb-4">Custom Curtains<span class="text-slate-400 font-normal ml-2 text-xl">/ Double-Set Reference Price</span></h1>
-                    <p class="text-slate-600 mb-6 text-sm leading-relaxed">
-                        Optimized "Drape + Sheer" set for Japanese housing. Prices include product, sewing, shape memory, and basic logistics. The listed price applies to standard residential windows where an existing curtain rail or curtain rod is already installed and the curtains can be hung directly. Special installation, new rail installation, rail replacement, high windows, difficult wall materials, removal work, or commercial/multiple-window projects will be quoted separately.
-                    </p>
-                    
-                    <div class="grid grid-cols-1 gap-4 mb-6">
-                        <!-- Plan A -->
-                        <div class="bg-white border-2 border-slate-100 rounded-lg p-3 flex justify-between items-center hover:border-blue-500 transition cursor-pointer">
-                            <div class="flex items-center space-x-3">
-                                <img src="https://sc04.alicdn.com/kf/S2f96f5a570a447ad94da1fff0dc46723i.png" class="w-16 h-16 object-cover rounded border border-slate-100" alt="Plan A">
-                                <div>
-                                    <div class="flex items-center space-x-1 mb-1">
-                                        <svg class="w-3 h-3 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5h16v14H4zM4 10h16M12 5v14"></path></svg>
-                                        <h3 class="font-bold text-slate-800 text-sm">Plan A: Standard Window</h3>
-                                    </div>
-                                    <p class="text-[10px] text-blue-600 font-bold">Drape x1 + Sheer x1 (Set)</p>
-                                    <p class="text-[9px] text-slate-500">Approx: H1200 × W1300mm</p>
-                                </div>
-                            </div>
-                            <div class="text-right">
-                                <span class="text-[10px] text-slate-400 block leading-none">Base Set Price</span>
-                                <span class="text-xl font-bold text-blue-600">¥15,800～</span>
-                                <span class="text-[10px] text-slate-400">(Tax Incl.)</span>
-                            </div>
+                    <h1 class="text-2xl font-bold mb-6">Custom Curtain Premium Set</h1>
+
+                    <!-- STEP 1: Color -->
+                    <div class="mb-6">
+                        <label class="block text-xs font-bold text-slate-400 uppercase mb-3">01. Select Color</label>
+                        <div class="flex flex-wrap gap-4">
+                            <div class="text-center"><div class="color-dot bg-[#D2B48C] mb-1"></div><span class="text-[10px] text-slate-500">Beige</span></div>
+                            <div class="text-center"><div class="color-dot bg-[#4A5D68] mb-1"></div><span class="text-[10px] text-slate-500">Blue</span></div>
+                            <div class="text-center"><div class="color-dot bg-[#6F4E37] mb-1 border-blue-500 ring-2 ring-blue-100"></div><span class="text-[10px] text-blue-600 font-bold">Brown</span></div>
+                            <div class="text-center"><div class="color-dot bg-[#8F9779] mb-1"></div><span class="text-[10px] text-slate-500">Green</span></div>
+                            <div class="text-center"><div class="color-dot bg-[#808080] mb-1"></div><span class="text-[10px] text-slate-500">Grey</span></div>
+                            <div class="text-center"><div class="color-dot bg-[#1A232E] mb-1"></div><span class="text-[10px] text-slate-500">Navy</span></div>
                         </div>
-                        <!-- Plan B -->
-                        <div class="bg-white border-2 border-slate-100 rounded-lg p-3 flex justify-between items-center hover:border-blue-500 transition cursor-pointer">
-                            <div class="flex items-center space-x-3">
-                                <img src="https://sc04.alicdn.com/kf/S864dac9df4254e6a9fee3b93d2724917V.jpg" class="w-16 h-16 object-cover rounded border border-slate-100" alt="Plan B">
-                                <div>
-                                    <div class="flex items-center space-x-1 mb-1">
-                                        <svg class="w-3 h-3 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 19h18M3 19l2-8h14l2 8M5 11l2-6h10l2 6M12 5v14"></path></svg>
-                                        <h3 class="font-bold text-slate-800 text-sm">Plan B: Bay Window</h3>
-                                    </div>
-                                    <p class="text-[10px] text-blue-600 font-bold">Drape x1 + Sheer x1 (Set)</p>
-                                    <p class="text-[9px] text-slate-500">Approx: H1200 × W1500mm</p>
-                                </div>
-                            </div>
-                            <div class="text-right">
-                                <span class="text-[10px] text-slate-400 block leading-none">Base Set Price</span>
-                                <span class="text-xl font-bold text-blue-600">¥18,800～</span>
-                                <span class="text-[10px] text-slate-400">(Tax Incl.)</span>
-                            </div>
+                    </div>
+
+                    <!-- STEP 2: Style -->
+                    <div class="mb-6">
+                        <div class="flex justify-between items-center mb-3">
+                            <label class="block text-xs font-bold text-slate-400 uppercase">02. Pleat Style</label>
+                            <span class="text-blue-500 text-[10px] cursor-pointer underline">Style Guide</span>
                         </div>
-                        <!-- Plan C -->
-                        <div class="bg-white border-2 border-slate-100 rounded-lg p-3 flex justify-between items-center hover:border-blue-500 transition cursor-pointer">
-                            <div class="flex items-center space-x-3">
-                                <img src="https://sc04.alicdn.com/kf/S77153923e157483b86eca11f1f4ddd3ds.png" class="w-16 h-16 object-cover rounded border border-slate-100" alt="Plan C">
-                                <div>
-                                    <div class="flex items-center space-x-1 mb-1">
-                                        <svg class="w-3 h-3 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 2h8v20H8zM8 11h8M12 2v20"></path></svg>
-                                        <h3 class="font-bold text-slate-800 text-sm">Plan C: Patio Window</h3>
-                                    </div>
-                                    <p class="text-[10px] text-blue-600 font-bold">Drape x1 + Sheer x1 (Set)</p>
-                                    <p class="text-[9px] text-slate-500">Approx: H2000 × W1800mm</p>
-                                </div>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
+                            <div class="config-card p-2 rounded text-center">
+                                <span class="block text-xs font-bold">1.5x Fullness</span>
+                                <span class="text-[9px] text-slate-400">Standard</span>
                             </div>
-                            <div class="text-right">
-                                <span class="text-[10px] text-slate-400 block leading-none">Base Set Price</span>
-                                <span class="text-xl font-bold text-blue-600">¥24,800～</span>
-                                <span class="text-[10px] text-slate-400">(Tax Incl.)</span>
+                            <div class="config-card active p-2 rounded text-center">
+                                <span class="block text-xs font-bold text-blue-600">1.8x Fullness</span>
+                                <span class="text-[9px] text-blue-400">Luxury / Rec.</span>
+                            </div>
+                            <div class="config-card p-2 rounded text-center">
+                                <span class="block text-xs font-bold">Flat Style</span>
+                                <span class="text-[9px] text-slate-400">No Pleats</span>
+                            </div>
+                            <div class="config-card p-2 rounded text-center">
+                                <span class="block text-xs font-bold">Pole Through</span>
+                                <span class="text-[9px] text-slate-400">Tension Rod</span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Specs -->
-                    <div class="bg-slate-50 border border-slate-200 rounded-lg p-4 mb-6">
-                        <h2 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Premium Specs</h2>
-                        <div class="grid grid-cols-2 gap-y-2 text-sm">
-                            <div class="text-slate-500">Blackout Rate</div><div class="font-medium text-slate-800">Class 1 (99.99%+)</div>
-                            <div class="text-slate-500">Shape Memory</div><div class="font-medium text-slate-800 text-blue-600">Standard (Heat-set processing)</div>
-                            <div class="text-slate-500 font-bold text-slate-800">Fullness Ratio</div><div class="font-bold text-blue-600">1.8x Fullness (Luxury Spec)</div>
-                            <div class="text-slate-500">Included</div><div class="font-medium text-slate-800">Matching Tassels / Adj. Hooks</div>
+                    <!-- STEP 3: Size -->
+                    <div class="mb-6">
+                        <label class="block text-xs font-bold text-slate-400 uppercase mb-3">03. Enter Dimensions (cm)</label>
+                        <div class="flex items-center space-x-4">
+                            <div class="flex-1 relative">
+                                <span class="absolute left-3 top-2 text-[9px] text-slate-400 uppercase">Width (W)</span>
+                                <input type="text" placeholder="200" class="w-full pt-6 pb-2 px-3 border border-slate-200 rounded text-sm focus:border-blue-500 outline-none">
+                            </div>
+                            <span class="text-slate-300">×</span>
+                            <div class="flex-1 relative">
+                                <span class="absolute left-3 top-2 text-[9px] text-slate-400 uppercase">Height (H)</span>
+                                <input type="text" placeholder="200" class="w-full pt-6 pb-2 px-3 border border-slate-200 rounded text-sm focus:border-blue-500 outline-none">
+                            </div>
                         </div>
-                        <p class="mt-3 text-[10px] text-slate-400 leading-tight border-t border-slate-200 pt-2">
-                            *The base price applies to windows with existing rails where curtains can be hung directly without drilling.
-                        </p>
+                        <p class="mt-2 text-[10px] text-blue-500">※Order size (x1.05 allowance) will be calculated automatically.</p>
                     </div>
 
-                    <div class="bg-emerald-50 border-l-4 border-emerald-500 p-4 mb-6">
-                        <h4 class="text-xs font-bold text-emerald-800 uppercase mb-1">Optional Japan Support</h4>
-                        <div class="grid grid-cols-1 gap-2 text-[11px] text-emerald-700">
-                            <div class="flex justify-between"><span>・Measurement (Tokyo 23)</span><span class="font-bold">¥8,800～</span></div>
-                            <div class="flex justify-between"><span>・Installation (Std. Window)</span><span class="font-bold">¥5,500～ / win</span></div>
+                    <!-- STEP 4: Opening & Hook -->
+                    <div class="grid grid-cols-2 gap-4 mb-8">
+                        <div>
+                            <label class="block text-[10px] font-bold text-slate-400 mb-2">Opening Type</label>
+                            <div class="grid grid-cols-2 gap-1">
+                                <div class="bg-blue-50 border border-blue-500 text-[10px] py-2 rounded text-center font-bold">Double</div>
+                                <div class="bg-white border border-slate-100 text-[10px] py-2 rounded text-center">Single</div>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold text-slate-400 mb-2">Hook Type</label>
+                            <div class="grid grid-cols-2 gap-1">
+                                <div class="bg-blue-50 border border-blue-500 text-[10px] py-2 rounded text-center font-bold">A Hook</div>
+                                <div class="bg-white border border-slate-100 text-[10px] py-2 rounded text-center">B Hook</div>
+                            </div>
                         </div>
                     </div>
+
+                    <!-- Final Action -->
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                        <div class="flex justify-between items-center mb-4">
+                            <div>
+                                <span class="text-[10px] text-slate-500">Estimated Price (Per Window)</span>
+                                <div class="text-2xl font-bold text-slate-900">¥15,800～ <span class="text-xs font-normal text-slate-400">(Tax Incl.)</span></div>
+                            </div>
+                            <div class="text-right">
+                                <span class="bg-blue-600 text-white text-[9px] px-2 py-1 rounded">Shape Memory Incl.</span>
+                            </div>
+                        </div>
+                        <a href="https://line.me/R/ti/p/@566wlcvz" class="line-button text-white w-full py-4 rounded-lg font-bold text-center flex items-center justify-center hover:opacity-90 transition">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/LINE_logo.svg" class="w-6 h-6 mr-2" alt="LINE">
+                            Consult with these Specs (LINE)
+                        </a>
+                        <p class="mt-3 text-center text-[10px] text-slate-400">Volume discounts apply for multiple windows or whole-house projects.</p>
+                    </div>
+
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Measurement Guide (Added Step-by-Step) -->
-    <section class="py-12 bg-slate-50 border-y border-slate-200">
-        <div class="container mx-auto px-4 max-w-4xl">
-            <h3 class="text-2xl font-bold text-center mb-10">Measurement Guide <span class="text-slate-400 font-normal text-lg">/ How to Measure</span></h3>
+    <!-- Why Us Section (Mimicking Perfect Space) -->
+    <section class="py-12 bg-slate-50 border-t border-slate-100">
+        <div class="container mx-auto px-4 max-w-5xl">
+            <h2 class="text-2xl font-bold text-center mb-12">Quality & Professional Specs <span class="block text-sm text-slate-400 font-normal mt-2">Why Sourcing with Kyoken Supply</span></h2>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- Width -->
-                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
-                    <div class="flex items-center space-x-3 mb-4">
-                        <span class="bg-industrial-navy text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm">01</span>
-                        <h4 class="font-bold">Width (W) Measurement</h4>
-                    </div>
-                    <img src="https://perfectspace.itembox.cloud/item/img/f/f_cu_measure_w.png" class="w-full h-auto mb-4 rounded bg-slate-50" alt="Width Measure">
-                    <p class="text-xs text-slate-600 leading-relaxed">
-                        Measure the distance between the <b>fixed runners (static hooks)</b> at both ends of the rail.
-                        <br><span class="text-blue-600 font-bold">※Order Size = Measured Size × 1.05 (Allowance)</span>
-                    </p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+                <div class="bg-white p-6 rounded-2xl shadow-sm">
+                    <div class="bg-blue-50 w-12 h-12 rounded-full flex items-center justify-center mb-4"><svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 18v1m9-9h-1M3 12h-1m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.364l-.707-.707M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg></div>
+                    <h3 class="font-bold mb-2">Class 1 Blackout (99.99%+)</h3>
+                    <p class="text-xs text-slate-500 leading-relaxed">Block out light completely for privacy and better sleep. Ideal for west-facing windows and bedrooms.</p>
                 </div>
-
-                <!-- Height -->
-                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
-                    <div class="flex items-center space-x-3 mb-4">
-                        <span class="bg-industrial-navy text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm">02</span>
-                        <h4 class="font-bold">Height (H) Measurement</h4>
-                    </div>
-                    <img src="https://perfectspace.itembox.cloud/item/img/f/f_cu_measure_h.png" class="w-full h-auto mb-4 rounded bg-slate-50" alt="Height Measure">
-                    <div class="space-y-3 text-xs text-slate-600">
-                        <p class="border-b border-slate-100 pb-2"><b>● Patio Window</b><br>Measure from hook ring to floor, then subtract <span class="text-red-600 font-bold">1cm</span>.</p>
-                        <p><b>● Waist-high Window</b><br>Measure from hook ring to window frame bottom, then add <span class="text-blue-600 font-bold">15cm</span>.</p>
-                    </div>
+                <div class="bg-white p-6 rounded-2xl shadow-sm">
+                    <div class="bg-emerald-50 w-12 h-12 rounded-full flex items-center justify-center mb-4"><svg class="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg></div>
+                    <h3 class="font-bold mb-2">Shape Memory Standard</h3>
+                    <p class="text-xs text-slate-500 leading-relaxed">High-heat set processing included as standard. Waves stay crisp and professional even after repeated washing.</p>
+                </div>
+                <div class="bg-white p-6 rounded-2xl shadow-sm">
+                    <div class="bg-orange-50 w-12 h-12 rounded-full flex items-center justify-center mb-4"><svg class="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.642.321a2 2 0 01-1.584 0l-.642-.321a6 6 0 00-3.86-.517l-2.387.477a2 2 0 00-1.022.547l-.34.34a2 2 0 000 2.828l1.245 1.245a2 2 0 002.828 0l.547-.547a2 2 0 011.022-.547l2.387-.477a6 6 0 013.86.517l.642.321a2 2 0 001.584 0l.642-.321a6 6 0 013.86-.517l2.387.477a2 2 0 011.022.547l.34.34a2 2 0 010 2.828l-1.245 1.245a2 2 0 01-2.828 0l-.547-.547a2 2 0 00-1.022-.547"></path></svg></div>
+                    <h3 class="font-bold mb-2">1.8x Fullness Aesthetics</h3>
+                    <p class="text-xs text-slate-500 leading-relaxed">Deeper than standard 1.5x, lighter than heavy 2.0x. The golden ratio for modern Japanese interiors.</p>
                 </div>
             </div>
 
-            <!-- Hook Type -->
-            <div class="mt-8 bg-white p-6 rounded-xl shadow-sm border border-slate-100">
-                <div class="flex items-center space-x-3 mb-4">
-                    <span class="bg-industrial-navy text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm">03</span>
-                    <h4 class="font-bold">Hook Type Choice (A or B)</h4>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="flex items-start space-x-4">
-                        <div class="bg-slate-100 p-2 rounded text-center min-w-[80px]">
-                            <span class="text-xl font-bold">A</span><br><span class="text-[10px]">Hook</span>
+            <!-- Measurement Section -->
+            <div class="bg-white rounded-3xl p-8 shadow-sm border border-slate-100">
+                <h3 class="text-xl font-bold mb-8 flex items-center"><span class="bg-industrial-navy text-white text-xs px-2 py-1 rounded mr-3">STEP BY STEP</span> Ordering Process</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                    <div>
+                        <div class="flex items-center space-x-3 mb-4">
+                            <span class="text-2xl font-black text-slate-200 italic">01</span>
+                            <h4 class="font-bold">Measure Width (W)</h4>
                         </div>
-                        <p class="text-xs text-slate-500">Exposes rail. Ideal for ceiling rails, decorative rods, or smooth sliding.</p>
+                        <img src="https://perfectspace.itembox.cloud/item/img/f/f_cu_measure_w.png" class="w-full mb-4 bg-slate-50 rounded-xl" alt="Measure Width">
+                        <p class="text-xs text-slate-600">Measure distance between fixed rings on both ends of the rail. We'll add the 5% fullness allowance for you.</p>
                     </div>
-                    <div class="flex items-start space-x-4">
-                        <div class="bg-slate-100 p-2 rounded text-center min-w-[80px]">
-                            <span class="text-xl font-bold">B</span><br><span class="text-[10px]">Hook</span>
+                    <div>
+                        <div class="flex items-center space-x-3 mb-4">
+                            <span class="text-2xl font-black text-slate-200 italic">02</span>
+                            <h4 class="font-bold">Measure Height (H)</h4>
                         </div>
-                        <p class="text-xs text-slate-500">Covers rail. Ideal for wall rails to minimize light leakage from the top.</p>
+                        <img src="https://perfectspace.itembox.cloud/item/img/f/f_cu_measure_h.png" class="w-full mb-4 bg-slate-50 rounded-xl" alt="Measure Height">
+                        <p class="text-xs text-slate-600"><b>Patio Window:</b> -1cm from floor.<br><b>Waist-high Window:</b> +15cm from frame bottom.<br>Standard for a perfect professional finish.</p>
                     </div>
                 </div>
-            </div>
-
-            <div class="mt-8 text-center">
-                <p class="text-sm text-slate-400">Not sure how to measure? Send photos of your rail to our LINE for expert guidance.</p>
             </div>
         </div>
     </section>
 
-    <!-- Project Gallery -->
+    <!-- Case Grid -->
     <section class="py-12 bg-white">
         <div class="container mx-auto px-4 text-center">
-            <h3 class="text-lg font-bold mb-8">Project Gallery</h3>
+            <h3 class="text-lg font-bold mb-8">Project Showcase</h3>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <img src="https://sc04.alicdn.com/kf/Hd64af2046b8044a7ab8489a996d3cdd3b.jpg" class="aspect-square object-cover rounded-lg shadow-sm" alt="Case 1">
-                <img src="https://sc04.alicdn.com/kf/H2320a5886fce454191fb3aec90b071caR.jpg" class="aspect-square object-cover rounded-lg shadow-sm" alt="Case 2">
-                <img src="https://sc04.alicdn.com/kf/H146d79ac4d07417c91a6f83084275276y.jpg" class="aspect-square object-cover rounded-lg shadow-sm" alt="Case 3">
-                <img src="https://sc04.alicdn.com/kf/H08c7682d475f4714996f76c16f295f3fC.jpg" class="aspect-square object-cover rounded-lg shadow-sm" alt="Case 5">
+                <img src="https://sc04.alicdn.com/kf/S2f96f5a570a447ad94da1fff0dc46723i.png" class="aspect-square object-cover rounded-lg shadow-sm" alt="Case 2">
+                <img src="https://sc04.alicdn.com/kf/S864dac9df4254e6a9fee3b93d2724917V.jpg" class="aspect-square object-cover rounded-lg shadow-sm" alt="Case 3">
+                <img src="https://sc04.alicdn.com/kf/S77153923e157483b86eca11f1f4ddd3ds.png" class="aspect-square object-cover rounded-lg shadow-sm" alt="Case 5">
             </div>
         </div>
     </section>
 
     <!-- Footer -->
     <footer class="bg-white border-t border-slate-200 py-6 pb-24 md:pb-6">
-        <div class="container mx-auto px-4">
+        <div class="container mx-auto px-4 text-center md:text-left">
             <div class="flex flex-col md:flex-row justify-between items-center text-xs text-slate-500 space-y-4 md:space-y-0">
-                <div class="flex flex-col md:flex-row md:items-center md:space-x-4 space-y-1 md:space-y-0 text-center md:text-left">
+                <div class="flex flex-col md:flex-row md:items-center md:space-x-4 space-y-1 md:space-y-0">
                     <span class="font-bold text-slate-800">Kyoken Real Estate Development Co., Ltd.</span>
                     <span>〒103-0027 Nihonbashi 3-7-7-4F, Chuo-ku, Tokyo</span>
                     <span>TEL: 03-6555-1306</span>
                     <div class="space-x-2">
-                        <a href="../tokushoho.html" class="underline hover:text-blue-600">Specified Commercial Transactions</a>
-                        <a href="../legal.html" class="underline hover:text-blue-600">Terms of Service</a>
+                        <a href="tokushoho.html" class="underline hover:text-blue-600">Specified Transactions</a>
+                        <a href="legal.html" class="underline hover:text-blue-600">Terms</a>
                     </div>
                 </div>
                 <div class="text-slate-400">
@@ -245,7 +241,7 @@
     <!-- Sticky Mobile CTA -->
     <div class="md:hidden fixed bottom-0 left-0 right-0 p-4 bg-white border-t border-slate-200 z-50">
         <a href="https://line.me/R/ti/p/@566wlcvz" class="line-button text-white w-full py-3 rounded-lg font-bold flex items-center justify-center">
-            Free Quote & Sample Request (LINE)
+            Free Quote & Samples (LINE)
         </a>
     </div>
 
