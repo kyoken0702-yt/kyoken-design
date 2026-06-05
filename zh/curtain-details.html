@@ -12,7 +12,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Noto+Sans+SC', sans-serif; }
+        body { font-family: 'Noto Sans SC', sans-serif; }
         .bg-industrial-navy { background-color: #1e293b; }
         .text-industrial-navy { color: #1e293b; }
         .line-button { background-color: #06C755; }
@@ -122,33 +122,7 @@
                         </div>
                     </div>
 
-                    <div class="bg-emerald-50 border-l-4 border-emerald-500 p-4 mb-6">
-                        <h4 class="text-xs font-bold text-emerald-800 uppercase mb-1">可选：日本现地增值服务</h4>
-                        <div class="grid grid-cols-1 gap-2 text-[11px] text-emerald-700">
-                            <div class="flex justify-between"><span>・上门实测（东京23区）</span><span class="font-bold">¥8,800～</span></div>
-                            <div class="flex justify-between"><span>・人工安装（标准窗）</span><span class="font-bold">¥5,500～ / 窗</span></div>
-                            <p class="text-[9px] mt-1 border-t border-emerald-100 pt-1">※满3窗可享免实测费优惠，整屋方案更优。详情请通过LINE咨询。</p>
-                        </div>
-                    </div>
-
-                    <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6">
-                        <h4 class="text-xs font-bold text-blue-800 uppercase mb-1">厂家直供 × 现地交付保障</h4>
-                        <p class="text-[11px] text-blue-700 leading-tight">
-                            保持<b>中国厂家直供</b>的价格优势，同时提供可选的<b>现地实测、轨道确认、取付施工</b>服务。京建供应为您解决 1688 等平台难以实现的“日本现地对接”难题。
-                        </p>
-                    </div>
-
-                    <div class="border-2 border-blue-100 rounded-lg p-4 bg-white mb-6">
-                        <h4 class="text-sm font-bold text-blue-800 mb-2">🏠 整屋窗帘一站式方案</h4>
-                        <p class="text-[11px] text-slate-600 mb-3">
-                            针对新筑、翻新、民宿或店铺，提供多窗组合方案。满3窗可享受<b>免测量费</b>，并根据订单量提供<b>阶梯折扣</b>。我们将为您匹配最具性价比的配置组合。
-                        </p>
-                        <div class="grid grid-cols-2 gap-2 text-center text-[10px] font-bold">
-                            <div class="bg-slate-50 py-2 border border-slate-100 rounded">1R/1K公寓: ¥4.9万～</div>
-                            <div class="bg-slate-50 py-2 border border-slate-100 rounded">1LDK/2LDK: ¥8.9万～</div>
-                        </div>
-                    </div>
-
+                    <!-- Specs -->
                     <div class="bg-slate-50 border border-slate-200 rounded-lg p-4 mb-6">
                         <h2 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">高配标准规格</h2>
                         <div class="grid grid-cols-2 gap-y-2 text-sm">
@@ -156,35 +130,94 @@
                             <div class="text-slate-500">形状记忆</div><div class="font-medium text-slate-800 text-blue-600">标配形态稳定加工</div>
                             <div class="text-slate-500 font-bold text-slate-800">褶皱比例</div><div class="font-bold text-blue-600">1.8倍褶皱 (豪华比例)</div>
                             <div class="text-slate-500">包含附件</div><div class="font-medium text-slate-800">同色扎带 / 调节式挂钩</div>
-                            <div class="text-slate-500">维护性能</div><div class="font-medium text-slate-800">可机洗 / 可选防炎面料</div>
                         </div>
                         <p class="mt-3 text-[10px] text-slate-400 leading-tight border-t border-slate-200 pt-2">
-                            *基础价格适用于已有窗帘杆或轨道、无需打孔、无需拆旧、可直接挂装的普通住宅窗户。轨道新装、修复、更换、高窗、特殊墙面、店铺/民宿/办公室等情况，需另行报价。
+                            *基础价格适用于已有窗帘轨道、无需打孔即可直接挂装的普通窗户。
                         </p>
                     </div>
 
-                    <a href="https://line.me/R/ti/p/@566wlcvz" class="line-button text-white w-full py-4 rounded-lg font-bold text-center flex items-center justify-center">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/LINE_logo.svg" class="w-6 h-6 mr-2" alt="LINE">
-                        获取案件快速报价 (LINE)
-                    </a>
+                    <div class="bg-emerald-50 border-l-4 border-emerald-500 p-4 mb-6">
+                        <h4 class="text-xs font-bold text-emerald-800 uppercase mb-1">可选：日本现地增值服务</h4>
+                        <div class="grid grid-cols-1 gap-2 text-[11px] text-emerald-700">
+                            <div class="flex justify-between"><span>・上门实测（东京23区）</span><span class="font-bold">¥8,800～</span></div>
+                            <div class="flex justify-between"><span>・人工安装（标准窗）</span><span class="font-bold">¥5,500～ / 窗</span></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Measurement Guide (Added Step-by-Step) -->
+    <section class="py-12 bg-slate-50 border-y border-slate-200">
+        <div class="container mx-auto px-4 max-w-4xl">
+            <h3 class="text-2xl font-bold text-center mb-10">尺寸测量指南 <span class="text-slate-400 font-normal text-lg">/ How to Measure</span></h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Width -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <span class="bg-industrial-navy text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm">01</span>
+                        <h4 class="font-bold">如何测量横幅 (W)</h4>
+                    </div>
+                    <img src="https://perfectspace.itembox.cloud/item/img/f/f_cu_measure_w.png" class="w-full h-auto mb-4 rounded bg-slate-50" alt="Width Measure">
+                    <p class="text-xs text-slate-600 leading-relaxed">
+                        请测量窗帘轨道<b>两端固定挂钩（不可移动的圆环）之间的距离</b>。
+                        <br><span class="text-blue-600 font-bold">※下单尺寸 ＝ 测量尺寸 × 1.05 (预留余量)</span>
+                    </p>
+                </div>
+
+                <!-- Height -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <span class="bg-industrial-navy text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm">02</span>
+                        <h4 class="font-bold">如何测量高度 (H)</h4>
+                    </div>
+                    <img src="https://perfectspace.itembox.cloud/item/img/f/f_cu_measure_h.png" class="w-full h-auto mb-4 rounded bg-slate-50" alt="Height Measure">
+                    <div class="space-y-3 text-xs text-slate-600">
+                        <p class="border-b border-slate-100 pb-2"><b>● 落地窗</b><br>从挂钩环底部量至地面，减去 <span class="text-red-600 font-bold">1cm</span>。</p>
+                        <p><b>● 腰窗（半截窗）</b><br>从挂钩环底部量至窗框下沿，增加 <span class="text-blue-600 font-bold">15cm</span> 以确保遮光。</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hook Type -->
+            <div class="mt-8 bg-white p-6 rounded-xl shadow-sm border border-slate-100">
+                <div class="flex items-center space-x-3 mb-4">
+                    <span class="bg-industrial-navy text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm">03</span>
+                    <h4 class="font-bold">挂钩类型选择 (A 或 B)</h4>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="flex items-start space-x-4">
+                        <div class="bg-slate-100 p-2 rounded text-center min-w-[80px]">
+                            <span class="text-xl font-bold">A</span><br><span class="text-[10px]">型钩</span>
+                        </div>
+                        <p class="text-xs text-slate-500">露出轨道。适用于天花板轨道、装饰杆或希望拉动顺畅的场景。</p>
+                    </div>
+                    <div class="flex items-start space-x-4">
+                        <div class="bg-slate-100 p-2 rounded text-center min-w-[80px]">
+                            <span class="text-xl font-bold">B</span><br><span class="text-[10px]">型钩</span>
+                        </div>
+                        <p class="text-xs text-slate-500">遮挡轨道。适用于壁挂式轨道，可有效减少顶部漏光。</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-8 text-center">
+                <p class="text-sm text-slate-400">如不确定如何测量或轨道类型，请通过 LINE 发送现场照片，我们将为您提供指导。</p>
+            </div>
+        </div>
+    </section>
+
     <!-- Project Gallery (Compact) -->
-    <section class="py-10 border-t border-slate-100 bg-slate-50">
+    <section class="py-12 bg-white">
         <div class="container mx-auto px-4">
-            <h3 class="text-lg font-bold mb-6 text-center">工程案例展示</h3>
+            <h3 class="text-lg font-bold mb-8 text-center">工程案例展示</h3>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <img src="https://sc04.alicdn.com/kf/Hd64af2046b8044a7ab8489a996d3cdd3b.jpg" class="aspect-square object-cover rounded-lg shadow-sm" alt="Case 1">
                 <img src="https://sc04.alicdn.com/kf/H2320a5886fce454191fb3aec90b071caR.jpg" class="aspect-square object-cover rounded-lg shadow-sm" alt="Case 2">
                 <img src="https://sc04.alicdn.com/kf/H146d79ac4d07417c91a6f83084275276y.jpg" class="aspect-square object-cover rounded-lg shadow-sm" alt="Case 3">
-                <img src="https://sc04.alicdn.com/kf/H89537d4ba1574f978ff89e03f6b9d316h/Modern-Style-Double-Sided-Thickened-Curtains-100-Shade-Pleated-Wave-Design-for-Home-Hotel-Cafe-windows.jpg" class="aspect-square object-cover rounded-lg shadow-sm" alt="Case 4">
                 <img src="https://sc04.alicdn.com/kf/H08c7682d475f4714996f76c16f295f3fC.jpg" class="aspect-square object-cover rounded-lg shadow-sm" alt="Case 5">
-                <img src="https://sc04.alicdn.com/kf/H08785432a00640b5ad5f1b22ba425c6cj.png" class="aspect-square object-cover rounded-lg shadow-sm" alt="Case 6">
-                <img src="https://sc04.alicdn.com/kf/H7d3e3f7f8eda4818ad2ac8e57b4fa9fe8.jpg" class="aspect-square object-cover rounded-lg shadow-sm" alt="Case 7">
-                <img src="https://sc04.alicdn.com/kf/H8d7d2680714d4491901cb6c4c7beeb5eI.jpg" class="aspect-square object-cover rounded-lg shadow-sm" alt="Case 8">
             </div>
         </div>
     </section>
