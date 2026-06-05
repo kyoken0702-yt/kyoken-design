@@ -85,12 +85,12 @@
                 <div class="overflow-x-auto rounded-xl border border-slate-200">
                     <table class="price-table">
                         <thead>
-                            <tr><th class="w-24">高度 \ 宽度(cm)</th><th>～100</th><th>～200</th><th>～300</th><th>～400</th></tr>
+                            <tr><th class="w-24 text-center">高度 \ 宽度(cm)</th><th>～100</th><th>～200</th><th>～300</th><th>～400</th></tr>
                         </thead>
                         <tbody>
-                            <tr><th>～140</th><td>¥11,800</td><td class="bg-blue-50 font-bold">¥15,800</td><td>¥26,800</td><td>¥35,800</td></tr>
-                            <tr><th>～200</th><td>¥16,800</td><td class="bg-blue-50 font-bold">¥24,800</td><td>¥38,800</td><td>¥52,800</td></tr>
-                            <tr><th>～260</th><td>¥19,800</td><td>¥29,800</td><td>¥46,800</td><td>¥62,800</td></tr>
+                            <tr><th class="text-center">～140</th><td>¥11,800</td><td class="bg-blue-50 font-bold">¥15,800</td><td>¥26,800</td><td>¥35,800</td></tr>
+                            <tr><th class="text-center">～200</th><td>¥16,800</td><td class="bg-blue-50 font-bold">¥24,800</td><td>¥38,800</td><td>¥52,800</td></tr>
+                            <tr><th class="text-center">～260</th><td>¥19,800</td><td>¥29,800</td><td>¥46,800</td><td>¥62,800</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -107,40 +107,59 @@
         </div>
     </section>
 
-    <!-- Measurement Section (Fixed Broken Images) -->
+    <!-- Measurement Section (Pure SVG for Reliability) -->
     <section class="py-16 bg-slate-900 text-white">
         <div class="container mx-auto px-4 max-w-4xl text-center">
-            <h3 class="text-2xl font-bold mb-12">测量与下单指南</h3>
+            <h3 class="text-2xl font-bold mb-12 uppercase tracking-wide">测量与下单指南 <span class="text-slate-500 font-normal">/ Measuring Guide</span></h3>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-12 text-left">
-                <!-- Step 1 -->
+                <!-- Step 1: Width -->
                 <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700">
                     <div class="flex items-center space-x-3 mb-6">
-                        <span class="bg-blue-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold">01</span>
+                        <span class="bg-blue-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm">01</span>
                         <h4 class="font-bold text-lg">横幅 (W) 测量</h4>
                     </div>
-                    <div class="bg-white p-4 rounded-xl mb-6 text-center">
-                        <img src="https://sc04.alicdn.com/kf/H76295328292d449389e9262f070f8072k.png" class="w-full h-auto" alt="Measure W">
+                    <!-- SVG Diagram: Width -->
+                    <div class="bg-white p-6 rounded-xl mb-6 flex justify-center">
+                        <svg width="240" height="100" viewBox="0 0 240 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="10" y="20" width="220" height="6" rx="3" fill="#1e293b"/>
+                            <circle cx="30" cy="35" r="5" stroke="#3b82f6" stroke-width="2" fill="white"/>
+                            <circle cx="210" cy="35" r="5" stroke="#3b82f6" stroke-width="2" fill="white"/>
+                            <path d="M30 65H210" stroke="#3b82f6" stroke-width="2" stroke-dasharray="4 4"/>
+                            <path d="M30 60V70M210 60V70" stroke="#3b82f6" stroke-width="2"/>
+                            <text x="120" y="85" text-anchor="middle" fill="#3b82f6" font-size="12" font-weight="bold">宽度 (W)</text>
+                            <text x="120" y="12" text-anchor="middle" fill="#64748b" font-size="10">测量固定挂钩之间的距离</text>
+                        </svg>
                     </div>
                     <p class="text-sm text-slate-400">请测量轨道两端<b>“固定挂钩环”</b>之间的距离。余量我们会自动为您计算。</p>
                 </div>
-                <!-- Step 2 -->
+                <!-- Step 2: Height -->
                 <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700">
                     <div class="flex items-center space-x-3 mb-6">
-                        <span class="bg-blue-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold">02</span>
+                        <span class="bg-blue-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm">02</span>
                         <h4 class="font-bold text-lg">高度 (H) 测量</h4>
                     </div>
-                    <div class="bg-white p-4 rounded-xl mb-6 text-center">
-                        <img src="https://sc04.alicdn.com/kf/He32694119d64488383f94689823628e9W.png" class="w-full h-auto" alt="Measure H">
+                    <!-- SVG Diagram: Height -->
+                    <div class="bg-white p-6 rounded-xl mb-6 flex justify-center">
+                        <svg width="240" height="100" viewBox="0 0 240 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="20" y="10" width="40" height="4" rx="2" fill="#1e293b"/>
+                            <path d="M40 14V80" stroke="#ef4444" stroke-width="2" stroke-dasharray="4 4"/>
+                            <path d="M35 80H45" stroke="#ef4444" stroke-width="2"/>
+                            <text x="75" y="50" fill="#ef4444" font-size="10" font-weight="bold">高度 (H)</text>
+                            <rect x="120" y="10" width="40" height="4" rx="2" fill="#1e293b"/>
+                            <path d="M140 14V60" stroke="#3b82f6" stroke-width="2" stroke-dasharray="4 4"/>
+                            <path d="M135 60H145" stroke="#3b82f6" stroke-width="2"/>
+                            <text x="120" y="90" fill="#64748b" font-size="9">落地窗 / 腰窗</text>
+                        </svg>
                     </div>
                     <p class="text-sm text-slate-400">
-                        <b>落地窗：</b>测至地面，然后 <span class="text-blue-400">减去 1cm</span>。
-                        <br><br>
-                        <b>腰窗：</b>测至窗框下沿，然后 <span class="text-blue-400">加上 15cm</span>。
+                        <b>落地窗：</b>测至地面减去 1cm
+                        <br><b>腰窗：</b>测至窗框下沿增加 15cm
                     </p>
                 </div>
             </div>
             <div class="mt-12 text-center">
-                <a href="https://line.me/R/ti/p/@566wlcvz" class="line-button text-white px-10 py-4 rounded-xl font-bold inline-flex items-center">
+                <a href="https://line.me/R/ti/p/@566wlcvz" class="line-button text-white px-10 py-4 rounded-xl font-bold inline-flex items-center shadow-lg hover:opacity-90 transition">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/LINE_logo.svg" class="w-6 h-6 mr-2" alt="LINE">
                     如有疑问，请通过 LINE 咨询
                 </a>
             </div>
