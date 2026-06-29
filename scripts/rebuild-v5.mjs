@@ -15,6 +15,17 @@ const products = [
   ["wpc-decking-details.html", "屋外用人工木材", "Outdoor WPC Decking", "户外人工木地板", "屋外搬入、下地、数量、長物梱包を確認するデッキ材。"]
 ];
 
+const zhProductNotes = {
+  "curtain-details.html": "确认 1.8 倍褶皱、上门测量、标准简易安装及窗边条件的窗帘材料。",
+  "acrylic-sign-details.html": "确认标志文件、厚度、安装方式和现场基层条件的室内标识。",
+  "lightbox-details.html": "确认设计文件、既有灯箱尺寸、包装和配送条件的画面材料。",
+  "pvc-sign-details.html": "适用于导视牌、注意提示、停车场标识等小批量板材。",
+  "enamel-panel.html": "面向厨房和水回等空间，确认板材、包装和搬入条件的磁吸板材。",
+  "acoustic-panel-details.html": "确认颜色、厚度、基层、数量和现场固定方式的吸音材料。",
+  "wallpaper-details.html": "确认图案文件、墙面尺寸、卷装包装和施工侧条件的内装材料。",
+  "wpc-decking-details.html": "确认户外搬入、基层、数量和长条材料包装条件的人工木地板。"
+};
+
 const langConfig = {
   ja: {
     dir: "",
@@ -132,12 +143,13 @@ function productCards(lang) {
     const name = lang === "en" ? en : lang === "zh" ? zh : ja;
     const href = productHref(lang, file);
     const sub = lang === "en" ? "Factory source / packaging / delivery / site confirmation" : lang === "zh" ? "工厂来源 / 包装 / 运输 / 日本现场确认" : "工場確認 / 包装 / 物流 / 現場確認";
+    const productNote = lang === "zh" ? zhProductNotes[file] : note;
     return `<a href="${href}" class="v5-product-card">
       ${photoSlot(name, lang === "en" ? "PRODUCT RECORD" : lang === "zh" ? "产品记录" : "製品記録")}
       <div>
         <h3>${name}</h3>
         <p>${sub}</p>
-        <small>${note}</small>
+        <small>${productNote}</small>
       </div>
     </a>`;
   }).join("\n");
@@ -261,8 +273,8 @@ function homePage(lang) {
   </main>
 
   <footer class="v5-footer">
-    <strong>${lang === "en" ? "Kyoken Real Estate Development Co., Ltd." : lang === "zh" ? "京建不動産開発株式会社" : "京建不動産開発株式会社"}</strong>
-    <p>〒103-0027 東京都中央区日本橋3丁目7-7-4F / Tel: 03-6555-1306 / Email: kyoken0702@gmail.com</p>
+    <strong>${lang === "en" ? "Kyoken Real Estate Development Co., Ltd." : lang === "zh" ? "京建不动产开发株式会社" : "京建不動産開発株式会社"}</strong>
+    <p>${lang === "zh" ? "〒103-0027 东京都中央区日本桥3丁目7-7-4F" : "〒103-0027 東京都中央区日本橋3丁目7-7-4F"} / Tel: 03-6555-1306 / Email: kyoken0702@gmail.com</p>
     <p>© 2026 Kyoken Real Estate Development Co., Ltd.</p>
   </footer>
 </body>
