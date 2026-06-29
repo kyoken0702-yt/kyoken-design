@@ -26,6 +26,17 @@ const zhProductNotes = {
   "wpc-decking-details.html": "确认户外搬入、基层、数量和长条材料包装条件的人工木地板。"
 };
 
+const enProductNotes = {
+  "curtain-details.html": "Curtain materials checked by pleat ratio, measurement, simple installation, and window conditions.",
+  "acrylic-sign-details.html": "Indoor signage checked by logo data, thickness, fixing method, and site substrate.",
+  "lightbox-details.html": "Display film checked by design data, existing lightbox size, packaging, and delivery conditions.",
+  "pvc-sign-details.html": "Small-lot panels for guidance signs, caution notices, parking signs, and temporary displays.",
+  "enamel-panel.html": "Magnetic enamel panels checked by board specification, packing method, and carrying route.",
+  "acoustic-panel-details.html": "Acoustic materials checked by color, thickness, substrate, quantity, and fixing method.",
+  "wallpaper-details.html": "Interior wall materials checked by pattern data, wall size, roll packing, and installation conditions.",
+  "wpc-decking-details.html": "Outdoor decking checked by carrying route, substrate, quantity, and long-material packaging."
+};
+
 const langConfig = {
   ja: {
     dir: "",
@@ -143,7 +154,7 @@ function productCards(lang) {
     const name = lang === "en" ? en : lang === "zh" ? zh : ja;
     const href = productHref(lang, file);
     const sub = lang === "en" ? "Factory source / packaging / delivery / site confirmation" : lang === "zh" ? "工厂来源 / 包装 / 运输 / 日本现场确认" : "工場確認 / 包装 / 物流 / 現場確認";
-    const productNote = lang === "zh" ? zhProductNotes[file] : note;
+    const productNote = lang === "en" ? enProductNotes[file] : lang === "zh" ? zhProductNotes[file] : note;
     return `<a href="${href}" class="v5-product-card">
       ${photoSlot(name, lang === "en" ? "PRODUCT RECORD" : lang === "zh" ? "产品记录" : "製品記録")}
       <div>
@@ -159,10 +170,10 @@ function homePage(lang) {
   const c = langConfig[lang];
   const prefix = lang === "ja" ? "" : "../";
   const languageSwitch = lang === "ja"
-    ? `<span>日本語</span><a href="en/index.html">EN</a><a href="zh/index.html">中文</a>`
+    ? `<span>JP</span><a href="en/index.html">EN</a><a href="zh/index.html">CN</a>`
     : lang === "en"
-      ? `<a href="../index.html">JP</a><span>EN</span><a href="../zh/index.html">中文</a>`
-      : `<a href="../index.html">日本語</a><a href="../en/index.html">EN</a><span>中文</span>`;
+      ? `<a href="../index.html">JP</a><span>EN</span><a href="../zh/index.html">CN</a>`
+      : `<a href="../index.html">JP</a><a href="../en/index.html">EN</a><span>中文</span>`;
   return `<!DOCTYPE html>
 <html lang="${c.htmlLang}">
 <head>
@@ -170,7 +181,7 @@ function homePage(lang) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${c.title}</title>
   <meta name="description" content="${c.description}">
-  <meta name="keywords" content="中国工場,日本現場,サプライチェーン,工務店,内装会社,材料調達,東京交付,建材供給">
+  <meta name="keywords" content="${lang === "en" ? "China factory, Japan site, supply chain, contractors, interior companies, material sourcing, Tokyo delivery, construction materials" : lang === "zh" ? "中国工厂,日本现场,供应链,工务店,内装公司,材料采购,东京交付,建材供应" : "中国工場,日本現場,サプライチェーン,工務店,内装会社,材料調達,東京交付,建材供給"}">
   <meta property="og:title" content="${c.title}">
   <meta property="og:description" content="${c.description}">
   <meta property="og:image" content="${prefix}assets/real-site/og-supply-chain.jpg">
@@ -274,7 +285,7 @@ function homePage(lang) {
 
   <footer class="v5-footer">
     <strong>${lang === "en" ? "Kyoken Real Estate Development Co., Ltd." : lang === "zh" ? "京建不动产开发株式会社" : "京建不動産開発株式会社"}</strong>
-    <p>${lang === "zh" ? "〒103-0027 东京都中央区日本桥3丁目7-7-4F" : "〒103-0027 東京都中央区日本橋3丁目7-7-4F"} / Tel: 03-6555-1306 / Email: kyoken0702@gmail.com</p>
+    <p>${lang === "en" ? "3-7-7-4F Nihonbashi, Chuo-ku, Tokyo 103-0027" : lang === "zh" ? "〒103-0027 东京都中央区日本桥3丁目7-7-4F" : "〒103-0027 東京都中央区日本橋3丁目7-7-4F"} / Tel: 03-6555-1306 / Email: kyoken0702@gmail.com</p>
     <p>© 2026 Kyoken Real Estate Development Co., Ltd.</p>
   </footer>
 </body>
