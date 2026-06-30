@@ -186,7 +186,7 @@ function homePage(lang) {
   <meta property="og:description" content="${c.description}">
   <meta property="og:image" content="${prefix}assets/real-site/og-supply-chain.jpg">
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="${prefix}styles.css">
+  <link rel="stylesheet" href="${prefix}styles.css?v=20260630-audit3">
 </head>
 <body class="v5-body">
   <header class="v5-header">
@@ -320,7 +320,7 @@ function contractorPage(lang) {
   <title>${title} | ${c.logo}</title>
   <meta name="description" content="${c.partnerLead}">
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="${prefix}styles.css">
+  <link rel="stylesheet" href="${prefix}styles.css?v=20260630-audit3">
 </head>
 <body class="v5-body">
   <header class="v5-header">

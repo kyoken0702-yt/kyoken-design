@@ -36,6 +36,7 @@ html[lang|="zh"] .v5-body * {
   color: var(--kyoken-navy);
   font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic", "YuGothic", "Noto Sans JP", "Noto Sans SC", sans-serif;
   font-weight: 650;
+  overflow-x: hidden;
 }
 
 .v5-body::before {
@@ -290,8 +291,14 @@ html[lang|="zh"] .v5-body * {
 .v5-product-card {
   display: grid;
   gap: 0.75rem;
+  min-width: 0;
   color: inherit;
   text-decoration: none;
+}
+
+.v5-product-card *,
+.v5-photo-slot * {
+  overflow-wrap: anywhere;
 }
 
 .v5-photo-slot {
@@ -1452,14 +1459,11 @@ img[alt="Entry"] {
   }
 
   .v5-body .v5-product-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    grid-template-columns: 1fr !important;
   }
 }
 
 /* Product detail pages: keep source images complete; never crop charts, plans, or case photos. */
-body:not(.v5-body) img[src*="alicdn.com"],
-body:not(.v5-body) img[src*="alicdn.com/"],
-body:not(.v5-body) img[src*="s.alicdn.com"],
 body:not(.v5-body) img[alt^="Plan"],
 body:not(.v5-body) img[alt^="Chart"],
 body:not(.v5-body) img[alt^="Color Chart"],
@@ -1481,4 +1485,48 @@ body:not(.v5-body) img[alt="Styles"],
 body:not(.v5-body) img[alt="Lifestyle Guide"] {
   height: auto !important;
   max-height: none !important;
+}
+
+/* Product detail pages: make Accio content denser and easier to read. */
+body:not(.v5-body) p,
+body:not(.v5-body) li,
+body:not(.v5-body) dd {
+  color: #1f2a44 !important;
+  font-size: clamp(15px, 1.02rem, 17px) !important;
+  line-height: 1.65 !important;
+  font-weight: 650 !important;
+}
+
+body:not(.v5-body) h1 {
+  color: #061b49 !important;
+  font-weight: 850 !important;
+}
+
+body:not(.v5-body) h2,
+body:not(.v5-body) h3,
+body:not(.v5-body) h4 {
+  color: #061b49 !important;
+  font-weight: 800 !important;
+}
+
+body:not(.v5-body) table th,
+body:not(.v5-body) table td {
+  color: #061b49 !important;
+  font-size: clamp(14px, 0.98rem, 16px) !important;
+  line-height: 1.55 !important;
+  font-weight: 750 !important;
+}
+
+body:not(.v5-body) .text-\[9px\],
+body:not(.v5-body) .text-\[10px\],
+body:not(.v5-body) .text-\[11px\],
+body:not(.v5-body) .text-xs {
+  font-size: 14px !important;
+  line-height: 1.55 !important;
+}
+
+@media (max-width: 767px) {
+  body:not(.v5-body) {
+    padding-bottom: 96px;
+  }
 }
