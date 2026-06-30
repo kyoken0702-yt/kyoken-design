@@ -3,6 +3,7 @@ import path from "node:path";
 
 const root = path.resolve(new URL("..", import.meta.url).pathname);
 const lineUrl = "https://line.me/R/ti/p/@566wlcvz";
+const supplyRecords = JSON.parse(fs.readFileSync(path.join(root, "data/supply-chain-records.json"), "utf8"));
 
 const products = [
   ["curtain-details.html", "オーダーカーテン", "Custom Curtains", "定制窗帘", "1.8倍ヒダ、採寸、標準簡易取付まで確認する窓まわり資材。"],
@@ -149,6 +150,20 @@ function photoSlot(label, note = "SUPPLY RECORD") {
   </div>`;
 }
 
+function mediaSlot(record, lang) {
+  const mediaLabel = lang === "en" ? "RECORD MEDIA" : lang === "zh" ? "记录影像" : "記録写真";
+  const copy = record[lang];
+  if (record.video) {
+    return `<video class="v5-record-media" controls playsinline poster="${record.image || ""}">
+      <source src="${record.video}">
+    </video>`;
+  }
+  if (record.image) {
+    return `<img class="v5-record-media" src="${record.image}" alt="${copy.title}">`;
+  }
+  return photoSlot(lang === "en" ? "Photo / video to be added" : lang === "zh" ? "照片 / 视频待补充" : "写真 / 動画を追加予定", mediaLabel);
+}
+
 function productCards(lang) {
   return products.map(([file, ja, en, zh, note]) => {
     const name = lang === "en" ? en : lang === "zh" ? zh : ja;
@@ -187,7 +202,7 @@ function homePage(lang) {
   <meta property="og:description" content="${c.description}">
   <meta property="og:image" content="${prefix}media/remote/6e64da3a8e48.png">
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="${prefix}styles.css?v=20260630-audit4">
+  <link rel="stylesheet" href="${prefix}styles.css?v=20260630-audit5">
 </head>
 <body class="v5-body">
   <header class="v5-header">
@@ -220,21 +235,26 @@ function homePage(lang) {
     </section>
 
     <section id="today" class="v5-section">
-      <p class="v5-kicker">${lang === "en" ? "TODAY" : lang === "zh" ? "今日供应链" : "今日の記録"}</p>
+      <p class="v5-kicker">${lang === "en" ? "DAILY RECORDS" : lang === "zh" ? "每日记录" : "日々の記録"}</p>
       <h2>${c.todayTitle}</h2>
       <p class="v5-lead">${c.todayLead}</p>
       <div class="v5-record-grid">
-        ${["2026.06.29", "2026.06.28", "2026.06.27"].map((date, index) => `<article class="v5-record">
-          ${photoSlot(lang === "en" ? "Factory packing / material arrival" : lang === "zh" ? "工厂包装 / 材料到场" : "工場包装 / 材料到着", date)}
-          <h3>${date}</h3>
-          <p>${lang === "en" ? "A daily supply-chain note is added here: what was checked, what arrived, and what uncertainty was reduced." : lang === "zh" ? "这里持续增加当天供应链记录：确认了什么、到了什么、降低了哪一项不确定性。" : "その日のサプライチェーン記録を追加します。何を確認し、何が届き、どの不確実性を下げたかを残します。"}</p>
-        </article>`).join("\n")}
+        ${supplyRecords.map((record) => {
+          const r = record[lang];
+          return `<a class="v5-record v5-record-link" href="supply-chain-records.html#record-${record.slug}">
+          ${mediaSlot(record, lang)}
+          <div class="v5-record-meta"><span>${record.date}</span><span>${r.label}</span></div>
+          <h3>${r.title}</h3>
+          <p>${r.summary}</p>
+        </a>`;
+        }).join("\n")}
       </div>
+      <a class="v5-section-link" href="supply-chain-records.html">${lang === "en" ? "View all supply-chain records" : lang === "zh" ? "查看全部供应链记录" : "すべての記録を見る"}</a>
     </section>
 
     <section id="factory" class="v5-section v5-split">
       <div>
-        <p class="v5-kicker">${lang === "en" ? "FACTORY" : lang === "zh" ? "中国工厂" : "中国工場"}</p>
+        <p class="v5-kicker">${lang === "en" ? "FACTORY SIDE" : lang === "zh" ? "工厂侧" : "工場側"}</p>
         <h2>${c.factoryTitle}</h2>
         <p class="v5-lead">${c.factoryLead}</p>
       </div>
@@ -246,7 +266,7 @@ function homePage(lang) {
 
     <section id="site" class="v5-section v5-split reverse">
       <div>
-        <p class="v5-kicker">${lang === "en" ? "SITE RECORDS" : lang === "zh" ? "现场记录" : "現場記録"}</p>
+        <p class="v5-kicker">${lang === "en" ? "JAPAN SITE" : lang === "zh" ? "日本现场" : "日本現場"}</p>
         <h2>${c.siteTitle}</h2>
         <p class="v5-lead">${c.siteLead}</p>
       </div>
@@ -257,7 +277,7 @@ function homePage(lang) {
     </section>
 
     <section class="v5-section">
-      <p class="v5-kicker">${lang === "en" ? "TIMELINE" : lang === "zh" ? "供应链时间轴" : "時間軸"}</p>
+      <p class="v5-kicker">${lang === "en" ? "PROCESS" : lang === "zh" ? "流程顺序" : "流れ"}</p>
       <h2>${c.timelineTitle}</h2>
       <div class="v5-timeline">
         ${c.timelineSteps.map((step, i) => `<div><span>0${i + 1}</span><strong>${step}</strong></div>`).join("")}
@@ -265,14 +285,14 @@ function homePage(lang) {
     </section>
 
     <section class="v5-section v5-partner">
-      <p class="v5-kicker">${lang === "en" ? "PARTNERSHIP" : lang === "zh" ? "工务店合作" : "工務店連携"}</p>
+      <p class="v5-kicker">${lang === "en" ? "ROLE BOUNDARY" : lang === "zh" ? "分工边界" : "分担範囲"}</p>
       <h2>${c.partnerTitle}</h2>
       <p class="v5-lead">${c.partnerLead}</p>
       <a href="${c.contractorUrl}">${c.partnerTitle}</a>
     </section>
 
     <section id="products" class="v5-section">
-      <p class="v5-kicker">${lang === "en" ? "PRODUCTS" : lang === "zh" ? "产品分类" : "製品分類"}</p>
+      <p class="v5-kicker">${lang === "en" ? "MATERIAL RANGE" : lang === "zh" ? "材料范围" : "取扱範囲"}</p>
       <h2>${c.productsTitle}</h2>
       <div class="v5-product-grid">${productCards(lang)}</div>
     </section>
@@ -287,8 +307,64 @@ function homePage(lang) {
   <footer class="v5-footer">
     <strong>${lang === "en" ? "Kyoken Real Estate Development Co., Ltd." : lang === "zh" ? "京建不动产开发株式会社" : "京建不動産開発株式会社"}</strong>
     <p>${lang === "en" ? "3-7-7-4F Nihonbashi, Chuo-ku, Tokyo 103-0027" : lang === "zh" ? "〒103-0027 东京都中央区日本桥3丁目7-7-4F" : "〒103-0027 東京都中央区日本橋3丁目7-7-4F"} / Tel: 03-6555-1306 / Email: kyoken0702@gmail.com</p>
-    <p>© 2026 Kyoken Real Estate Development Co., Ltd.</p>
+    <p>© 2026 ${lang === "en" ? "Kyoken Real Estate Development Co., Ltd." : lang === "zh" ? "京建不动产开发株式会社" : "京建不動産開発株式会社"}</p>
   </footer>
+</body>
+</html>
+`;
+}
+
+function recordsPage(lang) {
+  const c = langConfig[lang];
+  const prefix = lang === "ja" ? "" : "../";
+  const backText = lang === "en" ? "Back to home" : lang === "zh" ? "返回首页" : "トップへ戻る";
+  const title = lang === "en" ? "Supply-chain Records" : lang === "zh" ? "供应链记录" : "サプライチェーン記録";
+  const lead = lang === "en"
+    ? "A dated archive of factory checks, packing, logistics, arrival, and handover records. We keep the process visible so contractors can judge delivery certainty before ordering."
+    : lang === "zh"
+      ? "这里按日期记录工厂确认、包装、运输、到场、交接。把过程留出来，让工务店在下单前判断材料交付的确定性。"
+      : "工場確認、梱包、物流、到着、引き渡しを日付ごとに残す記録です。発注前に材料交付の確実性を判断できるようにします。";
+  return `<!DOCTYPE html>
+<html lang="${c.htmlLang}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="${prefix}media/remote/6e64da3a8e48.png">
+  <title>${title} | ${c.logo}</title>
+  <meta name="description" content="${lead}">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="${prefix}styles.css?v=20260630-audit5">
+</head>
+<body class="v5-body">
+  <header class="v5-header">
+    <a href="${c.homeUrl}" class="v5-logo">${c.logo}</a>
+    <nav class="v5-nav"><a href="${c.homeUrl}#today">${c.nav[0]}</a><a href="${c.homeUrl}#products">${c.nav[4]}</a></nav>
+    <a class="v5-back-link" href="${c.homeUrl}">${backText}</a>
+  </header>
+  <main>
+    <section class="v5-section v5-records-page">
+      <p class="v5-kicker">${lang === "en" ? "DAILY ARCHIVE" : lang === "zh" ? "每日归档" : "日々の記録"}</p>
+      <h1>${title}</h1>
+      <p class="v5-lead">${lead}</p>
+      <div class="v5-record-detail-list">
+        ${supplyRecords.map((record) => {
+          const r = record[lang];
+          return `<article id="record-${record.slug}" class="v5-record-detail">
+            <div>
+              ${mediaSlot(record, lang)}
+            </div>
+            <div>
+              <div class="v5-record-meta"><span>${record.date}</span><span>${r.label}</span></div>
+              <h2>${r.title}</h2>
+              <p>${r.summary}</p>
+              <ul>${r.details.map((item) => `<li>${item}</li>`).join("")}</ul>
+            </div>
+          </article>`;
+        }).join("\n")}
+      </div>
+    </section>
+  </main>
+  <footer class="v5-footer"><strong>${lang === "en" ? "Kyoken Real Estate Development Co., Ltd." : lang === "zh" ? "京建不动产开发株式会社" : "京建不動産開発株式会社"}</strong><p>© 2026 ${lang === "en" ? "Kyoken Real Estate Development Co., Ltd." : lang === "zh" ? "京建不动产开发株式会社" : "京建不動産開発株式会社"}</p></footer>
 </body>
 </html>
 `;
@@ -322,7 +398,7 @@ function contractorPage(lang) {
   <title>${title} | ${c.logo}</title>
   <meta name="description" content="${c.partnerLead}">
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="${prefix}styles.css?v=20260630-audit4">
+  <link rel="stylesheet" href="${prefix}styles.css?v=20260630-audit5">
 </head>
 <body class="v5-body">
   <header class="v5-header">
@@ -331,7 +407,7 @@ function contractorPage(lang) {
   </header>
   <main>
     <section class="v5-section v5-partner-page">
-      <p class="v5-kicker">${lang === "en" ? "CONTRACTOR PARTNERSHIP" : lang === "zh" ? "工务店合作" : "工務店連携"}</p>
+      <p class="v5-kicker">${lang === "en" ? "ROLE BOUNDARY" : lang === "zh" ? "分工边界" : "分担範囲"}</p>
       <h1>${title}</h1>
       ${body.map((line) => `<p>${line}</p>`).join("\n")}
       <div class="v5-role-grid">
@@ -341,7 +417,7 @@ function contractorPage(lang) {
       <a class="v5-line-link" href="${lineUrl}">${c.line}</a>
     </section>
   </main>
-  <footer class="v5-footer"><strong>Kyoken Real Estate Development Co., Ltd.</strong><p>© 2026 Kyoken Real Estate Development Co., Ltd.</p></footer>
+  <footer class="v5-footer"><strong>${lang === "en" ? "Kyoken Real Estate Development Co., Ltd." : lang === "zh" ? "京建不动产开发株式会社" : "京建不動産開発株式会社"}</strong><p>© 2026 ${lang === "en" ? "Kyoken Real Estate Development Co., Ltd." : lang === "zh" ? "京建不动产开发株式会社" : "京建不動産開発株式会社"}</p></footer>
 </body>
 </html>
 `;
@@ -385,6 +461,7 @@ for (const lang of Object.keys(langConfig)) {
   const dir = langConfig[lang].dir;
   writeFile(rel(dir, "index.html"), homePage(lang));
   writeFile(rel(dir, "contractor-partnership.html"), contractorPage(lang));
+  writeFile(rel(dir, "supply-chain-records.html"), recordsPage(lang));
 }
 
 const detailFiles = [

@@ -1,0 +1,110 @@
+[
+  {
+    "date": "2026.06.29",
+    "slug": "2026-06-29",
+    "image": "",
+    "video": "",
+    "ja": {
+      "label": "梱包確認",
+      "title": "カーテン生地の梱包仕様を確認",
+      "summary": "生地ロール、ラベル、外装、到着後の確認項目を整理しました。",
+      "details": [
+        "生地ロールの外装状態を確認",
+        "数量とラベル表記を照合",
+        "日本到着後の破損確認ポイントを整理"
+      ]
+    },
+    "en": {
+      "label": "Packing Check",
+      "title": "Curtain fabric packing specification checked",
+      "summary": "Roll packing, labels, outer packaging, and arrival checks were organized.",
+      "details": [
+        "Checked outer packing condition for fabric rolls",
+        "Matched quantity and label information",
+        "Listed damage-check points after arrival in Japan"
+      ]
+    },
+    "zh": {
+      "label": "包装确认",
+      "title": "窗帘面料包装规格确认",
+      "summary": "确认面料卷装、标签、外包装以及日本到场后的检查要点。",
+      "details": [
+        "确认面料卷装外包装状态",
+        "核对数量与标签信息",
+        "整理日本到场后的破损检查点"
+      ]
+    }
+  },
+  {
+    "date": "2026.06.28",
+    "slug": "2026-06-28",
+    "image": "",
+    "video": "",
+    "ja": {
+      "label": "寸法確認",
+      "title": "アクリルサインの寸法と取付条件を整理",
+      "summary": "ロゴデータ、厚み、穴位置、現場下地を確認しました。",
+      "details": [
+        "ロゴデータと製作サイズを整理",
+        "穴位置と固定方法を確認",
+        "現場下地の確認事項を施工側へ共有"
+      ]
+    },
+    "en": {
+      "label": "Size Check",
+      "title": "Acrylic sign size and fixing conditions organized",
+      "summary": "Logo data, thickness, hole positions, and site substrate were checked.",
+      "details": [
+        "Organized logo data and production size",
+        "Checked hole position and fixing method",
+        "Shared substrate confirmation points with the contractor"
+      ]
+    },
+    "zh": {
+      "label": "尺寸确认",
+      "title": "亚克力标识尺寸与安装条件整理",
+      "summary": "确认标志文件、厚度、孔位、现场基层等制作前条件。",
+      "details": [
+        "整理标志文件与制作尺寸",
+        "确认孔位和固定方式",
+        "把现场基层确认点同步给施工侧"
+      ]
+    }
+  },
+  {
+    "date": "2026.06.27",
+    "slug": "2026-06-27",
+    "image": "",
+    "video": "",
+    "ja": {
+      "label": "到着確認",
+      "title": "日本到着後の材料確認項目を整理",
+      "summary": "数量、外装、破損、取付前の引き渡し条件を確認しました。",
+      "details": [
+        "到着時の数量確認項目を整理",
+        "外装と破損確認の手順を確認",
+        "取付前の引き渡し範囲を明確化"
+      ]
+    },
+    "en": {
+      "label": "Arrival Check",
+      "title": "Material check points after Japan arrival organized",
+      "summary": "Quantity, outer packing, damage check, and handover conditions were reviewed.",
+      "details": [
+        "Organized quantity checks at arrival",
+        "Checked outer-packing and damage-check process",
+        "Clarified handover scope before installation"
+      ]
+    },
+    "zh": {
+      "label": "到场确认",
+      "title": "日本到场后的材料检查项目整理",
+      "summary": "确认数量、外包装、破损检查、安装前交接条件。",
+      "details": [
+        "整理到场时的数量确认项目",
+        "确认外包装和破损检查流程",
+        "明确安装前的交接范围"
+      ]
+    }
+  }
+]
