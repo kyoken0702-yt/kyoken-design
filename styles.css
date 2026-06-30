@@ -953,22 +953,40 @@ html[lang|="zh"] .v5-product-card small {
 .bg-slate-900 p,
 .bg-slate-900 li,
 .bg-slate-900 span,
+.bg-slate-900 small,
+.bg-slate-900 b,
 .bg-slate-900 .text-slate-300,
 .bg-slate-900 .text-slate-400,
 .bg-slate-900 .text-slate-500,
+.bg-slate-900 .text-red-400,
+.bg-slate-900 .text-blue-400,
 .bg-slate-800 p,
 .bg-slate-800 li,
 .bg-slate-800 span,
+.bg-slate-800 small,
+.bg-slate-800 b,
 .bg-slate-800 .text-slate-300,
 .bg-slate-800 .text-slate-400,
 .bg-slate-800 .text-slate-500,
+.bg-slate-800 .text-red-400,
+.bg-slate-800 .text-blue-400,
 .bg-industrial-navy p,
 .bg-industrial-navy li,
 .bg-industrial-navy span,
+.bg-industrial-navy small,
+.bg-industrial-navy b,
 .bg-industrial-navy .text-slate-300,
 .bg-industrial-navy .text-slate-400,
-.bg-industrial-navy .text-slate-500 {
+.bg-industrial-navy .text-slate-500,
+.bg-industrial-navy .text-red-400,
+.bg-industrial-navy .text-blue-400 {
   color: #f5f7fb !important;
+}
+
+.bg-slate-900 .text-red-400,
+.bg-slate-800 .text-red-400,
+.bg-industrial-navy .text-red-400 {
+  color: #ffd6dc !important;
 }
 
 .rounded-3xl {

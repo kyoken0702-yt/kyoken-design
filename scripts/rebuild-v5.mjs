@@ -182,11 +182,12 @@ function homePage(lang) {
   <title>${c.title}</title>
   <meta name="description" content="${c.description}">
   <meta name="keywords" content="${lang === "en" ? "China factory, Japan site, supply chain, contractors, interior companies, material sourcing, Tokyo delivery, construction materials" : lang === "zh" ? "中国工厂,日本现场,供应链,工务店,内装公司,材料采购,东京交付,建材供应" : "中国工場,日本現場,サプライチェーン,工務店,内装会社,材料調達,東京交付,建材供給"}">
+  <link rel="icon" type="image/png" href="${prefix}media/remote/6e64da3a8e48.png">
   <meta property="og:title" content="${c.title}">
   <meta property="og:description" content="${c.description}">
-  <meta property="og:image" content="${prefix}assets/real-site/og-supply-chain.jpg">
+  <meta property="og:image" content="${prefix}media/remote/6e64da3a8e48.png">
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="${prefix}styles.css?v=20260630-audit3">
+  <link rel="stylesheet" href="${prefix}styles.css?v=20260630-audit4">
 </head>
 <body class="v5-body">
   <header class="v5-header">
@@ -207,7 +208,7 @@ function homePage(lang) {
         ${photoSlot(lang === "en" ? "Factory / packing / site records" : lang === "zh" ? "工厂 / 包装 / 现场记录" : "工場・梱包・現場の記録", lang === "en" ? "SUPPLY RECORD" : lang === "zh" ? "供应链记录" : "写真記録")}
       </div>
       <div class="v5-hero-copy">
-        <p class="v5-kicker">CHINA FACTORY × JAPAN SITE</p>
+        <p class="v5-kicker">${lang === "en" ? "CHINA FACTORY × JAPAN SITE" : lang === "zh" ? "中国工厂 × 日本现场" : "中国工場 × 日本現場"}</p>
         <h1>${c.heroTitle}</h1>
         <div class="v5-route">${c.heroSub.map((item) => `<span>${item}</span>`).join("")}</div>
         <p>${c.heroBody}</p>
@@ -219,7 +220,7 @@ function homePage(lang) {
     </section>
 
     <section id="today" class="v5-section">
-      <p class="v5-kicker">TODAY</p>
+      <p class="v5-kicker">${lang === "en" ? "TODAY" : lang === "zh" ? "今日供应链" : "今日の記録"}</p>
       <h2>${c.todayTitle}</h2>
       <p class="v5-lead">${c.todayLead}</p>
       <div class="v5-record-grid">
@@ -233,7 +234,7 @@ function homePage(lang) {
 
     <section id="factory" class="v5-section v5-split">
       <div>
-        <p class="v5-kicker">FACTORY</p>
+        <p class="v5-kicker">${lang === "en" ? "FACTORY" : lang === "zh" ? "中国工厂" : "中国工場"}</p>
         <h2>${c.factoryTitle}</h2>
         <p class="v5-lead">${c.factoryLead}</p>
       </div>
@@ -245,7 +246,7 @@ function homePage(lang) {
 
     <section id="site" class="v5-section v5-split reverse">
       <div>
-        <p class="v5-kicker">SITE RECORDS</p>
+        <p class="v5-kicker">${lang === "en" ? "SITE RECORDS" : lang === "zh" ? "现场记录" : "現場記録"}</p>
         <h2>${c.siteTitle}</h2>
         <p class="v5-lead">${c.siteLead}</p>
       </div>
@@ -256,7 +257,7 @@ function homePage(lang) {
     </section>
 
     <section class="v5-section">
-      <p class="v5-kicker">TIMELINE</p>
+      <p class="v5-kicker">${lang === "en" ? "TIMELINE" : lang === "zh" ? "供应链时间轴" : "時間軸"}</p>
       <h2>${c.timelineTitle}</h2>
       <div class="v5-timeline">
         ${c.timelineSteps.map((step, i) => `<div><span>0${i + 1}</span><strong>${step}</strong></div>`).join("")}
@@ -264,14 +265,14 @@ function homePage(lang) {
     </section>
 
     <section class="v5-section v5-partner">
-      <p class="v5-kicker">PARTNERSHIP</p>
+      <p class="v5-kicker">${lang === "en" ? "PARTNERSHIP" : lang === "zh" ? "工务店合作" : "工務店連携"}</p>
       <h2>${c.partnerTitle}</h2>
       <p class="v5-lead">${c.partnerLead}</p>
       <a href="${c.contractorUrl}">${c.partnerTitle}</a>
     </section>
 
     <section id="products" class="v5-section">
-      <p class="v5-kicker">PRODUCTS</p>
+      <p class="v5-kicker">${lang === "en" ? "PRODUCTS" : lang === "zh" ? "产品分类" : "製品分類"}</p>
       <h2>${c.productsTitle}</h2>
       <div class="v5-product-grid">${productCards(lang)}</div>
     </section>
@@ -317,10 +318,11 @@ function contractorPage(lang) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="${prefix}media/remote/6e64da3a8e48.png">
   <title>${title} | ${c.logo}</title>
   <meta name="description" content="${c.partnerLead}">
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="${prefix}styles.css?v=20260630-audit3">
+  <link rel="stylesheet" href="${prefix}styles.css?v=20260630-audit4">
 </head>
 <body class="v5-body">
   <header class="v5-header">
@@ -329,7 +331,7 @@ function contractorPage(lang) {
   </header>
   <main>
     <section class="v5-section v5-partner-page">
-      <p class="v5-kicker">CONTRACTOR PARTNERSHIP</p>
+      <p class="v5-kicker">${lang === "en" ? "CONTRACTOR PARTNERSHIP" : lang === "zh" ? "工务店合作" : "工務店連携"}</p>
       <h1>${title}</h1>
       ${body.map((line) => `<p>${line}</p>`).join("\n")}
       <div class="v5-role-grid">
@@ -358,17 +360,17 @@ function productStory(lang, title) {
   }
   if (lang === "zh") {
     return `<section class="v5-product-story">
-      <p class="v5-kicker">SUPPLY CHAIN STORY</p>
-      <h2>一件产品的一生：${title}</h2>
-      <p>产品页不再只是规格和价格。它要持续记录材料来自哪里、怎样包装、怎样到日本、安装前需要确认什么。</p>
+      <p class="v5-kicker">供应链记录</p>
+      <h2>材料交付记录：${title}</h2>
+      <p>这里记录工厂确认、包装方式、运输路径和日本现场交接，不只是参数和价格。</p>
       <div class="v5-story-grid"><div><span>01</span><h3>工厂来源</h3><p>确认材料、工艺、生产稳定性和供应商沟通能力。</p></div><div><span>02</span><h3>包装方式</h3><p>根据产品风险确认纸箱、护角、标签、托盘、卷装或木架。</p></div><div><span>03</span><h3>运输确认</h3><p>按尺寸、数量、重量、进口费用和日本配送地址逐案确认。</p></div><div><span>04</span><h3>日本现场</h3><p>记录到场、破损检查、尺寸确认、安装前交接。</p></div></div>
       <div class="v5-contractor-note"><strong>分工边界：</strong>京建负责降低供应链不确定性；工务店负责安装施工、现场责任、安装报价和终端客户沟通。</div>
     </section>`;
   }
   return `<section class="v5-product-story">
-    <p class="v5-kicker">SUPPLY CHAIN STORY</p>
-    <h2>一つの製品の一生：${title}</h2>
-    <p>製品ページは、仕様と価格だけでは終わりません。材料がどこで作られ、どう梱包され、どう日本へ届き、現場で何を確認するかを残していきます。</p>
+    <p class="v5-kicker">サプライチェーン記録</p>
+    <h2>工場から現場まで：${title}</h2>
+    <p>仕様と価格だけでなく、製作確認、梱包、輸送、日本到着後の引き渡しまでを記録します。</p>
     <div class="v5-story-grid"><div><span>01</span><h3>工場確認</h3><p>素材、加工方法、製作安定性、サプライヤーとの連絡精度を確認します。</p></div><div><span>02</span><h3>包装方式</h3><p>破損リスクに合わせ、箱、角保護、ラベル、パレット、ロール梱包を確認します。</p></div><div><span>03</span><h3>輸送確認</h3><p>サイズ、数量、重量、輸入諸費用、日本国内配送を案件ごとに確認します。</p></div><div><span>04</span><h3>日本現場</h3><p>到着、破損確認、寸法確認、取付前の引き渡しを記録します。</p></div></div>
     <div class="v5-contractor-note"><strong>分担：</strong>京建はサプライチェーンの不確実性を下げます。施工、現場責任、取付費用、エンドユーザー対応は工務店様の領域です。</div>
   </section>`;
