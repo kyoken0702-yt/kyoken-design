@@ -102,3 +102,24 @@ npm run build
 ```
 
 注意：后台登录需要 GitHub/Decap CMS 的授权配置可用。代码入口已经准备好；如果线上打开 `/admin/` 后提示认证问题，下一步只处理登录授权，不改网站业务结构。
+
+## 后台登录授权
+
+GitHub OAuth App 需要填写：
+
+```text
+Homepage URL:
+https://www.kyoken.design
+
+Authorization callback URL:
+https://www.kyoken.design/api/callback
+```
+
+Vercel 项目环境变量需要填写：
+
+```text
+GITHUB_CLIENT_ID
+GITHUB_CLIENT_SECRET
+```
+
+不要把 Client Secret 写进代码、文档或聊天记录。只在 Vercel 项目 Environment Variables 页面填写。
