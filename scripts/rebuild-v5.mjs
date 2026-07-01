@@ -54,13 +54,13 @@ const supplyRecords = loadSupplyRecords();
 
 const products = [
   ["curtain-details.html", "オーダーカーテン", "Custom Curtains", "定制窗帘", "1.8倍ヒダ、採寸、標準簡易取付まで確認する窓まわり資材。"],
-  ["acrylic-sign-details.html", "アクリルサイン", "Acrylic Sign", "亚克力标识", "ロゴデータ、厚み、取付方法、現場下地を確認する室内サイン。"],
-  ["lightbox-details.html", "バックライトフィルム", "Lightbox Film", "灯箱画片", "デザインデータ、既存ライトボックス寸法、配送梱包を確認する画面資材。"],
-  ["pvc-sign-details.html", "PVC看板・プレート", "PVC Sign", "PVC标牌", "案内板、注意表示、駐車場表示など小ロットで動かしやすい板材。"],
+  ["acrylic-sign-details.html", "アクリル切文字サイン", "Acrylic Cut Letter Sign", "亚克力切文字标识", "ロゴデータ、厚み、取付方法、現場下地を確認する室内サイン。"],
+  ["lightbox-details.html", "電飾看板用フィルム", "Backlit Sign Film", "灯箱电饰膜", "デザインデータ、既存ライトボックス寸法、配送梱包を確認する画面資材。"],
+  ["pvc-sign-details.html", "塩ビプレートサイン", "PVC Plate Sign", "PVC板标牌", "案内板、注意表示、駐車場表示など小ロットで動かしやすい板材。"],
   ["enamel-panel.html", "ホーローキッチンパネル", "Enamel Panel", "珐琅磁吸板", "厨房・水回り向けに、板材、梱包、搬入条件を確認するパネル。"],
-  ["acoustic-panel-details.html", "吸音フェルトパネル", "Acoustic Panel", "吸音毛毡板", "色、厚み、下地、枚数、現場固定方法を確認する吸音材。"],
+  ["acoustic-panel-details.html", "フェルト吸音パネル", "Felt Acoustic Panel", "毛毡吸音板", "色、厚み、下地、枚数、現場固定方法を確認する吸音材。"],
   ["wallpaper-details.html", "壁紙・クロス材", "Wallpaper / Wall Covering", "墙纸 / 墙布材料", "柄データ、壁面寸法、ロール梱包、施工側条件を確認する内装壁材。"],
-  ["wpc-decking-details.html", "屋外用人工木材", "Outdoor WPC Decking", "户外人工木地板", "屋外搬入、下地、数量、長物梱包を確認するデッキ材。"]
+  ["wpc-decking-details.html", "人工木デッキ材", "WPC Decking Board", "人工木地板材料", "屋外搬入、下地、数量、長物梱包を確認するデッキ材。"]
 ];
 
 const productImages = {
@@ -76,24 +76,24 @@ const productImages = {
 
 const zhProductNotes = {
   "curtain-details.html": "确认 1.8 倍褶皱、上门测量、标准简易安装及窗边条件的窗帘材料。",
-  "acrylic-sign-details.html": "确认标志文件、厚度、安装方式和现场基层条件的室内标识。",
-  "lightbox-details.html": "确认设计文件、既有灯箱尺寸、包装和配送条件的画面材料。",
-  "pvc-sign-details.html": "适用于导视牌、注意提示、停车场标识等小批量板材。",
+  "acrylic-sign-details.html": "确认标志文件、厚度、安装方式和现场基层条件的亚克力切文字标识。",
+  "lightbox-details.html": "确认设计文件、既有灯箱尺寸、包装和配送条件的灯箱电饰膜材料。",
+  "pvc-sign-details.html": "适用于导视牌、注意提示、停车场标识等小批量PVC板标牌。",
   "enamel-panel.html": "面向厨房和水回等空间，确认板材、包装和搬入条件的磁吸板材。",
-  "acoustic-panel-details.html": "确认颜色、厚度、基层、数量和现场固定方式的吸音材料。",
+  "acoustic-panel-details.html": "确认颜色、厚度、基层、数量和现场固定方式的毛毡吸音板。",
   "wallpaper-details.html": "确认图案文件、墙面尺寸、卷装包装和施工侧条件的墙面内装材料。",
-  "wpc-decking-details.html": "确认户外搬入、基层、数量和长条材料包装条件的人工木地板。"
+  "wpc-decking-details.html": "确认户外搬入、基层、数量和长条材料包装条件的人工木地板材料。"
 };
 
 const enProductNotes = {
   "curtain-details.html": "Curtain materials checked by pleat ratio, measurement, simple installation, and window conditions.",
-  "acrylic-sign-details.html": "Indoor signage checked by logo data, thickness, fixing method, and site substrate.",
-  "lightbox-details.html": "Display film checked by design data, existing lightbox size, packaging, and delivery conditions.",
-  "pvc-sign-details.html": "Small-lot panels for guidance signs, caution notices, parking signs, and temporary displays.",
+  "acrylic-sign-details.html": "Acrylic cut-letter signage checked by logo data, thickness, fixing method, and site substrate.",
+  "lightbox-details.html": "Backlit sign film checked by design data, existing lightbox size, packaging, and delivery conditions.",
+  "pvc-sign-details.html": "PVC plate signs for guidance signs, caution notices, parking signs, and temporary displays.",
   "enamel-panel.html": "Magnetic enamel panels checked by board specification, packing method, and carrying route.",
-  "acoustic-panel-details.html": "Acoustic materials checked by color, thickness, substrate, quantity, and fixing method.",
+  "acoustic-panel-details.html": "Felt acoustic panels checked by color, thickness, substrate, quantity, and fixing method.",
   "wallpaper-details.html": "Wallpaper and wall covering materials checked by pattern data, wall size, roll packing, and installation conditions.",
-  "wpc-decking-details.html": "Outdoor decking checked by carrying route, substrate, quantity, and long-material packaging."
+  "wpc-decking-details.html": "WPC decking boards checked by carrying route, substrate, quantity, and long-material packaging."
 };
 
 const productDetails = {
@@ -122,22 +122,22 @@ const productDetails = {
   },
   "acrylic-sign-details.html": {
     ja: {
-      name: "アクリルサイン",
-      lead: "ロゴデータ、厚み、色、取付方法、下地条件を確認して手配する室内サイン資材です。",
+      name: "アクリル切文字サイン",
+      lead: "ロゴデータ、厚み、色、取付方法、下地条件を確認して手配する室内向けの切文字サインです。",
       plans: ["小型ドアサイン", "受付ロゴサイン", "大型エントランスサイン"],
       specs: ["AI、PDF、画像などのロゴデータを確認", "厚み、色、仕上げ、UV印刷の有無を確認", "両面テープ、穴あけ、ビス固定など取付方法を確認", "割れ防止の梱包方法を案件ごとに確認"],
       quote: "サイズ、厚み、加工方法、数量、梱包条件により案件ごとにお見積りします。"
     },
     zh: {
-      name: "亚克力标识",
-      lead: "确认标志文件、厚度、颜色、安装方式和基层条件后安排的室内标识材料。",
+      name: "亚克力切文字标识",
+      lead: "确认标志文件、厚度、颜色、安装方式和基层条件后安排的室内切文字标识材料。",
       plans: ["小型门牌", "前台 LOGO 标识", "大型入口标识"],
       specs: ["确认 AI、PDF、图片等标志文件", "确认厚度、颜色、表面处理、UV 印刷需求", "确认双面胶、打孔、螺丝固定等安装方式", "按案件确认防裂包装方式"],
       quote: "根据尺寸、厚度、加工方式、数量和包装条件逐案报价。"
     },
     en: {
-      name: "Acrylic Sign",
-      lead: "Indoor signage arranged after checking logo data, thickness, color, fixing method, and substrate conditions.",
+      name: "Acrylic Cut Letter Sign",
+      lead: "Indoor acrylic cut-letter signage arranged after checking logo data, thickness, color, fixing method, and substrate conditions.",
       plans: ["Small door sign", "Reception logo sign", "Large entrance sign"],
       specs: ["Logo data such as AI, PDF, or image files checked", "Thickness, color, finish, and UV printing confirmed", "Tape, drilling, screw fixing, or other mounting method checked", "Anti-breakage packing checked case by case"],
       quote: "Quoted case by case according to size, thickness, processing method, quantity, and packing conditions."
@@ -145,22 +145,22 @@ const productDetails = {
   },
   "lightbox-details.html": {
     ja: {
-      name: "バックライトフィルム",
-      lead: "既存ライトボックス寸法、デザインデータ、差し替え方法を確認して手配する内照式画面資材です。",
+      name: "電飾看板用フィルム",
+      lead: "既存ライトボックス寸法、デザインデータ、差し替え方法を確認して手配する電飾看板用の画面フィルムです。",
       plans: ["メニュー画面", "店舗正面用シート", "大型パノラマフィルム"],
       specs: ["既存ライトボックスの有効表示寸法を確認", "デザインデータ、色味、透過性を確認", "本体、電源、PSE関連部材が関係する場合は個別確認", "折れ、巻き癖、傷を避ける梱包を確認"],
       quote: "サイズ、数量、素材、配送方法、関連部材の有無により案件ごとに確認します。"
     },
     zh: {
-      name: "灯箱画片",
-      lead: "确认既有灯箱尺寸、设计文件和替换方式后安排的内照式画面材料。",
+      name: "灯箱电饰膜",
+      lead: "确认既有灯箱尺寸、设计文件和替换方式后安排的内照式灯箱画面材料。",
       plans: ["菜单画面", "店面正面灯箱片", "大型全景灯箱片"],
       specs: ["确认既有灯箱有效显示尺寸", "确认设计文件、色味、透光要求", "如涉及灯箱本体、电源、PSE 相关部材，逐案确认", "确认防折、防压、防划伤包装"],
       quote: "根据尺寸、数量、材料、配送方式和相关部材有无逐案确认。"
     },
     en: {
-      name: "Lightbox Film",
-      lead: "Backlit display film arranged after checking existing lightbox size, artwork, and replacement method.",
+      name: "Backlit Sign Film",
+      lead: "Backlit sign film arranged after checking existing lightbox size, artwork, and replacement method.",
       plans: ["Menu display film", "Shopfront lightbox sheet", "Large panoramic film"],
       specs: ["Effective display size of the existing lightbox checked", "Artwork, color, and light transmission confirmed", "Lightbox body, power supply, and PSE-related parts checked separately when involved", "Packing checked to prevent folding, pressure marks, and scratches"],
       quote: "Checked case by case according to size, quantity, material, delivery method, and related parts."
@@ -168,22 +168,22 @@ const productDetails = {
   },
   "pvc-sign-details.html": {
     ja: {
-      name: "PVC看板・プレート",
-      lead: "案内板、注意表示、駐車場表示などを小ロットで手配しやすい板材サインです。",
+      name: "塩ビプレートサイン",
+      lead: "案内板、注意表示、駐車場表示などを小ロットで手配しやすい塩ビ板のサイン材です。",
       plans: ["店内案内板", "駐車場・注意表示", "施工現場表示"],
       specs: ["サイズ、厚み、枚数を確認", "穴あけ、両面テープ、角丸など加工を確認", "屋外使用の場合は耐候条件を個別確認", "板材の反り、傷を避ける梱包を確認"],
       quote: "サイズ、枚数、加工、使用場所、配送先により案件ごとにお見積りします。"
     },
     zh: {
-      name: "PVC标牌",
-      lead: "适合店内导视、注意提示、停车场标识、施工现场表示等小批量板材。",
+      name: "PVC板标牌",
+      lead: "适合店内导视、注意提示、停车场标识、施工现场表示等小批量PVC板材。",
       plans: ["店内导视牌", "停车场/注意提示", "施工现场标识"],
       specs: ["确认尺寸、厚度、数量", "确认打孔、双面胶、圆角等加工", "如用于户外，逐案确认耐候条件", "确认防弯曲、防刮伤包装"],
       quote: "根据尺寸、数量、加工、使用场所和配送地址逐案报价。"
     },
     en: {
-      name: "PVC Sign",
-      lead: "Small-lot board signage for guidance signs, caution notices, parking signs, and site displays.",
+      name: "PVC Plate Sign",
+      lead: "Small-lot PVC plate signage for guidance signs, caution notices, parking signs, and site displays.",
       plans: ["Indoor guidance plate", "Parking / caution sign", "Construction site display"],
       specs: ["Size, thickness, and quantity checked", "Drilling, double-sided tape, rounded corners, and other processing confirmed", "Weather requirements checked separately for outdoor use", "Packing checked to prevent warping and scratches"],
       quote: "Quoted case by case according to size, quantity, processing, usage location, and delivery address."
@@ -214,22 +214,22 @@ const productDetails = {
   },
   "acoustic-panel-details.html": {
     ja: {
-      name: "吸音フェルトパネル",
+      name: "フェルト吸音パネル",
       lead: "オフィス、会議室、スタジオ向けに、色、厚み、下地、固定方法を確認する吸音材です。",
       plans: ["デスク周りセット", "会議室壁面セット", "スタジオ吸音セット"],
       specs: ["色、厚み、密度、枚数を確認", "接着、ピン、ビスなど固定方法を確認", "壁下地、割付、カット条件を確認", "大型枚数の場合は梱包と搬入を個別確認"],
       quote: "色、厚み、枚数、加工、固定方法、配送先により案件ごとにお見積りします。"
     },
     zh: {
-      name: "吸音毛毡板",
+      name: "毛毡吸音板",
       lead: "面向办公室、会议室、录音空间，确认颜色、厚度、基层和固定方式的吸音材料。",
       plans: ["桌面周边套餐", "会议室墙面套餐", "录音空间吸音套餐"],
       specs: ["确认颜色、厚度、密度、数量", "确认胶粘、针固定、螺丝固定等方式", "确认墙面基层、排版、切割条件", "大批量时单独确认包装和搬入"],
       quote: "根据颜色、厚度、数量、加工、固定方式和配送地址逐案报价。"
     },
     en: {
-      name: "Acoustic Panel",
-      lead: "Acoustic felt materials for offices, meeting rooms, and studios checked by color, thickness, substrate, and fixing method.",
+      name: "Felt Acoustic Panel",
+      lead: "Felt acoustic panels for offices, meeting rooms, and studios checked by color, thickness, substrate, and fixing method.",
       plans: ["Desk area set", "Meeting room wall set", "Studio acoustic set"],
       specs: ["Color, thickness, density, and quantity checked", "Adhesive, pin, screw, or other fixing method confirmed", "Wall substrate, layout, and cutting conditions checked", "Packing and carrying checked separately for large quantities"],
       quote: "Quoted case by case according to color, thickness, quantity, processing, fixing method, and delivery address."
@@ -260,22 +260,22 @@ const productDetails = {
   },
   "wpc-decking-details.html": {
     ja: {
-      name: "屋外用人工木材",
-      lead: "バルコニー、テラス、店舗外部向けに、長物梱包、搬入、下地条件を確認するデッキ材です。",
+      name: "人工木デッキ材",
+      lead: "バルコニー、テラス、店舗外部向けに、長物梱包、搬入、下地条件を確認する人工木デッキ材です。",
       plans: ["バルコニーセット", "住宅テラスセット", "店舗外部大面積セット"],
       specs: ["面積、長さ、数量、色を確認", "根太、下地、固定部材の条件を確認", "屋外使用、排水、日射条件を確認", "長物梱包、重量、搬入経路を個別確認"],
       quote: "面積、仕様、数量、部材、配送先、搬入条件により案件ごとにお見積りします。"
     },
     zh: {
-      name: "户外人工木地板",
-      lead: "面向阳台、露台、店铺外部，确认长条材料包装、搬入和基层条件的户外板材。",
+      name: "人工木地板材料",
+      lead: "面向阳台、露台、店铺外部，确认长条材料包装、搬入和基层条件的人工木地板材料。",
       plans: ["阳台套餐", "住宅露台套餐", "店铺外部大面积套餐"],
       specs: ["确认面积、长度、数量、颜色", "确认龙骨、基层、固定部材条件", "确认户外使用、排水、日晒条件", "长条包装、重量、搬入路线单独确认"],
       quote: "根据面积、规格、数量、部材、配送地址和搬入条件逐案报价。"
     },
     en: {
-      name: "Outdoor WPC Decking",
-      lead: "Outdoor decking for balconies, terraces, and shop exteriors checked by long-material packing, carrying route, and substrate conditions.",
+      name: "WPC Decking Board",
+      lead: "WPC decking boards for balconies, terraces, and shop exteriors checked by long-material packing, carrying route, and substrate conditions.",
       plans: ["Balcony set", "Residential terrace set", "Large shop exterior set"],
       specs: ["Area, length, quantity, and color checked", "Joist, substrate, and fixing parts confirmed", "Outdoor use, drainage, and sunlight conditions checked", "Long-material packing, weight, and carrying route checked separately"],
       quote: "Quoted case by case according to area, specification, quantity, parts, delivery address, and carrying conditions."
