@@ -41,15 +41,19 @@ zh/supply-chain-records.html
 - 产品
 - 中文标题
 - 中文摘要
-- 中文要点
-- 图片或视频
+- 日文标题
+- 日文摘要
+- 英文标题
+- 英文摘要
 
 可选：
 
-- 日文
-- 英文
+- 图片或视频
+- 各语种要点
 
-如果日文或英文暂时不填，生成脚本会临时使用中文内容兜底。第二阶段再接自动翻译，让你只填中文也能生成日文和英文。
+后台不接浏览器翻译插件，三种语言人工填写。这样可以避免日文页混入中文、英文页混入中文的问题。
+
+如果日文或英文漏填，生成脚本只会显示对应语种的“准备中”文案，不会用中文内容兜底。
 
 ## 图片和视频
 
@@ -91,6 +95,18 @@ data/supply-chain-records/2026-07-01-curtain-packing.json
     "title": "窗帘面料出货前包装确认",
     "summary": "确认卷装、标签、外箱和日本到场检查项目。",
     "details": ["确认外箱状态", "核对数量标签", "整理到场检查点"]
+  },
+  "ja": {
+    "label": "工場梱包",
+    "title": "カーテン生地の出荷前梱包確認",
+    "summary": "ロール梱包、ラベル、外箱、日本到着後の確認項目を整理しました。",
+    "details": ["外箱状態を確認", "数量ラベルを照合", "到着後の確認項目を整理"]
+  },
+  "en": {
+    "label": "Factory Packing",
+    "title": "Curtain fabric packing check before shipment",
+    "summary": "Roll packing, labels, cartons, and arrival check points were confirmed.",
+    "details": ["Checked carton condition", "Matched quantity labels", "Prepared arrival check points"]
   }
 }
 ```

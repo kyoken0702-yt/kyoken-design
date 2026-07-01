@@ -48,41 +48,39 @@ collections:
       - { label: "首页显示", name: "showOnHome", widget: "boolean", default: true }
       - { label: "图片", name: "image", widget: "image", required: false }
       - { label: "视频", name: "video", widget: "file", required: false }
-      - label: "中文"
+      - label: "中文内容"
         name: "zh"
         widget: "object"
         fields:
-          - { label: "标签", name: "label", widget: "string", default: "现场记录" }
-          - { label: "标题", name: "title", widget: "string" }
-          - { label: "摘要", name: "summary", widget: "text" }
-          - label: "要点"
+          - { label: "中文标签", name: "label", widget: "string", default: "现场记录" }
+          - { label: "中文标题", name: "title", widget: "string" }
+          - { label: "中文摘要", name: "summary", widget: "text" }
+          - label: "中文要点"
             name: "details"
             widget: "list"
             required: false
-            field: { label: "要点", name: "item", widget: "string" }
-      - label: "日文（第一阶段手动填写，第二阶段接自动翻译）"
+            field: { label: "中文要点", name: "item", widget: "string" }
+      - label: "日本語内容（手動入力）"
         name: "ja"
         widget: "object"
-        required: false
         fields:
-          - { label: "标签", name: "label", widget: "string", required: false }
-          - { label: "标题", name: "title", widget: "string", required: false }
-          - { label: "摘要", name: "summary", widget: "text", required: false }
-          - label: "要点"
+          - { label: "日本語ラベル", name: "label", widget: "string", default: "現場記録" }
+          - { label: "日本語タイトル", name: "title", widget: "string" }
+          - { label: "日本語概要", name: "summary", widget: "text" }
+          - label: "日本語要点"
             name: "details"
             widget: "list"
             required: false
-            field: { label: "要点", name: "item", widget: "string" }
-      - label: "英文（第一阶段手动填写，第二阶段接自动翻译）"
+            field: { label: "日本語要点", name: "item", widget: "string" }
+      - label: "English Content"
         name: "en"
         widget: "object"
-        required: false
         fields:
-          - { label: "标签", name: "label", widget: "string", required: false }
-          - { label: "标题", name: "title", widget: "string", required: false }
-          - { label: "摘要", name: "summary", widget: "text", required: false }
-          - label: "要点"
+          - { label: "English Label", name: "label", widget: "string", default: "Site Record" }
+          - { label: "English Title", name: "title", widget: "string" }
+          - { label: "English Summary", name: "summary", widget: "text" }
+          - label: "English Points"
             name: "details"
             widget: "list"
             required: false
-            field: { label: "要点", name: "item", widget: "string" }
+            field: { label: "English Point", name: "item", widget: "string" }

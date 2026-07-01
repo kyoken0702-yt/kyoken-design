@@ -6,28 +6,24 @@ const lineUrl = "https://line.me/R/ti/p/@566wlcvz";
 
 function normalizeRecord(record, sourceSlug = "") {
   const zh = record.zh || {};
-  const ja = record.ja && Object.keys(record.ja).length
-    ? record.ja
-    : {
-        label: zh.label || "記録",
-        title: zh.title || "サプライチェーン記録",
-        summary: zh.summary || "",
-        details: zh.details || []
-      };
-  const en = record.en && Object.keys(record.en).length
-    ? record.en
-    : {
-        label: zh.label || "Record",
-        title: zh.title || "Supply-chain record",
-        summary: zh.summary || "",
-        details: zh.details || []
-      };
+  const ja = record.ja || {};
+  const en = record.en || {};
 
   return {
     ...record,
     slug: record.slug || sourceSlug || String(record.date || "").replace(/\./g, "-"),
-    ja,
-    en,
+    ja: {
+      label: ja.label || "記録準備中",
+      title: ja.title || "サプライチェーン記録準備中",
+      summary: ja.summary || "日本語の記録内容を準備中です。",
+      details: ja.details || []
+    },
+    en: {
+      label: en.label || "Pending",
+      title: en.title || "Supply-chain record pending",
+      summary: en.summary || "English record content is being prepared.",
+      details: en.details || []
+    },
     zh: {
       label: zh.label || "记录",
       title: zh.title || "供应链记录",
