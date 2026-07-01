@@ -47,12 +47,7 @@ function loadSupplyRecords() {
       return records.sort((a, b) => String(b.date).localeCompare(String(a.date)));
     }
   }
-
-  const legacyPath = path.join(root, "data/supply-chain-records.json");
-  if (!fs.existsSync(legacyPath)) return [];
-  return JSON.parse(fs.readFileSync(legacyPath, "utf8"))
-    .map((record) => normalizeRecord(record))
-    .sort((a, b) => String(b.date).localeCompare(String(a.date)));
+  return [];
 }
 
 const supplyRecords = loadSupplyRecords();
@@ -64,7 +59,7 @@ const products = [
   ["pvc-sign-details.html", "PVC看板・プレート", "PVC Sign", "PVC标牌", "案内板、注意表示、駐車場表示など小ロットで動かしやすい板材。"],
   ["enamel-panel.html", "ホーローキッチンパネル", "Enamel Panel", "珐琅磁吸板", "厨房・水回り向けに、板材、梱包、搬入条件を確認するパネル。"],
   ["acoustic-panel-details.html", "吸音フェルトパネル", "Acoustic Panel", "吸音毛毡板", "色、厚み、下地、枚数、現場固定方法を確認する吸音材。"],
-  ["wallpaper-details.html", "シームレス壁紙", "Seamless Wallpaper", "无缝墙布", "柄データ、壁面寸法、ロール梱包、施工側条件を確認する内装材。"],
+  ["wallpaper-details.html", "壁紙・クロス材", "Wallpaper / Wall Covering", "墙纸 / 墙布材料", "柄データ、壁面寸法、ロール梱包、施工側条件を確認する内装壁材。"],
   ["wpc-decking-details.html", "屋外用人工木材", "Outdoor WPC Decking", "户外人工木地板", "屋外搬入、下地、数量、長物梱包を確認するデッキ材。"]
 ];
 
@@ -75,7 +70,7 @@ const productImages = {
   "pvc-sign-details.html": "media/remote/a3fb722c501c.png",
   "enamel-panel.html": "media/remote/f35f79d49094.png",
   "acoustic-panel-details.html": "media/remote/c3805c6eb4b0.png",
-  "wallpaper-details.html": "media/remote/41404ad7dc53.jpg",
+  "wallpaper-details.html": "media/remote/668ef6041d0b.jpg",
   "wpc-decking-details.html": "media/remote/937250ddfe38.png"
 };
 
@@ -86,7 +81,7 @@ const zhProductNotes = {
   "pvc-sign-details.html": "适用于导视牌、注意提示、停车场标识等小批量板材。",
   "enamel-panel.html": "面向厨房和水回等空间，确认板材、包装和搬入条件的磁吸板材。",
   "acoustic-panel-details.html": "确认颜色、厚度、基层、数量和现场固定方式的吸音材料。",
-  "wallpaper-details.html": "确认图案文件、墙面尺寸、卷装包装和施工侧条件的内装材料。",
+  "wallpaper-details.html": "确认图案文件、墙面尺寸、卷装包装和施工侧条件的墙面内装材料。",
   "wpc-decking-details.html": "确认户外搬入、基层、数量和长条材料包装条件的人工木地板。"
 };
 
@@ -97,8 +92,195 @@ const enProductNotes = {
   "pvc-sign-details.html": "Small-lot panels for guidance signs, caution notices, parking signs, and temporary displays.",
   "enamel-panel.html": "Magnetic enamel panels checked by board specification, packing method, and carrying route.",
   "acoustic-panel-details.html": "Acoustic materials checked by color, thickness, substrate, quantity, and fixing method.",
-  "wallpaper-details.html": "Interior wall materials checked by pattern data, wall size, roll packing, and installation conditions.",
+  "wallpaper-details.html": "Wallpaper and wall covering materials checked by pattern data, wall size, roll packing, and installation conditions.",
   "wpc-decking-details.html": "Outdoor decking checked by carrying route, substrate, quantity, and long-material packaging."
+};
+
+const productDetails = {
+  "curtain-details.html": {
+    ja: {
+      name: "オーダーカーテン",
+      lead: "1.8倍ヒダを基本に、採寸、標準簡易取付、窓まわり条件を確認して手配するカーテン資材です。",
+      plans: ["腰窓セット", "ワイド窓セット", "掃き出し窓セット"],
+      specs: ["1.8倍ヒダを基本仕様として確認", "生地、遮光、レース有無を案件ごとに確認", "窓数、幅、高さ、取付方法を確認", "採寸・標準簡易取付は手配可能。複雑施工、高所作業、特殊固定は別途確認"],
+      quote: "価格は窓数、サイズ、生地、取付条件、配送先により変動します。仕様確認後に概算見積をご案内します。"
+    },
+    zh: {
+      name: "定制窗帘",
+      lead: "以 1.8 倍褶皱为基本规格，确认测量、标准简易安装和窗边条件后安排的窗帘材料。",
+      plans: ["腰窗套餐", "宽窗套餐", "落地窗套餐"],
+      specs: ["目前以 1.8 倍褶皱为基本规格", "面料、遮光、纱帘需求按案件确认", "确认窗数、宽高、安装方式", "窗帘套餐可安排上门测量和标准简易安装；复杂施工、高空作业、特殊固定方式按现场另行确认"],
+      quote: "价格会随窗数、尺寸、面料、安装条件和配送地址变化。规格确认后提供概算报价。"
+    },
+    en: {
+      name: "Custom Curtains",
+      lead: "Curtain materials arranged around 1.8x fullness, measurement, standard simple installation, and window conditions.",
+      plans: ["Standard window set", "Wide window set", "Full-height window set"],
+      specs: ["1.8x fullness as the current base specification", "Fabric, blackout level, and lace curtain needs checked case by case", "Window count, width, height, and fixing method confirmed before quote", "Measurement and standard simple installation can be arranged; complex work, high-place work, and special fixing are checked separately"],
+      quote: "Pricing depends on window count, dimensions, fabric, installation conditions, and delivery address. A rough quote is provided after specification review."
+    }
+  },
+  "acrylic-sign-details.html": {
+    ja: {
+      name: "アクリルサイン",
+      lead: "ロゴデータ、厚み、色、取付方法、下地条件を確認して手配する室内サイン資材です。",
+      plans: ["小型ドアサイン", "受付ロゴサイン", "大型エントランスサイン"],
+      specs: ["AI、PDF、画像などのロゴデータを確認", "厚み、色、仕上げ、UV印刷の有無を確認", "両面テープ、穴あけ、ビス固定など取付方法を確認", "割れ防止の梱包方法を案件ごとに確認"],
+      quote: "サイズ、厚み、加工方法、数量、梱包条件により案件ごとにお見積りします。"
+    },
+    zh: {
+      name: "亚克力标识",
+      lead: "确认标志文件、厚度、颜色、安装方式和基层条件后安排的室内标识材料。",
+      plans: ["小型门牌", "前台 LOGO 标识", "大型入口标识"],
+      specs: ["确认 AI、PDF、图片等标志文件", "确认厚度、颜色、表面处理、UV 印刷需求", "确认双面胶、打孔、螺丝固定等安装方式", "按案件确认防裂包装方式"],
+      quote: "根据尺寸、厚度、加工方式、数量和包装条件逐案报价。"
+    },
+    en: {
+      name: "Acrylic Sign",
+      lead: "Indoor signage arranged after checking logo data, thickness, color, fixing method, and substrate conditions.",
+      plans: ["Small door sign", "Reception logo sign", "Large entrance sign"],
+      specs: ["Logo data such as AI, PDF, or image files checked", "Thickness, color, finish, and UV printing confirmed", "Tape, drilling, screw fixing, or other mounting method checked", "Anti-breakage packing checked case by case"],
+      quote: "Quoted case by case according to size, thickness, processing method, quantity, and packing conditions."
+    }
+  },
+  "lightbox-details.html": {
+    ja: {
+      name: "バックライトフィルム",
+      lead: "既存ライトボックス寸法、デザインデータ、差し替え方法を確認して手配する内照式画面資材です。",
+      plans: ["メニュー画面", "店舗正面用シート", "大型パノラマフィルム"],
+      specs: ["既存ライトボックスの有効表示寸法を確認", "デザインデータ、色味、透過性を確認", "本体、電源、PSE関連部材が関係する場合は個別確認", "折れ、巻き癖、傷を避ける梱包を確認"],
+      quote: "サイズ、数量、素材、配送方法、関連部材の有無により案件ごとに確認します。"
+    },
+    zh: {
+      name: "灯箱画片",
+      lead: "确认既有灯箱尺寸、设计文件和替换方式后安排的内照式画面材料。",
+      plans: ["菜单画面", "店面正面灯箱片", "大型全景灯箱片"],
+      specs: ["确认既有灯箱有效显示尺寸", "确认设计文件、色味、透光要求", "如涉及灯箱本体、电源、PSE 相关部材，逐案确认", "确认防折、防压、防划伤包装"],
+      quote: "根据尺寸、数量、材料、配送方式和相关部材有无逐案确认。"
+    },
+    en: {
+      name: "Lightbox Film",
+      lead: "Backlit display film arranged after checking existing lightbox size, artwork, and replacement method.",
+      plans: ["Menu display film", "Shopfront lightbox sheet", "Large panoramic film"],
+      specs: ["Effective display size of the existing lightbox checked", "Artwork, color, and light transmission confirmed", "Lightbox body, power supply, and PSE-related parts checked separately when involved", "Packing checked to prevent folding, pressure marks, and scratches"],
+      quote: "Checked case by case according to size, quantity, material, delivery method, and related parts."
+    }
+  },
+  "pvc-sign-details.html": {
+    ja: {
+      name: "PVC看板・プレート",
+      lead: "案内板、注意表示、駐車場表示などを小ロットで手配しやすい板材サインです。",
+      plans: ["店内案内板", "駐車場・注意表示", "施工現場表示"],
+      specs: ["サイズ、厚み、枚数を確認", "穴あけ、両面テープ、角丸など加工を確認", "屋外使用の場合は耐候条件を個別確認", "板材の反り、傷を避ける梱包を確認"],
+      quote: "サイズ、枚数、加工、使用場所、配送先により案件ごとにお見積りします。"
+    },
+    zh: {
+      name: "PVC标牌",
+      lead: "适合店内导视、注意提示、停车场标识、施工现场表示等小批量板材。",
+      plans: ["店内导视牌", "停车场/注意提示", "施工现场标识"],
+      specs: ["确认尺寸、厚度、数量", "确认打孔、双面胶、圆角等加工", "如用于户外，逐案确认耐候条件", "确认防弯曲、防刮伤包装"],
+      quote: "根据尺寸、数量、加工、使用场所和配送地址逐案报价。"
+    },
+    en: {
+      name: "PVC Sign",
+      lead: "Small-lot board signage for guidance signs, caution notices, parking signs, and site displays.",
+      plans: ["Indoor guidance plate", "Parking / caution sign", "Construction site display"],
+      specs: ["Size, thickness, and quantity checked", "Drilling, double-sided tape, rounded corners, and other processing confirmed", "Weather requirements checked separately for outdoor use", "Packing checked to prevent warping and scratches"],
+      quote: "Quoted case by case according to size, quantity, processing, usage location, and delivery address."
+    }
+  },
+  "enamel-panel.html": {
+    ja: {
+      name: "ホーローキッチンパネル",
+      lead: "厨房、水回り、店舗壁面向けに、板材仕様、搬入条件、梱包を確認して手配するパネル資材です。",
+      plans: ["標準キッチンセット", "L型カウンターセット", "店舗大面積セット"],
+      specs: ["サイズ、厚み、枚数を確認", "カット、穴あけ、端部処理の可否を確認", "搬入経路、重量、割れ防止梱包を確認", "磁石使用や水回り条件は案件ごとに確認"],
+      quote: "板材仕様、加工、数量、搬入条件、配送先により案件ごとにお見積りします。"
+    },
+    zh: {
+      name: "珐琅磁吸板",
+      lead: "面向厨房、水回、店铺墙面，确认板材规格、搬入条件和包装后安排的板材。",
+      plans: ["标准厨房套餐", "L 型台面套餐", "店铺大面积墙面套餐"],
+      specs: ["确认尺寸、厚度、数量", "确认切割、开孔、边部处理可否", "确认搬入路线、重量、防破损包装", "磁吸使用和水回条件逐案确认"],
+      quote: "根据板材规格、加工、数量、搬入条件和配送地址逐案报价。"
+    },
+    en: {
+      name: "Enamel Panel",
+      lead: "Panel materials for kitchens, wet areas, and shop walls arranged after checking board specifications, carrying route, and packing.",
+      plans: ["Standard kitchen set", "L-shaped counter set", "Large shop wall set"],
+      specs: ["Size, thickness, and quantity checked", "Cutting, drilling, and edge processing feasibility confirmed", "Carrying route, weight, and anti-breakage packing checked", "Magnet use and wet-area conditions checked case by case"],
+      quote: "Quoted case by case according to board specification, processing, quantity, carrying conditions, and delivery address."
+    }
+  },
+  "acoustic-panel-details.html": {
+    ja: {
+      name: "吸音フェルトパネル",
+      lead: "オフィス、会議室、スタジオ向けに、色、厚み、下地、固定方法を確認する吸音材です。",
+      plans: ["デスク周りセット", "会議室壁面セット", "スタジオ吸音セット"],
+      specs: ["色、厚み、密度、枚数を確認", "接着、ピン、ビスなど固定方法を確認", "壁下地、割付、カット条件を確認", "大型枚数の場合は梱包と搬入を個別確認"],
+      quote: "色、厚み、枚数、加工、固定方法、配送先により案件ごとにお見積りします。"
+    },
+    zh: {
+      name: "吸音毛毡板",
+      lead: "面向办公室、会议室、录音空间，确认颜色、厚度、基层和固定方式的吸音材料。",
+      plans: ["桌面周边套餐", "会议室墙面套餐", "录音空间吸音套餐"],
+      specs: ["确认颜色、厚度、密度、数量", "确认胶粘、针固定、螺丝固定等方式", "确认墙面基层、排版、切割条件", "大批量时单独确认包装和搬入"],
+      quote: "根据颜色、厚度、数量、加工、固定方式和配送地址逐案报价。"
+    },
+    en: {
+      name: "Acoustic Panel",
+      lead: "Acoustic felt materials for offices, meeting rooms, and studios checked by color, thickness, substrate, and fixing method.",
+      plans: ["Desk area set", "Meeting room wall set", "Studio acoustic set"],
+      specs: ["Color, thickness, density, and quantity checked", "Adhesive, pin, screw, or other fixing method confirmed", "Wall substrate, layout, and cutting conditions checked", "Packing and carrying checked separately for large quantities"],
+      quote: "Quoted case by case according to color, thickness, quantity, processing, fixing method, and delivery address."
+    }
+  },
+  "wallpaper-details.html": {
+    ja: {
+      name: "壁紙・クロス材",
+      lead: "柄データ、壁面寸法、ロール梱包、施工側条件を確認して手配する内装壁材です。",
+      plans: ["住宅向けクロス", "店舗アクセント壁", "ホテル・民泊壁面"],
+      specs: ["壁面幅、高さ、枚数を確認", "柄データ、色味、リピートを確認", "防炎仕様が必要な場合は対応可否を事前確認", "ロール梱包、折れ、汚れ防止を確認"],
+      quote: "壁面サイズ、素材、柄データ、数量、配送先により案件ごとに確認します。"
+    },
+    zh: {
+      name: "墙纸 / 墙布材料",
+      lead: "确认图案文件、墙面尺寸、卷装包装和施工侧条件后安排的墙面内装材料。",
+      plans: ["住宅墙面材料", "店铺重点墙", "酒店/民泊墙面"],
+      specs: ["确认墙面宽度、高度、数量", "确认图案文件、色味、花距", "需要防炎规格时，事前确认对应可否", "确认卷装、防折、防污包装"],
+      quote: "根据墙面尺寸、材料、图案文件、数量和配送地址逐案确认。"
+    },
+    en: {
+      name: "Wallpaper / Wall Covering",
+      lead: "Wallpaper and wall covering materials arranged after checking artwork, wall dimensions, roll packing, and installation-side conditions.",
+      plans: ["Residential wall covering", "Shop accent wall", "Hotel / minpaku wall"],
+      specs: ["Wall width, height, and quantity checked", "Pattern data, color, and repeat checked", "Fire-retardant requirements checked in advance when needed", "Roll packing checked to prevent folding and stains"],
+      quote: "Checked case by case according to wall size, material, artwork, quantity, and delivery address."
+    }
+  },
+  "wpc-decking-details.html": {
+    ja: {
+      name: "屋外用人工木材",
+      lead: "バルコニー、テラス、店舗外部向けに、長物梱包、搬入、下地条件を確認するデッキ材です。",
+      plans: ["バルコニーセット", "住宅テラスセット", "店舗外部大面積セット"],
+      specs: ["面積、長さ、数量、色を確認", "根太、下地、固定部材の条件を確認", "屋外使用、排水、日射条件を確認", "長物梱包、重量、搬入経路を個別確認"],
+      quote: "面積、仕様、数量、部材、配送先、搬入条件により案件ごとにお見積りします。"
+    },
+    zh: {
+      name: "户外人工木地板",
+      lead: "面向阳台、露台、店铺外部，确认长条材料包装、搬入和基层条件的户外板材。",
+      plans: ["阳台套餐", "住宅露台套餐", "店铺外部大面积套餐"],
+      specs: ["确认面积、长度、数量、颜色", "确认龙骨、基层、固定部材条件", "确认户外使用、排水、日晒条件", "长条包装、重量、搬入路线单独确认"],
+      quote: "根据面积、规格、数量、部材、配送地址和搬入条件逐案报价。"
+    },
+    en: {
+      name: "Outdoor WPC Decking",
+      lead: "Outdoor decking for balconies, terraces, and shop exteriors checked by long-material packing, carrying route, and substrate conditions.",
+      plans: ["Balcony set", "Residential terrace set", "Large shop exterior set"],
+      specs: ["Area, length, quantity, and color checked", "Joist, substrate, and fixing parts confirmed", "Outdoor use, drainage, and sunlight conditions checked", "Long-material packing, weight, and carrying route checked separately"],
+      quote: "Quoted case by case according to area, specification, quantity, parts, delivery address, and carrying conditions."
+    }
+  }
 };
 
 const langConfig = {
@@ -525,6 +707,117 @@ function productStory(lang, title) {
   </section>`;
 }
 
+function productDetailPage(lang, file) {
+  const c = langConfig[lang];
+  const detail = productDetails[file]?.[lang];
+  if (!detail) throw new Error(`Missing product detail for ${lang}/${file}`);
+  const prefix = lang === "ja" ? "" : "../";
+  const image = `${prefix}${productImages[file]}`;
+  const quoteLabel = lang === "en" ? "Case-by-case quote" : lang === "zh" ? "案件逐项确认报价" : "案件ごとにお見積り";
+  const packageTitle = lang === "en" ? "Plan / Specification" : lang === "zh" ? "套餐 / 规格" : "プラン / 仕様";
+  const quoteTitle = lang === "en" ? "Quote Conditions" : lang === "zh" ? "报价说明" : "見積条件";
+  const siteTitle = lang === "en" ? "Site Records" : lang === "zh" ? "现场记录" : "現場記録";
+  const backText = lang === "en" ? "Back to home" : lang === "zh" ? "返回首页" : "トップへ戻る";
+  const siteNotes = lang === "en"
+    ? ["Factory packing", "Arrival / handover check"]
+    : lang === "zh"
+      ? ["工厂包装", "到场 / 交付确认"]
+      : ["工場梱包", "到着 / 引き渡し確認"];
+  const lineNote = lang === "en"
+    ? "Send drawings, site photos, dimensions, quantity, and delivery area."
+    : lang === "zh"
+      ? "发送图纸、现场照片、尺寸、数量和配送区域。"
+      : "図面、現場写真、寸法、数量、配送先エリアをお送りください。";
+  const languageSwitch = lang === "ja"
+    ? `<span>JP</span><a href="en/${file}">EN</a><a href="zh/${file}">CN</a>`
+    : lang === "en"
+      ? `<a href="../${file}">JP</a><span>EN</span><a href="../zh/${file}">CN</a>`
+      : `<a href="../${file}">JP</a><a href="../en/${file}">EN</a><span>中文</span>`;
+
+  return `<!DOCTYPE html>
+<html lang="${c.htmlLang}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>${detail.name} | ${c.logo}</title>
+  <meta name="description" content="${detail.lead}">
+  <link rel="icon" type="image/png" href="${prefix}media/remote/6e64da3a8e48.png">
+  <meta property="og:title" content="${detail.name} | ${c.logo}">
+  <meta property="og:description" content="${detail.lead}">
+  <meta property="og:image" content="${image}">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="${prefix}styles.css?v=20260701-occam1">
+</head>
+<body class="v5-body">
+  <header class="v5-header">
+    <a href="${c.homeUrl}" class="v5-logo">${c.logo}</a>
+    <nav class="v5-nav"><a href="${c.homeUrl}#today">${c.nav[0]}</a><a href="${c.homeUrl}#products">${c.nav[4]}</a></nav>
+    <div class="v5-lang">${languageSwitch}</div>
+  </header>
+
+  <main>
+    <section class="v5-product-hero">
+      <div>
+        <p class="v5-kicker">${lang === "en" ? "MATERIAL SUPPLY" : lang === "zh" ? "材料供应" : "資材供給"}</p>
+        <h1>${detail.name}</h1>
+        <p>${detail.lead}</p>
+        <div class="v5-product-cta-row">
+          <span>${quoteLabel}</span>
+          <a href="${lineUrl}">${c.line}</a>
+        </div>
+      </div>
+      <img src="${image}" alt="${detail.name}">
+    </section>
+
+    <section class="v5-section v5-product-module">
+      <p class="v5-kicker">${lang === "en" ? "SCOPE" : lang === "zh" ? "范围" : "範囲"}</p>
+      <h2>${packageTitle}</h2>
+      <div class="v5-product-plan-grid">
+        ${detail.plans.map((plan, index) => `<div><span>0${index + 1}</span><strong>${plan}</strong></div>`).join("")}
+      </div>
+      <div class="v5-spec-grid">
+        ${detail.specs.map((item) => `<div>${item}</div>`).join("")}
+      </div>
+    </section>
+
+    <section class="v5-section v5-product-module">
+      <p class="v5-kicker">${lang === "en" ? "QUOTE" : lang === "zh" ? "报价" : "見積"}</p>
+      <h2>${quoteTitle}</h2>
+      <p class="v5-lead">${detail.quote}</p>
+      <div class="v5-quote-band">
+        <strong>${quoteLabel}</strong>
+        <span>${lineNote}</span>
+      </div>
+    </section>
+
+    <section class="v5-section v5-product-module">
+      <p class="v5-kicker">${lang === "en" ? "RECORDS" : lang === "zh" ? "记录" : "記録"}</p>
+      <h2>${siteTitle}</h2>
+      <div class="v5-record-grid two">
+        ${photoSlot(siteNotes[0], lang === "en" ? "PACKING RECORD" : lang === "zh" ? "包装记录" : "梱包記録")}
+        ${photoSlot(siteNotes[1], lang === "en" ? "SITE RECORD" : lang === "zh" ? "现场记录" : "現場記録")}
+      </div>
+    </section>
+
+    ${productStory(lang, detail.name)}
+
+    <section class="v5-section v5-contact">
+      <h2>${c.contactTitle}</h2>
+      <p>${c.contactLead}</p>
+      <a href="${lineUrl}">${c.line}</a>
+    </section>
+  </main>
+
+  <footer class="v5-footer">
+    <a class="v5-back-link" href="${c.homeUrl}">${backText}</a>
+    <strong>${lang === "en" ? "Kyoken Real Estate Development Co., Ltd." : lang === "zh" ? "京建不动产开发株式会社" : "京建不動産開発株式会社"}</strong>
+    <p>© 2026 ${lang === "en" ? "Kyoken Real Estate Development Co., Ltd." : lang === "zh" ? "京建不动产开发株式会社" : "京建不動産開発株式会社"}</p>
+  </footer>
+</body>
+</html>
+`;
+}
+
 function writeFile(relativePath, content) {
   fs.mkdirSync(path.dirname(path.join(root, relativePath)), { recursive: true });
   fs.writeFileSync(path.join(root, relativePath), content);
@@ -537,31 +830,10 @@ for (const lang of Object.keys(langConfig)) {
   writeFile(rel(dir, "supply-chain-records.html"), recordsPage(lang));
 }
 
-const detailFiles = [
-  ...products.map(([file]) => file),
-  ...products.map(([file]) => `en/${file}`),
-  ...products.map(([file]) => `zh/${file}`)
-];
-
-for (const file of detailFiles) {
-  const full = path.join(root, file);
-  if (!fs.existsSync(full)) continue;
-  let html = fs.readFileSync(full, "utf8");
-  const lang = file.startsWith("en/") ? "en" : file.startsWith("zh/") ? "zh" : "ja";
-  const titleMatch = html.match(/<title>([^|<]+)/u);
-  const title = (titleMatch?.[1] || "Product").trim();
-  html = html
-    .replace(/<section class="v5-product-story">[\s\S]*?<\/section>\s*/u, "")
-    .replace(/導入事例・施工実績/gu, "現場記録")
-    .replace(/導入事例・施工イメージ/gu, "現場記録")
-    .replace(/施工ギャラリー/gu, "現場記録")
-    .replace(/施工実績/gu, "現場記録")
-    .replace(/Case Grid \(Gallery\)/gu, "Site Records")
-    .replace(/Case Grid \(Compact\)/gu, "Site Records")
-    .replace(/快速报价/gu, "资料确认后报价");
-  const story = productStory(lang, title);
-  html = html.replace(/\s*<!-- Footer -->/u, `\n${story}\n\n    <!-- Footer -->`);
-  writeFile(file, html);
+for (const [file] of products) {
+  writeFile(file, productDetailPage("ja", file));
+  writeFile(`en/${file}`, productDetailPage("en", file));
+  writeFile(`zh/${file}`, productDetailPage("zh", file));
 }
 
 console.log("V5 rebuild complete");
