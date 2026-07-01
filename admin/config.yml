@@ -36,14 +36,14 @@ collections:
         widget: "select"
         default: "other"
         options:
-          - { label: "窗帘", value: "curtain" }
-          - { label: "亚克力标识", value: "acrylic" }
-          - { label: "灯箱画片", value: "lightbox" }
-          - { label: "PVC标牌", value: "pvc" }
+          - { label: "定制窗帘", value: "curtain" }
+          - { label: "亚克力切文字标识", value: "acrylic" }
+          - { label: "灯箱电饰膜", value: "lightbox" }
+          - { label: "PVC板标牌", value: "pvc" }
           - { label: "珐琅磁吸板", value: "enamel" }
-          - { label: "吸音板", value: "acoustic" }
-          - { label: "墙布", value: "wallpaper" }
-          - { label: "塑木板", value: "wpc" }
+          - { label: "毛毡吸音板", value: "acoustic" }
+          - { label: "墙纸 / 墙布材料", value: "wallpaper" }
+          - { label: "人工木地板材料", value: "wpc" }
           - { label: "其他", value: "other" }
       - { label: "首页显示", name: "showOnHome", widget: "boolean", default: true }
       - { label: "图片", name: "image", widget: "image", required: false }
