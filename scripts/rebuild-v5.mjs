@@ -16,6 +16,17 @@ const products = [
   ["wpc-decking-details.html", "屋外用人工木材", "Outdoor WPC Decking", "户外人工木地板", "屋外搬入、下地、数量、長物梱包を確認するデッキ材。"]
 ];
 
+const productImages = {
+  "curtain-details.html": "media/remote/e2f130af6ea5.png",
+  "acrylic-sign-details.html": "media/remote/c1f2ceb8eb9d.png",
+  "lightbox-details.html": "media/remote/b0c44a39e9d2.png",
+  "pvc-sign-details.html": "media/remote/a3fb722c501c.png",
+  "enamel-panel.html": "media/remote/f35f79d49094.png",
+  "acoustic-panel-details.html": "media/remote/c3805c6eb4b0.png",
+  "wallpaper-details.html": "media/remote/41404ad7dc53.jpg",
+  "wpc-decking-details.html": "media/remote/937250ddfe38.png"
+};
+
 const zhProductNotes = {
   "curtain-details.html": "确认 1.8 倍褶皱、上门测量、标准简易安装及窗边条件的窗帘材料。",
   "acrylic-sign-details.html": "确认标志文件、厚度、安装方式和现场基层条件的室内标识。",
@@ -165,13 +176,15 @@ function mediaSlot(record, lang) {
 }
 
 function productCards(lang) {
+  const prefix = lang === "ja" ? "" : "../";
   return products.map(([file, ja, en, zh, note]) => {
     const name = lang === "en" ? en : lang === "zh" ? zh : ja;
     const href = productHref(lang, file);
     const sub = lang === "en" ? "Factory source / packaging / delivery / site confirmation" : lang === "zh" ? "工厂来源 / 包装 / 运输 / 日本现场确认" : "工場確認 / 包装 / 物流 / 現場確認";
     const productNote = lang === "en" ? enProductNotes[file] : lang === "zh" ? zhProductNotes[file] : note;
+    const image = `${prefix}${productImages[file]}`;
     return `<a href="${href}" class="v5-product-card">
-      ${photoSlot(name, lang === "en" ? "PRODUCT RECORD" : lang === "zh" ? "产品记录" : "製品記録")}
+      <img class="v5-product-image" src="${image}" alt="${name}">
       <div>
         <h3>${name}</h3>
         <p>${sub}</p>
@@ -202,7 +215,7 @@ function homePage(lang) {
   <meta property="og:description" content="${c.description}">
   <meta property="og:image" content="${prefix}media/remote/6e64da3a8e48.png">
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="${prefix}styles.css?v=20260630-audit5">
+  <link rel="stylesheet" href="${prefix}styles.css?v=20260701-audit6">
 </head>
 <body class="v5-body">
   <header class="v5-header">
@@ -333,7 +346,7 @@ function recordsPage(lang) {
   <title>${title} | ${c.logo}</title>
   <meta name="description" content="${lead}">
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="${prefix}styles.css?v=20260630-audit5">
+  <link rel="stylesheet" href="${prefix}styles.css?v=20260701-audit6">
 </head>
 <body class="v5-body">
   <header class="v5-header">
@@ -398,7 +411,7 @@ function contractorPage(lang) {
   <title>${title} | ${c.logo}</title>
   <meta name="description" content="${c.partnerLead}">
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="${prefix}styles.css?v=20260630-audit5">
+  <link rel="stylesheet" href="${prefix}styles.css?v=20260701-audit6">
 </head>
 <body class="v5-body">
   <header class="v5-header">
