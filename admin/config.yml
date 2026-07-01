@@ -2,6 +2,8 @@ backend:
   name: github
   repo: kyoken0702-yt/kyoken-design
   branch: master
+  base_url: https://www.kyoken.design
+  auth_endpoint: api/auth
 
 media_folder: "media/records"
 public_folder: "/media/records"
