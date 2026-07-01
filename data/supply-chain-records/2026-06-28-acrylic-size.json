@@ -1,0 +1,40 @@
+{
+  "title": "亚克力标识尺寸与安装条件整理",
+  "date": "2026.06.28",
+  "slug": "2026-06-28-acrylic-size",
+  "category": "today",
+  "product": "acrylic",
+  "showOnHome": true,
+  "image": "",
+  "video": "",
+  "ja": {
+    "label": "寸法確認",
+    "title": "アクリルサインの寸法と取付条件を整理",
+    "summary": "ロゴデータ、厚み、穴位置、現場下地を確認しました。",
+    "details": [
+      "ロゴデータと製作サイズを整理",
+      "穴位置と固定方法を確認",
+      "現場下地の確認事項を施工側へ共有"
+    ]
+  },
+  "en": {
+    "label": "Size Check",
+    "title": "Acrylic sign size and fixing conditions organized",
+    "summary": "Logo data, thickness, hole positions, and site substrate were checked.",
+    "details": [
+      "Organized logo data and production size",
+      "Checked hole position and fixing method",
+      "Shared substrate confirmation points with the contractor"
+    ]
+  },
+  "zh": {
+    "label": "尺寸确认",
+    "title": "亚克力标识尺寸与安装条件整理",
+    "summary": "确认标志文件、厚度、孔位、现场基层等制作前条件。",
+    "details": [
+      "整理标志文件与制作尺寸",
+      "确认孔位和固定方式",
+      "把现场基层确认点同步给施工侧"
+    ]
+  }
+}

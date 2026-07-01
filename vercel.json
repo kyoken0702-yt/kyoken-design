@@ -1,0 +1,3 @@
+{
+  "buildCommand": "node scripts/rebuild-v5.mjs"
+}

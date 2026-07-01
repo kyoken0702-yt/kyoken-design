@@ -1,39 +1,90 @@
 # Supply Chain Records / 今日供应链记录维护
 
-This folder is the static content source for the home page "今日供应链 / 今日のサプライチェーン / Today's Supply Chain" section.
+第一阶段目标：先跑通“你可以自己上传照片、填写记录、保存到网站仓库”。
 
-Edit `supply-chain-records.json` to add or update records.
-
-## How to add photos or videos
-
-1. Put the photo or video file in:
+后台入口：
 
 ```text
-media/remote/
+https://www.kyoken.design/admin/
 ```
 
-Example:
+本阶段使用 Decap CMS。后台保存后会在 GitHub 仓库中新增或修改：
 
 ```text
-media/remote/2026-07-01-factory-packing.jpg
-media/remote/2026-07-01-japan-site.mp4
+data/supply-chain-records/*.json
+media/records/*
 ```
 
-2. Open:
+Vercel 构建时会运行：
+
+```bash
+node scripts/rebuild-v5.mjs
+```
+
+然后自动更新：
 
 ```text
-data/supply-chain-records.json
+index.html
+en/index.html
+zh/index.html
+supply-chain-records.html
+en/supply-chain-records.html
+zh/supply-chain-records.html
 ```
 
-3. Add or edit one record.
+## 后台填写规则
 
-For a photo:
+必填：
+
+- 日期
+- 栏目
+- 产品
+- 中文标题
+- 中文摘要
+- 中文要点
+- 图片或视频
+
+可选：
+
+- 日文
+- 英文
+
+如果日文或英文暂时不填，生成脚本会临时使用中文内容兜底。第二阶段再接自动翻译，让你只填中文也能生成日文和英文。
+
+## 图片和视频
+
+后台上传文件会进入：
+
+```text
+media/records/
+```
+
+建议文件名：
+
+```text
+2026-07-01-curtain-packing.jpg
+2026-07-01-factory-video.mp4
+```
+
+## 本地手动维护方式
+
+如果不用后台，也可以直接新增一个 JSON 文件：
+
+```text
+data/supply-chain-records/2026-07-01-curtain-packing.json
+```
+
+示例：
 
 ```json
 {
+  "title": "窗帘面料出货前包装确认",
   "date": "2026.07.01",
-  "slug": "2026-07-01",
-  "image": "media/remote/2026-07-01-factory-packing.jpg",
+  "slug": "2026-07-01-curtain-packing",
+  "category": "today",
+  "product": "curtain",
+  "showOnHome": true,
+  "image": "media/records/2026-07-01-curtain-packing.jpg",
   "video": "",
   "zh": {
     "label": "工厂包装",
@@ -44,38 +95,10 @@ For a photo:
 }
 ```
 
-For a video:
-
-```json
-{
-  "date": "2026.07.01",
-  "slug": "2026-07-01-site",
-  "image": "media/remote/2026-07-01-japan-site-cover.jpg",
-  "video": "media/remote/2026-07-01-japan-site.mp4"
-}
-```
-
-If both `image` and `video` are empty, the page displays a temporary placeholder.
-
-Fields:
-
-- `date`: Display date, for example `2026.06.29`.
-- `slug`: URL anchor, for example `2026-06-29`.
-- `image`: Optional image path or URL. Use local paths such as `../media/remote/example.jpg` from language subpages only if you understand relative paths. External HTTPS image URLs are also accepted.
-- `video`: Optional video path or URL. If present, the page renders a video player.
-- `ja`, `en`, `zh`: Language-specific label, title, summary, and detail bullet points.
-
-After editing:
+本地生成：
 
 ```bash
-node scripts/rebuild-v5.mjs
+npm run build
 ```
 
-Then check the generated pages:
-
-- `index.html`
-- `en/index.html`
-- `zh/index.html`
-- `supply-chain-records.html`
-- `en/supply-chain-records.html`
-- `zh/supply-chain-records.html`
+注意：后台登录需要 GitHub/Decap CMS 的授权配置可用。代码入口已经准备好；如果线上打开 `/admin/` 后提示认证问题，下一步只处理登录授权，不改网站业务结构。

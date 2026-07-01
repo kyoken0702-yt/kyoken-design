@@ -1,0 +1,40 @@
+{
+  "title": "日本到场后的材料检查项目整理",
+  "date": "2026.06.27",
+  "slug": "2026-06-27-arrival-check",
+  "category": "today",
+  "product": "other",
+  "showOnHome": true,
+  "image": "",
+  "video": "",
+  "ja": {
+    "label": "到着確認",
+    "title": "日本到着後の材料確認項目を整理",
+    "summary": "数量、外装、破損、取付前の引き渡し条件を確認しました。",
+    "details": [
+      "到着時の数量確認項目を整理",
+      "外装と破損確認の手順を確認",
+      "取付前の引き渡し範囲を明確化"
+    ]
+  },
+  "en": {
+    "label": "Arrival Check",
+    "title": "Material check points after Japan arrival organized",
+    "summary": "Quantity, outer packing, damage check, and handover conditions were reviewed.",
+    "details": [
+      "Organized quantity checks at arrival",
+      "Checked outer-packing and damage-check process",
+      "Clarified handover scope before installation"
+    ]
+  },
+  "zh": {
+    "label": "到场确认",
+    "title": "日本到场后的材料检查项目整理",
+    "summary": "确认数量、外包装、破损检查、安装前交接条件。",
+    "details": [
+      "整理到场时的数量确认项目",
+      "确认外包装和破损检查流程",
+      "明确安装前的交接范围"
+    ]
+  }
+}

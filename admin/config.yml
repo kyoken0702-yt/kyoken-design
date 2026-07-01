@@ -1,0 +1,86 @@
+backend:
+  name: github
+  repo: kyoken0702-yt/kyoken-design
+  branch: master
+
+media_folder: "media/records"
+public_folder: "/media/records"
+
+collections:
+  - name: "supply_chain_records"
+    label: "供应链记录"
+    label_singular: "供应链记录"
+    folder: "data/supply-chain-records"
+    create: true
+    extension: "json"
+    format: "json"
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    identifier_field: "title"
+    summary: "{{date}} / {{category}} / {{title}}"
+    fields:
+      - { label: "标题（后台列表用）", name: "title", widget: "string", hint: "例：窗帘面料包装确认" }
+      - { label: "日期", name: "date", widget: "datetime", date_format: "YYYY.MM.DD", time_format: false, format: "YYYY.MM.DD", default: "{{now}}" }
+      - { label: "URL编号", name: "slug", widget: "string", required: false, hint: "可不填。例：2026-07-01-curtain-packing" }
+      - label: "栏目"
+        name: "category"
+        widget: "select"
+        default: "today"
+        options:
+          - { label: "今日供应链", value: "today" }
+          - { label: "中国工厂", value: "factory" }
+          - { label: "日本现场", value: "site" }
+      - label: "产品"
+        name: "product"
+        widget: "select"
+        default: "other"
+        options:
+          - { label: "窗帘", value: "curtain" }
+          - { label: "亚克力标识", value: "acrylic" }
+          - { label: "灯箱画片", value: "lightbox" }
+          - { label: "PVC标牌", value: "pvc" }
+          - { label: "珐琅磁吸板", value: "enamel" }
+          - { label: "吸音板", value: "acoustic" }
+          - { label: "墙布", value: "wallpaper" }
+          - { label: "塑木板", value: "wpc" }
+          - { label: "其他", value: "other" }
+      - { label: "首页显示", name: "showOnHome", widget: "boolean", default: true }
+      - { label: "图片", name: "image", widget: "image", required: false }
+      - { label: "视频", name: "video", widget: "file", required: false }
+      - label: "中文"
+        name: "zh"
+        widget: "object"
+        fields:
+          - { label: "标签", name: "label", widget: "string", default: "现场记录" }
+          - { label: "标题", name: "title", widget: "string" }
+          - { label: "摘要", name: "summary", widget: "text" }
+          - label: "要点"
+            name: "details"
+            widget: "list"
+            required: false
+            field: { label: "要点", name: "item", widget: "string" }
+      - label: "日文（第一阶段手动填写，第二阶段接自动翻译）"
+        name: "ja"
+        widget: "object"
+        required: false
+        fields:
+          - { label: "标签", name: "label", widget: "string", required: false }
+          - { label: "标题", name: "title", widget: "string", required: false }
+          - { label: "摘要", name: "summary", widget: "text", required: false }
+          - label: "要点"
+            name: "details"
+            widget: "list"
+            required: false
+            field: { label: "要点", name: "item", widget: "string" }
+      - label: "英文（第一阶段手动填写，第二阶段接自动翻译）"
+        name: "en"
+        widget: "object"
+        required: false
+        fields:
+          - { label: "标签", name: "label", widget: "string", required: false }
+          - { label: "标题", name: "title", widget: "string", required: false }
+          - { label: "摘要", name: "summary", widget: "text", required: false }
+          - label: "要点"
+            name: "details"
+            widget: "list"
+            required: false
+            field: { label: "要点", name: "item", widget: "string" }

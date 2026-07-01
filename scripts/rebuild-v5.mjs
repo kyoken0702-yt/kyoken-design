@@ -3,7 +3,63 @@ import path from "node:path";
 
 const root = path.resolve(new URL("..", import.meta.url).pathname);
 const lineUrl = "https://line.me/R/ti/p/@566wlcvz";
-const supplyRecords = JSON.parse(fs.readFileSync(path.join(root, "data/supply-chain-records.json"), "utf8"));
+
+function normalizeRecord(record, sourceSlug = "") {
+  const zh = record.zh || {};
+  const ja = record.ja && Object.keys(record.ja).length
+    ? record.ja
+    : {
+        label: zh.label || "記録",
+        title: zh.title || "サプライチェーン記録",
+        summary: zh.summary || "",
+        details: zh.details || []
+      };
+  const en = record.en && Object.keys(record.en).length
+    ? record.en
+    : {
+        label: zh.label || "Record",
+        title: zh.title || "Supply-chain record",
+        summary: zh.summary || "",
+        details: zh.details || []
+      };
+
+  return {
+    ...record,
+    slug: record.slug || sourceSlug || String(record.date || "").replace(/\./g, "-"),
+    ja,
+    en,
+    zh: {
+      label: zh.label || "记录",
+      title: zh.title || "供应链记录",
+      summary: zh.summary || "",
+      details: zh.details || []
+    }
+  };
+}
+
+function loadSupplyRecords() {
+  const folder = path.join(root, "data/supply-chain-records");
+  if (fs.existsSync(folder)) {
+    const records = fs.readdirSync(folder)
+      .filter((file) => file.endsWith(".json"))
+      .map((file) => {
+        const recordPath = path.join(folder, file);
+        const record = JSON.parse(fs.readFileSync(recordPath, "utf8"));
+        return normalizeRecord(record, path.basename(file, ".json"));
+      });
+    if (records.length) {
+      return records.sort((a, b) => String(b.date).localeCompare(String(a.date)));
+    }
+  }
+
+  const legacyPath = path.join(root, "data/supply-chain-records.json");
+  if (!fs.existsSync(legacyPath)) return [];
+  return JSON.parse(fs.readFileSync(legacyPath, "utf8"))
+    .map((record) => normalizeRecord(record))
+    .sort((a, b) => String(b.date).localeCompare(String(a.date)));
+}
+
+const supplyRecords = loadSupplyRecords();
 
 const products = [
   ["curtain-details.html", "オーダーカーテン", "Custom Curtains", "定制窗帘", "1.8倍ヒダ、採寸、標準簡易取付まで確認する窓まわり資材。"],
@@ -164,13 +220,21 @@ function photoSlot(label, note = "SUPPLY RECORD") {
 function mediaSlot(record, lang) {
   const mediaLabel = lang === "en" ? "RECORD MEDIA" : lang === "zh" ? "记录影像" : "記録写真";
   const copy = record[lang];
+  const mediaPrefix = lang === "ja" ? "" : "../";
+  const resolveMedia = (value) => {
+    if (!value) return "";
+    if (/^(https?:)?\/\//u.test(value) || value.startsWith("data:")) return value;
+    return `${mediaPrefix}${value.replace(/^\/+/u, "")}`;
+  };
+  const image = resolveMedia(record.image);
+  const video = resolveMedia(record.video);
   if (record.video) {
-    return `<video class="v5-record-media" controls playsinline poster="${record.image || ""}">
-      <source src="${record.video}">
+    return `<video class="v5-record-media" controls playsinline poster="${image}">
+      <source src="${video}">
     </video>`;
   }
   if (record.image) {
-    return `<img class="v5-record-media" src="${record.image}" alt="${copy.title}">`;
+    return `<img class="v5-record-media" src="${image}" alt="${copy.title}">`;
   }
   return photoSlot(lang === "en" ? "Photo / video to be added" : lang === "zh" ? "照片 / 视频待补充" : "写真 / 動画を追加予定", mediaLabel);
 }
@@ -252,7 +316,7 @@ function homePage(lang) {
       <h2>${c.todayTitle}</h2>
       <p class="v5-lead">${c.todayLead}</p>
       <div class="v5-record-grid">
-        ${supplyRecords.map((record) => {
+        ${supplyRecords.filter((record) => record.showOnHome !== false).slice(0, 3).map((record) => {
           const r = record[lang];
           return `<a class="v5-record v5-record-link" href="supply-chain-records.html#record-${record.slug}">
           ${mediaSlot(record, lang)}

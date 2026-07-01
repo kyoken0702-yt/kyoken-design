@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "build": "node scripts/rebuild-v5.mjs"
+  },
   "dependencies": {
     "vercel": "^54.6.1"
   }
