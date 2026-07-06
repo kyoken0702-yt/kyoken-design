@@ -4,6 +4,32 @@ import path from "node:path";
 const root = path.resolve(new URL("..", import.meta.url).pathname);
 const lineUrl = "https://line.me/R/ti/p/@566wlcvz";
 
+function normalizeImages(record) {
+  const images = [];
+  const seen = new Set();
+  const addImage = (value) => {
+    if (typeof value !== "string") return;
+    const trimmed = value.trim();
+    if (!trimmed) return;
+    const key = /^(https?:)?\/\//u.test(trimmed) || trimmed.startsWith("data:")
+      ? trimmed
+      : trimmed.replace(/^\/+/u, "");
+    if (seen.has(key)) return;
+    seen.add(key);
+    images.push(trimmed);
+  };
+
+  addImage(record.image);
+  if (Array.isArray(record.images)) {
+    record.images.forEach((item) => {
+      if (typeof item === "string") addImage(item);
+      else if (item && typeof item === "object") addImage(item.image);
+    });
+  }
+
+  return images;
+}
+
 function normalizeRecord(record, sourceSlug = "") {
   const zh = record.zh || {};
   const ja = record.ja || {};
@@ -12,6 +38,7 @@ function normalizeRecord(record, sourceSlug = "") {
   return {
     ...record,
     slug: record.slug || sourceSlug || String(record.date || "").replace(/\./g, "-"),
+    images: normalizeImages(record),
     ja: {
       label: ja.label || "記録準備中",
       title: ja.title || "サプライチェーン記録準備中",
@@ -44,7 +71,7 @@ function loadSupplyRecords() {
         return normalizeRecord(record, path.basename(file, ".json"));
       });
     if (records.length) {
-      return records.sort((a, b) => String(b.date).localeCompare(String(a.date)));
+      return records.sort((a, b) => String(b.date || b.slug).localeCompare(String(a.date || a.slug)));
     }
   }
   return [];
@@ -373,22 +400,20 @@ function photoSlot(label, note = "SUPPLY RECORD") {
 
 function mediaSlot(record, lang) {
   const mediaLabel = lang === "en" ? "RECORD MEDIA" : lang === "zh" ? "记录影像" : "記録写真";
-  const copy = record[lang];
   const mediaPrefix = lang === "ja" ? "" : "../";
   const resolveMedia = (value) => {
     if (!value) return "";
     if (/^(https?:)?\/\//u.test(value) || value.startsWith("data:")) return value;
     return `${mediaPrefix}${value.replace(/^\/+/u, "")}`;
   };
-  const image = resolveMedia(record.image);
+  const images = (record.images || []).map(resolveMedia).filter(Boolean);
   const video = resolveMedia(record.video);
-  if (record.video) {
-    return `<video class="v5-record-media" controls playsinline poster="${image}">
+  if (images.length || record.video) {
+    const imageHtml = images.map((image) => `<img class="v5-record-media" src="${image}" alt="">`).join("");
+    const videoHtml = record.video ? `<video class="v5-record-media" controls playsinline${images[0] ? ` poster="${images[0]}"` : ""}>
       <source src="${video}">
-    </video>`;
-  }
-  if (record.image) {
-    return `<img class="v5-record-media" src="${image}" alt="${copy.title}">`;
+    </video>` : "";
+    return `<div class="v5-record-gallery">${imageHtml}${videoHtml}</div>`;
   }
   return photoSlot(lang === "en" ? "Photo / video to be added" : lang === "zh" ? "照片 / 视频待补充" : "写真 / 動画を追加予定", mediaLabel);
 }
@@ -403,18 +428,19 @@ function recordModuleLabel(category, lang) {
 }
 
 function recordCard(record, lang) {
-  const r = record[lang];
-  return `<a class="v5-record v5-record-link" href="supply-chain-records.html#record-${record.slug}">
+  return `<article class="v5-record v5-record-photo-card">
           ${mediaSlot(record, lang)}
-          <div class="v5-record-meta"><span>${record.date}</span><span>${recordModuleLabel(record.category || "today", lang)}</span></div>
-          <h3>${r.title}</h3>
-          <p>${r.summary}</p>
-        </a>`;
+        </article>`;
+}
+
+function hasRecordMedia(record) {
+  return Boolean((record.images && record.images.length) || record.video);
 }
 
 function homeRecords(lang, category, limit, fallbackHtml) {
   const records = supplyRecords
     .filter((record) => record.showOnHome !== false)
+    .filter(hasRecordMedia)
     .filter((record) => (record.category || "today") === category)
     .slice(0, limit);
   if (!records.length) return fallbackHtml;
@@ -578,10 +604,10 @@ function recordsPage(lang) {
   const backText = lang === "en" ? "Back to home" : lang === "zh" ? "返回首页" : "トップへ戻る";
   const title = lang === "en" ? "Supply-chain Records" : lang === "zh" ? "供应链记录" : "サプライチェーン記録";
   const lead = lang === "en"
-    ? "A dated archive of factory checks, packing, logistics, arrival, and handover records. We keep the process visible so contractors can judge delivery certainty before ordering."
+    ? "Raw photos and videos from factory, packing, logistics, arrival, and site handover. Photos speak first."
     : lang === "zh"
-      ? "这里按日期记录工厂确认、包装、运输、到场、交接。把过程留出来，让工务店在下单前判断材料交付的确定性。"
-      : "工場確認、梱包、物流、到着、引き渡しを日付ごとに残す記録です。発注前に材料交付の確実性を判断できるようにします。";
+      ? "这里集中展示工厂、包装、运输、到场、交付的真实照片和视频。照片先说话。"
+      : "工場、梱包、物流、到着、引き渡しの実際の写真と動画を集約します。まず写真で確認できる状態にします。";
   return `<!DOCTYPE html>
 <html lang="${c.htmlLang}">
 <head>
@@ -605,20 +631,9 @@ function recordsPage(lang) {
       <h1>${title}</h1>
       <p class="v5-lead">${lead}</p>
       <div class="v5-record-detail-list">
-        ${supplyRecords.map((record) => {
-          const r = record[lang];
-          return `<article id="record-${record.slug}" class="v5-record-detail">
-            <div>
-              ${mediaSlot(record, lang)}
-            </div>
-            <div>
-              <div class="v5-record-meta"><span>${record.date}</span><span>${recordModuleLabel(record.category || "today", lang)}</span></div>
-              <h2>${r.title}</h2>
-              <p>${r.summary}</p>
-              <ul>${r.details.map((item) => `<li>${item}</li>`).join("")}</ul>
-            </div>
-          </article>`;
-        }).join("\n")}
+        ${supplyRecords.filter(hasRecordMedia).map((record) => `<article id="record-${record.slug}" class="v5-record-detail v5-record-photo-card">
+          ${mediaSlot(record, lang)}
+        </article>`).join("\n")}
       </div>
     </section>
   </main>

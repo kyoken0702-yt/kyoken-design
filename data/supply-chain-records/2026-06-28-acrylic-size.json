@@ -35,6 +35,14 @@
   "title": "广告材料制作尺寸与安装条件整理",
   "video": "",
   "showOnHome": true,
+  "images": [
+    {
+      "image": "media/records/today/img_3700.jpg"
+    },
+    {
+      "image": "media/records/today/img_3713.jpg"
+    }
+  ],
   "image": "media/records/today/img_3700.jpg",
   "category": "today"
 }
