@@ -1,22 +1,4 @@
 {
-  "title": "广告材料制作尺寸与安装条件整理",
-  "date": "2026.06.28",
-  "slug": "2026-06-28-acrylic-size",
-  "category": "today",
-  "product": "advertising",
-  "showOnHome": true,
-  "image": "",
-  "video": "",
-  "ja": {
-    "label": "寸法確認",
-    "title": "広告材料制作の寸法と取付条件を整理",
-    "summary": "切文字サインのロゴデータ、厚み、穴位置、現場下地を確認しました。",
-    "details": [
-      "ロゴデータと製作サイズを整理",
-      "穴位置と固定方法を確認",
-      "現場下地の確認事項を施工側へ共有"
-    ]
-  },
   "en": {
     "label": "Size Check",
     "title": "Advertising material size and fixing conditions organized",
@@ -27,6 +9,7 @@
       "Shared substrate confirmation points with the contractor"
     ]
   },
+  "slug": "2026-06-28-acrylic-size",
   "zh": {
     "label": "尺寸确认",
     "title": "广告材料制作尺寸与安装条件整理",
@@ -36,5 +19,22 @@
       "确认孔位和固定方式",
       "把现场基层确认点同步给施工侧"
     ]
-  }
+  },
+  "date": "2026.06.28",
+  "product": "advertising",
+  "ja": {
+    "label": "寸法確認",
+    "title": "広告材料制作の寸法と取付条件を整理",
+    "summary": "切文字サインのロゴデータ、厚み、穴位置、現場下地を確認しました。",
+    "details": [
+      "ロゴデータと製作サイズを整理",
+      "穴位置と固定方法を確認",
+      "現場下地の確認事項を施工側へ共有"
+    ]
+  },
+  "title": "广告材料制作尺寸与安装条件整理",
+  "video": "",
+  "showOnHome": true,
+  "image": "",
+  "category": "today"
 }
