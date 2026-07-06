@@ -21,6 +21,7 @@ collections:
     media_folder: "../../media/records/today"
     public_folder: "/media/records/today"
     create: true
+    delete: true
     filter: { field: "category", value: "today" }
     extension: "json"
     format: "json"
@@ -28,54 +29,29 @@ collections:
     identifier_field: "title"
     summary: "{{date}} / 今日供应链 / {{title}}"
     fields:
-      - { label: "标题（后台列表用）", name: "title", widget: "string", hint: "例：窗帘面料包装确认" }
       - { label: "日期", name: "date", widget: "datetime", date_format: "YYYY.MM.DD", time_format: false, format: "YYYY.MM.DD", default: "{{now}}" }
-      - { label: "URL编号", name: "slug", widget: "string", required: false, hint: "可不填。例：2026-07-01-curtain-packing" }
       - { label: "前台显示模块", name: "category", widget: "hidden", default: "today" }
-      - { label: "首页显示", name: "showOnHome", widget: "boolean", default: true, hint: "关闭后只保存在记录页，不显示在首页。" }
-      - { label: "封面图片（网页显示）", name: "image", widget: "image", required: false, hint: "用于首页【每日记录】和记录页直接显示。请上传 JPG / PNG / WebP。手机 HEIC 请先转 JPG。" }
-      - { label: "网页视频（MP4）", name: "video", widget: "file", required: false, hint: "用于网页直接播放。请上传 MP4（H.264）。手机 MOV 建议先转 MP4。" }
-      - label: "手机原始素材备份（不直接显示）"
-        name: "mobileAssets"
-        widget: "list"
-        required: false
-        hint: "可备份手机 HEIC / MOV 原文件，但这些文件不用于网页直接展示。网页显示请使用上面的封面图片或网页视频。"
-        fields:
-          - { label: "原始文件", name: "file", widget: "file" }
-          - { label: "备注", name: "note", widget: "string", required: false }
+      - { label: "封面图片", name: "image", widget: "image", required: false, hint: "上传 JPG / PNG / WebP。手机 HEIC 请先转 JPG。" }
+      - { label: "视频", name: "video", widget: "file", required: false, hint: "上传 MP4。手机 MOV 请先转 MP4。" }
+      - { label: "后台标题", name: "title", widget: "string", hint: "后台列表用。建议和中文标题一致。" }
       - label: "中文内容"
         name: "zh"
         widget: "object"
         fields:
           - { label: "中文标题", name: "title", widget: "string" }
-          - { label: "中文摘要", name: "summary", widget: "text" }
-          - label: "中文要点"
-            name: "details"
-            widget: "list"
-            required: false
-            field: { label: "中文要点", name: "item", widget: "string" }
+          - { label: "中文说明", name: "summary", widget: "text" }
       - label: "日本語内容（手動入力）"
         name: "ja"
         widget: "object"
         fields:
           - { label: "日本語タイトル", name: "title", widget: "string" }
-          - { label: "日本語概要", name: "summary", widget: "text" }
-          - label: "日本語要点"
-            name: "details"
-            widget: "list"
-            required: false
-            field: { label: "日本語要点", name: "item", widget: "string" }
+          - { label: "日本語説明", name: "summary", widget: "text" }
       - label: "English Content"
         name: "en"
         widget: "object"
         fields:
           - { label: "English Title", name: "title", widget: "string" }
-          - { label: "English Summary", name: "summary", widget: "text" }
-          - label: "English Points"
-            name: "details"
-            widget: "list"
-            required: false
-            field: { label: "English Point", name: "item", widget: "string" }
+          - { label: "English Description", name: "summary", widget: "text" }
 
   - name: "factory_records"
     label: "首页模块｜工厂侧・中国工厂"
@@ -84,6 +60,7 @@ collections:
     media_folder: "../../media/records/factory"
     public_folder: "/media/records/factory"
     create: true
+    delete: true
     filter: { field: "category", value: "factory" }
     extension: "json"
     format: "json"
@@ -91,53 +68,29 @@ collections:
     identifier_field: "title"
     summary: "{{date}} / 中国工厂 / {{title}}"
     fields:
-      - { label: "标题（后台列表用）", name: "title", widget: "string", hint: "例：广告制作车间现场照片" }
       - { label: "日期", name: "date", widget: "datetime", date_format: "YYYY.MM.DD", time_format: false, format: "YYYY.MM.DD", default: "{{now}}" }
-      - { label: "URL编号", name: "slug", widget: "string", required: false, hint: "可不填。例：2026-07-01-factory-check" }
       - { label: "前台显示模块", name: "category", widget: "hidden", default: "factory" }
-      - { label: "首页显示", name: "showOnHome", widget: "boolean", default: true, hint: "关闭后只保存在记录页，不显示在首页【中国工厂】。" }
-      - { label: "封面图片（网页显示）", name: "image", widget: "image", required: false, hint: "用于首页【中国工厂】和记录页直接显示。请上传 JPG / PNG / WebP。手机 HEIC 请先转 JPG。" }
-      - { label: "网页视频（MP4）", name: "video", widget: "file", required: false, hint: "用于网页直接播放。请上传 MP4（H.264）。手机 MOV 建议先转 MP4。" }
-      - label: "手机原始素材备份（不直接显示）"
-        name: "mobileAssets"
-        widget: "list"
-        required: false
-        fields:
-          - { label: "原始文件", name: "file", widget: "file" }
-          - { label: "备注", name: "note", widget: "string", required: false }
+      - { label: "封面图片", name: "image", widget: "image", required: false, hint: "上传 JPG / PNG / WebP。手机 HEIC 请先转 JPG。" }
+      - { label: "视频", name: "video", widget: "file", required: false, hint: "上传 MP4。手机 MOV 请先转 MP4。" }
+      - { label: "后台标题", name: "title", widget: "string", hint: "后台列表用。建议和中文标题一致。" }
       - label: "中文内容"
         name: "zh"
         widget: "object"
         fields:
           - { label: "中文标题", name: "title", widget: "string" }
-          - { label: "中文摘要", name: "summary", widget: "text" }
-          - label: "中文要点"
-            name: "details"
-            widget: "list"
-            required: false
-            field: { label: "中文要点", name: "item", widget: "string" }
+          - { label: "中文说明", name: "summary", widget: "text" }
       - label: "日本語内容（手動入力）"
         name: "ja"
         widget: "object"
         fields:
           - { label: "日本語タイトル", name: "title", widget: "string" }
-          - { label: "日本語概要", name: "summary", widget: "text" }
-          - label: "日本語要点"
-            name: "details"
-            widget: "list"
-            required: false
-            field: { label: "日本語要点", name: "item", widget: "string" }
+          - { label: "日本語説明", name: "summary", widget: "text" }
       - label: "English Content"
         name: "en"
         widget: "object"
         fields:
           - { label: "English Title", name: "title", widget: "string" }
-          - { label: "English Summary", name: "summary", widget: "text" }
-          - label: "English Points"
-            name: "details"
-            widget: "list"
-            required: false
-            field: { label: "English Point", name: "item", widget: "string" }
+          - { label: "English Description", name: "summary", widget: "text" }
 
   - name: "japan_site_records"
     label: "首页模块｜日本现场・现场记录"
@@ -146,6 +99,7 @@ collections:
     media_folder: "../../media/records/site"
     public_folder: "/media/records/site"
     create: true
+    delete: true
     filter: { field: "category", value: "site" }
     extension: "json"
     format: "json"
@@ -153,50 +107,26 @@ collections:
     identifier_field: "title"
     summary: "{{date}} / 日本现场 / {{title}}"
     fields:
-      - { label: "标题（后台列表用）", name: "title", widget: "string", hint: "例：材料到场确认照片" }
       - { label: "日期", name: "date", widget: "datetime", date_format: "YYYY.MM.DD", time_format: false, format: "YYYY.MM.DD", default: "{{now}}" }
-      - { label: "URL编号", name: "slug", widget: "string", required: false, hint: "可不填。例：2026-07-01-site-arrival" }
       - { label: "前台显示模块", name: "category", widget: "hidden", default: "site" }
-      - { label: "首页显示", name: "showOnHome", widget: "boolean", default: true, hint: "关闭后只保存在记录页，不显示在首页【现场记录】。" }
-      - { label: "封面图片（网页显示）", name: "image", widget: "image", required: false, hint: "用于首页【现场记录】和记录页直接显示。请上传 JPG / PNG / WebP。手机 HEIC 请先转 JPG。" }
-      - { label: "网页视频（MP4）", name: "video", widget: "file", required: false, hint: "用于网页直接播放。请上传 MP4（H.264）。手机 MOV 建议先转 MP4。" }
-      - label: "手机原始素材备份（不直接显示）"
-        name: "mobileAssets"
-        widget: "list"
-        required: false
-        fields:
-          - { label: "原始文件", name: "file", widget: "file" }
-          - { label: "备注", name: "note", widget: "string", required: false }
+      - { label: "封面图片", name: "image", widget: "image", required: false, hint: "上传 JPG / PNG / WebP。手机 HEIC 请先转 JPG。" }
+      - { label: "视频", name: "video", widget: "file", required: false, hint: "上传 MP4。手机 MOV 请先转 MP4。" }
+      - { label: "后台标题", name: "title", widget: "string", hint: "后台列表用。建议和中文标题一致。" }
       - label: "中文内容"
         name: "zh"
         widget: "object"
         fields:
           - { label: "中文标题", name: "title", widget: "string" }
-          - { label: "中文摘要", name: "summary", widget: "text" }
-          - label: "中文要点"
-            name: "details"
-            widget: "list"
-            required: false
-            field: { label: "中文要点", name: "item", widget: "string" }
+          - { label: "中文说明", name: "summary", widget: "text" }
       - label: "日本語内容（手動入力）"
         name: "ja"
         widget: "object"
         fields:
           - { label: "日本語タイトル", name: "title", widget: "string" }
-          - { label: "日本語概要", name: "summary", widget: "text" }
-          - label: "日本語要点"
-            name: "details"
-            widget: "list"
-            required: false
-            field: { label: "日本語要点", name: "item", widget: "string" }
+          - { label: "日本語説明", name: "summary", widget: "text" }
       - label: "English Content"
         name: "en"
         widget: "object"
         fields:
           - { label: "English Title", name: "title", widget: "string" }
-          - { label: "English Summary", name: "summary", widget: "text" }
-          - label: "English Points"
-            name: "details"
-            widget: "list"
-            required: false
-            field: { label: "English Point", name: "item", widget: "string" }
+          - { label: "English Description", name: "summary", widget: "text" }
