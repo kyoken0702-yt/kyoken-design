@@ -70,6 +70,33 @@ const productImages = {
   "wpc-decking-details.html": "media/remote/937250ddfe38.png"
 };
 
+const productQuoteLabels = {
+  ja: {
+    "curtain-details.html": "仕様確認後に概算見積",
+    "advertising-materials-details.html": "案件ごとにお見積り",
+    "enamel-panel.html": "案件ごとにお見積り",
+    "acoustic-panel-details.html": "案件ごとにお見積り",
+    "wallpaper-details.html": "案件ごとにお見積り",
+    "wpc-decking-details.html": "案件ごとにお見積り"
+  },
+  zh: {
+    "curtain-details.html": "规格确认后报价",
+    "advertising-materials-details.html": "按案件报价",
+    "enamel-panel.html": "按案件报价",
+    "acoustic-panel-details.html": "按案件报价",
+    "wallpaper-details.html": "按案件报价",
+    "wpc-decking-details.html": "按案件报价"
+  },
+  en: {
+    "curtain-details.html": "Quote after spec check",
+    "advertising-materials-details.html": "Case-by-case quote",
+    "enamel-panel.html": "Case-by-case quote",
+    "acoustic-panel-details.html": "Case-by-case quote",
+    "wallpaper-details.html": "Case-by-case quote",
+    "wpc-decking-details.html": "Case-by-case quote"
+  }
+};
+
 const zhProductNotes = {
   "curtain-details.html": "确认 1.8 倍褶皱、上门测量、标准简易安装及窗边条件的窗帘材料。",
   "advertising-materials-details.html": "统一确认标志文件、灯箱画面、PVC板标牌的尺寸、材料、加工、包装和交付条件。",
@@ -240,8 +267,8 @@ const langConfig = {
     heroTitle: "二十年、サプライチェーンだけを積み上げてきました。",
     heroSub: ["中国工場", "↓", "日本現場", "↓", "長期連携"],
     heroBody: "京建サプライは施工会社ではありません。中国側の製作、包装、物流、日本到着後の現場確認をつなぎ、工務店・内装会社の背後で材料供給の確実性を積み上げます。",
-    primary: "今日のサプライチェーンを見る",
-    secondary: "現場記録を見る",
+    primary: "写真記録を見る",
+    secondary: "製品と見積を見る",
     todayTitle: "今日のサプライチェーン",
     todayLead: "毎日増えていく実記録。写真、寸法、包装、到着、確認。派手な広告ではなく、材料が現場へ届くまでの事実を残します。",
     factoryTitle: "中国工場",
@@ -252,10 +279,11 @@ const langConfig = {
     timelineSteps: ["ご要望・図面確認", "工場確認", "サンプル / 仕様確認", "梱包", "国際物流", "日本国内配送", "現場引き渡し"],
     partnerTitle: "工務店連携",
     partnerLead: "京建は現場を奪いません。材料、調達、輸送、到着確認を支え、施工・顧客対応・取付費用は工務店様側で決めていただきます。",
-    productsTitle: "製品分類",
-    contactTitle: "図面・写真・寸法を送ってください",
-    contactLead: "材料、包装、輸送、現場到着までの不確実性を一つずつ確認します。",
-    line: "LINEでサプライチェーン相談",
+    productsTitle: "製品と見積",
+    productsLead: "写真で供給体制を確認したら、必要な製品を選び、図面・写真・寸法をLINEで送ってください。",
+    contactTitle: "LINEで注文・見積相談",
+    contactLead: "製品名、写真、寸法、数量、納品先を送ってください。仕様確認後に概算見積をご案内します。",
+    line: "LINEで注文・見積相談",
     contractorUrl: "contractor-partnership.html",
     estimateUrl: "estimate.html",
     homeUrl: "index.html",
@@ -271,8 +299,8 @@ const langConfig = {
     heroTitle: "Twenty years, focused on supply chain certainty.",
     heroSub: ["China Factory", "↓", "Japan Site", "↓", "Long-term Partnership"],
     heroBody: "Kyoken Supply is not a contractor competing for your site. We support material sourcing, production coordination, export packaging, logistics, and arrival confirmation so contractors can focus on their own clients and installation work.",
-    primary: "View Today's Supply Chain",
-    secondary: "View Site Records",
+    primary: "View photos",
+    secondary: "View products & quotes",
     todayTitle: "Today's Supply Chain",
     todayLead: "A growing record of real work: photos, dimensions, packaging, shipment, arrival, and confirmation. Less advertising, more evidence.",
     factoryTitle: "China Factory",
@@ -283,10 +311,11 @@ const langConfig = {
     timelineSteps: ["Request & Drawing Check", "Factory Confirmation", "Sample / Specification", "Packing", "International Logistics", "Japan Delivery", "Site Handover"],
     partnerTitle: "Contractor Partnership",
     partnerLead: "Kyoken does not take your construction clients. We support procurement, transportation, delivery, and confirmation; contractors remain responsible for installation, site work, pricing, and customer relationships.",
-    productsTitle: "Product Categories",
-    contactTitle: "Send drawings, photos, dimensions",
-    contactLead: "We help reduce uncertainty around materials, packaging, delivery, and site coordination one item at a time.",
-    line: "Consult via LINE",
+    productsTitle: "Products & Quotes",
+    productsLead: "Check the supply-chain photos, choose a product, then send photos, dimensions, quantity, and delivery area via LINE.",
+    contactTitle: "Order or quote via LINE",
+    contactLead: "Send product name, photos, dimensions, quantity, and delivery area. A rough quote is provided after specification review.",
+    line: "Order / quote via LINE",
     contractorUrl: "contractor-partnership.html",
     estimateUrl: "../estimate.html",
     homeUrl: "index.html",
@@ -302,8 +331,8 @@ const langConfig = {
     heroTitle: "二十年，只做好供应链这一件事。",
     heroSub: ["中国工厂", "↓", "日本现场", "↓", "长期合作"],
     heroBody: "京建不是施工竞争者。我们做的是中国侧生产、包装、物流、日本到场确认，把材料可交付、可安装、可沟通这件事做稳定。",
-    primary: "查看今天供应链",
-    secondary: "查看现场记录",
+    primary: "看供应链照片",
+    secondary: "看产品和报价",
     todayTitle: "今日供应链",
     todayLead: "每天增加真实记录：照片、尺寸、包装、运输、到场、确认。不是广告堆砌，而是把材料抵达日本现场的过程长期沉淀下来。",
     factoryTitle: "中国工厂",
@@ -314,10 +343,11 @@ const langConfig = {
     timelineSteps: ["需求与图纸确认", "工厂确认", "样品 / 规格确认", "包装", "国际物流", "日本国内配送", "现场交付"],
     partnerTitle: "工务店合作",
     partnerLead: "京建负责材料、采购、运输、交付确认；现场施工、安装报价、终端客户维护由工务店主导。",
-    productsTitle: "产品分类",
-    contactTitle: "发送图纸、现场照片、尺寸",
-    contactLead: "我们帮助确认材料、包装、运输、到场和现场配合，把不确定性一项一项降下来。",
-    line: "LINE 供应链咨询",
+    productsTitle: "产品和报价",
+    productsLead: "先看供应链、工厂、日本现场照片，再选择产品，最后把照片、尺寸、数量、地址发到 LINE。",
+    contactTitle: "LINE 下单或报价咨询",
+    contactLead: "发送产品名、照片、尺寸、数量、配送地址。规格确认后给出概算报价。",
+    line: "LINE 下单 / 报价咨询",
     contractorUrl: "contractor-partnership.html",
     estimateUrl: "../estimate.html",
     homeUrl: "index.html",
@@ -399,14 +429,22 @@ function productCards(lang) {
     const sub = lang === "en" ? "Factory source / packaging / delivery / site confirmation" : lang === "zh" ? "工厂来源 / 包装 / 运输 / 日本现场确认" : "工場確認 / 包装 / 物流 / 現場確認";
     const productNote = lang === "en" ? enProductNotes[file] : lang === "zh" ? zhProductNotes[file] : note;
     const image = `${prefix}${productImages[file]}`;
-    return `<a href="${href}" class="v5-product-card">
+    const quote = productQuoteLabels[lang][file];
+    const detailText = lang === "en" ? "View quote" : lang === "zh" ? "查看报价" : "見積を見る";
+    const lineText = lang === "en" ? "Order / consult" : lang === "zh" ? "下单 / 咨询" : "注文 / 相談";
+    return `<article class="v5-product-card">
       <img class="v5-product-image" src="${image}" alt="${name}">
       <div>
         <h3>${name}</h3>
+        <strong class="v5-product-price">${quote}</strong>
         <p>${sub}</p>
         <small>${productNote}</small>
+        <div class="v5-product-actions">
+          <a href="${href}">${detailText}</a>
+          <a href="${lineUrl}">${lineText}</a>
+        </div>
       </div>
-    </a>`;
+    </article>`;
   }).join("\n");
 }
 
@@ -458,7 +496,7 @@ function homePage(lang) {
         <p>${c.heroBody}</p>
         <div class="v5-actions">
           <a href="#today">${c.primary}</a>
-          <a href="#site">${c.secondary}</a>
+          <a href="#products">${c.secondary}</a>
         </div>
       </div>
     </section>
@@ -513,6 +551,7 @@ function homePage(lang) {
     <section id="products" class="v5-section">
       <p class="v5-kicker">${lang === "en" ? "MATERIAL RANGE" : lang === "zh" ? "材料范围" : "取扱範囲"}</p>
       <h2>${c.productsTitle}</h2>
+      <p class="v5-lead">${c.productsLead}</p>
       <div class="v5-product-grid">${productCards(lang)}</div>
     </section>
 
