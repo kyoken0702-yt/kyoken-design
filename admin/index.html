@@ -12,6 +12,7 @@
       --line: #d7deea;
       --paper: #f5f7fb;
       --red: #a32736;
+      --gold: #d7a84b;
       --green: #047857;
       --text: #10213d;
     }
@@ -86,6 +87,22 @@
     }
     .status.ok { border-color: var(--green); background: #ecfdf5; color: #065f46; }
     .status.warn { border-color: var(--red); background: #fff1f2; color: #9f1239; }
+    .login-strip {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      border: 1px solid #ead49a;
+      background: #fff8e6;
+      padding: 12px;
+      color: var(--navy);
+      font-weight: 900;
+    }
+    .login-strip.ok {
+      border-color: #a7f3d0;
+      background: #ecfdf5;
+      color: #065f46;
+    }
     .preview-grid, .record-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
@@ -121,6 +138,13 @@
     }
     .record small { color: #52637b; font-weight: 800; }
     .record .media-count { color: var(--red); font-weight: 950; }
+    .module-note {
+      border: 1px solid var(--line);
+      background: #f8fafc;
+      padding: 10px 12px;
+      color: var(--navy);
+      font-weight: 900;
+    }
     .top-note { color: #43536c; font-weight: 800; }
     .hidden { display: none !important; }
     @media (max-width: 860px) {
@@ -146,14 +170,19 @@
     <section class="panel stack">
       <h2>新增 / 更新前台记录</h2>
       <div id="status" class="status">请先登录。登录后可以一次上传多张图片。</div>
+      <div id="loginStrip" class="login-strip">
+        <span id="loginText">未登录。点击“上传并发布”会先打开 GitHub 登录。</span>
+        <button id="inlineLoginBtn" type="button">先登录</button>
+      </div>
 
       <label>
         前台模块
         <select id="category">
-          <option value="factory">中国工厂・供应链实景</option>
-          <option value="site">日本现场记录</option>
+          <option value="factory">中国工厂・供应链实景（前台首页 #factory）</option>
+          <option value="site">日本现场记录（前台首页 #site）</option>
         </select>
       </label>
+      <div id="moduleNote" class="module-note">将显示在前台：首页 → 中国工厂・供应链实景</div>
 
       <label>
         中文大标题
@@ -200,20 +229,64 @@
       var tokenKey = "kyoken_custom_admin_github_token";
       var token = sessionStorage.getItem(tokenKey) || "";
       var popup = null;
+      var pendingPublish = false;
 
       var $ = function (id) { return document.getElementById(id); };
       var status = $("status");
       var loginBtn = $("loginBtn");
+      var inlineLoginBtn = $("inlineLoginBtn");
+      var loginStrip = $("loginStrip");
+      var loginText = $("loginText");
       var reloadBtn = $("reloadBtn");
       var publishBtn = $("publishBtn");
       var clearBtn = $("clearBtn");
       var filesInput = $("files");
       var previewGrid = $("previewGrid");
       var recordList = $("recordList");
+      var categoryInput = $("category");
+      var moduleNote = $("moduleNote");
+
+      var moduleLabels = {
+        factory: {
+          zh: "中国工厂・供应链实景",
+          ja: "中国工場・供給実景",
+          en: "China Factory & Supply Records",
+          anchor: "首页 #factory"
+        },
+        site: {
+          zh: "日本现场记录",
+          ja: "日本現場記録",
+          en: "Japan Site Records",
+          anchor: "首页 #site"
+        }
+      };
 
       function setStatus(message, type) {
         status.textContent = message;
         status.className = "status" + (type ? " " + type : "");
+      }
+
+      function updateLoginUi() {
+        if (token) {
+          loginBtn.textContent = "已登录";
+          loginBtn.disabled = true;
+          inlineLoginBtn.textContent = "已登录";
+          inlineLoginBtn.disabled = true;
+          loginStrip.className = "login-strip ok";
+          loginText.textContent = "已登录，可以直接上传并发布。";
+        } else {
+          loginBtn.textContent = "登录 GitHub";
+          loginBtn.disabled = false;
+          inlineLoginBtn.textContent = "先登录";
+          inlineLoginBtn.disabled = false;
+          loginStrip.className = "login-strip";
+          loginText.textContent = "未登录。点击“上传并发布”会先打开 GitHub 登录。";
+        }
+      }
+
+      function updateModuleNote() {
+        var selected = moduleLabels[categoryInput.value] || moduleLabels.factory;
+        moduleNote.textContent = "将显示在前台：" + selected.anchor + " → " + selected.zh + " / " + selected.ja + " / " + selected.en;
       }
 
       function api(path, options) {
@@ -322,7 +395,12 @@
         var titleEn = $("titleEn").value.trim();
         var files = Array.from(filesInput.files || []);
 
-        if (!token) return setStatus("请先登录 GitHub。", "warn");
+        if (!token) {
+          setStatus("需要先登录 GitHub。登录完成后会自动继续上传。", "warn");
+          pendingPublish = true;
+          login();
+          return;
+        }
         if (!titleZh) return setStatus("请填写中文大标题。", "warn");
         if (!files.length) return setStatus("请选择至少一张图片。", "warn");
         var oversized = files.filter(function (file) { return isVideo(file) && file.size > 25 * 1024 * 1024; });
@@ -387,27 +465,49 @@
             recordList.innerHTML = '<p class="hint">暂无记录。</p>';
             return;
           }
+          var grouped = {};
           for (var i = 0; i < jsonFiles.length; i += 1) {
-            await renderRecord(jsonFiles[i]);
+            var item = jsonFiles[i];
+            var detail = await getContent(item.path);
+            var content = JSON.parse(decodeURIComponent(escape(atob(detail.content.replace(/\s/g, "")))));
+            var category = content.category === "site" ? "site" : "factory";
+            if (!grouped[category]) grouped[category] = [];
+            grouped[category].push({ item: item, content: content });
           }
+          renderRecordGroup("factory", grouped.factory || []);
+          renderRecordGroup("site", grouped.site || []);
         } catch (error) {
           recordList.innerHTML = '<p class="hint">读取失败：' + error.message + '</p>';
         }
       }
 
-      async function renderRecord(item) {
-        var detail = await getContent(item.path);
-        var content = JSON.parse(decodeURIComponent(escape(atob(detail.content.replace(/\s/g, "")))));
+      function renderRecordGroup(category, records) {
+        var label = moduleLabels[category] || moduleLabels.factory;
+        var group = document.createElement("div");
+        group.className = "stack";
+        group.innerHTML = '<h3>' + escapeHtml(label.zh) + '</h3>';
+        if (!records.length) {
+          group.innerHTML += '<p class="hint">这个前台板块暂无记录。</p>';
+          recordList.appendChild(group);
+          return;
+        }
+        records.forEach(function (record) {
+          renderRecord(record.item, record.content, group);
+        });
+        recordList.appendChild(group);
+      }
+
+      function renderRecord(item, content, target) {
         var card = document.createElement("div");
         card.className = "record";
         var mediaCount = Array.isArray(content.media) ? content.media.length : (content.media ? 1 : 0);
         card.innerHTML =
           '<h3>' + escapeHtml(content.title || item.name) + '</h3>' +
           '<small>' + escapeHtml(item.name) + '</small>' +
-          '<div><span class="media-count">' + mediaCount + '</span> 个媒体 / ' + escapeHtml(content.category || "") + '</div>' +
+          '<div><span class="media-count">' + mediaCount + '</span> 个媒体 / 前台：' + escapeHtml((moduleLabels[content.category] || moduleLabels.factory).zh) + '</div>' +
           '<div class="actions"><button class="danger" type="button">删除记录</button></div>';
         card.querySelector("button").addEventListener("click", function () { deleteRecord(item.path, item.sha, content.title || item.name); });
-        recordList.appendChild(card);
+        target.appendChild(card);
       }
 
       async function deleteRecord(path, sha, title) {
@@ -437,7 +537,11 @@
 
       function login() {
         popup = window.open("/api/auth?scope=repo", "kyokenGithubLogin", "width=720,height=720");
-        setStatus("GitHub 登录窗口已打开。");
+        if (!popup) {
+          setStatus("浏览器拦截了登录窗口。请允许弹窗，或点击右上角“登录 GitHub”。", "warn");
+          return;
+        }
+        setStatus("GitHub 登录窗口已打开。登录完成后会自动回到后台。");
       }
 
       window.addEventListener("message", function (event) {
@@ -450,8 +554,13 @@
           var payload = JSON.parse(data.slice("authorization:github:success:".length));
           token = payload.token;
           sessionStorage.setItem(tokenKey, token);
+          updateLoginUi();
           setStatus("已登录。可以新增记录。", "ok");
           loadRecords();
+          if (pendingPublish) {
+            pendingPublish = false;
+            publishRecord();
+          }
         }
         if (data.indexOf("authorization:github:error:") === 0) {
           setStatus("GitHub 登录失败。", "warn");
@@ -459,15 +568,20 @@
       });
 
       loginBtn.addEventListener("click", login);
+      inlineLoginBtn.addEventListener("click", login);
       reloadBtn.addEventListener("click", loadRecords);
       publishBtn.addEventListener("click", publishRecord);
       clearBtn.addEventListener("click", clearForm);
       filesInput.addEventListener("change", renderLocalPreviews);
+      categoryInput.addEventListener("change", updateModuleNote);
 
+      updateModuleNote();
       if (token) {
+        updateLoginUi();
         setStatus("已读取本机登录状态。", "ok");
         loadRecords();
       } else {
+        updateLoginUi();
         loadRecords();
       }
     })();
