@@ -90,6 +90,36 @@ function loadSupplyRecords() {
 
 const supplyRecords = loadSupplyRecords();
 
+const recordChannels = [
+  {
+    id: "advertising",
+    category: "factory",
+    titles: {
+      ja: "広告材料制作工場",
+      en: "Advertising Material Production Factory",
+      zh: "广告材料制作工厂"
+    }
+  },
+  {
+    id: "curtain",
+    category: "factory",
+    titles: {
+      ja: "カーテン加工工場",
+      en: "Curtain Production Factory",
+      zh: "窗帘加工制作工厂"
+    }
+  },
+  {
+    id: "wpc",
+    category: "factory",
+    titles: {
+      ja: "人工木デッキ材工場",
+      en: "WPC Decking Material Factory",
+      zh: "塑木板材料工厂"
+    }
+  }
+];
+
 const products = [
   ["curtain-details.html", "オーダーカーテン", "Custom Curtains", "定制窗帘", "1.8倍ヒダ、採寸、標準簡易取付まで確認する窓まわり資材。"],
   ["advertising-materials-details.html", "広告材料制作", "Advertising Material Production", "广告材料制作", "切文字、電飾フィルム、塩ビ板サインを図面・寸法・梱包条件ごとにまとめて確認します。"],
@@ -448,13 +478,42 @@ function hasRecordMedia(record) {
 }
 
 function homeRecords(lang, category, limit, fallbackHtml) {
-  const records = supplyRecords
+  const records = orderedRecordsForCategory(category)
     .filter((record) => record.showOnHome !== false)
-    .filter(hasRecordMedia)
-    .filter((record) => (record.category || "today") === category)
     .slice(0, limit);
   if (!records.length) return fallbackHtml;
   return records.map((record) => recordCard(record, lang)).join("\n");
+}
+
+function recordsForChannel(category, channel) {
+  return supplyRecords
+    .filter((record) => record.showOnHome !== false)
+    .filter(hasRecordMedia)
+    .filter((record) => (record.category || "factory") === category)
+    .filter((record) => (record.channel || "") === channel)
+    .sort((a, b) => String(b.sortKey || b.slug).localeCompare(String(a.sortKey || a.slug)));
+}
+
+function orderedRecordsForCategory(category) {
+  if (category === "factory") {
+    return recordChannels.flatMap((channel) => recordsForChannel("factory", channel.id));
+  }
+  return supplyRecords
+    .filter((record) => record.showOnHome !== false)
+    .filter(hasRecordMedia)
+    .filter((record) => (record.category || "factory") === category)
+    .sort((a, b) => String(b.sortKey || b.slug).localeCompare(String(a.sortKey || a.slug)));
+}
+
+function channelRecordSection(channel, lang) {
+  const records = recordsForChannel(channel.category, channel.id);
+  const content = records.length
+    ? records.map((record) => recordCard(record, lang)).join("\n")
+    : photoSlot(lang === "en" ? "Photos to be added" : lang === "zh" ? "照片待补充" : "写真を追加予定", channel.titles[lang]);
+  return `<section class="v5-channel-block">
+        <h3>${channel.titles[lang]}</h3>
+        <div class="v5-record-grid">${content}</div>
+      </section>`;
 }
 
 function productCards(lang) {
@@ -542,8 +601,8 @@ function homePage(lang) {
         <h2>${c.factoryTitle}</h2>
         <p class="v5-lead">${c.factoryLead}</p>
       </div>
-      <div class="v5-record-grid">
-        ${homeRecords(lang, "factory", 4, photoSlot(lang === "en" ? "Factory and supply-chain photos / videos to be added" : lang === "zh" ? "工厂供应链照片 / 视频待补充" : "工場・供給実景の写真 / 動画を追加予定", recordModuleLabel("factory", lang)))}
+      <div class="v5-channel-stack">
+        ${recordChannels.map((channel) => channelRecordSection(channel, lang)).join("\n")}
       </div>
       <a class="v5-section-link" href="supply-chain-records.html">${lang === "en" ? "View all records" : lang === "zh" ? "查看全部实景记录" : "すべての記録を見る"}</a>
     </section>
@@ -631,7 +690,7 @@ function recordsPage(lang) {
       <h1>${title}</h1>
       <p class="v5-lead">${lead}</p>
       <div class="v5-record-detail-list">
-        ${supplyRecords.filter(hasRecordMedia).map((record) => `<article id="record-${record.slug}" class="v5-record-detail v5-record-photo-card">
+        ${[...orderedRecordsForCategory("factory"), ...orderedRecordsForCategory("site")].map((record) => `<article id="record-${record.slug}" class="v5-record-detail v5-record-photo-card">
           <h2 class="v5-record-title">${record[lang]?.title || record.title || recordModuleLabel(record.category || "factory", lang)}</h2>
           ${mediaSlot(record, lang)}
         </article>`).join("\n")}

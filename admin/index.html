@@ -182,6 +182,15 @@
           <option value="site">日本现场记录（前台首页 #site）</option>
         </select>
       </label>
+      <label id="channelField">
+        材料上传通道
+        <select id="channel">
+          <option value="advertising">广告材料制作工厂</option>
+          <option value="curtain">窗帘加工制作工厂</option>
+          <option value="wpc">塑木板材料工厂</option>
+        </select>
+        <span class="hint">选择后会自动填写三语大标题；前台会归到同一个材料通道。</span>
+      </label>
       <div id="moduleNote" class="module-note">将显示在前台：首页 → 中国工厂・供应链实景</div>
 
       <label>
@@ -244,6 +253,8 @@
       var previewGrid = $("previewGrid");
       var recordList = $("recordList");
       var categoryInput = $("category");
+      var channelInput = $("channel");
+      var channelField = $("channelField");
       var moduleNote = $("moduleNote");
 
       var moduleLabels = {
@@ -258,6 +269,24 @@
           ja: "日本現場記録",
           en: "Japan Site Records",
           anchor: "首页 #site"
+        }
+      };
+
+      var channelLabels = {
+        advertising: {
+          zh: "广告材料制作工厂",
+          ja: "広告材料制作工場",
+          en: "Advertising Material Production Factory"
+        },
+        curtain: {
+          zh: "窗帘加工制作工厂",
+          ja: "カーテン加工工場",
+          en: "Curtain Production Factory"
+        },
+        wpc: {
+          zh: "塑木板材料工厂",
+          ja: "人工木デッキ材工場",
+          en: "WPC Decking Material Factory"
         }
       };
 
@@ -286,7 +315,23 @@
 
       function updateModuleNote() {
         var selected = moduleLabels[categoryInput.value] || moduleLabels.factory;
+        var isFactory = categoryInput.value === "factory";
+        channelField.className = isFactory ? "" : "hidden";
+        if (isFactory) {
+          var channel = channelLabels[channelInput.value] || channelLabels.wpc;
+          moduleNote.textContent = "将显示在前台：" + selected.anchor + " → " + selected.zh + " → " + channel.zh;
+          return;
+        }
         moduleNote.textContent = "将显示在前台：" + selected.anchor + " → " + selected.zh + " / " + selected.ja + " / " + selected.en;
+      }
+
+      function applyChannelTitle() {
+        if (categoryInput.value !== "factory") return;
+        var channel = channelLabels[channelInput.value] || channelLabels.wpc;
+        $("titleZh").value = channel.zh;
+        $("titleJa").value = channel.ja;
+        $("titleEn").value = channel.en;
+        updateModuleNote();
       }
 
       function api(path, options) {
@@ -390,6 +435,7 @@
 
       async function publishRecord() {
         var category = $("category").value;
+        var channel = category === "factory" ? $("channel").value : "site";
         var titleZh = $("titleZh").value.trim();
         var titleJa = $("titleJa").value.trim();
         var titleEn = $("titleEn").value.trim();
@@ -412,7 +458,7 @@
           for (var i = 0; i < files.length; i += 1) {
             var file = files[i];
             setStatus("正在上传媒体 " + (i + 1) + " / " + files.length + "：" + file.name);
-            var mediaPath = "media/records/" + category + "/" + cleanFileName(file, i);
+            var mediaPath = "media/records/" + category + "/" + channel + "/" + cleanFileName(file, i);
             await putFile(mediaPath, await fileToBase64(file), "upload supply record media");
             mediaPaths.push("/" + mediaPath);
           }
@@ -422,6 +468,7 @@
           var fileName = todayFileDate() + "-" + stamp + "-" + slug + ".json";
           var record = {
             category: category,
+            channel: channel,
             slug: slug + "-" + stamp,
             title: titleZh,
             date: todayFileDate().replace(/-/g, "."),
@@ -471,18 +518,29 @@
             var detail = await getContent(item.path);
             var content = JSON.parse(decodeURIComponent(escape(atob(detail.content.replace(/\s/g, "")))));
             var category = content.category === "site" ? "site" : "factory";
-            if (!grouped[category]) grouped[category] = [];
-            grouped[category].push({ item: item, content: content });
+            var groupKey = category === "factory" ? (content.channel || inferChannel(content)) : "site";
+            if (!grouped[groupKey]) grouped[groupKey] = [];
+            grouped[groupKey].push({ item: item, content: content });
           }
-          renderRecordGroup("factory", grouped.factory || []);
+          renderRecordGroup("advertising", grouped.advertising || []);
+          renderRecordGroup("curtain", grouped.curtain || []);
+          renderRecordGroup("wpc", grouped.wpc || []);
           renderRecordGroup("site", grouped.site || []);
         } catch (error) {
           recordList.innerHTML = '<p class="hint">读取失败：' + error.message + '</p>';
         }
       }
 
+      function inferChannel(content) {
+        var value = String(content.channel || content.slug || content.title || "").toLowerCase();
+        if (value.indexOf("wpc") !== -1 || value.indexOf("塑木") !== -1 || value.indexOf("デッキ") !== -1) return "wpc";
+        if (value.indexOf("advertising") !== -1 || value.indexOf("广告") !== -1 || value.indexOf("広告") !== -1) return "advertising";
+        if (value.indexOf("curtain") !== -1 || value.indexOf("窗帘") !== -1 || value.indexOf("カーテン") !== -1) return "curtain";
+        return "advertising";
+      }
+
       function renderRecordGroup(category, records) {
-        var label = moduleLabels[category] || moduleLabels.factory;
+        var label = channelLabels[category] || moduleLabels[category] || moduleLabels.factory;
         var group = document.createElement("div");
         group.className = "stack";
         group.innerHTML = '<h3>' + escapeHtml(label.zh) + '</h3>';
@@ -504,7 +562,7 @@
         card.innerHTML =
           '<h3>' + escapeHtml(content.title || item.name) + '</h3>' +
           '<small>' + escapeHtml(item.name) + '</small>' +
-          '<div><span class="media-count">' + mediaCount + '</span> 个媒体 / 前台：' + escapeHtml((moduleLabels[content.category] || moduleLabels.factory).zh) + '</div>' +
+          '<div><span class="media-count">' + mediaCount + '</span> 个媒体 / 前台：' + escapeHtml((moduleLabels[content.category] || moduleLabels.factory).zh) + ' / ' + escapeHtml((channelLabels[content.channel] || channelLabels[inferChannel(content)] || { zh: "" }).zh) + '</div>' +
           '<div class="actions"><button class="danger" type="button">删除记录</button></div>';
         card.querySelector("button").addEventListener("click", function () { deleteRecord(item.path, item.sha, content.title || item.name); });
         target.appendChild(card);
@@ -573,9 +631,14 @@
       publishBtn.addEventListener("click", publishRecord);
       clearBtn.addEventListener("click", clearForm);
       filesInput.addEventListener("change", renderLocalPreviews);
-      categoryInput.addEventListener("change", updateModuleNote);
+      categoryInput.addEventListener("change", function () {
+        updateModuleNote();
+        applyChannelTitle();
+      });
+      channelInput.addEventListener("change", applyChannelTitle);
 
       updateModuleNote();
+      applyChannelTitle();
       if (token) {
         updateLoginUi();
         setStatus("已读取本机登录状态。", "ok");

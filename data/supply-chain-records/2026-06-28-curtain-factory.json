@@ -1,18 +1,19 @@
 {
   "category": "factory",
+  "channel": "curtain",
   "slug": "curtain-factory",
   "title": "窗帘加工制作工厂",
   "date": "2026.06.28",
   "showOnHome": true,
   "media": [
-    "/media/records/factory/微信图片_20260605223620_68_266.jpg",
-    "/media/records/factory/微信图片_20260605223622_70_266.jpg",
-    "/media/records/factory/微信图片_20260605223534_64_266.jpg",
-    "/media/records/factory/微信图片_20260629221737_125_266.jpg",
-    "/media/records/factory/微信图片_20260629221727_124_266.jpg",
-    "/media/records/factory/微信图片_20260629221839_127_266.jpg",
-    "/media/records/factory/微信图片_20260629221912_130_266.jpg",
-    "/media/records/factory/微信图片_20260629221857_129_266.jpg"
+    "/media/records/factory/curtain/微信图片_20260605223620_68_266.jpg",
+    "/media/records/factory/curtain/微信图片_20260605223622_70_266.jpg",
+    "/media/records/factory/curtain/微信图片_20260605223534_64_266.jpg",
+    "/media/records/factory/curtain/微信图片_20260629221737_125_266.jpg",
+    "/media/records/factory/curtain/微信图片_20260629221727_124_266.jpg",
+    "/media/records/factory/curtain/微信图片_20260629221839_127_266.jpg",
+    "/media/records/factory/curtain/微信图片_20260629221912_130_266.jpg",
+    "/media/records/factory/curtain/微信图片_20260629221857_129_266.jpg"
   ],
   "zh": {
     "title": "窗帘加工制作工厂"
@@ -22,5 +23,6 @@
   },
   "en": {
     "title": "Curtain Production Factory"
-  }
+  },
+  "createdAt": "2026-06-28T00:00:00+09:00"
 }
