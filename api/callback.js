@@ -6,24 +6,37 @@ function getCookie(req, name) {
 
 function oauthResultPage(provider, status, payload) {
   const message = `authorization:${provider}:${status}:${JSON.stringify(payload)}`;
+  const token = status === "success" && payload && payload.token ? payload.token : "";
   return `<!doctype html>
 <html>
-<head><meta charset="utf-8"><title>CMS Login</title></head>
+<head><meta charset="utf-8"><title>Kyoken Admin Login</title></head>
 <body>
 <script>
 (function () {
+  var token = ${JSON.stringify(token)};
+  var tokenKey = "kyoken_custom_admin_github_token";
+  var adminPath = "/admin/";
   function receiveMessage(event) {
     if (!event || !event.origin) return;
     window.opener.postMessage(${JSON.stringify(message)}, event.origin);
     window.close();
   }
-  window.addEventListener("message", receiveMessage, false);
   if (window.opener) {
+    window.addEventListener("message", receiveMessage, false);
     window.opener.postMessage("authorizing:github", "*");
+    return;
   }
+  if (token) {
+    try {
+      window.sessionStorage.setItem(tokenKey, token);
+    } catch (error) {}
+    window.location.replace(adminPath);
+    return;
+  }
+  document.body.textContent = "GitHub login failed. Please return to admin and try again.";
 })();
 </script>
-<p>Authentication complete. You can close this window.</p>
+<p>Authentication complete. Returning to admin...</p>
 </body>
 </html>`;
 }

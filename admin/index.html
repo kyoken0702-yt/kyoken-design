@@ -64,6 +64,20 @@
     input:focus, select:focus, textarea:focus { outline: 3px solid rgba(18, 52, 107, .14); border-color: var(--blue); }
     .hint { color: #52637b; font-size: 13px; font-weight: 750; }
     .actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+    .file-picker {
+      border: 1px dashed #9aa9bf;
+      background: #f8fafc;
+      padding: 14px;
+      display: grid;
+      gap: 10px;
+    }
+    .file-input-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      opacity: 0;
+      pointer-events: none;
+    }
     button {
       border: 1px solid var(--navy);
       background: var(--navy);
@@ -209,11 +223,13 @@
         <input id="titleEn" type="text" placeholder="Example: Advertising Material Production Factory">
       </label>
 
-      <label>
-        选择图片 / 小视频
-        <input id="files" type="file" multiple accept="image/jpeg,image/png,image/webp,video/mp4,video/webm">
+      <div class="file-picker">
+        <strong>选择图片 / 小视频</strong>
+        <button id="selectFilesBtn" class="secondary" type="button">选择图片 / 视频（可多选）</button>
+        <input id="files" class="file-input-hidden" type="file" multiple accept="image/jpeg,image/png,image/webp,video/mp4,video/webm">
+        <span id="fileSummary" class="hint">未选择文件。</span>
         <span class="hint">图片建议 JPG / PNG / WebP。视频建议 MP4 / WebM 且小于 25MB。手机 MOV 请先转 MP4。</span>
-      </label>
+      </div>
 
       <div class="preview-grid" id="previewGrid"></div>
 
@@ -249,7 +265,9 @@
       var reloadBtn = $("reloadBtn");
       var publishBtn = $("publishBtn");
       var clearBtn = $("clearBtn");
+      var selectFilesBtn = $("selectFilesBtn");
       var filesInput = $("files");
+      var fileSummary = $("fileSummary");
       var previewGrid = $("previewGrid");
       var recordList = $("recordList");
       var categoryInput = $("category");
@@ -399,7 +417,10 @@
 
       function renderLocalPreviews() {
         previewGrid.innerHTML = "";
-        Array.from(filesInput.files || []).forEach(function (file) {
+        var files = Array.from(filesInput.files || []);
+        fileSummary.textContent = files.length ? "已选择 " + files.length + " 个文件。确认后点击“上传并发布”。" : "未选择文件。";
+        if (files.length) setStatus("已选择 " + files.length + " 个文件。可以点击“上传并发布”。", "ok");
+        files.forEach(function (file) {
           var card = document.createElement("div");
           card.className = "thumb";
           var media = isVideo(file) ? document.createElement("video") : document.createElement("img");
@@ -442,13 +463,17 @@
         var files = Array.from(filesInput.files || []);
 
         if (!token) {
-          setStatus("需要先登录 GitHub。登录完成后会自动继续上传。", "warn");
+          setStatus("需要先登录 GitHub。若浏览器拦截弹窗，会自动改为当前页面登录。登录后请重新选择文件上传。", "warn");
           pendingPublish = true;
           login();
           return;
         }
         if (!titleZh) return setStatus("请填写中文大标题。", "warn");
-        if (!files.length) return setStatus("请选择至少一张图片。", "warn");
+        if (!files.length) {
+          setStatus("请先点击“选择图片 / 视频（可多选）”，选择至少一个文件。", "warn");
+          selectFilesBtn.focus();
+          return;
+        }
         var oversized = files.filter(function (file) { return isVideo(file) && file.size > 25 * 1024 * 1024; });
         if (oversized.length) return setStatus("视频太大。请先压缩到 25MB 以下 MP4/WebM。", "warn");
 
@@ -495,6 +520,7 @@
         $("titleJa").value = "";
         $("titleEn").value = "";
         filesInput.value = "";
+        fileSummary.textContent = "未选择文件。";
         previewGrid.innerHTML = "";
       }
 
@@ -594,13 +620,19 @@
       }
 
       function login() {
-        popup = window.open("/api/auth?scope=repo", "kyokenGithubLogin", "width=720,height=720");
+        var authUrl = "/api/auth?scope=repo";
+        popup = window.open(authUrl, "kyokenGithubLogin", "width=720,height=720");
         if (!popup) {
-          setStatus("浏览器拦截了登录窗口。请允许弹窗，或点击右上角“登录 GitHub”。", "warn");
+          setStatus("浏览器拦截了登录窗口。现在改为当前页面登录；登录回来后请重新选择文件上传。", "warn");
+          window.location.href = authUrl;
           return;
         }
         setStatus("GitHub 登录窗口已打开。登录完成后会自动回到后台。");
       }
+
+      window.addEventListener("error", function (event) {
+        setStatus("后台脚本错误：" + (event.message || "未知错误") + "。请刷新页面后重试。", "warn");
+      });
 
       window.addEventListener("message", function (event) {
         var data = String(event.data || "");
@@ -630,6 +662,7 @@
       reloadBtn.addEventListener("click", loadRecords);
       publishBtn.addEventListener("click", publishRecord);
       clearBtn.addEventListener("click", clearForm);
+      selectFilesBtn.addEventListener("click", function () { filesInput.click(); });
       filesInput.addEventListener("change", renderLocalPreviews);
       categoryInput.addEventListener("change", function () {
         updateModuleNote();
