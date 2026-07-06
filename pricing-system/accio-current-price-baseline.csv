@@ -1,0 +1,35 @@
+category,item,condition,public_price_jpy,note
+curtain,Plan A: 標準腰窓セット,,15800~,Accio current page baseline
+curtain,Plan B: 出窓・ワイド窓セット,,18800~,Accio current page baseline
+curtain,Plan C: 掃き出し窓セット,,24800~,Accio current page baseline
+curtain,1.8倍ヒダ 2重セット,丈～140 幅～100,11800,Accio current price matrix
+curtain,1.8倍ヒダ 2重セット,丈～140 幅～200,15800~,Accio current price matrix highlighted
+curtain,1.8倍ヒダ 2重セット,丈～140 幅～300,26800,Accio current price matrix
+curtain,1.8倍ヒダ 2重セット,丈～140 幅～400,35800,Accio current price matrix
+curtain,1.8倍ヒダ 2重セット,丈～200 幅～100,16800,Accio current price matrix
+curtain,1.8倍ヒダ 2重セット,丈～200 幅～200,24800~,Accio current price matrix highlighted
+curtain,1.8倍ヒダ 2重セット,丈～200 幅～300,38800,Accio current price matrix
+curtain,1.8倍ヒダ 2重セット,丈～200 幅～400,52800,Accio current price matrix
+curtain,1.8倍ヒダ 2重セット,丈～260 幅～100,19800,Accio current price matrix
+curtain,1.8倍ヒダ 2重セット,丈～260 幅～200,29800,Accio current price matrix
+curtain,1.8倍ヒダ 2重セット,丈～260 幅～300,46800,Accio current price matrix
+curtain,1.8倍ヒダ 2重セット,丈～260 幅～400,62800,Accio current price matrix
+wpc_decking,Plan A: バルコニー・ベランダセット,,14800/㎡~,Accio current page baseline
+wpc_decking,Plan B: 戸建てウッドデッキ・庭園テラスセット,,18800/㎡~,Accio current page baseline
+wpc_decking,Plan C: 商業施設・店舗大型ルーフバルコニーセット,,24800/㎡~,Accio current page baseline
+wpc_decking,145×21mm 中空（平）,小面積～10㎡,12800/㎡,Accio current price matrix
+wpc_decking,145×21mm 中空（平）,中規模～30㎡,11800/㎡,Accio current price matrix
+wpc_decking,145×21mm 中空（平）,大規模～50㎡,10800/㎡,Accio current price matrix
+wpc_decking,145×21mm 中空（平）,特大100㎡～,9800/㎡~,Accio current price matrix highlighted
+wpc_decking,140×23mm 3D立体木目,小面積～10㎡,15800/㎡,Accio current price matrix
+wpc_decking,140×23mm 3D立体木目,中規模～30㎡,14800/㎡~,Accio current price matrix highlighted
+wpc_decking,140×23mm 3D立体木目,大規模～50㎡,13800/㎡,Accio current price matrix
+wpc_decking,140×23mm 3D立体木目,特大100㎡～,12800/㎡,Accio current price matrix
+wpc_decking,150×23mm 極厚補強中空,小面積～10㎡,19800/㎡,Accio current price matrix
+wpc_decking,150×23mm 極厚補強中空,中規模～30㎡,18800/㎡,Accio current price matrix
+wpc_decking,150×23mm 極厚補強中空,大規模～50㎡,17800/㎡~,Accio current price matrix highlighted
+wpc_decking,150×23mm 極厚補強中空,特大100㎡～,16800/㎡,Accio current price matrix
+wpc_decking,140×25mm 極厚ソリッド,小面積～10㎡,24800/㎡,Accio current price matrix
+wpc_decking,140×25mm 極厚ソリッド,中規模～30㎡,22800/㎡,Accio current price matrix
+wpc_decking,140×25mm 極厚ソリッド,大規模～50㎡,20800/㎡,Accio current price matrix
+wpc_decking,140×25mm 極厚ソリッド,特大100㎡～,18800/㎡~,Accio current price matrix highlighted

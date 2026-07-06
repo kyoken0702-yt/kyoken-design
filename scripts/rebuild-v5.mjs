@@ -417,6 +417,25 @@ function mediaSlot(record, lang) {
   return photoSlot(lang === "en" ? "Photo / video to be added" : lang === "zh" ? "照片 / 视频待补充" : "写真 / 動画を追加予定", mediaLabel);
 }
 
+function recordCard(record, lang) {
+  const r = record[lang];
+  return `<a class="v5-record v5-record-link" href="supply-chain-records.html#record-${record.slug}">
+          ${mediaSlot(record, lang)}
+          <div class="v5-record-meta"><span>${record.date}</span><span>${r.label}</span></div>
+          <h3>${r.title}</h3>
+          <p>${r.summary}</p>
+        </a>`;
+}
+
+function homeRecords(lang, category, limit, fallbackHtml) {
+  const records = supplyRecords
+    .filter((record) => record.showOnHome !== false)
+    .filter((record) => (record.category || "today") === category)
+    .slice(0, limit);
+  if (!records.length) return fallbackHtml;
+  return records.map((record) => recordCard(record, lang)).join("\n");
+}
+
 function productCards(lang) {
   const prefix = lang === "ja" ? "" : "../";
   return products.map(([file, ja, en, zh, note]) => {
@@ -494,15 +513,7 @@ function homePage(lang) {
       <h2>${c.todayTitle}</h2>
       <p class="v5-lead">${c.todayLead}</p>
       <div class="v5-record-grid">
-        ${supplyRecords.filter((record) => record.showOnHome !== false).slice(0, 3).map((record) => {
-          const r = record[lang];
-          return `<a class="v5-record v5-record-link" href="supply-chain-records.html#record-${record.slug}">
-          ${mediaSlot(record, lang)}
-          <div class="v5-record-meta"><span>${record.date}</span><span>${r.label}</span></div>
-          <h3>${r.title}</h3>
-          <p>${r.summary}</p>
-        </a>`;
-        }).join("\n")}
+        ${homeRecords(lang, "today", 3, photoSlot(lang === "en" ? "Daily photo / video to be added" : lang === "zh" ? "每日照片 / 视频待补充" : "日々の写真 / 動画を追加予定", lang === "en" ? "DAILY RECORD" : lang === "zh" ? "每日记录" : "日々の記録"))}
       </div>
       <a class="v5-section-link" href="supply-chain-records.html">${lang === "en" ? "View all supply-chain records" : lang === "zh" ? "查看全部供应链记录" : "すべての記録を見る"}</a>
     </section>
@@ -514,8 +525,8 @@ function homePage(lang) {
         <p class="v5-lead">${c.factoryLead}</p>
       </div>
       <div class="v5-record-grid two">
-        ${photoSlot(lang === "en" ? "Machine / worker / warehouse" : lang === "zh" ? "机器 / 师傅 / 仓库" : "機械 / 職人 / 倉庫", lang === "en" ? "FACTORY RECORD" : lang === "zh" ? "工厂记录" : "工場記録")}
-        ${photoSlot(lang === "en" ? "Packing / label / pallet" : lang === "zh" ? "包装 / 标签 / 托盘" : "梱包 / ラベル / パレット", lang === "en" ? "PACKING RECORD" : lang === "zh" ? "包装记录" : "梱包記録")}
+        ${homeRecords(lang, "factory", 2, `${photoSlot(lang === "en" ? "Machine / worker / warehouse" : lang === "zh" ? "机器 / 师傅 / 仓库" : "機械 / 職人 / 倉庫", lang === "en" ? "FACTORY RECORD" : lang === "zh" ? "工厂记录" : "工場記録")}
+        ${photoSlot(lang === "en" ? "Packing / label / pallet" : lang === "zh" ? "包装 / 标签 / 托盘" : "梱包 / ラベル / パレット", lang === "en" ? "PACKING RECORD" : lang === "zh" ? "包装记录" : "梱包記録")}`)}
       </div>
     </section>
 
@@ -526,8 +537,8 @@ function homePage(lang) {
         <p class="v5-lead">${c.siteLead}</p>
       </div>
       <div class="v5-record-grid two">
-        ${photoSlot(lang === "en" ? "Tape measure / drawing / arrival check" : lang === "zh" ? "卷尺 / 图纸 / 到场确认" : "巻尺 / 図面 / 到着確認", lang === "en" ? "SITE RECORD" : lang === "zh" ? "现场记录" : "現場記録")}
-        ${photoSlot(lang === "en" ? "Material before installation" : lang === "zh" ? "安装前材料确认" : "取付前の材料確認", lang === "en" ? "SITE RECORD" : lang === "zh" ? "现场记录" : "現場記録")}
+        ${homeRecords(lang, "site", 2, `${photoSlot(lang === "en" ? "Tape measure / drawing / arrival check" : lang === "zh" ? "卷尺 / 图纸 / 到场确认" : "巻尺 / 図面 / 到着確認", lang === "en" ? "SITE RECORD" : lang === "zh" ? "现场记录" : "現場記録")}
+        ${photoSlot(lang === "en" ? "Material before installation" : lang === "zh" ? "安装前材料确认" : "取付前の材料確認", lang === "en" ? "SITE RECORD" : lang === "zh" ? "现场记录" : "現場記録")}`)}
       </div>
     </section>
 
