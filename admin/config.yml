@@ -36,7 +36,7 @@ collections:
         widget: "list"
         required: false
         summary: "{{fields.image}}"
-        hint: "上传工厂、材料、包装、仓库、发货、装车、物流前状态照片。前台会一起展示，不需要逐张写说明。"
+        hint: "上传工厂、材料、包装、仓库、发货、装车、物流前状态照片。每张图点一次“新增图片”。选择后看右下角上传状态；确认有预览后点右上角“发布”。"
         field: { label: "图片", name: "image", widget: "image", required: false, hint: "建议上传 JPG / PNG / WebP。手机 HEIC 请先转 JPG。" }
       - { label: "视频（可选）", name: "video", widget: "file", required: false, hint: "上传 MP4。手机 MOV 请先转 MP4。" }
 
@@ -62,6 +62,6 @@ collections:
         widget: "list"
         required: false
         summary: "{{fields.image}}"
-        hint: "把同一批到场、搬入、确认照片放在这里。前台会一起展示，不需要逐张写说明。"
+        hint: "上传到场、搬入、尺寸确认、安装前确认、交付状态照片。每张图点一次“新增图片”。选择后看右下角上传状态；确认有预览后点右上角“发布”。"
         field: { label: "图片", name: "image", widget: "image", required: false, hint: "建议上传 JPG / PNG / WebP。手机 HEIC 请先转 JPG。" }
       - { label: "视频（可选）", name: "video", widget: "file", required: false, hint: "上传 MP4。手机 MOV 请先转 MP4。" }

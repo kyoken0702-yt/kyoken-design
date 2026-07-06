@@ -10,11 +10,121 @@
   <!-- Decap CMS. Replace auth settings in config.yml if the GitHub auth provider changes. -->
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js?v=20260706-modules2"></script>
   <script>
-    window.setInterval(function () {
+    (function () {
+      var helper;
+      var previewGrid;
+      var statusLine;
+
+      function formatSize(bytes) {
+        if (!bytes && bytes !== 0) return "";
+        if (bytes < 1024 * 1024) return Math.round(bytes / 1024) + " KB";
+        return (bytes / 1024 / 1024).toFixed(1) + " MB";
+      }
+
+      function ensureUploadHelper() {
+        if (helper) return;
+        helper = document.createElement("div");
+        helper.id = "kyoken-upload-helper";
+        helper.innerHTML = [
+          '<div class="kyoken-upload-title">图片上传状态</div>',
+          '<div class="kyoken-upload-steps">1. 点“新增图片”  2. 选择 JPG / PNG / WebP  3. 看到预览  4. 点右上角“发布”</div>',
+          '<div class="kyoken-upload-status">等待选择图片。</div>',
+          '<div class="kyoken-upload-grid"></div>'
+        ].join("");
+        document.body.appendChild(helper);
+        statusLine = helper.querySelector(".kyoken-upload-status");
+        previewGrid = helper.querySelector(".kyoken-upload-grid");
+      }
+
+      function showStatus(message, isWarning) {
+        ensureUploadHelper();
+        statusLine.textContent = message;
+        statusLine.className = isWarning ? "kyoken-upload-status warning" : "kyoken-upload-status";
+      }
+
+      function showLocalPreviews(files) {
+        ensureUploadHelper();
+        previewGrid.innerHTML = "";
+        Array.prototype.forEach.call(files, function (file) {
+          var card = document.createElement("div");
+          card.className = "kyoken-upload-card";
+          var info = document.createElement("div");
+          info.className = "kyoken-upload-info";
+          info.textContent = file.name + " / " + formatSize(file.size) + " / " + (file.type || "unknown");
+          card.appendChild(info);
+
+          if (/^image\//.test(file.type)) {
+            var img = document.createElement("img");
+            img.src = URL.createObjectURL(file);
+            img.onload = function () { URL.revokeObjectURL(img.src); };
+            card.appendChild(img);
+          } else {
+            var label = document.createElement("div");
+            label.className = "kyoken-upload-file";
+            label.textContent = "视频文件已选择";
+            card.appendChild(label);
+          }
+          previewGrid.appendChild(card);
+        });
+      }
+
+      function normalizeCmsImagePaths() {
+        document.querySelectorAll("img").forEach(function (img) {
+          var src = img.getAttribute("src") || "";
+          if (!src) return;
+          if (src.indexOf("/admin/media/records/") !== -1) {
+            img.src = src.replace("/admin/media/records/", "/media/records/");
+          } else if (/^media\/records\//.test(src)) {
+            img.src = "/" + src;
+          }
+        });
+      }
+
+      function wireFileInputs() {
       document.querySelectorAll('input[type="file"]').forEach(function (input) {
-        if (!input.accept) input.accept = 'image/jpeg,image/png,image/webp,video/mp4';
+          input.accept = "image/jpeg,image/png,image/webp,video/mp4";
+          if (input.dataset.kyokenUploadReady) return;
+          input.dataset.kyokenUploadReady = "1";
+          input.addEventListener("change", function () {
+            var files = input.files || [];
+            if (!files.length) {
+              showStatus("未选择文件。", true);
+              return;
+            }
+            var unsupported = Array.prototype.filter.call(files, function (file) {
+              return !/^(image\/jpeg|image\/png|image\/webp|video\/mp4)$/.test(file.type);
+            });
+            if (unsupported.length) {
+              showStatus("有文件格式不适合网页显示。手机 HEIC / MOV 请先转成 JPG / MP4。", true);
+            } else {
+              showStatus("已选择 " + files.length + " 个文件。下方能看到预览后，再点击右上角“发布”。", false);
+            }
+            showLocalPreviews(files);
+          });
       });
-    }, 1000);
+      }
+
+      var style = document.createElement("style");
+      style.textContent = [
+        "#kyoken-upload-helper{position:fixed;right:18px;bottom:18px;z-index:99999;width:min(420px,calc(100vw - 36px));background:#fff;border:1px solid #cbd5e1;box-shadow:0 18px 40px rgba(2,6,23,.18);padding:14px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#0f172a}",
+        ".kyoken-upload-title{font-weight:900;font-size:15px;margin-bottom:6px}",
+        ".kyoken-upload-steps{font-size:12px;line-height:1.55;color:#334155;margin-bottom:8px}",
+        ".kyoken-upload-status{font-size:12px;font-weight:800;color:#047857;background:#ecfdf5;border:1px solid #a7f3d0;padding:7px 8px;margin-bottom:8px}",
+        ".kyoken-upload-status.warning{color:#9f1239;background:#fff1f2;border-color:#fecdd3}",
+        ".kyoken-upload-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;max-height:220px;overflow:auto}",
+        ".kyoken-upload-card{border:1px solid #e2e8f0;background:#f8fafc;padding:6px}",
+        ".kyoken-upload-card img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;background:#e2e8f0}",
+        ".kyoken-upload-info{font-size:11px;line-height:1.35;color:#334155;margin-bottom:5px;word-break:break-all}",
+        ".kyoken-upload-file{display:flex;align-items:center;justify-content:center;min-height:70px;background:#e2e8f0;font-size:12px;font-weight:800}"
+      ].join("");
+      document.head.appendChild(style);
+
+      ensureUploadHelper();
+      window.setInterval(function () {
+        wireFileInputs();
+        normalizeCmsImagePaths();
+      }, 800);
+    })();
   </script>
 </body>
 </html>
