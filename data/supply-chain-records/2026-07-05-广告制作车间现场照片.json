@@ -1,0 +1,22 @@
+{
+  "date": "2026.07.06",
+  "category": "today",
+  "product": "pvc",
+  "showOnHome": true,
+  "zh": {
+    "label": "现场记录",
+    "title": "广告制作车间现场照片",
+    "summary": "广告制作车间现场照片"
+  },
+  "ja": {
+    "label": "現場記録",
+    "title": "広告制作工房の写真",
+    "summary": "広告制作工房の写真"
+  },
+  "en": {
+    "label": "Site Record",
+    "title": "Photos of the advertising production workshop",
+    "summary": "Photos of the advertising production workshop"
+  },
+  "title": "广告制作车间现场照片"
+}
