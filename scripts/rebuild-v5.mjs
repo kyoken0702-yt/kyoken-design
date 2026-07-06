@@ -19,8 +19,6 @@ function normalizeMedia(record) {
     media.push(trimmed);
   };
 
-  addMedia(record.image);
-  addMedia(record.video);
   if (typeof record.media === "string") {
     addMedia(record.media);
   }
@@ -29,13 +27,6 @@ function normalizeMedia(record) {
       if (Array.isArray(item)) item.forEach(addMedia);
       if (typeof item === "string") addMedia(item);
       else if (item && typeof item === "object") addMedia(item.file || item.image || item.video);
-    });
-  }
-  if (Array.isArray(record.images)) {
-    record.images.forEach((item) => {
-      if (Array.isArray(item)) item.forEach(addMedia);
-      if (typeof item === "string") addMedia(item);
-      else if (item && typeof item === "object") addMedia(item.image);
     });
   }
 

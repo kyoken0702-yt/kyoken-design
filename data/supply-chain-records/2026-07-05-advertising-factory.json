@@ -1,0 +1,31 @@
+{
+  "category": "factory",
+  "slug": "advertising-material-factory",
+  "title": "广告材料制作工厂",
+  "date": "2026.07.05",
+  "showOnHome": true,
+  "media": [
+    "/media/records/factory/img_3700.jpg",
+    "/media/records/factory/img_3701.jpg",
+    "/media/records/factory/img_3702.jpg",
+    "/media/records/factory/img_3704.jpg",
+    "/media/records/factory/img_3705.jpg",
+    "/media/records/factory/img_3706.jpg",
+    "/media/records/factory/img_3707.jpg",
+    "/media/records/factory/img_3708.jpg",
+    "/media/records/factory/img_3709.jpg",
+    "/media/records/factory/img_3711.jpg",
+    "/media/records/factory/img_3712.jpg",
+    "/media/records/factory/img_3713.jpg",
+    "/media/records/factory/img_3714.jpg"
+  ],
+  "zh": {
+    "title": "广告材料制作工厂"
+  },
+  "ja": {
+    "title": "広告材料制作工場"
+  },
+  "en": {
+    "title": "Advertising Material Production Factory"
+  }
+}

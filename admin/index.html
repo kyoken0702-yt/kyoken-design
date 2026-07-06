@@ -1,227 +1,475 @@
 <!doctype html>
-<html>
+<html lang="zh-CN">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Cache-Control" content="no-store">
-  <title>京建供应链 CMS</title>
+  <title>京建供应链后台</title>
+  <style>
+    :root {
+      --navy: #061a44;
+      --blue: #12346b;
+      --line: #d7deea;
+      --paper: #f5f7fb;
+      --red: #a32736;
+      --green: #047857;
+      --text: #10213d;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Microsoft YaHei", sans-serif;
+      background: var(--paper);
+      color: var(--text);
+      font-size: 16px;
+      line-height: 1.55;
+    }
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 16px clamp(16px, 4vw, 40px);
+      background: #fff;
+      border-bottom: 1px solid var(--line);
+    }
+    h1, h2, h3, p { margin: 0; }
+    h1 { color: var(--navy); font-size: clamp(22px, 3vw, 34px); font-weight: 950; }
+    h2 { color: var(--navy); font-size: 22px; font-weight: 950; margin-bottom: 14px; }
+    h3 { color: var(--navy); font-size: 18px; font-weight: 900; }
+    main { width: min(1180px, 100%); margin: 0 auto; padding: 22px 16px 48px; }
+    .grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(320px, .85fr); gap: 18px; align-items: start; }
+    .panel {
+      background: #fff;
+      border: 1px solid var(--line);
+      box-shadow: 0 10px 28px rgba(6, 26, 68, .06);
+      padding: clamp(16px, 2.5vw, 24px);
+    }
+    .stack { display: grid; gap: 14px; }
+    label { display: grid; gap: 7px; font-weight: 900; color: var(--navy); }
+    input, select, textarea {
+      width: 100%;
+      border: 1px solid #c7d1e2;
+      background: #fff;
+      color: var(--text);
+      padding: 12px 13px;
+      font: inherit;
+      font-weight: 750;
+      border-radius: 0;
+    }
+    input:focus, select:focus, textarea:focus { outline: 3px solid rgba(18, 52, 107, .14); border-color: var(--blue); }
+    .hint { color: #52637b; font-size: 13px; font-weight: 750; }
+    .actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+    button {
+      border: 1px solid var(--navy);
+      background: var(--navy);
+      color: #fff;
+      padding: 12px 16px;
+      font: inherit;
+      font-weight: 950;
+      cursor: pointer;
+      border-radius: 0;
+    }
+    button.secondary { background: #fff; color: var(--navy); }
+    button.danger { background: #fff; color: var(--red); border-color: var(--red); }
+    button:disabled { opacity: .45; cursor: not-allowed; }
+    .status {
+      border-left: 5px solid var(--blue);
+      background: #eef4ff;
+      color: var(--navy);
+      padding: 12px 14px;
+      font-weight: 900;
+      white-space: pre-wrap;
+    }
+    .status.ok { border-color: var(--green); background: #ecfdf5; color: #065f46; }
+    .status.warn { border-color: var(--red); background: #fff1f2; color: #9f1239; }
+    .preview-grid, .record-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 10px;
+    }
+    .thumb {
+      border: 1px solid var(--line);
+      background: #f8fafc;
+      padding: 8px;
+      min-width: 0;
+    }
+    .thumb img, .thumb video {
+      display: block;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      background: #dde5f1;
+    }
+    .thumb span {
+      display: block;
+      margin-top: 6px;
+      color: #42546f;
+      font-size: 12px;
+      font-weight: 800;
+      word-break: break-all;
+    }
+    .record {
+      border: 1px solid var(--line);
+      padding: 12px;
+      background: #fff;
+      display: grid;
+      gap: 10px;
+    }
+    .record small { color: #52637b; font-weight: 800; }
+    .record .media-count { color: var(--red); font-weight: 950; }
+    .top-note { color: #43536c; font-weight: 800; }
+    .hidden { display: none !important; }
+    @media (max-width: 860px) {
+      header { align-items: flex-start; flex-direction: column; }
+      .grid { grid-template-columns: 1fr; }
+      .actions button { width: 100%; }
+    }
+  </style>
 </head>
 <body>
-  <!-- Decap CMS. Replace auth settings in config.yml if the GitHub auth provider changes. -->
-  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js?v=20260706-modules2"></script>
+  <header>
+    <div>
+      <h1>京建供应链后台</h1>
+      <p class="top-note">只做三件事：写大标题、选模块、上传现场照片/小视频。</p>
+    </div>
+    <div class="actions">
+      <button id="loginBtn" type="button">登录 GitHub</button>
+      <button id="reloadBtn" class="secondary" type="button">刷新记录</button>
+    </div>
+  </header>
+
+  <main class="grid">
+    <section class="panel stack">
+      <h2>新增 / 更新前台记录</h2>
+      <div id="status" class="status">请先登录。登录后可以一次上传多张图片。</div>
+
+      <label>
+        前台模块
+        <select id="category">
+          <option value="factory">中国工厂・供应链实景</option>
+          <option value="site">日本现场记录</option>
+        </select>
+      </label>
+
+      <label>
+        中文大标题
+        <input id="titleZh" type="text" placeholder="例如：广告材料制作工厂">
+        <span class="hint">这是中文前台显示的大标题。</span>
+      </label>
+
+      <label>
+        日本語タイトル
+        <input id="titleJa" type="text" placeholder="例：広告材料制作工場">
+      </label>
+
+      <label>
+        English Title
+        <input id="titleEn" type="text" placeholder="Example: Advertising Material Production Factory">
+      </label>
+
+      <label>
+        选择图片 / 小视频
+        <input id="files" type="file" multiple accept="image/jpeg,image/png,image/webp,video/mp4,video/webm">
+        <span class="hint">图片建议 JPG / PNG / WebP。视频建议 MP4 / WebM 且小于 25MB。手机 MOV 请先转 MP4。</span>
+      </label>
+
+      <div class="preview-grid" id="previewGrid"></div>
+
+      <div class="actions">
+        <button id="publishBtn" type="button">上传并发布</button>
+        <button id="clearBtn" class="secondary" type="button">清空表单</button>
+      </div>
+    </section>
+
+    <aside class="panel stack">
+      <h2>当前记录</h2>
+      <p class="hint">删除会提交到 GitHub。前台按记录文件名日期倒序显示。</p>
+      <div id="recordList" class="stack"></div>
+    </aside>
+  </main>
+
   <script>
     (function () {
-      var helper;
-      var previewGrid;
-      var statusLine;
+      var owner = "kyoken0702-yt";
+      var repo = "kyoken-design";
+      var branch = "master";
+      var tokenKey = "kyoken_custom_admin_github_token";
+      var token = sessionStorage.getItem(tokenKey) || "";
+      var popup = null;
 
-      function formatSize(bytes) {
-        if (!bytes && bytes !== 0) return "";
-        if (bytes < 1024 * 1024) return Math.round(bytes / 1024) + " KB";
-        return (bytes / 1024 / 1024).toFixed(1) + " MB";
+      var $ = function (id) { return document.getElementById(id); };
+      var status = $("status");
+      var loginBtn = $("loginBtn");
+      var reloadBtn = $("reloadBtn");
+      var publishBtn = $("publishBtn");
+      var clearBtn = $("clearBtn");
+      var filesInput = $("files");
+      var previewGrid = $("previewGrid");
+      var recordList = $("recordList");
+
+      function setStatus(message, type) {
+        status.textContent = message;
+        status.className = "status" + (type ? " " + type : "");
       }
 
-      function ensureUploadHelper() {
-        if (helper) return;
-        helper = document.createElement("div");
-        helper.id = "kyoken-upload-helper";
-        helper.innerHTML = [
-          '<div class="kyoken-upload-title">媒体上传状态</div>',
-          '<div class="kyoken-upload-steps">1. 点“选择文件”  2. 一次选择多张图片  3. 字段出现路径后点“发布”  4. 大视频先压缩成小 MP4</div>',
-          '<div class="kyoken-upload-status">等待选择图片或视频。</div>',
-          '<div class="kyoken-upload-grid"></div>'
-        ].join("");
-        document.body.appendChild(helper);
-        statusLine = helper.querySelector(".kyoken-upload-status");
-        previewGrid = helper.querySelector(".kyoken-upload-grid");
-      }
-
-      function showStatus(message, isWarning) {
-        ensureUploadHelper();
-        statusLine.textContent = message;
-        statusLine.className = isWarning ? "kyoken-upload-status warning" : "kyoken-upload-status";
-      }
-
-      function showLocalPreviews(files) {
-        ensureUploadHelper();
-        previewGrid.innerHTML = "";
-        Array.prototype.forEach.call(files, function (file) {
-          var card = document.createElement("div");
-          card.className = "kyoken-upload-card";
-          var info = document.createElement("div");
-          info.className = "kyoken-upload-info";
-          info.textContent = file.name + " / " + formatSize(file.size) + " / " + (file.type || "unknown");
-          card.appendChild(info);
-
-          if (/^image\//.test(file.type)) {
-            var img = document.createElement("img");
-            img.src = URL.createObjectURL(file);
-            img.onload = function () { URL.revokeObjectURL(img.src); };
-            card.appendChild(img);
-          } else if (/^video\//.test(file.type)) {
-            var video = document.createElement("video");
-            video.src = URL.createObjectURL(file);
-            video.controls = true;
-            video.muted = true;
-            video.onloadeddata = function () { URL.revokeObjectURL(video.src); };
-            card.appendChild(video);
-          } else {
-            var label = document.createElement("div");
-            label.className = "kyoken-upload-file";
-            label.textContent = "文件已选择";
-            card.appendChild(label);
+      function api(path, options) {
+        if (!token) return Promise.reject(new Error("请先登录 GitHub。"));
+        return fetch("https://api.github.com/repos/" + owner + "/" + repo + path, Object.assign({
+          headers: {
+            "Accept": "application/vnd.github+json",
+            "Authorization": "Bearer " + token,
+            "X-GitHub-Api-Version": "2022-11-28"
           }
+        }, options || {})).then(async function (res) {
+          var text = await res.text();
+          var data = text ? JSON.parse(text) : null;
+          if (!res.ok) {
+            throw new Error((data && data.message) || ("GitHub API error: " + res.status));
+          }
+          return data;
+        });
+      }
+
+      function fileToBase64(file) {
+        return new Promise(function (resolve, reject) {
+          var reader = new FileReader();
+          reader.onload = function () {
+            resolve(String(reader.result).split(",")[1]);
+          };
+          reader.onerror = reject;
+          reader.readAsDataURL(file);
+        });
+      }
+
+      function safeSlug(text) {
+        var ascii = String(text || "").toLowerCase().trim()
+          .replace(/[^a-z0-9]+/g, "-")
+          .replace(/^-+|-+$/g, "");
+        if (ascii) return ascii.slice(0, 60);
+        return "record-" + nowStamp();
+      }
+
+      function nowStamp() {
+        var d = new Date();
+        var pad = function (n) { return String(n).padStart(2, "0"); };
+        return d.getFullYear() + pad(d.getMonth() + 1) + pad(d.getDate()) + pad(d.getHours()) + pad(d.getMinutes()) + pad(d.getSeconds());
+      }
+
+      function todayFileDate() {
+        var d = new Date();
+        var pad = function (n) { return String(n).padStart(2, "0"); };
+        return d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate());
+      }
+
+      function cleanFileName(file, index) {
+        var ext = (file.name.match(/\.[a-z0-9]+$/i) || [""])[0].toLowerCase();
+        var base = file.name.replace(/\.[^.]+$/u, "").toLowerCase()
+          .replace(/[^a-z0-9\u4e00-\u9fa5ぁ-んァ-ン一-龥]+/gu, "-")
+          .replace(/^-+|-+$/g, "")
+          .slice(0, 64) || "media";
+        return nowStamp() + "-" + String(index + 1).padStart(2, "0") + "-" + base + ext;
+      }
+
+      function isVideo(fileOrPath) {
+        var value = typeof fileOrPath === "string" ? fileOrPath : (fileOrPath.type || fileOrPath.name || "");
+        return /video|\.mp4$|\.webm$/i.test(value);
+      }
+
+      function renderLocalPreviews() {
+        previewGrid.innerHTML = "";
+        Array.from(filesInput.files || []).forEach(function (file) {
+          var card = document.createElement("div");
+          card.className = "thumb";
+          var media = isVideo(file) ? document.createElement("video") : document.createElement("img");
+          media.src = URL.createObjectURL(file);
+          if (media.tagName === "VIDEO") {
+            media.controls = true;
+            media.muted = true;
+          }
+          media.onload = media.onloadeddata = function () { URL.revokeObjectURL(media.src); };
+          var label = document.createElement("span");
+          label.textContent = file.name + " / " + Math.round(file.size / 1024) + "KB";
+          card.appendChild(media);
+          card.appendChild(label);
           previewGrid.appendChild(card);
         });
       }
 
-      function normalizeMediaPath(value) {
-        if (!value) return "";
-        var match = String(value).match(/(?:https?:\/\/[^\s"')]+\.(?:mp4|webm|mov|m4v)(?:[?#][^\s"')]*)?)|(?:\/?media\/records\/[^\s"')]+)/i);
-        if (!match) return "";
-        if (/^https?:\/\//i.test(match[0])) return match[0];
-        return "/" + match[0].replace(/^\/+/, "");
-      }
-
-      function isVideoPath(value) {
-        return /\.(mp4|webm|mov|m4v)(?:[?#].*)?$/i.test(value || "");
-      }
-
-      function showCmsPathList(paths) {
-        ensureUploadHelper();
-        previewGrid.innerHTML = "";
-        paths.forEach(function (path) {
-          var card = document.createElement("div");
-          card.className = "kyoken-upload-card";
-          var info = document.createElement("div");
-          info.className = "kyoken-upload-info";
-          info.textContent = path;
-          card.appendChild(info);
-          previewGrid.appendChild(card);
+      async function putFile(path, contentBase64, message, sha) {
+        return api("/contents/" + encodeURIComponent(path).replace(/%2F/g, "/"), {
+          method: "PUT",
+          body: JSON.stringify({
+            message: message,
+            content: contentBase64,
+            branch: branch,
+            sha: sha || undefined
+          })
         });
       }
 
-      function scanSelectedMediaPaths() {
-        var found = [];
-        var seen = {};
-        document.querySelectorAll("input, textarea, [contenteditable='true']").forEach(function (node) {
-          var value = node.value || node.textContent || "";
-          var path = normalizeMediaPath(value);
-          if (!path || seen[path]) return;
-          seen[path] = true;
-          found.push(path);
-        });
-        return found;
+      async function getContent(path) {
+        return api("/contents/" + encodeURIComponent(path).replace(/%2F/g, "/") + "?ref=" + encodeURIComponent(branch));
       }
 
-      function updateStatusFromSavedPaths() {
-        var paths = scanSelectedMediaPaths();
-        if (!paths.length) return;
-        var imageCount = paths.filter(function (path) { return !isVideoPath(path); }).length;
-        var videoCount = paths.length - imageCount;
-        showStatus("当前字段已写入 " + paths.length + " 个媒体路径：图片 " + imageCount + " 个，视频 " + videoCount + " 个。可以点击右上角“发布”。", false);
-        showCmsPathList(paths);
-      }
+      async function publishRecord() {
+        var category = $("category").value;
+        var titleZh = $("titleZh").value.trim();
+        var titleJa = $("titleJa").value.trim();
+        var titleEn = $("titleEn").value.trim();
+        var files = Array.from(filesInput.files || []);
 
-      function translateCmsButtons() {
-        var replacements = {
-          "Add more files": "继续添加图片/视频",
-          "Remove all files": "清空媒体",
-          "Choose an image": "选择图片",
-          "Choose a file": "选择文件",
-          "Insert from URL": "用 URL 添加",
-          "Upload": "上传图片/小视频",
-          "Download": "下载",
-          "Copy": "复制",
-          "Delete selected": "删除选中项目",
-          "Choose selected": "使用已上传文件"
-        };
-        document.querySelectorAll("button").forEach(function (button) {
-          var text = (button.textContent || "").trim();
-          if (replacements[text]) button.textContent = replacements[text];
-        });
-      }
+        if (!token) return setStatus("请先登录 GitHub。", "warn");
+        if (!titleZh) return setStatus("请填写中文大标题。", "warn");
+        if (!files.length) return setStatus("请选择至少一张图片。", "warn");
+        var oversized = files.filter(function (file) { return isVideo(file) && file.size > 25 * 1024 * 1024; });
+        if (oversized.length) return setStatus("视频太大。请先压缩到 25MB 以下 MP4/WebM。", "warn");
 
-      function normalizeCmsImagePaths() {
-        document.querySelectorAll("img, video, source").forEach(function (node) {
-          var src = node.getAttribute("src") || "";
-          if (!src) return;
-          if (src.indexOf("/admin/media/records/") !== -1) {
-            node.src = src.replace("/admin/media/records/", "/media/records/");
-          } else if (/^media\/records\//.test(src)) {
-            node.src = "/" + src;
+        publishBtn.disabled = true;
+        try {
+          var mediaPaths = [];
+          for (var i = 0; i < files.length; i += 1) {
+            var file = files[i];
+            setStatus("正在上传媒体 " + (i + 1) + " / " + files.length + "：" + file.name);
+            var mediaPath = "media/records/" + category + "/" + cleanFileName(file, i);
+            await putFile(mediaPath, await fileToBase64(file), "upload supply record media");
+            mediaPaths.push("/" + mediaPath);
           }
-        });
+
+          var slug = safeSlug(titleEn || titleZh);
+          var stamp = nowStamp();
+          var fileName = todayFileDate() + "-" + stamp + "-" + slug + ".json";
+          var record = {
+            category: category,
+            slug: slug + "-" + stamp,
+            title: titleZh,
+            date: todayFileDate().replace(/-/g, "."),
+            showOnHome: true,
+            media: mediaPaths,
+            zh: { title: titleZh },
+            ja: { title: titleJa || titleZh },
+            en: { title: titleEn || titleZh }
+          };
+          var json = JSON.stringify(record, null, 2) + "\n";
+          await putFile("data/supply-chain-records/" + fileName, btoa(unescape(encodeURIComponent(json))), "create supply record");
+          setStatus("发布成功。已上传 " + mediaPaths.length + " 个媒体，并创建前台记录。Vercel 会随后自动部署。", "ok");
+          clearForm();
+          await loadRecords();
+        } catch (error) {
+          setStatus("发布失败：" + error.message, "warn");
+        } finally {
+          publishBtn.disabled = false;
+        }
       }
 
-      function wireFileInputs() {
-      document.querySelectorAll('input[type="file"]').forEach(function (input) {
-          input.accept = "image/jpeg,image/png,image/webp,video/mp4,video/webm,video/quicktime";
-          input.multiple = true;
-          if (input.dataset.kyokenUploadReady) return;
-          input.dataset.kyokenUploadReady = "1";
-          input.addEventListener("change", function () {
-            var files = input.files || [];
-            if (!files.length) {
-              showStatus("未选择文件。", true);
-              return;
-            }
-            var unsupported = Array.prototype.filter.call(files, function (file) {
-              return !/^(image\/jpeg|image\/png|image\/webp|video\/mp4|video\/webm|video\/quicktime)$/.test(file.type);
-            });
-            var largeVideos = Array.prototype.filter.call(files, function (file) {
-              return /^video\//.test(file.type) && file.size > 25 * 1024 * 1024;
-            });
-            if (unsupported.length) {
-              showStatus("有文件格式不适合网页显示。手机 HEIC 请先转 JPG；MOV 如果前台不能播放，请转 MP4。", true);
-            } else if (largeVideos.length) {
-              showStatus("视频文件偏大，GitHub 后台可能上传失败。请压缩成 25MB 以下 MP4，或用 URL 添加视频。", true);
-            } else {
-              var imageCount = Array.prototype.filter.call(files, function (file) { return /^image\//.test(file.type); }).length;
-              var videoCount = Array.prototype.filter.call(files, function (file) { return /^video\//.test(file.type); }).length;
-              showStatus("已选择 " + files.length + " 个文件：图片 " + imageCount + " 个，视频 " + videoCount + " 个。下方能看到预览后，再点击右上角“发布”。", false);
-            }
-            showLocalPreviews(files);
+      function clearForm() {
+        $("titleZh").value = "";
+        $("titleJa").value = "";
+        $("titleEn").value = "";
+        filesInput.value = "";
+        previewGrid.innerHTML = "";
+      }
+
+      async function loadRecords() {
+        recordList.innerHTML = "";
+        if (!token) {
+          recordList.innerHTML = '<p class="hint">登录后显示记录。</p>';
+          return;
+        }
+        try {
+          var files = await getContent("data/supply-chain-records");
+          var jsonFiles = files.filter(function (item) { return item.name.endsWith(".json"); })
+            .sort(function (a, b) { return b.name.localeCompare(a.name); });
+          if (!jsonFiles.length) {
+            recordList.innerHTML = '<p class="hint">暂无记录。</p>';
+            return;
+          }
+          for (var i = 0; i < jsonFiles.length; i += 1) {
+            await renderRecord(jsonFiles[i]);
+          }
+        } catch (error) {
+          recordList.innerHTML = '<p class="hint">读取失败：' + error.message + '</p>';
+        }
+      }
+
+      async function renderRecord(item) {
+        var detail = await getContent(item.path);
+        var content = JSON.parse(decodeURIComponent(escape(atob(detail.content.replace(/\s/g, "")))));
+        var card = document.createElement("div");
+        card.className = "record";
+        var mediaCount = Array.isArray(content.media) ? content.media.length : (content.media ? 1 : 0);
+        card.innerHTML =
+          '<h3>' + escapeHtml(content.title || item.name) + '</h3>' +
+          '<small>' + escapeHtml(item.name) + '</small>' +
+          '<div><span class="media-count">' + mediaCount + '</span> 个媒体 / ' + escapeHtml(content.category || "") + '</div>' +
+          '<div class="actions"><button class="danger" type="button">删除记录</button></div>';
+        card.querySelector("button").addEventListener("click", function () { deleteRecord(item.path, item.sha, content.title || item.name); });
+        recordList.appendChild(card);
+      }
+
+      async function deleteRecord(path, sha, title) {
+        if (!token) return setStatus("请先登录。", "warn");
+        if (!window.confirm("确定删除记录：" + title + "？\n只删除记录 JSON，不删除已上传媒体文件。")) return;
+        try {
+          await api("/contents/" + encodeURIComponent(path).replace(/%2F/g, "/"), {
+            method: "DELETE",
+            body: JSON.stringify({
+              message: "delete supply record",
+              sha: sha,
+              branch: branch
+            })
           });
-      });
+          setStatus("已删除记录。Vercel 会随后自动部署。", "ok");
+          await loadRecords();
+        } catch (error) {
+          setStatus("删除失败：" + error.message, "warn");
+        }
       }
 
-      function autoUseSelectedMedia() {
-        document.querySelectorAll("button").forEach(function (button) {
-          var text = (button.textContent || "").replace(/\s+/g, "");
-          var isUseSelected = /^(选用已选中项目|選用已選中項目|Chooseselected|Useselected|Insertselected)$/i.test(text);
-          if (!isUseSelected || button.disabled || button.dataset.kyokenAutoClicked) return;
-          button.dataset.kyokenAutoClicked = "1";
-          showStatus("检测到已选中的媒体，正在自动确认并返回编辑页。", false);
-          window.setTimeout(function () {
-            if (!button.disabled) button.click();
-          }, 500);
+      function escapeHtml(value) {
+        return String(value || "").replace(/[&<>"']/g, function (ch) {
+          return ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;" })[ch];
         });
       }
 
-      var style = document.createElement("style");
-      style.textContent = [
-        "#kyoken-upload-helper{position:fixed;right:18px;bottom:18px;z-index:99999;width:min(420px,calc(100vw - 36px));background:#fff;border:1px solid #cbd5e1;box-shadow:0 18px 40px rgba(2,6,23,.18);padding:14px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#0f172a}",
-        ".kyoken-upload-title{font-weight:900;font-size:15px;margin-bottom:6px}",
-        ".kyoken-upload-steps{font-size:12px;line-height:1.55;color:#334155;margin-bottom:8px}",
-        ".kyoken-upload-status{font-size:12px;font-weight:800;color:#047857;background:#ecfdf5;border:1px solid #a7f3d0;padding:7px 8px;margin-bottom:8px}",
-        ".kyoken-upload-status.warning{color:#9f1239;background:#fff1f2;border-color:#fecdd3}",
-        ".kyoken-upload-grid{display:grid;grid-template-columns:1fr;gap:6px;max-height:140px;overflow:auto}",
-        ".kyoken-upload-card{border:1px solid #e2e8f0;background:#f8fafc;padding:6px}",
-        ".kyoken-upload-card img,.kyoken-upload-card video{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;background:#e2e8f0}",
-        ".kyoken-upload-info{font-size:11px;line-height:1.35;color:#334155;margin-bottom:5px;word-break:break-all}",
-        ".kyoken-upload-file{display:flex;align-items:center;justify-content:center;min-height:70px;background:#e2e8f0;font-size:12px;font-weight:800}"
-      ].join("");
-      document.head.appendChild(style);
+      function login() {
+        popup = window.open("/api/auth?scope=repo", "kyokenGithubLogin", "width=720,height=720");
+        setStatus("GitHub 登录窗口已打开。");
+      }
 
-      ensureUploadHelper();
-      window.setInterval(function () {
-        wireFileInputs();
-        normalizeCmsImagePaths();
-        translateCmsButtons();
-        updateStatusFromSavedPaths();
-        autoUseSelectedMedia();
-      }, 800);
+      window.addEventListener("message", function (event) {
+        var data = String(event.data || "");
+        if (data === "authorizing:github" && popup) {
+          popup.postMessage("ready", "*");
+          return;
+        }
+        if (data.indexOf("authorization:github:success:") === 0) {
+          var payload = JSON.parse(data.slice("authorization:github:success:".length));
+          token = payload.token;
+          sessionStorage.setItem(tokenKey, token);
+          setStatus("已登录。可以新增记录。", "ok");
+          loadRecords();
+        }
+        if (data.indexOf("authorization:github:error:") === 0) {
+          setStatus("GitHub 登录失败。", "warn");
+        }
+      });
+
+      loginBtn.addEventListener("click", login);
+      reloadBtn.addEventListener("click", loadRecords);
+      publishBtn.addEventListener("click", publishRecord);
+      clearBtn.addEventListener("click", clearForm);
+      filesInput.addEventListener("change", renderLocalPreviews);
+
+      if (token) {
+        setStatus("已读取本机登录状态。", "ok");
+        loadRecords();
+      } else {
+        loadRecords();
+      }
     })();
   </script>
 </body>
