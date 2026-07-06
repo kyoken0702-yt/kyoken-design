@@ -18,7 +18,7 @@ collections:
     label: "首页模块｜每日记录・今日供应链"
     label_singular: "每日记录"
     folder: "data/supply-chain-records"
-    media_folder: "media/records/today"
+    media_folder: "../../media/records/today"
     public_folder: "/media/records/today"
     create: true
     filter: { field: "category", value: "today" }
@@ -96,7 +96,7 @@ collections:
     label: "首页模块｜工厂侧・中国工厂"
     label_singular: "工厂记录"
     folder: "data/supply-chain-records"
-    media_folder: "media/records/factory"
+    media_folder: "../../media/records/factory"
     public_folder: "/media/records/factory"
     create: true
     filter: { field: "category", value: "factory" }
@@ -173,7 +173,7 @@ collections:
     label: "首页模块｜日本现场・现场记录"
     label_singular: "现场记录"
     folder: "data/supply-chain-records"
-    media_folder: "media/records/site"
+    media_folder: "../../media/records/site"
     public_folder: "/media/records/site"
     create: true
     filter: { field: "category", value: "site" }

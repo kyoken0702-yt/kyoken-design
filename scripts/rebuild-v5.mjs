@@ -70,12 +70,6 @@ const productImages = {
   "wpc-decking-details.html": "media/remote/937250ddfe38.png"
 };
 
-const advertisingLegacyPages = [
-  "acrylic-sign-details.html",
-  "lightbox-details.html",
-  "pvc-sign-details.html"
-];
-
 const zhProductNotes = {
   "curtain-details.html": "确认 1.8 倍褶皱、上门测量、标准简易安装及窗边条件的窗帘材料。",
   "advertising-materials-details.html": "统一确认标志文件、灯箱画面、PVC板标牌的尺寸、材料、加工、包装和交付条件。",
@@ -781,38 +775,6 @@ function productDetailPage(lang, file) {
 `;
 }
 
-function redirectPage(lang, targetFile) {
-  const c = langConfig[lang];
-  const target = lang === "ja" ? targetFile : `../${lang}/${targetFile}`;
-  const home = c.homeUrl;
-  const message = lang === "en"
-    ? "This category has been merged into Advertising Material Production."
-    : lang === "zh"
-      ? "这个分类已合并到「广告材料制作」。"
-      : "この分類は「広告材料制作」に統合しました。";
-  const linkText = lang === "en" ? "Open Advertising Material Production" : lang === "zh" ? "打开广告材料制作" : "広告材料制作を見る";
-  return `<!DOCTYPE html>
-<html lang="${c.htmlLang}">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="refresh" content="0; url=${target}">
-  <link rel="canonical" href="${target}">
-  <title>${message} | ${c.logo}</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="${lang === "ja" ? "" : "../"}styles.css?v=20260701-occam1">
-</head>
-<body class="v5-body">
-  <main class="v5-section v5-contact">
-    <h1>${message}</h1>
-    <p><a href="${target}">${linkText}</a></p>
-    <p><a href="${home}">${lang === "en" ? "Back to home" : lang === "zh" ? "返回首页" : "トップへ戻る"}</a></p>
-  </main>
-</body>
-</html>
-`;
-}
-
 function writeFile(relativePath, content) {
   fs.mkdirSync(path.dirname(path.join(root, relativePath)), { recursive: true });
   fs.writeFileSync(path.join(root, relativePath), content);
@@ -829,12 +791,6 @@ for (const [file] of products) {
   writeFile(file, productDetailPage("ja", file));
   writeFile(`en/${file}`, productDetailPage("en", file));
   writeFile(`zh/${file}`, productDetailPage("zh", file));
-}
-
-for (const file of advertisingLegacyPages) {
-  writeFile(file, redirectPage("ja", "advertising-materials-details.html"));
-  writeFile(`en/${file}`, redirectPage("en", "advertising-materials-details.html"));
-  writeFile(`zh/${file}`, redirectPage("zh", "advertising-materials-details.html"));
 }
 
 console.log("V5 rebuild complete");

@@ -1,4 +1,15 @@
 {
   "buildCommand": "node scripts/rebuild-v5.mjs",
-  "outputDirectory": "."
+  "outputDirectory": ".",
+  "redirects": [
+    { "source": "/acrylic-sign-details.html", "destination": "/advertising-materials-details.html", "permanent": true },
+    { "source": "/lightbox-details.html", "destination": "/advertising-materials-details.html", "permanent": true },
+    { "source": "/pvc-sign-details.html", "destination": "/advertising-materials-details.html", "permanent": true },
+    { "source": "/zh/acrylic-sign-details.html", "destination": "/zh/advertising-materials-details.html", "permanent": true },
+    { "source": "/zh/lightbox-details.html", "destination": "/zh/advertising-materials-details.html", "permanent": true },
+    { "source": "/zh/pvc-sign-details.html", "destination": "/zh/advertising-materials-details.html", "permanent": true },
+    { "source": "/en/acrylic-sign-details.html", "destination": "/en/advertising-materials-details.html", "permanent": true },
+    { "source": "/en/lightbox-details.html", "destination": "/en/advertising-materials-details.html", "permanent": true },
+    { "source": "/en/pvc-sign-details.html", "destination": "/en/advertising-materials-details.html", "permanent": true }
+  ]
 }
