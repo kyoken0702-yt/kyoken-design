@@ -31,14 +31,14 @@ collections:
     fields:
       - { label: "前台显示模块", name: "category", widget: "hidden", default: "factory" }
       - { label: "前台大标题", name: "title", widget: "string", hint: "会显示在这一组图片/视频上方。例如：广告材料制作工厂、窗帘加工制作工厂、塑木板材料工厂。" }
-      - label: "媒体（图片 / 视频，可多张）"
+      - label: "媒体（图片 / 小视频，可多选）"
         name: "media"
-        widget: "list"
+        widget: "file"
         required: false
-        collapsed: false
-        summary: "{{fields.file}}"
-        hint: "上传工厂、材料、包装、仓库、发货、装车、物流前状态。图片和小 MP4 视频放在同一个列表里；大视频建议先压缩或用 URL 添加。"
-        field: { label: "图片或小视频", name: "file", widget: "file", required: false, media_library: { config: { multiple: true } }, hint: "图片建议 JPG / PNG / WebP。视频建议 MP4 / WebM 且小于 25MB；手机 HEIC / MOV 请先转 JPG / MP4。" }
+        media_library:
+          config:
+            multiple: true
+        hint: "一次选择多张图片会保存为一组媒体。图片建议 JPG / PNG / WebP。视频只建议小 MP4 / WebM；大视频请先压缩后再上传。"
 
   - name: "japan_site_records"
     label: "首页模块｜日本现场记录"
@@ -57,11 +57,11 @@ collections:
     fields:
       - { label: "前台显示模块", name: "category", widget: "hidden", default: "site" }
       - { label: "前台大标题", name: "title", widget: "string", hint: "会显示在这一组图片/视频上方。例如：窗帘到场确认、广告材料到场确认、塑木板现场交付。" }
-      - label: "媒体（图片 / 视频，可多张）"
+      - label: "媒体（图片 / 小视频，可多选）"
         name: "media"
-        widget: "list"
+        widget: "file"
         required: false
-        collapsed: false
-        summary: "{{fields.file}}"
-        hint: "上传到场、搬入、尺寸确认、安装前确认、交付状态。图片和小 MP4 视频放在同一个列表里；大视频建议先压缩或用 URL 添加。"
-        field: { label: "图片或小视频", name: "file", widget: "file", required: false, media_library: { config: { multiple: true } }, hint: "图片建议 JPG / PNG / WebP。视频建议 MP4 / WebM 且小于 25MB；手机 HEIC / MOV 请先转 JPG / MP4。" }
+        media_library:
+          config:
+            multiple: true
+        hint: "一次选择多张图片会保存为一组媒体。图片建议 JPG / PNG / WebP。视频只建议小 MP4 / WebM；大视频请先压缩后再上传。"

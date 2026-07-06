@@ -21,6 +21,9 @@ function normalizeMedia(record) {
 
   addMedia(record.image);
   addMedia(record.video);
+  if (typeof record.media === "string") {
+    addMedia(record.media);
+  }
   if (Array.isArray(record.media)) {
     record.media.forEach((item) => {
       if (Array.isArray(item)) item.forEach(addMedia);

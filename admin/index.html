@@ -27,7 +27,7 @@
         helper.id = "kyoken-upload-helper";
         helper.innerHTML = [
           '<div class="kyoken-upload-title">媒体上传状态</div>',
-          '<div class="kyoken-upload-steps">1. 点“新增媒体”  2. 图片可多选上传  3. 视频请用 MP4/WebM 小文件或 URL  4. 看到预览后点“发布”</div>',
+          '<div class="kyoken-upload-steps">1. 点“选择文件”  2. 一次选择多张图片  3. 字段出现路径后点“发布”  4. 大视频先压缩成小 MP4</div>',
           '<div class="kyoken-upload-status">等待选择图片或视频。</div>',
           '<div class="kyoken-upload-grid"></div>'
         ].join("");
@@ -87,7 +87,7 @@
         return /\.(mp4|webm|mov|m4v)(?:[?#].*)?$/i.test(value || "");
       }
 
-      function showCmsPathPreviews(paths) {
+      function showCmsPathList(paths) {
         ensureUploadHelper();
         previewGrid.innerHTML = "";
         paths.forEach(function (path) {
@@ -97,19 +97,6 @@
           info.className = "kyoken-upload-info";
           info.textContent = path;
           card.appendChild(info);
-
-          if (isVideoPath(path)) {
-            var video = document.createElement("video");
-            video.src = path;
-            video.controls = true;
-            video.muted = true;
-            card.appendChild(video);
-          } else {
-            var img = document.createElement("img");
-            img.src = path;
-            img.alt = "";
-            card.appendChild(img);
-          }
           previewGrid.appendChild(card);
         });
       }
@@ -117,7 +104,7 @@
       function scanSelectedMediaPaths() {
         var found = [];
         var seen = {};
-        document.querySelectorAll("input, textarea, [contenteditable='true'], span, div").forEach(function (node) {
+        document.querySelectorAll("input, textarea, [contenteditable='true']").forEach(function (node) {
           var value = node.value || node.textContent || "";
           var path = normalizeMediaPath(value);
           if (!path || seen[path]) return;
@@ -132,14 +119,14 @@
         if (!paths.length) return;
         var imageCount = paths.filter(function (path) { return !isVideoPath(path); }).length;
         var videoCount = paths.length - imageCount;
-        showStatus("已写入 " + paths.length + " 个媒体：图片 " + imageCount + " 个，视频 " + videoCount + " 个。可以直接点击右上角“发布”。", false);
-        showCmsPathPreviews(paths);
+        showStatus("当前字段已写入 " + paths.length + " 个媒体路径：图片 " + imageCount + " 个，视频 " + videoCount + " 个。可以点击右上角“发布”。", false);
+        showCmsPathList(paths);
       }
 
       function translateCmsButtons() {
         var replacements = {
           "Add more files": "继续添加图片/视频",
-          "Remove all files": "清空本组媒体",
+          "Remove all files": "清空媒体",
           "Choose an image": "选择图片",
           "Choose a file": "选择文件",
           "Insert from URL": "用 URL 添加",
@@ -219,7 +206,7 @@
         ".kyoken-upload-steps{font-size:12px;line-height:1.55;color:#334155;margin-bottom:8px}",
         ".kyoken-upload-status{font-size:12px;font-weight:800;color:#047857;background:#ecfdf5;border:1px solid #a7f3d0;padding:7px 8px;margin-bottom:8px}",
         ".kyoken-upload-status.warning{color:#9f1239;background:#fff1f2;border-color:#fecdd3}",
-        ".kyoken-upload-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;max-height:220px;overflow:auto}",
+        ".kyoken-upload-grid{display:grid;grid-template-columns:1fr;gap:6px;max-height:140px;overflow:auto}",
         ".kyoken-upload-card{border:1px solid #e2e8f0;background:#f8fafc;padding:6px}",
         ".kyoken-upload-card img,.kyoken-upload-card video{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;background:#e2e8f0}",
         ".kyoken-upload-info{font-size:11px;line-height:1.35;color:#334155;margin-bottom:5px;word-break:break-all}",
