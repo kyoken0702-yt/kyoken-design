@@ -1,6 +1,6 @@
 {
   "date": "2026.07.06",
-  "category": "today",
+  "category": "factory",
   "product": "pvc",
   "showOnHome": true,
   "zh": {
@@ -18,5 +18,7 @@
     "title": "Photos of the advertising production workshop",
     "summary": "Photos of the advertising production workshop"
   },
-  "title": "广告制作车间现场照片"
+  "title": "广告制作车间现场照片",
+  "image": "media/records/factory/img_3701.jpg",
+  "video": ""
 }

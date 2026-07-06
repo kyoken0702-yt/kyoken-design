@@ -5,3 +5,5 @@ vercel_login.log
 media/*
 !media/remote/
 !media/remote/*
+!media/records/
+!media/records/**
