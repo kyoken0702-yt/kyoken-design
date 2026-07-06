@@ -228,7 +228,7 @@
         <button id="selectFilesBtn" class="secondary" type="button">选择图片 / 视频（可多选）</button>
         <input id="files" class="file-input-hidden" type="file" multiple accept="image/jpeg,image/png,image/webp,video/mp4,video/webm">
         <span id="fileSummary" class="hint">未选择文件。</span>
-        <span class="hint">图片建议 JPG / PNG / WebP。视频建议 MP4 / WebM 且小于 25MB。手机 MOV 请先转 MP4。</span>
+        <span class="hint">图片会在浏览器内自动压缩为网页用 JPG 后上传。视频建议 MP4 / WebM 且小于 25MB，手机 MOV 请先转 MP4。</span>
       </div>
 
       <div class="preview-grid" id="previewGrid"></div>
@@ -381,6 +381,11 @@
         });
       }
 
+      function bytesText(size) {
+        if (size > 1024 * 1024) return (size / 1024 / 1024).toFixed(1) + "MB";
+        return Math.max(1, Math.round(size / 1024)) + "KB";
+      }
+
       function safeSlug(text) {
         var ascii = String(text || "").toLowerCase().trim()
           .replace(/[^a-z0-9]+/g, "-")
@@ -401,8 +406,8 @@
         return d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate());
       }
 
-      function cleanFileName(file, index) {
-        var ext = (file.name.match(/\.[a-z0-9]+$/i) || [""])[0].toLowerCase();
+      function cleanFileName(file, index, forcedExt) {
+        var ext = forcedExt || (file.name.match(/\.[a-z0-9]+$/i) || [""])[0].toLowerCase();
         var base = file.name.replace(/\.[^.]+$/u, "").toLowerCase()
           .replace(/[^a-z0-9\u4e00-\u9fa5ぁ-んァ-ン一-龥]+/gu, "-")
           .replace(/^-+|-+$/g, "")
@@ -413,6 +418,59 @@
       function isVideo(fileOrPath) {
         var value = typeof fileOrPath === "string" ? fileOrPath : (fileOrPath.type || fileOrPath.name || "");
         return /video|\.mp4$|\.webm$/i.test(value);
+      }
+
+      function isCompressibleImage(file) {
+        return /^image\/(jpeg|jpg|png|webp)$/i.test(file.type || "") || /\.(jpe?g|png|webp)$/i.test(file.name || "");
+      }
+
+      function compressImage(file) {
+        return new Promise(function (resolve, reject) {
+          if (!isCompressibleImage(file)) {
+            resolve({ file: file, originalSize: file.size, compressed: false });
+            return;
+          }
+          var image = new Image();
+          var objectUrl = URL.createObjectURL(file);
+          image.onload = function () {
+            URL.revokeObjectURL(objectUrl);
+            var maxSide = 1800;
+            var width = image.naturalWidth || image.width;
+            var height = image.naturalHeight || image.height;
+            var scale = Math.min(1, maxSide / Math.max(width, height));
+            var targetWidth = Math.max(1, Math.round(width * scale));
+            var targetHeight = Math.max(1, Math.round(height * scale));
+            var canvas = document.createElement("canvas");
+            canvas.width = targetWidth;
+            canvas.height = targetHeight;
+            var ctx = canvas.getContext("2d", { alpha: false });
+            ctx.fillStyle = "#fff";
+            ctx.fillRect(0, 0, targetWidth, targetHeight);
+            ctx.drawImage(image, 0, 0, targetWidth, targetHeight);
+            canvas.toBlob(function (blob) {
+              if (!blob) {
+                resolve({ file: file, originalSize: file.size, compressed: false });
+                return;
+              }
+              var output = new File([blob], file.name.replace(/\.[^.]+$/u, "") + ".jpg", { type: "image/jpeg" });
+              if (output.size >= file.size) {
+                resolve({ file: file, originalSize: file.size, compressedSize: file.size, compressed: false });
+                return;
+              }
+              resolve({
+                file: output,
+                originalSize: file.size,
+                compressedSize: output.size,
+                compressed: output.size < file.size
+              });
+            }, "image/jpeg", 0.78);
+          };
+          image.onerror = function () {
+            URL.revokeObjectURL(objectUrl);
+            reject(new Error("图片无法在浏览器内压缩：" + file.name + "。请先转为 JPG / PNG / WebP。"));
+          };
+          image.src = objectUrl;
+        });
       }
 
       function renderLocalPreviews() {
@@ -431,7 +489,7 @@
           }
           media.onload = media.onloadeddata = function () { URL.revokeObjectURL(media.src); };
           var label = document.createElement("span");
-          label.textContent = file.name + " / " + Math.round(file.size / 1024) + "KB";
+          label.textContent = file.name + " / " + bytesText(file.size);
           card.appendChild(media);
           card.appendChild(label);
           previewGrid.appendChild(card);
@@ -452,6 +510,70 @@
 
       async function getContent(path) {
         return api("/contents/" + encodeURIComponent(path).replace(/%2F/g, "/") + "?ref=" + encodeURIComponent(branch));
+      }
+
+      async function createBlob(content, encoding) {
+        var blob = await api("/git/blobs", {
+          method: "POST",
+          body: JSON.stringify({ content: content, encoding: encoding })
+        });
+        return blob.sha;
+      }
+
+      function cleanGitPath(path) {
+        var value = String(path || "").replace(/^\/+/, "");
+        if (!value || value.indexOf("..") !== -1 || value.indexOf(".git/") === 0) {
+          throw new Error("Invalid upload path: " + path);
+        }
+        return value;
+      }
+
+      async function publishBundle(files, recordPath, record) {
+        var ref = await api("/git/ref/heads/" + branch);
+        var baseCommitSha = ref.object.sha;
+        var baseCommit = await api("/git/commits/" + baseCommitSha);
+        var tree = [];
+
+        for (var i = 0; i < files.length; i += 1) {
+          setStatus("正在准备 GitHub 提交 " + (i + 1) + " / " + files.length + "。");
+          tree.push({
+            path: cleanGitPath(files[i].path),
+            mode: "100644",
+            type: "blob",
+            sha: await createBlob(files[i].content, "base64")
+          });
+        }
+
+        tree.push({
+          path: cleanGitPath(recordPath),
+          mode: "100644",
+          type: "blob",
+          sha: await createBlob(JSON.stringify(record, null, 2) + "\n", "utf-8")
+        });
+
+        var newTree = await api("/git/trees", {
+          method: "POST",
+          body: JSON.stringify({
+            base_tree: baseCommit.tree.sha,
+            tree: tree
+          })
+        });
+        var newCommit = await api("/git/commits", {
+          method: "POST",
+          body: JSON.stringify({
+            message: "publish supply record",
+            tree: newTree.sha,
+            parents: [baseCommitSha]
+          })
+        });
+        await api("/git/refs/heads/" + branch, {
+          method: "PATCH",
+          body: JSON.stringify({
+            sha: newCommit.sha,
+            force: false
+          })
+        });
+        return newCommit;
       }
 
       async function publishRecord() {
@@ -480,11 +602,20 @@
         publishBtn.disabled = true;
         try {
           var mediaPaths = [];
+          var uploadFiles = [];
+          var savedBytes = 0;
           for (var i = 0; i < files.length; i += 1) {
             var file = files[i];
-            setStatus("正在上传媒体 " + (i + 1) + " / " + files.length + "：" + file.name);
-            var mediaPath = "media/records/" + category + "/" + channel + "/" + cleanFileName(file, i);
-            await putFile(mediaPath, await fileToBase64(file), "upload supply record media");
+            setStatus("正在压缩媒体 " + (i + 1) + " / " + files.length + "：" + file.name);
+            var prepared = isVideo(file) ? { file: file, originalSize: file.size, compressed: false } : await compressImage(file);
+            if (prepared.compressed) savedBytes += prepared.originalSize - prepared.compressedSize;
+            var preparedFile = prepared.file;
+            var mediaPath = "media/records/" + category + "/" + channel + "/" + cleanFileName(preparedFile, i, isVideo(preparedFile) ? null : ".jpg");
+            setStatus("正在读取媒体 " + (i + 1) + " / " + files.length + "：" + preparedFile.name + "（" + bytesText(preparedFile.size) + "）");
+            uploadFiles.push({
+              path: mediaPath,
+              content: await fileToBase64(preparedFile)
+            });
             mediaPaths.push("/" + mediaPath);
           }
 
@@ -503,9 +634,15 @@
             ja: { title: titleJa || titleZh },
             en: { title: titleEn || titleZh }
           };
-          var json = JSON.stringify(record, null, 2) + "\n";
-          await putFile("data/supply-chain-records/" + fileName, btoa(unescape(encodeURIComponent(json))), "create supply record");
-          setStatus("发布成功。已上传 " + mediaPaths.length + " 个媒体，并创建前台记录。Vercel 会随后自动部署。", "ok");
+          setStatus("正在一次性发布：媒体 " + uploadFiles.length + " 个 + 前台记录 1 条。");
+          try {
+            await publishBundle(uploadFiles, "data/supply-chain-records/" + fileName, record);
+          } catch (error) {
+            if (!/reference|fast-forward|sha|conflict/i.test(error.message)) throw error;
+            setStatus("远端刚好有新提交，正在自动重试一次。");
+            await publishBundle(uploadFiles, "data/supply-chain-records/" + fileName, record);
+          }
+          setStatus("发布成功。已上传 " + mediaPaths.length + " 个媒体，并创建前台记录。" + (savedBytes ? " 图片已自动压缩，约减少 " + bytesText(savedBytes) + "。" : "") + " Vercel 会随后自动部署。", "ok");
           clearForm();
           await loadRecords();
         } catch (error) {
