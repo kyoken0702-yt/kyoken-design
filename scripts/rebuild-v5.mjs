@@ -363,11 +363,20 @@ function mediaSlot(record, lang) {
   return photoSlot(lang === "en" ? "Photo / video to be added" : lang === "zh" ? "照片 / 视频待补充" : "写真 / 動画を追加予定", mediaLabel);
 }
 
+function recordModuleLabel(category, lang) {
+  const labels = {
+    today: { ja: "今日のサプライチェーン", en: "Today's Supply Chain", zh: "今日供应链" },
+    factory: { ja: "中国工場", en: "China Factory", zh: "中国工厂" },
+    site: { ja: "現場記録", en: "Site Records", zh: "现场记录" }
+  };
+  return (labels[category] || labels.today)[lang];
+}
+
 function recordCard(record, lang) {
   const r = record[lang];
   return `<a class="v5-record v5-record-link" href="supply-chain-records.html#record-${record.slug}">
           ${mediaSlot(record, lang)}
-          <div class="v5-record-meta"><span>${record.date}</span><span>${r.label}</span></div>
+          <div class="v5-record-meta"><span>${record.date}</span><span>${recordModuleLabel(record.category || "today", lang)}</span></div>
           <h3>${r.title}</h3>
           <p>${r.summary}</p>
         </a>`;
@@ -471,8 +480,7 @@ function homePage(lang) {
         <p class="v5-lead">${c.factoryLead}</p>
       </div>
       <div class="v5-record-grid two">
-        ${homeRecords(lang, "factory", 2, `${photoSlot(lang === "en" ? "Machine / worker / warehouse" : lang === "zh" ? "机器 / 师傅 / 仓库" : "機械 / 職人 / 倉庫", lang === "en" ? "FACTORY RECORD" : lang === "zh" ? "工厂记录" : "工場記録")}
-        ${photoSlot(lang === "en" ? "Packing / label / pallet" : lang === "zh" ? "包装 / 标签 / 托盘" : "梱包 / ラベル / パレット", lang === "en" ? "PACKING RECORD" : lang === "zh" ? "包装记录" : "梱包記録")}`)}
+        ${homeRecords(lang, "factory", 2, photoSlot(lang === "en" ? "Factory photos / videos to be added" : lang === "zh" ? "中国工厂照片 / 视频待补充" : "中国工場の写真 / 動画を追加予定", recordModuleLabel("factory", lang)))}
       </div>
     </section>
 
@@ -483,8 +491,7 @@ function homePage(lang) {
         <p class="v5-lead">${c.siteLead}</p>
       </div>
       <div class="v5-record-grid two">
-        ${homeRecords(lang, "site", 2, `${photoSlot(lang === "en" ? "Tape measure / drawing / arrival check" : lang === "zh" ? "卷尺 / 图纸 / 到场确认" : "巻尺 / 図面 / 到着確認", lang === "en" ? "SITE RECORD" : lang === "zh" ? "现场记录" : "現場記録")}
-        ${photoSlot(lang === "en" ? "Material before installation" : lang === "zh" ? "安装前材料确认" : "取付前の材料確認", lang === "en" ? "SITE RECORD" : lang === "zh" ? "现场记录" : "現場記録")}`)}
+        ${homeRecords(lang, "site", 2, photoSlot(lang === "en" ? "Site photos / videos to be added" : lang === "zh" ? "现场照片 / 视频待补充" : "現場写真 / 動画を追加予定", recordModuleLabel("site", lang)))}
       </div>
     </section>
 
@@ -566,7 +573,7 @@ function recordsPage(lang) {
               ${mediaSlot(record, lang)}
             </div>
             <div>
-              <div class="v5-record-meta"><span>${record.date}</span><span>${r.label}</span></div>
+              <div class="v5-record-meta"><span>${record.date}</span><span>${recordModuleLabel(record.category || "today", lang)}</span></div>
               <h2>${r.title}</h2>
               <p>${r.summary}</p>
               <ul>${r.details.map((item) => `<li>${item}</li>`).join("")}</ul>
@@ -673,13 +680,13 @@ function productDetailPage(lang, file) {
   const quoteLabel = lang === "en" ? "Case-by-case quote" : lang === "zh" ? "案件逐项确认报价" : "案件ごとにお見積り";
   const packageTitle = lang === "en" ? "Plan / Specification" : lang === "zh" ? "套餐 / 规格" : "プラン / 仕様";
   const quoteTitle = lang === "en" ? "Quote Conditions" : lang === "zh" ? "报价说明" : "見積条件";
-  const siteTitle = lang === "en" ? "Site Records" : lang === "zh" ? "现场记录" : "現場記録";
+  const siteTitle = lang === "en" ? "Related Records" : lang === "zh" ? "相关记录" : "関連記録";
   const backText = lang === "en" ? "Back to home" : lang === "zh" ? "返回首页" : "トップへ戻る";
-  const siteNotes = lang === "en"
-    ? ["Factory packing", "Arrival / handover check"]
+  const recordNote = lang === "en"
+    ? "Photos and videos are managed only under Today's Supply Chain, China Factory, and Site Records."
     : lang === "zh"
-      ? ["工厂包装", "到场 / 交付确认"]
-      : ["工場梱包", "到着 / 引き渡し確認"];
+      ? "照片和视频只统一归档到「今日供应链」「中国工厂」「现场记录」三个大类。"
+      : "写真と動画は「今日のサプライチェーン」「中国工場」「現場記録」の3分類だけで管理します。";
   const lineNote = lang === "en"
     ? "Send drawings, site photos, dimensions, quantity, and delivery area."
     : lang === "zh"
@@ -750,10 +757,8 @@ function productDetailPage(lang, file) {
     <section class="v5-section v5-product-module">
       <p class="v5-kicker">${lang === "en" ? "RECORDS" : lang === "zh" ? "记录" : "記録"}</p>
       <h2>${siteTitle}</h2>
-      <div class="v5-record-grid two">
-        ${photoSlot(siteNotes[0], lang === "en" ? "PACKING RECORD" : lang === "zh" ? "包装记录" : "梱包記録")}
-        ${photoSlot(siteNotes[1], lang === "en" ? "SITE RECORD" : lang === "zh" ? "现场记录" : "現場記録")}
-      </div>
+      <p class="v5-lead">${recordNote}</p>
+      <a class="v5-section-link" href="${c.homeUrl}#today">${lang === "en" ? "Open the three record modules" : lang === "zh" ? "查看三个记录大类" : "3つの記録分類を見る"}</a>
     </section>
 
     ${productStory(lang, detail.name)}

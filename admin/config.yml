@@ -32,18 +32,6 @@ collections:
       - { label: "日期", name: "date", widget: "datetime", date_format: "YYYY.MM.DD", time_format: false, format: "YYYY.MM.DD", default: "{{now}}" }
       - { label: "URL编号", name: "slug", widget: "string", required: false, hint: "可不填。例：2026-07-01-curtain-packing" }
       - { label: "前台显示模块", name: "category", widget: "hidden", default: "today" }
-      - label: "产品"
-        name: "product"
-        widget: "select"
-        default: "other"
-        options:
-          - { label: "定制窗帘", value: "curtain" }
-          - { label: "广告材料制作", value: "advertising" }
-          - { label: "珐琅磁吸板", value: "enamel" }
-          - { label: "毛毡吸音板", value: "acoustic" }
-          - { label: "墙纸 / 墙布材料", value: "wallpaper" }
-          - { label: "人工木地板材料", value: "wpc" }
-          - { label: "其他", value: "other" }
       - { label: "首页显示", name: "showOnHome", widget: "boolean", default: true, hint: "关闭后只保存在记录页，不显示在首页。" }
       - { label: "封面图片（网页显示）", name: "image", widget: "image", required: false, hint: "用于首页【每日记录】和记录页直接显示。请上传 JPG / PNG / WebP。手机 HEIC 请先转 JPG。" }
       - { label: "网页视频（MP4）", name: "video", widget: "file", required: false, hint: "用于网页直接播放。请上传 MP4（H.264）。手机 MOV 建议先转 MP4。" }
@@ -59,7 +47,6 @@ collections:
         name: "zh"
         widget: "object"
         fields:
-          - { label: "中文标签", name: "label", widget: "string", default: "现场记录" }
           - { label: "中文标题", name: "title", widget: "string" }
           - { label: "中文摘要", name: "summary", widget: "text" }
           - label: "中文要点"
@@ -71,7 +58,6 @@ collections:
         name: "ja"
         widget: "object"
         fields:
-          - { label: "日本語ラベル", name: "label", widget: "string", default: "現場記録" }
           - { label: "日本語タイトル", name: "title", widget: "string" }
           - { label: "日本語概要", name: "summary", widget: "text" }
           - label: "日本語要点"
@@ -83,7 +69,6 @@ collections:
         name: "en"
         widget: "object"
         fields:
-          - { label: "English Label", name: "label", widget: "string", default: "Site Record" }
           - { label: "English Title", name: "title", widget: "string" }
           - { label: "English Summary", name: "summary", widget: "text" }
           - label: "English Points"
@@ -110,18 +95,6 @@ collections:
       - { label: "日期", name: "date", widget: "datetime", date_format: "YYYY.MM.DD", time_format: false, format: "YYYY.MM.DD", default: "{{now}}" }
       - { label: "URL编号", name: "slug", widget: "string", required: false, hint: "可不填。例：2026-07-01-factory-check" }
       - { label: "前台显示模块", name: "category", widget: "hidden", default: "factory" }
-      - label: "产品"
-        name: "product"
-        widget: "select"
-        default: "other"
-        options:
-          - { label: "定制窗帘", value: "curtain" }
-          - { label: "广告材料制作", value: "advertising" }
-          - { label: "珐琅磁吸板", value: "enamel" }
-          - { label: "毛毡吸音板", value: "acoustic" }
-          - { label: "墙纸 / 墙布材料", value: "wallpaper" }
-          - { label: "人工木地板材料", value: "wpc" }
-          - { label: "其他", value: "other" }
       - { label: "首页显示", name: "showOnHome", widget: "boolean", default: true, hint: "关闭后只保存在记录页，不显示在首页【中国工厂】。" }
       - { label: "封面图片（网页显示）", name: "image", widget: "image", required: false, hint: "用于首页【中国工厂】和记录页直接显示。请上传 JPG / PNG / WebP。手机 HEIC 请先转 JPG。" }
       - { label: "网页视频（MP4）", name: "video", widget: "file", required: false, hint: "用于网页直接播放。请上传 MP4（H.264）。手机 MOV 建议先转 MP4。" }
@@ -136,7 +109,6 @@ collections:
         name: "zh"
         widget: "object"
         fields:
-          - { label: "中文标签", name: "label", widget: "string", default: "工厂记录" }
           - { label: "中文标题", name: "title", widget: "string" }
           - { label: "中文摘要", name: "summary", widget: "text" }
           - label: "中文要点"
@@ -148,7 +120,6 @@ collections:
         name: "ja"
         widget: "object"
         fields:
-          - { label: "日本語ラベル", name: "label", widget: "string", default: "工場記録" }
           - { label: "日本語タイトル", name: "title", widget: "string" }
           - { label: "日本語概要", name: "summary", widget: "text" }
           - label: "日本語要点"
@@ -160,7 +131,6 @@ collections:
         name: "en"
         widget: "object"
         fields:
-          - { label: "English Label", name: "label", widget: "string", default: "Factory Record" }
           - { label: "English Title", name: "title", widget: "string" }
           - { label: "English Summary", name: "summary", widget: "text" }
           - label: "English Points"
@@ -187,18 +157,6 @@ collections:
       - { label: "日期", name: "date", widget: "datetime", date_format: "YYYY.MM.DD", time_format: false, format: "YYYY.MM.DD", default: "{{now}}" }
       - { label: "URL编号", name: "slug", widget: "string", required: false, hint: "可不填。例：2026-07-01-site-arrival" }
       - { label: "前台显示模块", name: "category", widget: "hidden", default: "site" }
-      - label: "产品"
-        name: "product"
-        widget: "select"
-        default: "other"
-        options:
-          - { label: "定制窗帘", value: "curtain" }
-          - { label: "广告材料制作", value: "advertising" }
-          - { label: "珐琅磁吸板", value: "enamel" }
-          - { label: "毛毡吸音板", value: "acoustic" }
-          - { label: "墙纸 / 墙布材料", value: "wallpaper" }
-          - { label: "人工木地板材料", value: "wpc" }
-          - { label: "其他", value: "other" }
       - { label: "首页显示", name: "showOnHome", widget: "boolean", default: true, hint: "关闭后只保存在记录页，不显示在首页【现场记录】。" }
       - { label: "封面图片（网页显示）", name: "image", widget: "image", required: false, hint: "用于首页【现场记录】和记录页直接显示。请上传 JPG / PNG / WebP。手机 HEIC 请先转 JPG。" }
       - { label: "网页视频（MP4）", name: "video", widget: "file", required: false, hint: "用于网页直接播放。请上传 MP4（H.264）。手机 MOV 建议先转 MP4。" }
@@ -213,7 +171,6 @@ collections:
         name: "zh"
         widget: "object"
         fields:
-          - { label: "中文标签", name: "label", widget: "string", default: "现场记录" }
           - { label: "中文标题", name: "title", widget: "string" }
           - { label: "中文摘要", name: "summary", widget: "text" }
           - label: "中文要点"
@@ -225,7 +182,6 @@ collections:
         name: "ja"
         widget: "object"
         fields:
-          - { label: "日本語ラベル", name: "label", widget: "string", default: "現場記録" }
           - { label: "日本語タイトル", name: "title", widget: "string" }
           - { label: "日本語概要", name: "summary", widget: "text" }
           - label: "日本語要点"
@@ -237,7 +193,6 @@ collections:
         name: "en"
         widget: "object"
         fields:
-          - { label: "English Label", name: "label", widget: "string", default: "Site Record" }
           - { label: "English Title", name: "title", widget: "string" }
           - { label: "English Summary", name: "summary", widget: "text" }
           - label: "English Points"
