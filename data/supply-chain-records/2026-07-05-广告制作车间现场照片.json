@@ -1,24 +1,24 @@
 {
-  "date": "2026.07.06",
-  "category": "factory",
-  "product": "advertising",
-  "showOnHome": true,
-  "zh": {
-    "label": "现场记录",
-    "title": "广告制作车间现场照片",
-    "summary": "广告制作车间现场照片"
-  },
-  "ja": {
-    "label": "現場記録",
-    "title": "広告制作工房の写真",
-    "summary": "広告制作工房の写真"
-  },
   "en": {
     "label": "Site Record",
     "title": "Photos of the advertising production workshop",
     "summary": "Photos of the advertising production workshop"
   },
+  "zh": {
+    "label": "现场记录",
+    "title": "广告制作车间现场照片",
+    "summary": "广告制作车间现场照片"
+  },
+  "date": "2026.07.06",
+  "product": "advertising",
+  "ja": {
+    "label": "現場記録",
+    "title": "広告制作工房の写真",
+    "summary": "広告制作工房の写真"
+  },
   "title": "广告制作车间现场照片",
-  "image": "media/records/factory/img_3700.jpg",
-  "video": ""
+  "video": "",
+  "showOnHome": true,
+  "image": "/media/records/factory/img_3700.jpg",
+  "category": "factory"
 }
