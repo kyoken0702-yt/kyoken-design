@@ -8,38 +8,38 @@
 
 当前数据规则：
 
-- 每条记录一个 JSON 文件。
-- 文件位置：`data/supply-chain-records/`
-- 工厂侧媒体文件位置：`media/records/factory/advertising/`、`media/records/factory/curtain/`、`media/records/factory/wpc/`
-- 日本现场媒体文件位置：`media/records/site/`
-- 前台只读取 `media` 数组。
-- 不再读取旧字段 `image`、`video`、`images`。
-- 工厂侧必须写 `channel`，只允许 `advertising`、`curtain`、`wpc`。
-- 前台工厂侧显示顺序固定为：广告材料制作工厂 → 窗帘加工制作工厂 → 塑木板材料工厂。
-- 每个通道内部按记录时间倒序显示。
+- 前台只读取一套索引：`data/records.json`。
+- 不再使用 `data/supply-chain-records/` 逐条 JSON。
+- 不再使用旧 `channel`、旧 today 记录、旧 fallback 数据。
+- 媒体文件保存在 `media/records/<module>/<record-id>/`。
+- 一次发布必须同时提交媒体文件和 `data/records.json`。
+- 前台只有两个记录模块：`factory` 与 `site`。
 
 标准记录格式：
 
 ```json
 {
-  "category": "factory",
-  "channel": "advertising",
-  "slug": "advertising-material-factory",
+  "id": "advertising-factory-20260705",
+  "module": "factory",
   "title": "广告材料制作工厂",
-  "date": "2026.07.05",
+  "summary": "广告材料制作、出货前确认、包装状态记录。",
   "createdAt": "2026-07-05T00:00:00+09:00",
-  "showOnHome": true,
   "media": [
     "/media/records/factory/advertising/example.jpg"
   ],
-  "zh": {
-    "title": "广告材料制作工厂"
-  },
-  "ja": {
-    "title": "広告材料制作工場"
-  },
-  "en": {
-    "title": "Advertising Material Production Factory"
+  "i18n": {
+    "ja": {
+      "title": "広告材料制作工場",
+      "summary": "広告材料制作、出荷前確認、包装状態の記録。"
+    },
+    "zh": {
+      "title": "广告材料制作工厂",
+      "summary": "广告材料制作、出货前确认、包装状态记录。"
+    },
+    "en": {
+      "title": "Advertising Material Production Factory",
+      "summary": "Advertising material production, pre-shipment check, and packing status record."
+    }
   }
 }
 ```
@@ -48,22 +48,14 @@
 
 1. 登录 GitHub。
 2. 选择前台模块。
-3. 工厂侧选择材料上传通道：广告材料制作工厂、窗帘加工制作工厂、塑木板材料工厂。
-4. 后台自动填写三语大标题，也可以手动修改。
-5. 一次选择多张图片或小视频。
-6. 后台把媒体提交到 GitHub。
-7. 后台创建一条 JSON 记录。
-8. Vercel 根据 GitHub 提交自动部署。
+3. 填写标题和可选说明。
+4. 一次选择多张图片或小视频。
+5. 图片在浏览器本地压缩。
+6. 后台创建一个 Git commit，同时包含媒体文件和 `data/records.json`。
+7. Vercel 根据 GitHub 提交自动部署。
 
 视频规则：
 
 - 建议使用小 MP4 / WebM。
 - 手机 MOV 先转 MP4。
 - 大视频不要直接上传到 GitHub。
-
-前台排序：
-
-- 工厂侧先按固定材料通道排序。
-- 同一材料通道内部按记录文件名倒序。
-- 日本现场记录按记录文件名倒序。
-- 新后台生成文件名格式：`YYYY-MM-DD-YYYYMMDDHHMMSS-slug.json`。

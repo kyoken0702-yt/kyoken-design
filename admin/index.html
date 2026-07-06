@@ -2,83 +2,85 @@
 <html lang="zh-CN">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="Cache-Control" content="no-store">
-  <title>京建供应链后台</title>
+  <title>京建供应链记录后台</title>
   <style>
     :root {
-      --navy: #061a44;
-      --blue: #12346b;
-      --line: #d7deea;
-      --paper: #f5f7fb;
-      --red: #a32736;
-      --gold: #d7a84b;
+      --navy: #071a3a;
+      --blue: #183965;
+      --paper: #f4f6f8;
+      --line: #d8dee8;
+      --text: #111827;
+      --muted: #4b5563;
+      --red: #a51e32;
       --green: #047857;
-      --text: #10213d;
     }
     * { box-sizing: border-box; }
     body {
       margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Microsoft YaHei", sans-serif;
       background: var(--paper);
       color: var(--text);
-      font-size: 16px;
-      line-height: 1.55;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif;
+      font-size: 17px;
+      line-height: 1.6;
     }
+    h1, h2, h3, p { margin: 0; }
     header {
       position: sticky;
       top: 0;
       z-index: 10;
       display: flex;
-      align-items: center;
       justify-content: space-between;
       gap: 16px;
-      padding: 16px clamp(16px, 4vw, 40px);
+      padding: 16px clamp(16px, 4vw, 42px);
       background: #fff;
       border-bottom: 1px solid var(--line);
     }
-    h1, h2, h3, p { margin: 0; }
-    h1 { color: var(--navy); font-size: clamp(22px, 3vw, 34px); font-weight: 950; }
-    h2 { color: var(--navy); font-size: 22px; font-weight: 950; margin-bottom: 14px; }
-    h3 { color: var(--navy); font-size: 18px; font-weight: 900; }
-    main { width: min(1180px, 100%); margin: 0 auto; padding: 22px 16px 48px; }
-    .grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(320px, .85fr); gap: 18px; align-items: start; }
+    h1 { color: var(--navy); font-size: clamp(24px, 3vw, 36px); font-weight: 950; }
+    h2 { color: var(--navy); font-size: 23px; font-weight: 950; }
+    h3 { color: var(--navy); font-size: 18px; font-weight: 950; }
+    main {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(330px, .9fr);
+      gap: 18px;
+      width: min(1240px, 100%);
+      margin: 0 auto;
+      padding: 20px 16px 52px;
+    }
     .panel {
+      display: grid;
+      gap: 15px;
+      align-content: start;
+      padding: clamp(16px, 2.5vw, 24px);
       background: #fff;
       border: 1px solid var(--line);
-      box-shadow: 0 10px 28px rgba(6, 26, 68, .06);
-      padding: clamp(16px, 2.5vw, 24px);
     }
-    .stack { display: grid; gap: 14px; }
-    label { display: grid; gap: 7px; font-weight: 900; color: var(--navy); }
+    .top-note, .hint { color: var(--muted); font-weight: 780; }
+    .hint { font-size: 14px; }
+    label { display: grid; gap: 7px; color: var(--navy); font-weight: 950; }
     input, select, textarea {
       width: 100%;
-      border: 1px solid #c7d1e2;
+      border: 1px solid #c8d1df;
       background: #fff;
       color: var(--text);
       padding: 12px 13px;
       font: inherit;
-      font-weight: 750;
+      font-weight: 800;
       border-radius: 0;
     }
-    input:focus, select:focus, textarea:focus { outline: 3px solid rgba(18, 52, 107, .14); border-color: var(--blue); }
-    .hint { color: #52637b; font-size: 13px; font-weight: 750; }
-    .actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
-    .file-picker {
-      border: 1px dashed #9aa9bf;
-      background: #f8fafc;
-      padding: 14px;
-      display: grid;
+    textarea { min-height: 86px; resize: vertical; }
+    input:focus, select:focus, textarea:focus {
+      outline: 3px solid rgba(24, 57, 101, .14);
+      border-color: var(--blue);
+    }
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
       gap: 10px;
+      align-items: center;
     }
-    .file-input-hidden {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      opacity: 0;
-      pointer-events: none;
-    }
-    button {
+    button, .button-like {
       border: 1px solid var(--navy);
       background: var(--navy);
       color: #fff;
@@ -88,14 +90,15 @@
       cursor: pointer;
       border-radius: 0;
     }
-    button.secondary { background: #fff; color: var(--navy); }
-    button.danger { background: #fff; color: var(--red); border-color: var(--red); }
-    button:disabled { opacity: .45; cursor: not-allowed; }
+    button.secondary, .button-like.secondary { background: #fff; color: var(--navy); }
+    button.danger { border-color: var(--red); background: #fff; color: var(--red); }
+    button:disabled { opacity: .5; cursor: not-allowed; }
     .status {
+      min-height: 52px;
+      padding: 13px 15px;
       border-left: 5px solid var(--blue);
       background: #eef4ff;
       color: var(--navy);
-      padding: 12px 14px;
       font-weight: 900;
       white-space: pre-wrap;
     }
@@ -103,12 +106,12 @@
     .status.warn { border-color: var(--red); background: #fff1f2; color: #9f1239; }
     .login-strip {
       display: flex;
-      align-items: center;
       justify-content: space-between;
       gap: 10px;
+      align-items: center;
+      padding: 12px;
       border: 1px solid #ead49a;
       background: #fff8e6;
-      padding: 12px;
       color: var(--navy);
       font-weight: 900;
     }
@@ -117,62 +120,75 @@
       background: #ecfdf5;
       color: #065f46;
     }
+    .file-box {
+      display: grid;
+      gap: 10px;
+      padding: 14px;
+      border: 1px dashed #9aa9bf;
+      background: #f8fafc;
+    }
+    .file-input {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      opacity: 0;
+      pointer-events: none;
+    }
     .preview-grid, .record-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
       gap: 10px;
     }
-    .thumb {
-      border: 1px solid var(--line);
-      background: #f8fafc;
-      padding: 8px;
+    .thumb, .record {
       min-width: 0;
+      padding: 9px;
+      border: 1px solid var(--line);
+      background: #fff;
     }
     .thumb img, .thumb video {
       display: block;
       width: 100%;
       aspect-ratio: 4 / 3;
       object-fit: cover;
-      background: #dde5f1;
+      background: #dbe3ee;
     }
-    .thumb span {
+    .thumb span, .record small {
       display: block;
       margin-top: 6px;
-      color: #42546f;
+      color: var(--muted);
       font-size: 12px;
       font-weight: 800;
       word-break: break-all;
     }
     .record {
-      border: 1px solid var(--line);
-      padding: 12px;
-      background: #fff;
       display: grid;
-      gap: 10px;
+      gap: 9px;
     }
-    .record small { color: #52637b; font-weight: 800; }
-    .record .media-count { color: var(--red); font-weight: 950; }
-    .module-note {
-      border: 1px solid var(--line);
-      background: #f8fafc;
-      padding: 10px 12px;
-      color: var(--navy);
-      font-weight: 900;
+    .record strong { color: var(--red); }
+    .progress {
+      overflow: hidden;
+      height: 12px;
+      border: 1px solid #c8d1df;
+      background: #fff;
     }
-    .top-note { color: #43536c; font-weight: 800; }
-    .hidden { display: none !important; }
-    @media (max-width: 860px) {
-      header { align-items: flex-start; flex-direction: column; }
-      .grid { grid-template-columns: 1fr; }
-      .actions button { width: 100%; }
+    .progress > div {
+      width: 0%;
+      height: 100%;
+      background: var(--red);
+      transition: width .2s ease;
+    }
+    @media (max-width: 880px) {
+      header { position: static; flex-direction: column; }
+      main { grid-template-columns: 1fr; }
+      .actions button, .button-like { width: 100%; }
     }
   </style>
 </head>
 <body>
   <header>
     <div>
-      <h1>京建供应链后台</h1>
-      <p class="top-note">只做三件事：写大标题、选模块、上传现场照片/小视频。</p>
+      <h1>京建供应链记录后台</h1>
+      <p class="top-note">只填模块、标题、说明和图片 / 小视频。发布后前台读取同一个 records.json。</p>
     </div>
     <div class="actions">
       <button id="loginBtn" type="button">登录 GitHub</button>
@@ -180,58 +196,43 @@
     </div>
   </header>
 
-  <main class="grid">
-    <section class="panel stack">
-      <h2>新增 / 更新前台记录</h2>
-      <div id="status" class="status">请先登录。登录后可以一次上传多张图片。</div>
+  <main>
+    <section class="panel">
+      <h2>发布新记录</h2>
+      <div id="status" class="status">请先登录。可以先选择图片预览。</div>
+      <div id="progress" class="progress"><div></div></div>
       <div id="loginStrip" class="login-strip">
-        <span id="loginText">未登录。点击“上传并发布”会先打开 GitHub 登录。</span>
+        <span id="loginText">未登录。发布前需要登录 GitHub。</span>
         <button id="inlineLoginBtn" type="button">先登录</button>
       </div>
 
       <label>
-        前台模块
-        <select id="category">
-          <option value="factory">中国工厂・供应链实景（前台首页 #factory）</option>
-          <option value="site">日本现场记录（前台首页 #site）</option>
+        选择前台模块
+        <select id="module">
+          <option value="factory">中国工厂・供应链实景</option>
+          <option value="site">日本现场记录</option>
         </select>
       </label>
-      <label id="channelField">
-        材料上传通道
-        <select id="channel">
-          <option value="advertising">广告材料制作工厂</option>
-          <option value="curtain">窗帘加工制作工厂</option>
-          <option value="wpc">塑木板材料工厂</option>
-        </select>
-        <span class="hint">选择后会自动填写三语大标题；前台会归到同一个材料通道。</span>
-      </label>
-      <div id="moduleNote" class="module-note">将显示在前台：首页 → 中国工厂・供应链实景</div>
 
       <label>
-        中文大标题
-        <input id="titleZh" type="text" placeholder="例如：广告材料制作工厂">
-        <span class="hint">这是中文前台显示的大标题。</span>
+        标题
+        <input id="title" type="text" placeholder="例如：广告材料制作工厂">
       </label>
 
       <label>
-        日本語タイトル
-        <input id="titleJa" type="text" placeholder="例：広告材料制作工場">
+        简短说明（可选）
+        <textarea id="summary" placeholder="例如：材料、包装、出货前状态记录。"></textarea>
       </label>
 
-      <label>
-        English Title
-        <input id="titleEn" type="text" placeholder="Example: Advertising Material Production Factory">
-      </label>
-
-      <div class="file-picker">
-        <strong>选择图片 / 小视频</strong>
+      <div class="file-box">
+        <strong>上传图片 / 视频</strong>
         <button id="selectFilesBtn" class="secondary" type="button">选择图片 / 视频（可多选）</button>
-        <input id="files" class="file-input-hidden" type="file" multiple accept="image/jpeg,image/png,image/webp,video/mp4,video/webm">
+        <input id="files" class="file-input" type="file" multiple accept="image/jpeg,image/png,image/webp,video/mp4,video/webm">
         <span id="fileSummary" class="hint">未选择文件。</span>
-        <span class="hint">图片会在浏览器内自动压缩为网页用 JPG 后上传。视频建议 MP4 / WebM 且小于 25MB，手机 MOV 请先转 MP4。</span>
+        <span class="hint">支持 JPG / PNG / WebP / 小 MP4 / WebM。HEIC / MOV 请先转 JPG / MP4。图片会在浏览器本地压缩到长边约 1800px、JPG quality 0.78。</span>
       </div>
 
-      <div class="preview-grid" id="previewGrid"></div>
+      <div id="previewGrid" class="preview-grid"></div>
 
       <div class="actions">
         <button id="publishBtn" type="button">上传并发布</button>
@@ -239,10 +240,10 @@
       </div>
     </section>
 
-    <aside class="panel stack">
-      <h2>当前记录</h2>
-      <p class="hint">删除会提交到 GitHub。前台按记录文件名日期倒序显示。</p>
-      <div id="recordList" class="stack"></div>
+    <aside class="panel">
+      <h2>当前前台记录</h2>
+      <p class="hint">这里读取 data/records.json。删除只从前台索引移除，不删除已上传媒体文件。</p>
+      <div id="recordList" class="record-grid"></div>
     </aside>
   </main>
 
@@ -251,13 +252,15 @@
       var owner = "kyoken0702-yt";
       var repo = "kyoken-design";
       var branch = "master";
-      var tokenKey = "kyoken_custom_admin_github_token";
+      var recordsPath = "data/records.json";
+      var tokenKey = "kyoken_supply_admin_token";
       var token = sessionStorage.getItem(tokenKey) || "";
       var popup = null;
-      var pendingPublish = false;
+      var records = [];
 
       var $ = function (id) { return document.getElementById(id); };
       var status = $("status");
+      var progressBar = $("progress").firstElementChild;
       var loginBtn = $("loginBtn");
       var inlineLoginBtn = $("inlineLoginBtn");
       var loginStrip = $("loginStrip");
@@ -270,47 +273,15 @@
       var fileSummary = $("fileSummary");
       var previewGrid = $("previewGrid");
       var recordList = $("recordList");
-      var categoryInput = $("category");
-      var channelInput = $("channel");
-      var channelField = $("channelField");
-      var moduleNote = $("moduleNote");
-
-      var moduleLabels = {
-        factory: {
-          zh: "中国工厂・供应链实景",
-          ja: "中国工場・供給実景",
-          en: "China Factory & Supply Records",
-          anchor: "首页 #factory"
-        },
-        site: {
-          zh: "日本现场记录",
-          ja: "日本現場記録",
-          en: "Japan Site Records",
-          anchor: "首页 #site"
-        }
-      };
-
-      var channelLabels = {
-        advertising: {
-          zh: "广告材料制作工厂",
-          ja: "広告材料制作工場",
-          en: "Advertising Material Production Factory"
-        },
-        curtain: {
-          zh: "窗帘加工制作工厂",
-          ja: "カーテン加工工場",
-          en: "Curtain Production Factory"
-        },
-        wpc: {
-          zh: "塑木板材料工厂",
-          ja: "人工木デッキ材工場",
-          en: "WPC Decking Material Factory"
-        }
-      };
 
       function setStatus(message, type) {
         status.textContent = message;
         status.className = "status" + (type ? " " + type : "");
+      }
+
+      function setProgress(done, total) {
+        var pct = total ? Math.round((done / total) * 100) : 0;
+        progressBar.style.width = Math.max(0, Math.min(100, pct)) + "%";
       }
 
       function updateLoginUi() {
@@ -320,64 +291,75 @@
           inlineLoginBtn.textContent = "已登录";
           inlineLoginBtn.disabled = true;
           loginStrip.className = "login-strip ok";
-          loginText.textContent = "已登录，可以直接上传并发布。";
+          loginText.textContent = "已登录，可以发布。";
         } else {
           loginBtn.textContent = "登录 GitHub";
           loginBtn.disabled = false;
           inlineLoginBtn.textContent = "先登录";
           inlineLoginBtn.disabled = false;
           loginStrip.className = "login-strip";
-          loginText.textContent = "未登录。点击“上传并发布”会先打开 GitHub 登录。";
+          loginText.textContent = "未登录。发布前需要登录 GitHub。";
         }
-      }
-
-      function updateModuleNote() {
-        var selected = moduleLabels[categoryInput.value] || moduleLabels.factory;
-        var isFactory = categoryInput.value === "factory";
-        channelField.className = isFactory ? "" : "hidden";
-        if (isFactory) {
-          var channel = channelLabels[channelInput.value] || channelLabels.wpc;
-          moduleNote.textContent = "将显示在前台：" + selected.anchor + " → " + selected.zh + " → " + channel.zh;
-          return;
-        }
-        moduleNote.textContent = "将显示在前台：" + selected.anchor + " → " + selected.zh + " / " + selected.ja + " / " + selected.en;
-      }
-
-      function applyChannelTitle() {
-        if (categoryInput.value !== "factory") return;
-        var channel = channelLabels[channelInput.value] || channelLabels.wpc;
-        $("titleZh").value = channel.zh;
-        $("titleJa").value = channel.ja;
-        $("titleEn").value = channel.en;
-        updateModuleNote();
       }
 
       function api(path, options) {
         if (!token) return Promise.reject(new Error("请先登录 GitHub。"));
         return fetch("https://api.github.com/repos/" + owner + "/" + repo + path, Object.assign({
           headers: {
-            "Accept": "application/vnd.github+json",
-            "Authorization": "Bearer " + token,
+            Accept: "application/vnd.github+json",
+            Authorization: "Bearer " + token,
             "X-GitHub-Api-Version": "2022-11-28"
           }
         }, options || {})).then(async function (res) {
           var text = await res.text();
           var data = text ? JSON.parse(text) : null;
-          if (!res.ok) {
-            throw new Error((data && data.message) || ("GitHub API error: " + res.status));
-          }
+          if (!res.ok) throw new Error((data && data.message) || ("GitHub API error: " + res.status));
           return data;
         });
       }
 
-      function fileToBase64(file) {
-        return new Promise(function (resolve, reject) {
-          var reader = new FileReader();
-          reader.onload = function () {
-            resolve(String(reader.result).split(",")[1]);
-          };
-          reader.onerror = reject;
-          reader.readAsDataURL(file);
+      function decodeBase64(content) {
+        return decodeURIComponent(escape(atob(String(content || "").replace(/\s/g, ""))));
+      }
+
+      async function getContent(path) {
+        return api("/contents/" + encodeURIComponent(path).replace(/%2F/g, "/") + "?ref=" + encodeURIComponent(branch));
+      }
+
+      async function loadRecords() {
+        recordList.innerHTML = "";
+        if (!token) {
+          recordList.innerHTML = '<p class="hint">登录后显示记录。</p>';
+          return;
+        }
+        try {
+          var file = await getContent(recordsPath);
+          records = JSON.parse(decodeBase64(file.content));
+          renderRecords();
+          setStatus("已读取前台记录 " + records.length + " 条。", "ok");
+        } catch (error) {
+          recordList.innerHTML = '<p class="hint">读取失败：' + escapeHtml(error.message) + '</p>';
+          setStatus("读取 records.json 失败：" + error.message, "warn");
+        }
+      }
+
+      function renderRecords() {
+        recordList.innerHTML = "";
+        if (!records.length) {
+          recordList.innerHTML = '<p class="hint">暂无记录。</p>';
+          return;
+        }
+        records.forEach(function (record) {
+          var card = document.createElement("div");
+          card.className = "record";
+          var mediaCount = Array.isArray(record.media) ? record.media.length : 0;
+          card.innerHTML = '<h3>' + escapeHtml(record.title || "未命名记录") + '</h3>' +
+            '<small>' + escapeHtml(record.module === "site" ? "日本现场记录" : "中国工厂・供应链实景") + '</small>' +
+            '<div><strong>' + mediaCount + '</strong> 个媒体</div>' +
+            '<small>' + escapeHtml(record.id || "") + '</small>' +
+            '<button class="danger" type="button">从前台移除</button>';
+          card.querySelector("button").addEventListener("click", function () { deleteRecord(record.id); });
+          recordList.appendChild(card);
         });
       }
 
@@ -386,33 +368,24 @@
         return Math.max(1, Math.round(size / 1024)) + "KB";
       }
 
-      function safeSlug(text) {
-        var ascii = String(text || "").toLowerCase().trim()
-          .replace(/[^a-z0-9]+/g, "-")
-          .replace(/^-+|-+$/g, "");
-        if (ascii) return ascii.slice(0, 60);
-        return "record-" + nowStamp();
-      }
-
       function nowStamp() {
         var d = new Date();
         var pad = function (n) { return String(n).padStart(2, "0"); };
         return d.getFullYear() + pad(d.getMonth() + 1) + pad(d.getDate()) + pad(d.getHours()) + pad(d.getMinutes()) + pad(d.getSeconds());
       }
 
-      function todayFileDate() {
-        var d = new Date();
-        var pad = function (n) { return String(n).padStart(2, "0"); };
-        return d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate());
+      function slugify(text) {
+        var ascii = String(text || "").toLowerCase().trim().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+        return (ascii || "record").slice(0, 54);
       }
 
-      function cleanFileName(file, index, forcedExt) {
-        var ext = forcedExt || (file.name.match(/\.[a-z0-9]+$/i) || [""])[0].toLowerCase();
+      function cleanFileName(file, index, ext) {
+        var suffix = ext || (file.name.match(/\.[a-z0-9]+$/i) || [""])[0].toLowerCase();
         var base = file.name.replace(/\.[^.]+$/u, "").toLowerCase()
           .replace(/[^a-z0-9\u4e00-\u9fa5ぁ-んァ-ン一-龥]+/gu, "-")
           .replace(/^-+|-+$/g, "")
-          .slice(0, 64) || "media";
-        return nowStamp() + "-" + String(index + 1).padStart(2, "0") + "-" + base + ext;
+          .slice(0, 54) || "media";
+        return nowStamp() + "-" + String(index + 1).padStart(2, "0") + "-" + base + suffix;
       }
 
       function isVideo(fileOrPath) {
@@ -420,13 +393,24 @@
         return /video|\.mp4$|\.webm$/i.test(value);
       }
 
-      function isCompressibleImage(file) {
-        return /^image\/(jpeg|jpg|png|webp)$/i.test(file.type || "") || /\.(jpe?g|png|webp)$/i.test(file.name || "");
+      function isAllowed(file) {
+        return /^image\/(jpeg|jpg|png|webp)$/i.test(file.type || "") ||
+          /^video\/(mp4|webm)$/i.test(file.type || "") ||
+          /\.(jpe?g|png|webp|mp4|webm)$/i.test(file.name || "");
+      }
+
+      function fileToBase64(file) {
+        return new Promise(function (resolve, reject) {
+          var reader = new FileReader();
+          reader.onload = function () { resolve(String(reader.result).split(",")[1]); };
+          reader.onerror = reject;
+          reader.readAsDataURL(file);
+        });
       }
 
       function compressImage(file) {
         return new Promise(function (resolve, reject) {
-          if (!isCompressibleImage(file)) {
+          if (!/^image\/(jpeg|jpg|png|webp)$/i.test(file.type || "") && !/\.(jpe?g|png|webp)$/i.test(file.name || "")) {
             resolve({ file: file, originalSize: file.size, compressed: false });
             return;
           }
@@ -438,36 +422,23 @@
             var width = image.naturalWidth || image.width;
             var height = image.naturalHeight || image.height;
             var scale = Math.min(1, maxSide / Math.max(width, height));
-            var targetWidth = Math.max(1, Math.round(width * scale));
-            var targetHeight = Math.max(1, Math.round(height * scale));
             var canvas = document.createElement("canvas");
-            canvas.width = targetWidth;
-            canvas.height = targetHeight;
+            canvas.width = Math.max(1, Math.round(width * scale));
+            canvas.height = Math.max(1, Math.round(height * scale));
             var ctx = canvas.getContext("2d", { alpha: false });
             ctx.fillStyle = "#fff";
-            ctx.fillRect(0, 0, targetWidth, targetHeight);
-            ctx.drawImage(image, 0, 0, targetWidth, targetHeight);
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
             canvas.toBlob(function (blob) {
-              if (!blob) {
-                resolve({ file: file, originalSize: file.size, compressed: false });
-                return;
-              }
+              if (!blob) return resolve({ file: file, originalSize: file.size, compressed: false });
               var output = new File([blob], file.name.replace(/\.[^.]+$/u, "") + ".jpg", { type: "image/jpeg" });
-              if (output.size >= file.size) {
-                resolve({ file: file, originalSize: file.size, compressedSize: file.size, compressed: false });
-                return;
-              }
-              resolve({
-                file: output,
-                originalSize: file.size,
-                compressedSize: output.size,
-                compressed: output.size < file.size
-              });
+              if (output.size >= file.size) return resolve({ file: file, originalSize: file.size, compressed: false });
+              resolve({ file: output, originalSize: file.size, compressedSize: output.size, compressed: true });
             }, "image/jpeg", 0.78);
           };
           image.onerror = function () {
             URL.revokeObjectURL(objectUrl);
-            reject(new Error("图片无法在浏览器内压缩：" + file.name + "。请先转为 JPG / PNG / WebP。"));
+            reject(new Error("图片无法在浏览器内压缩：" + file.name + "。请先转成 JPG / PNG / WebP。"));
           };
           image.src = objectUrl;
         });
@@ -476,8 +447,13 @@
       function renderLocalPreviews() {
         previewGrid.innerHTML = "";
         var files = Array.from(filesInput.files || []);
-        fileSummary.textContent = files.length ? "已选择 " + files.length + " 个文件。确认后点击“上传并发布”。" : "未选择文件。";
-        if (files.length) setStatus("已选择 " + files.length + " 个文件。可以点击“上传并发布”。", "ok");
+        var rejected = files.filter(function (file) { return !isAllowed(file); });
+        if (rejected.length) {
+          setStatus("有不支持的文件：" + rejected.map(function (file) { return file.name; }).join("、") + "。HEIC / MOV 请先转换。", "warn");
+        } else if (files.length) {
+          setStatus("已选择 " + files.length + " 个文件。每张图片大小已显示，发布前会自动压缩。", "ok");
+        }
+        fileSummary.textContent = files.length ? "已选择 " + files.length + " 个文件，总大小 " + bytesText(files.reduce(function (sum, file) { return sum + file.size; }, 0)) + "。" : "未选择文件。";
         files.forEach(function (file) {
           var card = document.createElement("div");
           card.className = "thumb";
@@ -496,22 +472,6 @@
         });
       }
 
-      async function putFile(path, contentBase64, message, sha) {
-        return api("/contents/" + encodeURIComponent(path).replace(/%2F/g, "/"), {
-          method: "PUT",
-          body: JSON.stringify({
-            message: message,
-            content: contentBase64,
-            branch: branch,
-            sha: sha || undefined
-          })
-        });
-      }
-
-      async function getContent(path) {
-        return api("/contents/" + encodeURIComponent(path).replace(/%2F/g, "/") + "?ref=" + encodeURIComponent(branch));
-      }
-
       async function createBlob(content, encoding) {
         var blob = await api("/git/blobs", {
           method: "POST",
@@ -522,129 +482,110 @@
 
       function cleanGitPath(path) {
         var value = String(path || "").replace(/^\/+/, "");
-        if (!value || value.indexOf("..") !== -1 || value.indexOf(".git/") === 0) {
-          throw new Error("Invalid upload path: " + path);
-        }
+        if (!value || value.indexOf("..") !== -1 || value.indexOf(".git/") === 0) throw new Error("Invalid path: " + path);
         return value;
       }
 
-      async function publishBundle(files, recordPath, record) {
+      async function commitBundle(uploadFiles, nextRecords, message) {
         var ref = await api("/git/ref/heads/" + branch);
         var baseCommitSha = ref.object.sha;
         var baseCommit = await api("/git/commits/" + baseCommitSha);
         var tree = [];
-
-        for (var i = 0; i < files.length; i += 1) {
-          setStatus("正在准备 GitHub 提交 " + (i + 1) + " / " + files.length + "。");
+        for (var i = 0; i < uploadFiles.length; i += 1) {
+          setStatus("正在准备一次性提交：" + (i + 1) + " / " + uploadFiles.length);
+          setProgress(i + 1, uploadFiles.length + 1);
           tree.push({
-            path: cleanGitPath(files[i].path),
+            path: cleanGitPath(uploadFiles[i].path),
             mode: "100644",
             type: "blob",
-            sha: await createBlob(files[i].content, "base64")
+            sha: await createBlob(uploadFiles[i].content, "base64")
           });
         }
-
         tree.push({
-          path: cleanGitPath(recordPath),
+          path: recordsPath,
           mode: "100644",
           type: "blob",
-          sha: await createBlob(JSON.stringify(record, null, 2) + "\n", "utf-8")
+          sha: await createBlob(JSON.stringify(nextRecords, null, 2) + "\n", "utf-8")
         });
-
+        setProgress(uploadFiles.length + 1, uploadFiles.length + 1);
         var newTree = await api("/git/trees", {
           method: "POST",
-          body: JSON.stringify({
-            base_tree: baseCommit.tree.sha,
-            tree: tree
-          })
+          body: JSON.stringify({ base_tree: baseCommit.tree.sha, tree: tree })
         });
         var newCommit = await api("/git/commits", {
           method: "POST",
-          body: JSON.stringify({
-            message: "publish supply record",
-            tree: newTree.sha,
-            parents: [baseCommitSha]
-          })
+          body: JSON.stringify({ message: message, tree: newTree.sha, parents: [baseCommitSha] })
         });
         await api("/git/refs/heads/" + branch, {
           method: "PATCH",
-          body: JSON.stringify({
-            sha: newCommit.sha,
-            force: false
-          })
+          body: JSON.stringify({ sha: newCommit.sha, force: false })
         });
         return newCommit;
       }
 
       async function publishRecord() {
-        var category = $("category").value;
-        var channel = category === "factory" ? $("channel").value : "site";
-        var titleZh = $("titleZh").value.trim();
-        var titleJa = $("titleJa").value.trim();
-        var titleEn = $("titleEn").value.trim();
-        var files = Array.from(filesInput.files || []);
-
         if (!token) {
-          setStatus("需要先登录 GitHub。若浏览器拦截弹窗，会自动改为当前页面登录。登录后请重新选择文件上传。", "warn");
-          pendingPublish = true;
+          setStatus("需要先登录 GitHub。登录后请重新确认文件选择。", "warn");
           login();
           return;
         }
-        if (!titleZh) return setStatus("请填写中文大标题。", "warn");
-        if (!files.length) {
-          setStatus("请先点击“选择图片 / 视频（可多选）”，选择至少一个文件。", "warn");
-          selectFilesBtn.focus();
-          return;
-        }
-        var oversized = files.filter(function (file) { return isVideo(file) && file.size > 25 * 1024 * 1024; });
-        if (oversized.length) return setStatus("视频太大。请先压缩到 25MB 以下 MP4/WebM。", "warn");
+        var moduleName = $("module").value;
+        var title = $("title").value.trim();
+        var summary = $("summary").value.trim();
+        var files = Array.from(filesInput.files || []);
+        if (!title) return setStatus("请填写标题。", "warn");
+        if (!files.length) return setStatus("请先选择至少一张图片或一个小视频。", "warn");
+        var unsupported = files.filter(function (file) { return !isAllowed(file); });
+        if (unsupported.length) return setStatus("不支持这些文件：" + unsupported.map(function (file) { return file.name; }).join("、") + "。HEIC / MOV 请先转换。", "warn");
+        var oversizedVideos = files.filter(function (file) { return isVideo(file) && file.size > 25 * 1024 * 1024; });
+        if (oversizedVideos.length) return setStatus("视频太大，请先压缩到 25MB 以下 MP4 / WebM。", "warn");
 
         publishBtn.disabled = true;
+        setProgress(0, 1);
         try {
+          if (!records.length) {
+            var existing = await getContent(recordsPath);
+            records = JSON.parse(decodeBase64(existing.content));
+          }
+          var stamp = nowStamp();
+          var id = slugify(title) + "-" + stamp;
           var mediaPaths = [];
           var uploadFiles = [];
           var savedBytes = 0;
           for (var i = 0; i < files.length; i += 1) {
-            var file = files[i];
-            setStatus("正在压缩媒体 " + (i + 1) + " / " + files.length + "：" + file.name);
-            var prepared = isVideo(file) ? { file: file, originalSize: file.size, compressed: false } : await compressImage(file);
+            var source = files[i];
+            setStatus("正在压缩 / 读取媒体 " + (i + 1) + " / " + files.length + "：" + source.name);
+            var prepared = isVideo(source) ? { file: source, originalSize: source.size, compressed: false } : await compressImage(source);
             if (prepared.compressed) savedBytes += prepared.originalSize - prepared.compressedSize;
             var preparedFile = prepared.file;
-            var mediaPath = "media/records/" + category + "/" + channel + "/" + cleanFileName(preparedFile, i, isVideo(preparedFile) ? null : ".jpg");
-            setStatus("正在读取媒体 " + (i + 1) + " / " + files.length + "：" + preparedFile.name + "（" + bytesText(preparedFile.size) + "）");
-            uploadFiles.push({
-              path: mediaPath,
-              content: await fileToBase64(preparedFile)
-            });
+            var mediaPath = "media/records/" + moduleName + "/" + id + "/" + cleanFileName(preparedFile, i, isVideo(preparedFile) ? null : ".jpg");
+            uploadFiles.push({ path: mediaPath, content: await fileToBase64(preparedFile) });
             mediaPaths.push("/" + mediaPath);
+            setProgress(i + 1, files.length * 2 + 1);
           }
-
-          var slug = safeSlug(titleEn || titleZh);
-          var stamp = nowStamp();
-          var fileName = todayFileDate() + "-" + stamp + "-" + slug + ".json";
           var record = {
-            category: category,
-            channel: channel,
-            slug: slug + "-" + stamp,
-            title: titleZh,
-            date: todayFileDate().replace(/-/g, "."),
-            showOnHome: true,
-            media: mediaPaths,
-            zh: { title: titleZh },
-            ja: { title: titleJa || titleZh },
-            en: { title: titleEn || titleZh }
+            id: id,
+            module: moduleName,
+            title: title,
+            summary: summary,
+            createdAt: new Date().toISOString(),
+            media: mediaPaths
           };
-          setStatus("正在一次性发布：媒体 " + uploadFiles.length + " 个 + 前台记录 1 条。");
+          var nextRecords = [record].concat(records);
+          setStatus("正在发布：媒体 " + uploadFiles.length + " 个 + records.json 1 个。");
           try {
-            await publishBundle(uploadFiles, "data/supply-chain-records/" + fileName, record);
+            await commitBundle(uploadFiles, nextRecords, "publish kyoken supply record");
           } catch (error) {
             if (!/reference|fast-forward|sha|conflict/i.test(error.message)) throw error;
-            setStatus("远端刚好有新提交，正在自动重试一次。");
-            await publishBundle(uploadFiles, "data/supply-chain-records/" + fileName, record);
+            setStatus("远端刚好有新提交，正在重读 records.json 后重试一次。");
+            var fresh = await getContent(recordsPath);
+            var freshRecords = JSON.parse(decodeBase64(fresh.content));
+            await commitBundle(uploadFiles, [record].concat(freshRecords), "publish kyoken supply record");
           }
-          setStatus("发布成功。已上传 " + mediaPaths.length + " 个媒体，并创建前台记录。" + (savedBytes ? " 图片已自动压缩，约减少 " + bytesText(savedBytes) + "。" : "") + " Vercel 会随后自动部署。", "ok");
+          records = nextRecords;
+          renderRecords();
+          setStatus("发布成功。前台会显示这条记录。图片已自动压缩" + (savedBytes ? "，约减少 " + bytesText(savedBytes) : "") + "。Vercel 会随后自动部署。", "ok");
           clearForm();
-          await loadRecords();
         } catch (error) {
           setStatus("发布失败：" + error.message, "warn");
         } finally {
@@ -652,103 +593,59 @@
         }
       }
 
-      function clearForm() {
-        $("titleZh").value = "";
-        $("titleJa").value = "";
-        $("titleEn").value = "";
-        filesInput.value = "";
-        fileSummary.textContent = "未选择文件。";
-        previewGrid.innerHTML = "";
-      }
-
-      async function loadRecords() {
-        recordList.innerHTML = "";
-        if (!token) {
-          recordList.innerHTML = '<p class="hint">登录后显示记录。</p>';
-          return;
-        }
-        try {
-          var files = await getContent("data/supply-chain-records");
-          var jsonFiles = files.filter(function (item) { return item.name.endsWith(".json"); })
-            .sort(function (a, b) { return b.name.localeCompare(a.name); });
-          if (!jsonFiles.length) {
-            recordList.innerHTML = '<p class="hint">暂无记录。</p>';
-            return;
-          }
-          var grouped = {};
-          for (var i = 0; i < jsonFiles.length; i += 1) {
-            var item = jsonFiles[i];
-            var detail = await getContent(item.path);
-            var content = JSON.parse(decodeURIComponent(escape(atob(detail.content.replace(/\s/g, "")))));
-            var category = content.category === "site" ? "site" : "factory";
-            var groupKey = category === "factory" ? (content.channel || inferChannel(content)) : "site";
-            if (!grouped[groupKey]) grouped[groupKey] = [];
-            grouped[groupKey].push({ item: item, content: content });
-          }
-          renderRecordGroup("advertising", grouped.advertising || []);
-          renderRecordGroup("curtain", grouped.curtain || []);
-          renderRecordGroup("wpc", grouped.wpc || []);
-          renderRecordGroup("site", grouped.site || []);
-        } catch (error) {
-          recordList.innerHTML = '<p class="hint">读取失败：' + error.message + '</p>';
-        }
-      }
-
-      function inferChannel(content) {
-        var value = String(content.channel || content.slug || content.title || "").toLowerCase();
-        if (value.indexOf("wpc") !== -1 || value.indexOf("塑木") !== -1 || value.indexOf("デッキ") !== -1) return "wpc";
-        if (value.indexOf("advertising") !== -1 || value.indexOf("广告") !== -1 || value.indexOf("広告") !== -1) return "advertising";
-        if (value.indexOf("curtain") !== -1 || value.indexOf("窗帘") !== -1 || value.indexOf("カーテン") !== -1) return "curtain";
-        return "advertising";
-      }
-
-      function renderRecordGroup(category, records) {
-        var label = channelLabels[category] || moduleLabels[category] || moduleLabels.factory;
-        var group = document.createElement("div");
-        group.className = "stack";
-        group.innerHTML = '<h3>' + escapeHtml(label.zh) + '</h3>';
-        if (!records.length) {
-          group.innerHTML += '<p class="hint">这个前台板块暂无记录。</p>';
-          recordList.appendChild(group);
-          return;
-        }
-        records.forEach(function (record) {
-          renderRecord(record.item, record.content, group);
-        });
-        recordList.appendChild(group);
-      }
-
-      function renderRecord(item, content, target) {
-        var card = document.createElement("div");
-        card.className = "record";
-        var mediaCount = Array.isArray(content.media) ? content.media.length : (content.media ? 1 : 0);
-        card.innerHTML =
-          '<h3>' + escapeHtml(content.title || item.name) + '</h3>' +
-          '<small>' + escapeHtml(item.name) + '</small>' +
-          '<div><span class="media-count">' + mediaCount + '</span> 个媒体 / 前台：' + escapeHtml((moduleLabels[content.category] || moduleLabels.factory).zh) + ' / ' + escapeHtml((channelLabels[content.channel] || channelLabels[inferChannel(content)] || { zh: "" }).zh) + '</div>' +
-          '<div class="actions"><button class="danger" type="button">删除记录</button></div>';
-        card.querySelector("button").addEventListener("click", function () { deleteRecord(item.path, item.sha, content.title || item.name); });
-        target.appendChild(card);
-      }
-
-      async function deleteRecord(path, sha, title) {
+      async function deleteRecord(id) {
         if (!token) return setStatus("请先登录。", "warn");
-        if (!window.confirm("确定删除记录：" + title + "？\n只删除记录 JSON，不删除已上传媒体文件。")) return;
+        var target = records.find(function (record) { return record.id === id; });
+        if (!target) return;
+        if (!window.confirm("确定从前台移除这条记录？\n" + target.title + "\n媒体文件会保留。")) return;
+        publishBtn.disabled = true;
         try {
-          await api("/contents/" + encodeURIComponent(path).replace(/%2F/g, "/"), {
-            method: "DELETE",
-            body: JSON.stringify({
-              message: "delete supply record",
-              sha: sha,
-              branch: branch
-            })
-          });
-          setStatus("已删除记录。Vercel 会随后自动部署。", "ok");
-          await loadRecords();
+          var nextRecords = records.filter(function (record) { return record.id !== id; });
+          await commitBundle([], nextRecords, "remove kyoken supply record");
+          records = nextRecords;
+          renderRecords();
+          setStatus("已从前台移除记录。Vercel 会随后自动部署。", "ok");
         } catch (error) {
           setStatus("删除失败：" + error.message, "warn");
+        } finally {
+          publishBtn.disabled = false;
         }
       }
+
+      function clearForm() {
+        $("title").value = "";
+        $("summary").value = "";
+        filesInput.value = "";
+        previewGrid.innerHTML = "";
+        fileSummary.textContent = "未选择文件。";
+        setProgress(0, 1);
+      }
+
+      function login() {
+        var authUrl = "/api/auth?scope=repo";
+        popup = window.open(authUrl, "kyoken_github_login", "width=720,height=760");
+        if (!popup) window.location.href = authUrl;
+      }
+
+      window.addEventListener("message", function (event) {
+        if (event.data === "authorizing:github" && popup) {
+          popup.postMessage("ready", event.origin);
+          return;
+        }
+        if (typeof event.data !== "string" || event.data.indexOf("authorization:github:") !== 0) return;
+        var parts = event.data.split(":");
+        var state = parts[2];
+        var payloadText = event.data.slice(("authorization:github:" + state + ":").length);
+        if (state === "success") {
+          var payload = JSON.parse(payloadText);
+          token = payload.token;
+          sessionStorage.setItem(tokenKey, token);
+          updateLoginUi();
+          loadRecords();
+        } else {
+          setStatus("GitHub 登录失败。", "warn");
+        }
+      });
 
       function escapeHtml(value) {
         return String(value || "").replace(/[&<>"']/g, function (ch) {
@@ -756,67 +653,16 @@
         });
       }
 
-      function login() {
-        var authUrl = "/api/auth?scope=repo";
-        popup = window.open(authUrl, "kyokenGithubLogin", "width=720,height=720");
-        if (!popup) {
-          setStatus("浏览器拦截了登录窗口。现在改为当前页面登录；登录回来后请重新选择文件上传。", "warn");
-          window.location.href = authUrl;
-          return;
-        }
-        setStatus("GitHub 登录窗口已打开。登录完成后会自动回到后台。");
-      }
-
-      window.addEventListener("error", function (event) {
-        setStatus("后台脚本错误：" + (event.message || "未知错误") + "。请刷新页面后重试。", "warn");
-      });
-
-      window.addEventListener("message", function (event) {
-        var data = String(event.data || "");
-        if (data === "authorizing:github" && popup) {
-          popup.postMessage("ready", "*");
-          return;
-        }
-        if (data.indexOf("authorization:github:success:") === 0) {
-          var payload = JSON.parse(data.slice("authorization:github:success:".length));
-          token = payload.token;
-          sessionStorage.setItem(tokenKey, token);
-          updateLoginUi();
-          setStatus("已登录。可以新增记录。", "ok");
-          loadRecords();
-          if (pendingPublish) {
-            pendingPublish = false;
-            publishRecord();
-          }
-        }
-        if (data.indexOf("authorization:github:error:") === 0) {
-          setStatus("GitHub 登录失败。", "warn");
-        }
-      });
-
-      loginBtn.addEventListener("click", login);
-      inlineLoginBtn.addEventListener("click", login);
-      reloadBtn.addEventListener("click", loadRecords);
-      publishBtn.addEventListener("click", publishRecord);
-      clearBtn.addEventListener("click", clearForm);
       selectFilesBtn.addEventListener("click", function () { filesInput.click(); });
       filesInput.addEventListener("change", renderLocalPreviews);
-      categoryInput.addEventListener("change", function () {
-        updateModuleNote();
-        applyChannelTitle();
-      });
-      channelInput.addEventListener("change", applyChannelTitle);
+      publishBtn.addEventListener("click", publishRecord);
+      clearBtn.addEventListener("click", clearForm);
+      reloadBtn.addEventListener("click", loadRecords);
+      loginBtn.addEventListener("click", login);
+      inlineLoginBtn.addEventListener("click", login);
 
-      updateModuleNote();
-      applyChannelTitle();
-      if (token) {
-        updateLoginUi();
-        setStatus("已读取本机登录状态。", "ok");
-        loadRecords();
-      } else {
-        updateLoginUi();
-        loadRecords();
-      }
+      updateLoginUi();
+      if (token) loadRecords();
     })();
   </script>
 </body>

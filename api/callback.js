@@ -14,7 +14,7 @@ function oauthResultPage(provider, status, payload) {
 <script>
 (function () {
   var token = ${JSON.stringify(token)};
-  var tokenKey = "kyoken_custom_admin_github_token";
+  var tokenKey = "kyoken_supply_admin_token";
   var adminPath = "/admin/";
   function receiveMessage(event) {
     if (!event || !event.origin) return;
@@ -49,7 +49,7 @@ export default async function handler(req, res) {
     return;
   }
 
-  const expectedState = getCookie(req, "kyoken_cms_oauth_state");
+  const expectedState = getCookie(req, "kyoken_supply_oauth_state");
   if (!expectedState || expectedState !== req.query.state) {
     res.status(400).send("Invalid OAuth state.");
     return;
@@ -75,7 +75,7 @@ export default async function handler(req, res) {
   const tokenPayload = await tokenResponse.json();
 
   res.setHeader("Set-Cookie", [
-    "kyoken_cms_oauth_state=; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=0"
+    "kyoken_supply_oauth_state=; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=0"
   ]);
 
   if (!tokenPayload.access_token) {

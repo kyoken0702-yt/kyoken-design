@@ -26,7 +26,7 @@ export default function handler(req, res) {
   authUrl.searchParams.set("state", state);
 
   res.setHeader("Set-Cookie", [
-    `kyoken_cms_oauth_state=${state}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=600`
+    `kyoken_supply_oauth_state=${state}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=600`
   ]);
   res.redirect(authUrl.toString());
 }
