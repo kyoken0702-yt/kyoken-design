@@ -19,6 +19,21 @@
   "title": "广告制作车间现场照片",
   "video": "",
   "showOnHome": true,
+  "media": [
+    "/media/records/factory/img_3700.jpg",
+    "/media/records/factory/img_3701.jpg",
+    "/media/records/factory/img_3702.jpg",
+    "/media/records/factory/img_3704.jpg",
+    "/media/records/factory/img_3705.jpg",
+    "/media/records/factory/img_3706.jpg",
+    "/media/records/factory/img_3707.jpg",
+    "/media/records/factory/img_3708.jpg",
+    "/media/records/factory/img_3709.jpg",
+    "/media/records/factory/img_3711.jpg",
+    "/media/records/factory/img_3712.jpg",
+    "/media/records/factory/img_3713.jpg",
+    "/media/records/factory/img_3714.jpg"
+  ],
   "images": [
     {
       "image": "/media/records/factory/img_3700.jpg"

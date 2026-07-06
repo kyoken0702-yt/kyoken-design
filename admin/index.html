@@ -26,9 +26,9 @@
         helper = document.createElement("div");
         helper.id = "kyoken-upload-helper";
         helper.innerHTML = [
-          '<div class="kyoken-upload-title">图片上传状态</div>',
-          '<div class="kyoken-upload-steps">1. 点“新增图片”  2. 选择 JPG / PNG / WebP  3. 看到预览  4. 点右上角“发布”</div>',
-          '<div class="kyoken-upload-status">等待选择图片。</div>',
+          '<div class="kyoken-upload-title">媒体上传状态</div>',
+          '<div class="kyoken-upload-steps">1. 点“新增媒体”  2. 一次选择多张图片或视频  3. 看到预览  4. 点右上角“发布”</div>',
+          '<div class="kyoken-upload-status">等待选择图片或视频。</div>',
           '<div class="kyoken-upload-grid"></div>'
         ].join("");
         document.body.appendChild(helper);
@@ -58,10 +58,17 @@
             img.src = URL.createObjectURL(file);
             img.onload = function () { URL.revokeObjectURL(img.src); };
             card.appendChild(img);
+          } else if (/^video\//.test(file.type)) {
+            var video = document.createElement("video");
+            video.src = URL.createObjectURL(file);
+            video.controls = true;
+            video.muted = true;
+            video.onloadeddata = function () { URL.revokeObjectURL(video.src); };
+            card.appendChild(video);
           } else {
             var label = document.createElement("div");
             label.className = "kyoken-upload-file";
-            label.textContent = "视频文件已选择";
+            label.textContent = "文件已选择";
             card.appendChild(label);
           }
           previewGrid.appendChild(card);
@@ -69,20 +76,21 @@
       }
 
       function normalizeCmsImagePaths() {
-        document.querySelectorAll("img").forEach(function (img) {
-          var src = img.getAttribute("src") || "";
+        document.querySelectorAll("img, video, source").forEach(function (node) {
+          var src = node.getAttribute("src") || "";
           if (!src) return;
           if (src.indexOf("/admin/media/records/") !== -1) {
-            img.src = src.replace("/admin/media/records/", "/media/records/");
+            node.src = src.replace("/admin/media/records/", "/media/records/");
           } else if (/^media\/records\//.test(src)) {
-            img.src = "/" + src;
+            node.src = "/" + src;
           }
         });
       }
 
       function wireFileInputs() {
       document.querySelectorAll('input[type="file"]').forEach(function (input) {
-          input.accept = "image/jpeg,image/png,image/webp,video/mp4";
+          input.accept = "image/jpeg,image/png,image/webp,video/mp4,video/webm,video/quicktime";
+          input.multiple = true;
           if (input.dataset.kyokenUploadReady) return;
           input.dataset.kyokenUploadReady = "1";
           input.addEventListener("change", function () {
@@ -92,16 +100,31 @@
               return;
             }
             var unsupported = Array.prototype.filter.call(files, function (file) {
-              return !/^(image\/jpeg|image\/png|image\/webp|video\/mp4)$/.test(file.type);
+              return !/^(image\/jpeg|image\/png|image\/webp|video\/mp4|video\/webm|video\/quicktime)$/.test(file.type);
             });
             if (unsupported.length) {
-              showStatus("有文件格式不适合网页显示。手机 HEIC / MOV 请先转成 JPG / MP4。", true);
+              showStatus("有文件格式不适合网页显示。手机 HEIC 请先转 JPG；MOV 如果前台不能播放，请转 MP4。", true);
             } else {
-              showStatus("已选择 " + files.length + " 个文件。下方能看到预览后，再点击右上角“发布”。", false);
+              var imageCount = Array.prototype.filter.call(files, function (file) { return /^image\//.test(file.type); }).length;
+              var videoCount = Array.prototype.filter.call(files, function (file) { return /^video\//.test(file.type); }).length;
+              showStatus("已选择 " + files.length + " 个文件：图片 " + imageCount + " 个，视频 " + videoCount + " 个。下方能看到预览后，再点击右上角“发布”。", false);
             }
             showLocalPreviews(files);
           });
       });
+      }
+
+      function autoUseSelectedMedia() {
+        document.querySelectorAll("button").forEach(function (button) {
+          var text = (button.textContent || "").replace(/\s+/g, "");
+          var isUseSelected = /^(选用已选中项目|選用已選中項目|Chooseselected|Useselected|Insertselected)$/i.test(text);
+          if (!isUseSelected || button.disabled || button.dataset.kyokenAutoClicked) return;
+          button.dataset.kyokenAutoClicked = "1";
+          showStatus("检测到已选中的媒体，正在自动确认并返回编辑页。", false);
+          window.setTimeout(function () {
+            if (!button.disabled) button.click();
+          }, 500);
+        });
       }
 
       var style = document.createElement("style");
@@ -113,7 +136,7 @@
         ".kyoken-upload-status.warning{color:#9f1239;background:#fff1f2;border-color:#fecdd3}",
         ".kyoken-upload-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;max-height:220px;overflow:auto}",
         ".kyoken-upload-card{border:1px solid #e2e8f0;background:#f8fafc;padding:6px}",
-        ".kyoken-upload-card img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;background:#e2e8f0}",
+        ".kyoken-upload-card img,.kyoken-upload-card video{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;background:#e2e8f0}",
         ".kyoken-upload-info{font-size:11px;line-height:1.35;color:#334155;margin-bottom:5px;word-break:break-all}",
         ".kyoken-upload-file{display:flex;align-items:center;justify-content:center;min-height:70px;background:#e2e8f0;font-size:12px;font-weight:800}"
       ].join("");
@@ -123,6 +146,7 @@
       window.setInterval(function () {
         wireFileInputs();
         normalizeCmsImagePaths();
+        autoUseSelectedMedia();
       }, 800);
     })();
   </script>

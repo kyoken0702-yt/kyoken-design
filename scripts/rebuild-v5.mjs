@@ -4,10 +4,10 @@ import path from "node:path";
 const root = path.resolve(new URL("..", import.meta.url).pathname);
 const lineUrl = "https://line.me/R/ti/p/@566wlcvz";
 
-function normalizeImages(record) {
-  const images = [];
+function normalizeMedia(record) {
+  const media = [];
   const seen = new Set();
-  const addImage = (value) => {
+  const addMedia = (value) => {
     if (typeof value !== "string") return;
     const trimmed = value.trim();
     if (!trimmed) return;
@@ -16,18 +16,31 @@ function normalizeImages(record) {
       : trimmed.replace(/^\/+/u, "");
     if (seen.has(key)) return;
     seen.add(key);
-    images.push(trimmed);
+    media.push(trimmed);
   };
 
-  addImage(record.image);
+  addMedia(record.image);
+  addMedia(record.video);
+  if (Array.isArray(record.media)) {
+    record.media.forEach((item) => {
+      if (Array.isArray(item)) item.forEach(addMedia);
+      if (typeof item === "string") addMedia(item);
+      else if (item && typeof item === "object") addMedia(item.file || item.image || item.video);
+    });
+  }
   if (Array.isArray(record.images)) {
     record.images.forEach((item) => {
-      if (typeof item === "string") addImage(item);
-      else if (item && typeof item === "object") addImage(item.image);
+      if (Array.isArray(item)) item.forEach(addMedia);
+      if (typeof item === "string") addMedia(item);
+      else if (item && typeof item === "object") addMedia(item.image);
     });
   }
 
-  return images;
+  return media;
+}
+
+function isVideoMedia(value) {
+  return /\.(mp4|webm|mov|m4v)(?:[?#].*)?$/iu.test(value || "");
 }
 
 function normalizeRecord(record, sourceSlug = "") {
@@ -38,7 +51,7 @@ function normalizeRecord(record, sourceSlug = "") {
   return {
     ...record,
     slug: record.slug || sourceSlug || String(record.date || "").replace(/\./g, "-"),
-    images: normalizeImages(record),
+    media: normalizeMedia(record),
     ja: {
       label: ja.label || "記録準備中",
       title: ja.title || "サプライチェーン記録準備中",
@@ -400,14 +413,18 @@ function mediaSlot(record, lang) {
     if (/^(https?:)?\/\//u.test(value) || value.startsWith("data:")) return value;
     return `${mediaPrefix}${value.replace(/^\/+/u, "")}`;
   };
-  const images = (record.images || []).map(resolveMedia).filter(Boolean);
-  const video = resolveMedia(record.video);
-  if (images.length || record.video) {
-    const imageHtml = images.map((image) => `<img class="v5-record-media" src="${image}" alt="">`).join("");
-    const videoHtml = record.video ? `<video class="v5-record-media" controls playsinline${images[0] ? ` poster="${images[0]}"` : ""}>
-      <source src="${video}">
-    </video>` : "";
-    return `<div class="v5-record-gallery">${imageHtml}${videoHtml}</div>`;
+  const media = (record.media || []).map((item) => ({ raw: item, src: resolveMedia(item) })).filter((item) => item.src);
+  if (media.length) {
+    const firstImage = media.find((item) => !isVideoMedia(item.raw))?.src || "";
+    const mediaHtml = media.map((item) => {
+      if (isVideoMedia(item.raw)) {
+        return `<video class="v5-record-media" controls playsinline${firstImage ? ` poster="${firstImage}"` : ""}>
+          <source src="${item.src}">
+        </video>`;
+      }
+      return `<img class="v5-record-media" src="${item.src}" alt="">`;
+    }).join("");
+    return `<div class="v5-record-gallery">${mediaHtml}</div>`;
   }
   return photoSlot(lang === "en" ? "Photo / video to be added" : lang === "zh" ? "照片 / 视频待补充" : "写真 / 動画を追加予定", mediaLabel);
 }
@@ -427,7 +444,7 @@ function recordCard(record, lang) {
 }
 
 function hasRecordMedia(record) {
-  return Boolean((record.images && record.images.length) || record.video);
+  return Boolean(record.media && record.media.length);
 }
 
 function homeRecords(lang, category, limit, fallbackHtml) {

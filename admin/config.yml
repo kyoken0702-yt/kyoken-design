@@ -31,14 +31,14 @@ collections:
     fields:
       - { label: "前台显示模块", name: "category", widget: "hidden", default: "factory" }
       - { label: "后台记录名", name: "title", widget: "string", hint: "只用于后台识别，不在前台显示。" }
-      - label: "图片（可多张）"
-        name: "images"
+      - label: "媒体（图片 / 视频，可多张）"
+        name: "media"
         widget: "list"
         required: false
-        summary: "{{fields.image}}"
-        hint: "上传工厂、材料、包装、仓库、发货、装车、物流前状态照片。每张图点一次“新增图片”。选择后看右下角上传状态；确认有预览后点右上角“发布”。"
-        field: { label: "图片", name: "image", widget: "image", required: false, hint: "建议上传 JPG / PNG / WebP。手机 HEIC 请先转 JPG。" }
-      - { label: "视频（可选）", name: "video", widget: "file", required: false, hint: "上传 MP4。手机 MOV 请先转 MP4。" }
+        collapsed: false
+        summary: "{{fields.file}}"
+        hint: "上传工厂、材料、包装、仓库、发货、装车、物流前状态。图片和视频放在同一个列表里；选择后看右下角上传状态，确认有预览后点右上角“发布”。"
+        field: { label: "图片或视频", name: "file", widget: "file", required: false, media_library: { config: { multiple: true } }, hint: "建议图片用 JPG / PNG / WebP，视频用 MP4。手机 HEIC / MOV 如不能显示，请先转 JPG / MP4。" }
 
   - name: "japan_site_records"
     label: "首页模块｜日本现场记录"
@@ -57,11 +57,11 @@ collections:
     fields:
       - { label: "前台显示模块", name: "category", widget: "hidden", default: "site" }
       - { label: "后台记录名", name: "title", widget: "string", hint: "只用于后台识别，不在前台显示。" }
-      - label: "图片（可多张）"
-        name: "images"
+      - label: "媒体（图片 / 视频，可多张）"
+        name: "media"
         widget: "list"
         required: false
-        summary: "{{fields.image}}"
-        hint: "上传到场、搬入、尺寸确认、安装前确认、交付状态照片。每张图点一次“新增图片”。选择后看右下角上传状态；确认有预览后点右上角“发布”。"
-        field: { label: "图片", name: "image", widget: "image", required: false, hint: "建议上传 JPG / PNG / WebP。手机 HEIC 请先转 JPG。" }
-      - { label: "视频（可选）", name: "video", widget: "file", required: false, hint: "上传 MP4。手机 MOV 请先转 MP4。" }
+        collapsed: false
+        summary: "{{fields.file}}"
+        hint: "上传到场、搬入、尺寸确认、安装前确认、交付状态。图片和视频放在同一个列表里；选择后看右下角上传状态，确认有预览后点右上角“发布”。"
+        field: { label: "图片或视频", name: "file", widget: "file", required: false, media_library: { config: { multiple: true } }, hint: "建议图片用 JPG / PNG / WebP，视频用 MP4。手机 HEIC / MOV 如不能显示，请先转 JPG / MP4。" }
