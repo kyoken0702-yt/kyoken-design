@@ -54,9 +54,7 @@ const supplyRecords = loadSupplyRecords();
 
 const products = [
   ["curtain-details.html", "オーダーカーテン", "Custom Curtains", "定制窗帘", "1.8倍ヒダ、採寸、標準簡易取付まで確認する窓まわり資材。"],
-  ["acrylic-sign-details.html", "アクリル切文字サイン", "Acrylic Cut Letter Sign", "亚克力切文字标识", "ロゴデータ、厚み、取付方法、現場下地を確認する室内サイン。"],
-  ["lightbox-details.html", "電飾看板用フィルム", "Backlit Sign Film", "灯箱电饰膜", "デザインデータ、既存ライトボックス寸法、配送梱包を確認する画面資材。"],
-  ["pvc-sign-details.html", "塩ビプレートサイン", "PVC Plate Sign", "PVC板标牌", "案内板、注意表示、駐車場表示など小ロットで動かしやすい板材。"],
+  ["advertising-materials-details.html", "広告材料制作", "Advertising Material Production", "广告材料制作", "切文字、電飾フィルム、塩ビ板サインを図面・寸法・梱包条件ごとにまとめて確認します。"],
   ["enamel-panel.html", "ホーローキッチンパネル", "Enamel Panel", "珐琅磁吸板", "厨房・水回り向けに、板材、梱包、搬入条件を確認するパネル。"],
   ["acoustic-panel-details.html", "フェルト吸音パネル", "Felt Acoustic Panel", "毛毡吸音板", "色、厚み、下地、枚数、現場固定方法を確認する吸音材。"],
   ["wallpaper-details.html", "壁紙・クロス材", "Wallpaper / Wall Covering", "墙纸 / 墙布材料", "柄データ、壁面寸法、ロール梱包、施工側条件を確認する内装壁材。"],
@@ -65,20 +63,22 @@ const products = [
 
 const productImages = {
   "curtain-details.html": "media/remote/e2f130af6ea5.png",
-  "acrylic-sign-details.html": "media/remote/c1f2ceb8eb9d.png",
-  "lightbox-details.html": "media/remote/b0c44a39e9d2.png",
-  "pvc-sign-details.html": "media/remote/a3fb722c501c.png",
+  "advertising-materials-details.html": "media/remote/c1f2ceb8eb9d.png",
   "enamel-panel.html": "media/remote/f35f79d49094.png",
   "acoustic-panel-details.html": "media/remote/c3805c6eb4b0.png",
   "wallpaper-details.html": "media/remote/668ef6041d0b.jpg",
   "wpc-decking-details.html": "media/remote/937250ddfe38.png"
 };
 
+const advertisingLegacyPages = [
+  "acrylic-sign-details.html",
+  "lightbox-details.html",
+  "pvc-sign-details.html"
+];
+
 const zhProductNotes = {
   "curtain-details.html": "确认 1.8 倍褶皱、上门测量、标准简易安装及窗边条件的窗帘材料。",
-  "acrylic-sign-details.html": "确认标志文件、厚度、安装方式和现场基层条件的亚克力切文字标识。",
-  "lightbox-details.html": "确认设计文件、既有灯箱尺寸、包装和配送条件的灯箱电饰膜材料。",
-  "pvc-sign-details.html": "适用于导视牌、注意提示、停车场标识等小批量PVC板标牌。",
+  "advertising-materials-details.html": "统一确认标志文件、灯箱画面、PVC板标牌的尺寸、材料、加工、包装和交付条件。",
   "enamel-panel.html": "面向厨房和水回等空间，确认板材、包装和搬入条件的磁吸板材。",
   "acoustic-panel-details.html": "确认颜色、厚度、基层、数量和现场固定方式的毛毡吸音板。",
   "wallpaper-details.html": "确认图案文件、墙面尺寸、卷装包装和施工侧条件的墙面内装材料。",
@@ -87,9 +87,7 @@ const zhProductNotes = {
 
 const enProductNotes = {
   "curtain-details.html": "Curtain materials checked by pleat ratio, measurement, simple installation, and window conditions.",
-  "acrylic-sign-details.html": "Acrylic cut-letter signage checked by logo data, thickness, fixing method, and site substrate.",
-  "lightbox-details.html": "Backlit sign film checked by design data, existing lightbox size, packaging, and delivery conditions.",
-  "pvc-sign-details.html": "PVC plate signs for guidance signs, caution notices, parking signs, and temporary displays.",
+  "advertising-materials-details.html": "Signage files, lightbox film, and PVC plates checked together by size, material, processing, packing, and delivery conditions.",
   "enamel-panel.html": "Magnetic enamel panels checked by board specification, packing method, and carrying route.",
   "acoustic-panel-details.html": "Felt acoustic panels checked by color, thickness, substrate, quantity, and fixing method.",
   "wallpaper-details.html": "Wallpaper and wall covering materials checked by pattern data, wall size, roll packing, and installation conditions.",
@@ -120,73 +118,27 @@ const productDetails = {
       quote: "Pricing depends on window count, dimensions, fabric, installation conditions, and delivery address. A rough quote is provided after specification review."
     }
   },
-  "acrylic-sign-details.html": {
+  "advertising-materials-details.html": {
     ja: {
-      name: "アクリル切文字サイン",
-      lead: "ロゴデータ、厚み、色、取付方法、下地条件を確認して手配する室内向けの切文字サインです。",
-      plans: ["小型ドアサイン", "受付ロゴサイン", "大型エントランスサイン"],
-      specs: ["AI、PDF、画像などのロゴデータを確認", "厚み、色、仕上げ、UV印刷の有無を確認", "両面テープ、穴あけ、ビス固定など取付方法を確認", "割れ防止の梱包方法を案件ごとに確認"],
-      quote: "サイズ、厚み、加工方法、数量、梱包条件により案件ごとにお見積りします。"
+      name: "広告材料制作",
+      lead: "アクリル切文字、電飾看板用フィルム、塩ビプレートサインなど、店舗・施設向け広告材料を図面、寸法、設置条件ごとに確認して手配します。",
+      plans: ["アクリル切文字", "電飾看板用フィルム", "塩ビプレートサイン"],
+      specs: ["AI、PDF、画像などのデザインデータを確認", "サイズ、厚み、素材、色、数量を確認", "既存看板や設置場所の写真、下地、固定方法を確認", "傷、折れ、割れを避ける梱包方法を案件ごとに確認"],
+      quote: "材料種類、サイズ、加工方法、数量、梱包条件、配送先により案件ごとにお見積りします。電気部材や屋外条件が関係する場合は個別確認となります。"
     },
     zh: {
-      name: "亚克力切文字标识",
-      lead: "确认标志文件、厚度、颜色、安装方式和基层条件后安排的室内切文字标识材料。",
-      plans: ["小型门牌", "前台 LOGO 标识", "大型入口标识"],
-      specs: ["确认 AI、PDF、图片等标志文件", "确认厚度、颜色、表面处理、UV 印刷需求", "确认双面胶、打孔、螺丝固定等安装方式", "按案件确认防裂包装方式"],
-      quote: "根据尺寸、厚度、加工方式、数量和包装条件逐案报价。"
+      name: "广告材料制作",
+      lead: "把亚克力切文字、灯箱电饰膜、PVC板标牌等店铺和设施广告材料统一按图纸、尺寸和现场条件确认后安排制作。",
+      plans: ["亚克力切文字", "灯箱电饰膜", "PVC板标牌"],
+      specs: ["确认 AI、PDF、图片等设计文件", "确认尺寸、厚度、材料、颜色和数量", "确认既有招牌、安装位置照片、基层和固定方式", "按案件确认防刮、防折、防裂包装方式"],
+      quote: "根据材料种类、尺寸、加工方式、数量、包装条件和配送地址逐案报价。涉及电气部材或户外条件时单独确认。"
     },
     en: {
-      name: "Acrylic Cut Letter Sign",
-      lead: "Indoor acrylic cut-letter signage arranged after checking logo data, thickness, color, fixing method, and substrate conditions.",
-      plans: ["Small door sign", "Reception logo sign", "Large entrance sign"],
-      specs: ["Logo data such as AI, PDF, or image files checked", "Thickness, color, finish, and UV printing confirmed", "Tape, drilling, screw fixing, or other mounting method checked", "Anti-breakage packing checked case by case"],
-      quote: "Quoted case by case according to size, thickness, processing method, quantity, and packing conditions."
-    }
-  },
-  "lightbox-details.html": {
-    ja: {
-      name: "電飾看板用フィルム",
-      lead: "既存ライトボックス寸法、デザインデータ、差し替え方法を確認して手配する電飾看板用の画面フィルムです。",
-      plans: ["メニュー画面", "店舗正面用シート", "大型パノラマフィルム"],
-      specs: ["既存ライトボックスの有効表示寸法を確認", "デザインデータ、色味、透過性を確認", "本体、電源、PSE関連部材が関係する場合は個別確認", "折れ、巻き癖、傷を避ける梱包を確認"],
-      quote: "サイズ、数量、素材、配送方法、関連部材の有無により案件ごとに確認します。"
-    },
-    zh: {
-      name: "灯箱电饰膜",
-      lead: "确认既有灯箱尺寸、设计文件和替换方式后安排的内照式灯箱画面材料。",
-      plans: ["菜单画面", "店面正面灯箱片", "大型全景灯箱片"],
-      specs: ["确认既有灯箱有效显示尺寸", "确认设计文件、色味、透光要求", "如涉及灯箱本体、电源、PSE 相关部材，逐案确认", "确认防折、防压、防划伤包装"],
-      quote: "根据尺寸、数量、材料、配送方式和相关部材有无逐案确认。"
-    },
-    en: {
-      name: "Backlit Sign Film",
-      lead: "Backlit sign film arranged after checking existing lightbox size, artwork, and replacement method.",
-      plans: ["Menu display film", "Shopfront lightbox sheet", "Large panoramic film"],
-      specs: ["Effective display size of the existing lightbox checked", "Artwork, color, and light transmission confirmed", "Lightbox body, power supply, and PSE-related parts checked separately when involved", "Packing checked to prevent folding, pressure marks, and scratches"],
-      quote: "Checked case by case according to size, quantity, material, delivery method, and related parts."
-    }
-  },
-  "pvc-sign-details.html": {
-    ja: {
-      name: "塩ビプレートサイン",
-      lead: "案内板、注意表示、駐車場表示などを小ロットで手配しやすい塩ビ板のサイン材です。",
-      plans: ["店内案内板", "駐車場・注意表示", "施工現場表示"],
-      specs: ["サイズ、厚み、枚数を確認", "穴あけ、両面テープ、角丸など加工を確認", "屋外使用の場合は耐候条件を個別確認", "板材の反り、傷を避ける梱包を確認"],
-      quote: "サイズ、枚数、加工、使用場所、配送先により案件ごとにお見積りします。"
-    },
-    zh: {
-      name: "PVC板标牌",
-      lead: "适合店内导视、注意提示、停车场标识、施工现场表示等小批量PVC板材。",
-      plans: ["店内导视牌", "停车场/注意提示", "施工现场标识"],
-      specs: ["确认尺寸、厚度、数量", "确认打孔、双面胶、圆角等加工", "如用于户外，逐案确认耐候条件", "确认防弯曲、防刮伤包装"],
-      quote: "根据尺寸、数量、加工、使用场所和配送地址逐案报价。"
-    },
-    en: {
-      name: "PVC Plate Sign",
-      lead: "Small-lot PVC plate signage for guidance signs, caution notices, parking signs, and site displays.",
-      plans: ["Indoor guidance plate", "Parking / caution sign", "Construction site display"],
-      specs: ["Size, thickness, and quantity checked", "Drilling, double-sided tape, rounded corners, and other processing confirmed", "Weather requirements checked separately for outdoor use", "Packing checked to prevent warping and scratches"],
-      quote: "Quoted case by case according to size, quantity, processing, usage location, and delivery address."
+      name: "Advertising Material Production",
+      lead: "Acrylic letters, backlit sign film, and PVC plate signage are arranged after checking drawings, dimensions, and site conditions for shops and facilities.",
+      plans: ["Acrylic letters", "Backlit sign film", "PVC plate signs"],
+      specs: ["Design data such as AI, PDF, or image files checked", "Size, thickness, material, color, and quantity confirmed", "Existing signage, site photos, substrate, and fixing method checked", "Packing checked case by case to prevent scratches, folding, and breakage"],
+      quote: "Quoted case by case according to material type, size, processing method, quantity, packing conditions, and delivery address. Electrical parts or outdoor conditions are checked separately when involved."
     }
   },
   "enamel-panel.html": {
@@ -829,6 +781,38 @@ function productDetailPage(lang, file) {
 `;
 }
 
+function redirectPage(lang, targetFile) {
+  const c = langConfig[lang];
+  const target = lang === "ja" ? targetFile : `../${lang}/${targetFile}`;
+  const home = c.homeUrl;
+  const message = lang === "en"
+    ? "This category has been merged into Advertising Material Production."
+    : lang === "zh"
+      ? "这个分类已合并到「广告材料制作」。"
+      : "この分類は「広告材料制作」に統合しました。";
+  const linkText = lang === "en" ? "Open Advertising Material Production" : lang === "zh" ? "打开广告材料制作" : "広告材料制作を見る";
+  return `<!DOCTYPE html>
+<html lang="${c.htmlLang}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="refresh" content="0; url=${target}">
+  <link rel="canonical" href="${target}">
+  <title>${message} | ${c.logo}</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="${lang === "ja" ? "" : "../"}styles.css?v=20260701-occam1">
+</head>
+<body class="v5-body">
+  <main class="v5-section v5-contact">
+    <h1>${message}</h1>
+    <p><a href="${target}">${linkText}</a></p>
+    <p><a href="${home}">${lang === "en" ? "Back to home" : lang === "zh" ? "返回首页" : "トップへ戻る"}</a></p>
+  </main>
+</body>
+</html>
+`;
+}
+
 function writeFile(relativePath, content) {
   fs.mkdirSync(path.dirname(path.join(root, relativePath)), { recursive: true });
   fs.writeFileSync(path.join(root, relativePath), content);
@@ -845,6 +829,12 @@ for (const [file] of products) {
   writeFile(file, productDetailPage("ja", file));
   writeFile(`en/${file}`, productDetailPage("en", file));
   writeFile(`zh/${file}`, productDetailPage("zh", file));
+}
+
+for (const file of advertisingLegacyPages) {
+  writeFile(file, redirectPage("ja", "advertising-materials-details.html"));
+  writeFile(`en/${file}`, redirectPage("en", "advertising-materials-details.html"));
+  writeFile(`zh/${file}`, redirectPage("zh", "advertising-materials-details.html"));
 }
 
 console.log("V5 rebuild complete");

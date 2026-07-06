@@ -38,9 +38,7 @@ collections:
         default: "other"
         options:
           - { label: "定制窗帘", value: "curtain" }
-          - { label: "亚克力切文字标识", value: "acrylic" }
-          - { label: "灯箱电饰膜", value: "lightbox" }
-          - { label: "PVC板标牌", value: "pvc" }
+          - { label: "广告材料制作", value: "advertising" }
           - { label: "珐琅磁吸板", value: "enamel" }
           - { label: "毛毡吸音板", value: "acoustic" }
           - { label: "墙纸 / 墙布材料", value: "wallpaper" }
@@ -118,9 +116,7 @@ collections:
         default: "other"
         options:
           - { label: "定制窗帘", value: "curtain" }
-          - { label: "亚克力切文字标识", value: "acrylic" }
-          - { label: "灯箱电饰膜", value: "lightbox" }
-          - { label: "PVC板标牌", value: "pvc" }
+          - { label: "广告材料制作", value: "advertising" }
           - { label: "珐琅磁吸板", value: "enamel" }
           - { label: "毛毡吸音板", value: "acoustic" }
           - { label: "墙纸 / 墙布材料", value: "wallpaper" }
@@ -197,9 +193,7 @@ collections:
         default: "other"
         options:
           - { label: "定制窗帘", value: "curtain" }
-          - { label: "亚克力切文字标识", value: "acrylic" }
-          - { label: "灯箱电饰膜", value: "lightbox" }
-          - { label: "PVC板标牌", value: "pvc" }
+          - { label: "广告材料制作", value: "advertising" }
           - { label: "珐琅磁吸板", value: "enamel" }
           - { label: "毛毡吸音板", value: "acoustic" }
           - { label: "墙纸 / 墙布材料", value: "wallpaper" }
