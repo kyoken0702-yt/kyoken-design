@@ -30,7 +30,7 @@ collections:
     summary: "中国工厂・供应链实景 / {{title}}"
     fields:
       - { label: "前台显示模块", name: "category", widget: "hidden", default: "factory" }
-      - { label: "后台记录名", name: "title", widget: "string", hint: "只用于后台识别，不在前台显示。" }
+      - { label: "前台大标题", name: "title", widget: "string", hint: "会显示在这一组图片/视频上方。例如：广告材料制作工厂、窗帘加工制作工厂、塑木板材料工厂。" }
       - label: "媒体（图片 / 视频，可多张）"
         name: "media"
         widget: "list"
@@ -56,7 +56,7 @@ collections:
     summary: "日本现场 / {{title}}"
     fields:
       - { label: "前台显示模块", name: "category", widget: "hidden", default: "site" }
-      - { label: "后台记录名", name: "title", widget: "string", hint: "只用于后台识别，不在前台显示。" }
+      - { label: "前台大标题", name: "title", widget: "string", hint: "会显示在这一组图片/视频上方。例如：窗帘到场确认、广告材料到场确认、塑木板现场交付。" }
       - label: "媒体（图片 / 视频，可多张）"
         name: "media"
         widget: "list"

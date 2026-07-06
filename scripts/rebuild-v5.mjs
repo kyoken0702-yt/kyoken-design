@@ -54,19 +54,19 @@ function normalizeRecord(record, sourceSlug = "") {
     media: normalizeMedia(record),
     ja: {
       label: ja.label || "記録準備中",
-      title: ja.title || "サプライチェーン記録準備中",
+      title: ja.title || record.title || "サプライチェーン記録準備中",
       summary: ja.summary || "日本語の記録内容を準備中です。",
       details: ja.details || []
     },
     en: {
       label: en.label || "Pending",
-      title: en.title || "Supply-chain record pending",
+      title: en.title || record.title || "Supply-chain record pending",
       summary: en.summary || "English record content is being prepared.",
       details: en.details || []
     },
     zh: {
       label: zh.label || "记录",
-      title: zh.title || "供应链记录",
+      title: zh.title || record.title || "供应链记录",
       summary: zh.summary || "",
       details: zh.details || []
     }
@@ -438,7 +438,9 @@ function recordModuleLabel(category, lang) {
 }
 
 function recordCard(record, lang) {
+  const title = record[lang]?.title || record.title || recordModuleLabel(record.category || "factory", lang);
   return `<article class="v5-record v5-record-photo-card">
+          <h3 class="v5-record-title">${title}</h3>
           ${mediaSlot(record, lang)}
         </article>`;
 }
@@ -632,6 +634,7 @@ function recordsPage(lang) {
       <p class="v5-lead">${lead}</p>
       <div class="v5-record-detail-list">
         ${supplyRecords.filter(hasRecordMedia).map((record) => `<article id="record-${record.slug}" class="v5-record-detail v5-record-photo-card">
+          <h2 class="v5-record-title">${record[lang]?.title || record.title || recordModuleLabel(record.category || "factory", lang)}</h2>
           ${mediaSlot(record, lang)}
         </article>`).join("\n")}
       </div>

@@ -1,7 +1,20 @@
 {
   "category": "factory",
-  "title": "塑木板",
-  "images": [
-    "/media/records/factory/微信图片_20260630172034_7_611-1-.jpg"
-  ]
+  "slug": "wpc-factory",
+  "title": "塑木板材料工厂",
+  "media": [
+    {
+      "file": "/media/records/factory/微信图片_20260630172034_7_611-1-.jpg",
+      "type": "image"
+    }
+  ],
+  "zh": {
+    "title": "塑木板材料工厂"
+  },
+  "ja": {
+    "title": "人工木デッキ材工場"
+  },
+  "en": {
+    "title": "WPC Decking Material Factory"
+  }
 }

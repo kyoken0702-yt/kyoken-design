@@ -310,7 +310,16 @@ html[lang|="zh"] .v5-body * {
 }
 
 .v5-record-photo-card {
-  padding: 0.45rem;
+  padding: 0.6rem;
+}
+
+.v5-record-title {
+  margin: 0 0 0.55rem;
+  color: var(--kyoken-navy);
+  font-size: clamp(1.2rem, 2.2vw, 1.75rem) !important;
+  font-weight: 950 !important;
+  line-height: 1.25;
+  letter-spacing: 0;
 }
 
 .v5-record-gallery {
@@ -348,7 +357,7 @@ html[lang|="zh"] .v5-body * {
   box-shadow: 0 12px 28px rgba(3, 17, 47, 0.07);
 }
 
-.v5-record h3,
+.v5-record h3:not(.v5-record-title),
 .v5-product-card h3,
 .v5-story-grid h3,
 .v5-role-grid h2 {

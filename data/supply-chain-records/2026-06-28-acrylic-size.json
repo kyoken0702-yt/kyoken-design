@@ -1,7 +1,7 @@
 {
   "en": {
     "label": "Size Check",
-    "title": "Advertising material size and fixing conditions organized",
+    "title": "Curtain Production Factory",
     "summary": "Logo data, thickness, hole positions, and site substrate for cut-letter signage were checked.",
     "details": [
       "Organized logo data and production size",
@@ -12,7 +12,7 @@
   "slug": "2026-06-28-acrylic-size",
   "zh": {
     "label": "尺寸确认",
-    "title": "广告材料制作尺寸与安装条件整理",
+    "title": "窗帘加工制作工厂",
     "summary": "确认切文字标识的设计文件、厚度、孔位、现场基层等制作前条件。",
     "details": [
       "整理标志文件与制作尺寸",
@@ -24,7 +24,7 @@
   "product": "advertising",
   "ja": {
     "label": "寸法確認",
-    "title": "広告材料制作の寸法と取付条件を整理",
+    "title": "カーテン加工工場",
     "summary": "切文字サインのロゴデータ、厚み、穴位置、現場下地を確認しました。",
     "details": [
       "ロゴデータと製作サイズを整理",
@@ -32,7 +32,7 @@
       "現場下地の確認事項を施工側へ共有"
     ]
   },
-  "title": "窗帘加工制作",
+  "title": "窗帘加工制作工厂",
   "media": [
     "/media/records/factory/微信图片_20260605223620_68_266.jpg",
     "/media/records/factory/微信图片_20260605223622_70_266.jpg",
