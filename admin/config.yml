@@ -37,8 +37,8 @@ collections:
         required: false
         collapsed: false
         summary: "{{fields.file}}"
-        hint: "上传工厂、材料、包装、仓库、发货、装车、物流前状态。图片和视频放在同一个列表里；选择后看右下角上传状态，确认有预览后点右上角“发布”。"
-        field: { label: "图片或视频", name: "file", widget: "file", required: false, media_library: { config: { multiple: true } }, hint: "建议图片用 JPG / PNG / WebP，视频用 MP4。手机 HEIC / MOV 如不能显示，请先转 JPG / MP4。" }
+        hint: "上传工厂、材料、包装、仓库、发货、装车、物流前状态。图片和小 MP4 视频放在同一个列表里；大视频建议先压缩或用 URL 添加。"
+        field: { label: "图片或小视频", name: "file", widget: "file", required: false, media_library: { config: { multiple: true } }, hint: "图片建议 JPG / PNG / WebP。视频建议 MP4 / WebM 且小于 25MB；手机 HEIC / MOV 请先转 JPG / MP4。" }
 
   - name: "japan_site_records"
     label: "首页模块｜日本现场记录"
@@ -63,5 +63,5 @@ collections:
         required: false
         collapsed: false
         summary: "{{fields.file}}"
-        hint: "上传到场、搬入、尺寸确认、安装前确认、交付状态。图片和视频放在同一个列表里；选择后看右下角上传状态，确认有预览后点右上角“发布”。"
-        field: { label: "图片或视频", name: "file", widget: "file", required: false, media_library: { config: { multiple: true } }, hint: "建议图片用 JPG / PNG / WebP，视频用 MP4。手机 HEIC / MOV 如不能显示，请先转 JPG / MP4。" }
+        hint: "上传到场、搬入、尺寸确认、安装前确认、交付状态。图片和小 MP4 视频放在同一个列表里；大视频建议先压缩或用 URL 添加。"
+        field: { label: "图片或小视频", name: "file", widget: "file", required: false, media_library: { config: { multiple: true } }, hint: "图片建议 JPG / PNG / WebP。视频建议 MP4 / WebM 且小于 25MB；手机 HEIC / MOV 请先转 JPG / MP4。" }

@@ -47,10 +47,14 @@ function normalizeRecord(record, sourceSlug = "") {
   const zh = record.zh || {};
   const ja = record.ja || {};
   const en = record.en || {};
+  const sourceDate = sourceSlug.match(/^\d{4}-\d{2}-\d{2}/u)?.[0] || "";
+  const primaryDate = String(record.date || sourceDate || "").replace(/\./g, "-");
+  const sortKey = `${primaryDate || "0000-00-00"}-${sourceSlug || record.slug || ""}`;
 
   return {
     ...record,
     slug: record.slug || sourceSlug || String(record.date || "").replace(/\./g, "-"),
+    sortKey,
     media: normalizeMedia(record),
     ja: {
       label: ja.label || "記録準備中",
@@ -84,7 +88,7 @@ function loadSupplyRecords() {
         return normalizeRecord(record, path.basename(file, ".json"));
       });
     if (records.length) {
-      return records.sort((a, b) => String(b.date || b.slug).localeCompare(String(a.date || a.slug)));
+      return records.sort((a, b) => String(b.sortKey || b.slug).localeCompare(String(a.sortKey || a.slug)));
     }
   }
   return [];

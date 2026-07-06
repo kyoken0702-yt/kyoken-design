@@ -27,7 +27,7 @@
         helper.id = "kyoken-upload-helper";
         helper.innerHTML = [
           '<div class="kyoken-upload-title">媒体上传状态</div>',
-          '<div class="kyoken-upload-steps">1. 点“新增媒体”  2. 一次选择多张图片或视频  3. 看到预览  4. 点右上角“发布”</div>',
+          '<div class="kyoken-upload-steps">1. 点“新增媒体”  2. 图片可多选上传  3. 视频请用 MP4/WebM 小文件或 URL  4. 看到预览后点“发布”</div>',
           '<div class="kyoken-upload-status">等待选择图片或视频。</div>',
           '<div class="kyoken-upload-grid"></div>'
         ].join("");
@@ -75,6 +75,86 @@
         });
       }
 
+      function normalizeMediaPath(value) {
+        if (!value) return "";
+        var match = String(value).match(/(?:https?:\/\/[^\s"')]+\.(?:mp4|webm|mov|m4v)(?:[?#][^\s"')]*)?)|(?:\/?media\/records\/[^\s"')]+)/i);
+        if (!match) return "";
+        if (/^https?:\/\//i.test(match[0])) return match[0];
+        return "/" + match[0].replace(/^\/+/, "");
+      }
+
+      function isVideoPath(value) {
+        return /\.(mp4|webm|mov|m4v)(?:[?#].*)?$/i.test(value || "");
+      }
+
+      function showCmsPathPreviews(paths) {
+        ensureUploadHelper();
+        previewGrid.innerHTML = "";
+        paths.forEach(function (path) {
+          var card = document.createElement("div");
+          card.className = "kyoken-upload-card";
+          var info = document.createElement("div");
+          info.className = "kyoken-upload-info";
+          info.textContent = path;
+          card.appendChild(info);
+
+          if (isVideoPath(path)) {
+            var video = document.createElement("video");
+            video.src = path;
+            video.controls = true;
+            video.muted = true;
+            card.appendChild(video);
+          } else {
+            var img = document.createElement("img");
+            img.src = path;
+            img.alt = "";
+            card.appendChild(img);
+          }
+          previewGrid.appendChild(card);
+        });
+      }
+
+      function scanSelectedMediaPaths() {
+        var found = [];
+        var seen = {};
+        document.querySelectorAll("input, textarea, [contenteditable='true'], span, div").forEach(function (node) {
+          var value = node.value || node.textContent || "";
+          var path = normalizeMediaPath(value);
+          if (!path || seen[path]) return;
+          seen[path] = true;
+          found.push(path);
+        });
+        return found;
+      }
+
+      function updateStatusFromSavedPaths() {
+        var paths = scanSelectedMediaPaths();
+        if (!paths.length) return;
+        var imageCount = paths.filter(function (path) { return !isVideoPath(path); }).length;
+        var videoCount = paths.length - imageCount;
+        showStatus("已写入 " + paths.length + " 个媒体：图片 " + imageCount + " 个，视频 " + videoCount + " 个。可以直接点击右上角“发布”。", false);
+        showCmsPathPreviews(paths);
+      }
+
+      function translateCmsButtons() {
+        var replacements = {
+          "Add more files": "继续添加图片/视频",
+          "Remove all files": "清空本组媒体",
+          "Choose an image": "选择图片",
+          "Choose a file": "选择文件",
+          "Insert from URL": "用 URL 添加",
+          "Upload": "上传图片/小视频",
+          "Download": "下载",
+          "Copy": "复制",
+          "Delete selected": "删除选中项目",
+          "Choose selected": "使用已上传文件"
+        };
+        document.querySelectorAll("button").forEach(function (button) {
+          var text = (button.textContent || "").trim();
+          if (replacements[text]) button.textContent = replacements[text];
+        });
+      }
+
       function normalizeCmsImagePaths() {
         document.querySelectorAll("img, video, source").forEach(function (node) {
           var src = node.getAttribute("src") || "";
@@ -102,8 +182,13 @@
             var unsupported = Array.prototype.filter.call(files, function (file) {
               return !/^(image\/jpeg|image\/png|image\/webp|video\/mp4|video\/webm|video\/quicktime)$/.test(file.type);
             });
+            var largeVideos = Array.prototype.filter.call(files, function (file) {
+              return /^video\//.test(file.type) && file.size > 25 * 1024 * 1024;
+            });
             if (unsupported.length) {
               showStatus("有文件格式不适合网页显示。手机 HEIC 请先转 JPG；MOV 如果前台不能播放，请转 MP4。", true);
+            } else if (largeVideos.length) {
+              showStatus("视频文件偏大，GitHub 后台可能上传失败。请压缩成 25MB 以下 MP4，或用 URL 添加视频。", true);
             } else {
               var imageCount = Array.prototype.filter.call(files, function (file) { return /^image\//.test(file.type); }).length;
               var videoCount = Array.prototype.filter.call(files, function (file) { return /^video\//.test(file.type); }).length;
@@ -146,6 +231,8 @@
       window.setInterval(function () {
         wireFileInputs();
         normalizeCmsImagePaths();
+        translateCmsButtons();
+        updateStatusFromSavedPaths();
         autoUseSelectedMedia();
       }, 800);
     })();
