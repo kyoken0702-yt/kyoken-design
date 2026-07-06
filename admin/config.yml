@@ -5,6 +5,8 @@ backend:
   base_url: https://www.kyoken.design
   auth_endpoint: api/auth
 
+locale: "zh_Hans"
+
 media_folder: "media/records"
 public_folder: "/media/records"
 
@@ -47,7 +49,7 @@ collections:
           - { label: "人工木地板材料", value: "wpc" }
           - { label: "其他", value: "other" }
       - { label: "首页显示", name: "showOnHome", widget: "boolean", default: true, hint: "关闭后只保存在记录页，不显示在首页三个板块。" }
-      - { label: "图片", name: "image", widget: "image", required: false, hint: "选择图片后必须点击保存/发布。发布完成并等待网站部署后，图片才会出现在对应栏目。" }
+      - { label: "图片", name: "image", widget: "image", required: false, hint: "建议上传 JPG / PNG / WebP，不建议 HEIC。点 Upload 上传后，还要选中图片并点 Choose selected，字段里出现图片路径后再保存/发布。" }
       - { label: "视频", name: "video", widget: "file", required: false, hint: "如同时上传视频和图片，图片会作为视频封面。" }
       - label: "中文内容"
         name: "zh"
