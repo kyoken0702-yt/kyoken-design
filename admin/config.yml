@@ -31,7 +31,7 @@ collections:
     fields:
       - { label: "日期", name: "date", widget: "datetime", date_format: "YYYY.MM.DD", time_format: false, format: "YYYY.MM.DD", default: "{{now}}" }
       - { label: "前台显示模块", name: "category", widget: "hidden", default: "today" }
-      - { label: "封面图片", name: "image", widget: "image", required: false, hint: "上传 JPG / PNG / WebP。手机 HEIC 请先转 JPG。" }
+      - { label: "封面图片", name: "image", widget: "image", required: false, hint: "上传后这里应立即显示预览。请使用 JPG / PNG / WebP。" }
       - { label: "视频", name: "video", widget: "file", required: false, hint: "上传 MP4。手机 MOV 请先转 MP4。" }
       - { label: "后台标题", name: "title", widget: "string", hint: "后台列表用。建议和中文标题一致。" }
       - label: "中文内容"
@@ -70,7 +70,7 @@ collections:
     fields:
       - { label: "日期", name: "date", widget: "datetime", date_format: "YYYY.MM.DD", time_format: false, format: "YYYY.MM.DD", default: "{{now}}" }
       - { label: "前台显示模块", name: "category", widget: "hidden", default: "factory" }
-      - { label: "封面图片", name: "image", widget: "image", required: false, hint: "上传 JPG / PNG / WebP。手机 HEIC 请先转 JPG。" }
+      - { label: "封面图片", name: "image", widget: "image", required: false, hint: "上传后这里应立即显示预览。请使用 JPG / PNG / WebP。" }
       - { label: "视频", name: "video", widget: "file", required: false, hint: "上传 MP4。手机 MOV 请先转 MP4。" }
       - { label: "后台标题", name: "title", widget: "string", hint: "后台列表用。建议和中文标题一致。" }
       - label: "中文内容"
@@ -109,7 +109,7 @@ collections:
     fields:
       - { label: "日期", name: "date", widget: "datetime", date_format: "YYYY.MM.DD", time_format: false, format: "YYYY.MM.DD", default: "{{now}}" }
       - { label: "前台显示模块", name: "category", widget: "hidden", default: "site" }
-      - { label: "封面图片", name: "image", widget: "image", required: false, hint: "上传 JPG / PNG / WebP。手机 HEIC 请先转 JPG。" }
+      - { label: "封面图片", name: "image", widget: "image", required: false, hint: "上传后这里应立即显示预览。请使用 JPG / PNG / WebP。" }
       - { label: "视频", name: "video", widget: "file", required: false, hint: "上传 MP4。手机 MOV 请先转 MP4。" }
       - { label: "后台标题", name: "title", widget: "string", hint: "后台列表用。建议和中文标题一致。" }
       - label: "中文内容"

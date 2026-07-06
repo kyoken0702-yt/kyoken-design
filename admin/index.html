@@ -9,5 +9,12 @@
 <body>
   <!-- Decap CMS. Replace auth settings in config.yml if the GitHub auth provider changes. -->
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js?v=20260706-modules2"></script>
+  <script>
+    window.setInterval(function () {
+      document.querySelectorAll('input[type="file"]').forEach(function (input) {
+        if (!input.accept) input.accept = 'image/jpeg,image/png,image/webp,video/mp4';
+      });
+    }, 1000);
+  </script>
 </body>
 </html>
