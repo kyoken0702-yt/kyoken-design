@@ -27,6 +27,7 @@ collections:
         name: "category"
         widget: "select"
         default: "today"
+        hint: "选择图片显示位置：今日供应链显示到首页【每日记录】；中国工厂显示到首页【工厂侧】；日本现场显示到首页【现场记录】。"
         options:
           - { label: "今日供应链", value: "today" }
           - { label: "中国工厂", value: "factory" }
@@ -45,9 +46,9 @@ collections:
           - { label: "墙纸 / 墙布材料", value: "wallpaper" }
           - { label: "人工木地板材料", value: "wpc" }
           - { label: "其他", value: "other" }
-      - { label: "首页显示", name: "showOnHome", widget: "boolean", default: true }
-      - { label: "图片", name: "image", widget: "image", required: false }
-      - { label: "视频", name: "video", widget: "file", required: false }
+      - { label: "首页显示", name: "showOnHome", widget: "boolean", default: true, hint: "关闭后只保存在记录页，不显示在首页三个板块。" }
+      - { label: "图片", name: "image", widget: "image", required: false, hint: "选择图片后必须点击保存/发布。发布完成并等待网站部署后，图片才会出现在对应栏目。" }
+      - { label: "视频", name: "video", widget: "file", required: false, hint: "如同时上传视频和图片，图片会作为视频封面。" }
       - label: "中文内容"
         name: "zh"
         widget: "object"
