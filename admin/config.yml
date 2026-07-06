@@ -14,35 +14,9 @@ editor:
   preview: false
 
 collections:
-  - name: "daily_supply_records"
-    label: "首页模块｜每日记录・今日供应链"
-    label_singular: "每日记录"
-    folder: "data/supply-chain-records"
-    media_folder: "../../media/records/today"
-    public_folder: "/media/records/today"
-    create: true
-    delete: true
-    filter: { field: "category", value: "today" }
-    extension: "json"
-    format: "json"
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
-    identifier_field: "title"
-    summary: "今日供应链 / {{title}}"
-    fields:
-      - { label: "前台显示模块", name: "category", widget: "hidden", default: "today" }
-      - { label: "后台记录名", name: "title", widget: "string", hint: "只用于后台识别，不在前台显示。" }
-      - label: "图片（可多张）"
-        name: "images"
-        widget: "list"
-        required: false
-        summary: "{{fields.image}}"
-        hint: "把同一批现场照片放在这里。前台会一起展示，不需要逐张写说明。"
-        field: { label: "图片", name: "image", widget: "image", required: false, hint: "建议上传 JPG / PNG / WebP。手机 HEIC 请先转 JPG。" }
-      - { label: "视频（可选）", name: "video", widget: "file", required: false, hint: "上传 MP4。手机 MOV 请先转 MP4。" }
-
   - name: "factory_records"
-    label: "首页模块｜工厂侧・中国工厂"
-    label_singular: "工厂记录"
+    label: "首页模块｜中国工厂・供应链实景"
+    label_singular: "工厂供应链实景"
     folder: "data/supply-chain-records"
     media_folder: "../../media/records/factory"
     public_folder: "/media/records/factory"
@@ -53,7 +27,7 @@ collections:
     format: "json"
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     identifier_field: "title"
-    summary: "中国工厂 / {{title}}"
+    summary: "中国工厂・供应链实景 / {{title}}"
     fields:
       - { label: "前台显示模块", name: "category", widget: "hidden", default: "factory" }
       - { label: "后台记录名", name: "title", widget: "string", hint: "只用于后台识别，不在前台显示。" }
@@ -62,13 +36,13 @@ collections:
         widget: "list"
         required: false
         summary: "{{fields.image}}"
-        hint: "把同一批工厂、包装、仓库照片放在这里。前台会一起展示，不需要逐张写说明。"
+        hint: "上传工厂、材料、包装、仓库、发货、装车、物流前状态照片。前台会一起展示，不需要逐张写说明。"
         field: { label: "图片", name: "image", widget: "image", required: false, hint: "建议上传 JPG / PNG / WebP。手机 HEIC 请先转 JPG。" }
       - { label: "视频（可选）", name: "video", widget: "file", required: false, hint: "上传 MP4。手机 MOV 请先转 MP4。" }
 
   - name: "japan_site_records"
-    label: "首页模块｜日本现场・现场记录"
-    label_singular: "现场记录"
+    label: "首页模块｜日本现场记录"
+    label_singular: "日本现场记录"
     folder: "data/supply-chain-records"
     media_folder: "../../media/records/site"
     public_folder: "/media/records/site"

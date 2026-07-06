@@ -290,18 +290,16 @@ const langConfig = {
     title: "京建サプライ｜中国工場 × 日本現場 × 工務店のサプライチェーンパートナー",
     description: "京建サプライは、中国工場と日本現場をつなぎ、工務店・内装会社・設計会社のために材料調達、包装、物流、現場確認を支えるサプライチェーンパートナーです。",
     logo: "京建サプライ",
-    nav: ["今日のサプライチェーン", "中国工場", "現場記録", "工務店連携", "製品分類"],
+    nav: ["中国工場・供給実景", "日本現場記録", "製品と見積", "工務店連携"],
     heroTitle: "二十年、サプライチェーンだけを積み上げてきました。",
     heroSub: ["中国工場", "↓", "日本現場", "↓", "長期連携"],
     heroBody: "京建サプライは施工会社ではありません。中国側の製作、包装、物流、日本到着後の現場確認をつなぎ、工務店・内装会社の背後で材料供給の確実性を積み上げます。",
-    primary: "写真記録を見る",
+    primary: "工場・供給実景を見る",
     secondary: "製品と見積を見る",
-    todayTitle: "今日のサプライチェーン",
-    todayLead: "毎日増えていく実記録。写真、寸法、包装、到着、確認。派手な広告ではなく、材料が現場へ届くまでの事実を残します。",
-    factoryTitle: "中国工場",
-    factoryLead: "工場、職人、機械、梱包、倉庫。京建が見るのは価格だけではありません。安定して作れるか、梱包できるか、日本の現場に届く形にできるかを確認します。",
-    siteTitle: "現場記録",
-    siteLead: "施工実績ではなく、材料が現場に着くまでの記録です。寸法確認、材料到着、破損確認、取付前確認、引き渡し。施工は工務店様が主役です。",
+    factoryTitle: "中国工場・供給実景",
+    factoryLead: "工場、材料、梱包、倉庫、出荷、積み込み、物流前の状態を写真で残します。京建が見るのは価格だけではなく、安定して作れるか、梱包できるか、日本の現場に届く形にできるかです。",
+    siteTitle: "日本現場記録",
+    siteLead: "材料到着、寸法確認、破損確認、取付前確認、引き渡し状態を残します。施工実績ではなく、材料が日本の現場へ落ちた事実の記録です。",
     timelineTitle: "サプライチェーン時間軸",
     timelineSteps: ["ご要望・図面確認", "工場確認", "サンプル / 仕様確認", "梱包", "国際物流", "日本国内配送", "現場引き渡し"],
     partnerTitle: "工務店連携",
@@ -322,18 +320,16 @@ const langConfig = {
     title: "Kyoken Supply | China Factory × Japan Site × Contractor Supply Chain Partner",
     description: "Kyoken Supply supports contractors and interior companies by connecting Chinese factories with Japanese job sites through procurement, packaging, logistics, and site confirmation.",
     logo: "Kyoken Supply",
-    nav: ["Today", "China Factory", "Site Records", "Partners", "Products"],
+    nav: ["China Factory & Supply Records", "Japan Site Records", "Products & Quotes", "Partners"],
     heroTitle: "Twenty years, focused on supply chain certainty.",
     heroSub: ["China Factory", "↓", "Japan Site", "↓", "Long-term Partnership"],
     heroBody: "Kyoken Supply is not a contractor competing for your site. We support material sourcing, production coordination, export packaging, logistics, and arrival confirmation so contractors can focus on their own clients and installation work.",
-    primary: "View photos",
+    primary: "View factory records",
     secondary: "View products & quotes",
-    todayTitle: "Today's Supply Chain",
-    todayLead: "A growing record of real work: photos, dimensions, packaging, shipment, arrival, and confirmation. Less advertising, more evidence.",
-    factoryTitle: "China Factory",
-    factoryLead: "Factories, skilled workers, machines, packing lines, warehouses. We look beyond price and check whether materials can be made, packed, shipped, and received reliably.",
-    siteTitle: "Site Records",
-    siteLead: "Not construction cases. These are records of materials landing at Japanese sites: measurements, delivery, damage check, pre-installation confirmation, and handover.",
+    factoryTitle: "China Factory & Supply Records",
+    factoryLead: "Factory, materials, packing, warehouse, shipment, loading, and pre-logistics conditions. We show whether materials can be made, packed, shipped, and received reliably.",
+    siteTitle: "Japan Site Records",
+    siteLead: "Material arrival, dimension checks, damage checks, pre-installation confirmation, and handover status. These are not construction case studies; they are records of materials landing at Japanese sites.",
     timelineTitle: "Supply Chain Timeline",
     timelineSteps: ["Request & Drawing Check", "Factory Confirmation", "Sample / Specification", "Packing", "International Logistics", "Japan Delivery", "Site Handover"],
     partnerTitle: "Contractor Partnership",
@@ -354,23 +350,21 @@ const langConfig = {
     title: "京建供应链｜中国工厂 × 日本现场 × 工务店供应链合作伙伴",
     description: "京建供应链连接中国工厂和日本现场，为工务店、内装公司、设计公司提供材料采购、包装、物流、现场确认等供应链支持。",
     logo: "京建供应链",
-    nav: ["今日供应链", "中国工厂", "现场记录", "工务店合作", "产品分类"],
+    nav: ["中国工厂・供应链实景", "日本现场记录", "产品与报价", "工务店合作"],
     heroTitle: "二十年，只做好供应链这一件事。",
     heroSub: ["中国工厂", "↓", "日本现场", "↓", "长期合作"],
     heroBody: "京建不是施工竞争者。我们做的是中国侧生产、包装、物流、日本到场确认，把材料可交付、可安装、可沟通这件事做稳定。",
-    primary: "看供应链照片",
+    primary: "看工厂供应链实景",
     secondary: "看产品和报价",
-    todayTitle: "今日供应链",
-    todayLead: "每天增加真实记录：照片、尺寸、包装、运输、到场、确认。不是广告堆砌，而是把材料抵达日本现场的过程长期沉淀下来。",
-    factoryTitle: "中国工厂",
-    factoryLead: "工厂、老师傅、机器、包装线、仓库。京建看的不是最低价，而是能不能稳定生产、稳定包装、稳定交付到日本现场。",
-    siteTitle: "现场记录",
-    siteLead: "不是施工案例，而是材料落地记录。尺寸确认、材料到场、破损确认、安装前确认、交付确认。施工主角仍然是工务店。",
+    factoryTitle: "中国工厂・供应链实景",
+    factoryLead: "展示工厂、包装、材料、仓库、发货、装车、物流前状态。京建看的不是最低价，而是能不能稳定生产、稳定包装、稳定交付到日本现场。",
+    siteTitle: "日本现场记录",
+    siteLead: "展示材料到场、尺寸确认、破损确认、安装前确认、交付状态。这里不是施工案例，而是材料真正落到日本现场的记录。",
     timelineTitle: "供应链时间轴",
     timelineSteps: ["需求与图纸确认", "工厂确认", "样品 / 规格确认", "包装", "国际物流", "日本国内配送", "现场交付"],
     partnerTitle: "工务店合作",
     partnerLead: "京建负责材料、采购、运输、交付确认；现场施工、安装报价、终端客户维护由工务店主导。",
-    productsTitle: "产品和报价",
+    productsTitle: "产品与报价",
     productsLead: "先看供应链、工厂、日本现场照片，再选择产品，最后把照片、尺寸、数量、地址发到 LINE。",
     contactTitle: "LINE 下单或报价咨询",
     contactLead: "发送产品名、照片、尺寸、数量、配送地址。规格确认后给出概算报价。",
@@ -420,11 +414,10 @@ function mediaSlot(record, lang) {
 
 function recordModuleLabel(category, lang) {
   const labels = {
-    today: { ja: "今日のサプライチェーン", en: "Today's Supply Chain", zh: "今日供应链" },
-    factory: { ja: "中国工場", en: "China Factory", zh: "中国工厂" },
-    site: { ja: "現場記録", en: "Site Records", zh: "现场记录" }
+    factory: { ja: "中国工場・供給実景", en: "China Factory & Supply Records", zh: "中国工厂・供应链实景" },
+    site: { ja: "日本現場記録", en: "Japan Site Records", zh: "日本现场记录" }
   };
-  return (labels[category] || labels.today)[lang];
+  return (labels[category] || labels.factory)[lang];
 }
 
 function recordCard(record, lang) {
@@ -501,11 +494,10 @@ function homePage(lang) {
   <header class="v5-header">
     <a href="${c.homeUrl}" class="v5-logo">${c.logo}</a>
     <nav class="v5-nav">
-      <a href="#today">${c.nav[0]}</a>
-      <a href="#factory">${c.nav[1]}</a>
-      <a href="#site">${c.nav[2]}</a>
+      <a href="#factory">${c.nav[0]}</a>
+      <a href="#site">${c.nav[1]}</a>
+      <a href="#products">${c.nav[2]}</a>
       <a href="${c.contractorUrl}">${c.nav[3]}</a>
-      <a href="#products">${c.nav[4]}</a>
     </nav>
     <div class="v5-lang">${languageSwitch}</div>
   </header>
@@ -521,31 +513,22 @@ function homePage(lang) {
         <div class="v5-route">${c.heroSub.map((item) => `<span>${item}</span>`).join("")}</div>
         <p>${c.heroBody}</p>
         <div class="v5-actions">
-          <a href="#today">${c.primary}</a>
+          <a href="#factory">${c.primary}</a>
           <a href="#products">${c.secondary}</a>
         </div>
       </div>
     </section>
 
-    <section id="today" class="v5-section">
-      <p class="v5-kicker">${lang === "en" ? "DAILY RECORDS" : lang === "zh" ? "每日记录" : "日々の記録"}</p>
-      <h2>${c.todayTitle}</h2>
-      <p class="v5-lead">${c.todayLead}</p>
-      <div class="v5-record-grid">
-        ${homeRecords(lang, "today", 3, photoSlot(lang === "en" ? "Daily photo / video to be added" : lang === "zh" ? "每日照片 / 视频待补充" : "日々の写真 / 動画を追加予定", lang === "en" ? "DAILY RECORD" : lang === "zh" ? "每日记录" : "日々の記録"))}
-      </div>
-      <a class="v5-section-link" href="supply-chain-records.html">${lang === "en" ? "View all supply-chain records" : lang === "zh" ? "查看全部供应链记录" : "すべての記録を見る"}</a>
-    </section>
-
-    <section id="factory" class="v5-section v5-split">
+    <section id="factory" class="v5-section">
       <div>
-        <p class="v5-kicker">${lang === "en" ? "FACTORY SIDE" : lang === "zh" ? "工厂侧" : "工場側"}</p>
+        <p class="v5-kicker">${lang === "en" ? "FACTORY / PACKING / SHIPMENT" : lang === "zh" ? "工厂 / 包装 / 发货" : "工場 / 梱包 / 出荷"}</p>
         <h2>${c.factoryTitle}</h2>
         <p class="v5-lead">${c.factoryLead}</p>
       </div>
-      <div class="v5-record-grid two">
-        ${homeRecords(lang, "factory", 2, photoSlot(lang === "en" ? "Factory photos / videos to be added" : lang === "zh" ? "中国工厂照片 / 视频待补充" : "中国工場の写真 / 動画を追加予定", recordModuleLabel("factory", lang)))}
+      <div class="v5-record-grid">
+        ${homeRecords(lang, "factory", 4, photoSlot(lang === "en" ? "Factory and supply-chain photos / videos to be added" : lang === "zh" ? "工厂供应链照片 / 视频待补充" : "工場・供給実景の写真 / 動画を追加予定", recordModuleLabel("factory", lang)))}
       </div>
+      <a class="v5-section-link" href="supply-chain-records.html">${lang === "en" ? "View all records" : lang === "zh" ? "查看全部实景记录" : "すべての記録を見る"}</a>
     </section>
 
     <section id="site" class="v5-section v5-split reverse">
@@ -575,7 +558,7 @@ function homePage(lang) {
     </section>
 
     <section id="products" class="v5-section">
-      <p class="v5-kicker">${lang === "en" ? "MATERIAL RANGE" : lang === "zh" ? "材料范围" : "取扱範囲"}</p>
+      <p class="v5-kicker">${lang === "en" ? "PRODUCTS / QUOTES" : lang === "zh" ? "产品 / 报价" : "製品 / 見積"}</p>
       <h2>${c.productsTitle}</h2>
       <p class="v5-lead">${c.productsLead}</p>
       <div class="v5-product-grid">${productCards(lang)}</div>
@@ -602,12 +585,12 @@ function recordsPage(lang) {
   const c = langConfig[lang];
   const prefix = lang === "ja" ? "" : "../";
   const backText = lang === "en" ? "Back to home" : lang === "zh" ? "返回首页" : "トップへ戻る";
-  const title = lang === "en" ? "Supply-chain Records" : lang === "zh" ? "供应链记录" : "サプライチェーン記録";
+  const title = lang === "en" ? "Factory & Site Records" : lang === "zh" ? "工厂与现场实景记录" : "工場・現場記録";
   const lead = lang === "en"
-    ? "Raw photos and videos from factory, packing, logistics, arrival, and site handover. Photos speak first."
+    ? "Raw photos and videos from China factory supply-chain scenes and Japan site handover. Photos speak first."
     : lang === "zh"
-      ? "这里集中展示工厂、包装、运输、到场、交付的真实照片和视频。照片先说话。"
-      : "工場、梱包、物流、到着、引き渡しの実際の写真と動画を集約します。まず写真で確認できる状態にします。";
+      ? "这里集中展示中国工厂供应链实景和日本现场记录。照片先说话。"
+      : "中国工場の供給実景と日本現場記録の写真・動画を集約します。まず写真で確認できる状態にします。";
   return `<!DOCTYPE html>
 <html lang="${c.htmlLang}">
 <head>
@@ -622,12 +605,12 @@ function recordsPage(lang) {
 <body class="v5-body">
   <header class="v5-header">
     <a href="${c.homeUrl}" class="v5-logo">${c.logo}</a>
-    <nav class="v5-nav"><a href="${c.homeUrl}#today">${c.nav[0]}</a><a href="${c.homeUrl}#products">${c.nav[4]}</a></nav>
+    <nav class="v5-nav"><a href="${c.homeUrl}#factory">${c.nav[0]}</a><a href="${c.homeUrl}#products">${c.nav[2]}</a></nav>
     <a class="v5-back-link" href="${c.homeUrl}">${backText}</a>
   </header>
   <main>
     <section class="v5-section v5-records-page">
-      <p class="v5-kicker">${lang === "en" ? "DAILY ARCHIVE" : lang === "zh" ? "每日归档" : "日々の記録"}</p>
+      <p class="v5-kicker">${lang === "en" ? "PHOTO RECORDS" : lang === "zh" ? "实景记录" : "写真記録"}</p>
       <h1>${title}</h1>
       <p class="v5-lead">${lead}</p>
       <div class="v5-record-detail-list">
@@ -676,7 +659,7 @@ function contractorPage(lang) {
 <body class="v5-body">
   <header class="v5-header">
     <a href="${c.homeUrl}" class="v5-logo">${c.logo}</a>
-    <nav class="v5-nav"><a href="${c.homeUrl}#today">${c.nav[0]}</a><a href="${c.homeUrl}#products">${c.nav[4]}</a></nav>
+    <nav class="v5-nav"><a href="${c.homeUrl}#factory">${c.nav[0]}</a><a href="${c.homeUrl}#products">${c.nav[2]}</a></nav>
   </header>
   <main>
     <section class="v5-section v5-partner-page">
@@ -737,10 +720,10 @@ function productDetailPage(lang, file) {
   const siteTitle = lang === "en" ? "Related Records" : lang === "zh" ? "相关记录" : "関連記録";
   const backText = lang === "en" ? "Back to home" : lang === "zh" ? "返回首页" : "トップへ戻る";
   const recordNote = lang === "en"
-    ? "Photos and videos are managed only under Today's Supply Chain, China Factory, and Site Records."
+    ? "Photos and videos are managed under China Factory & Supply Records and Japan Site Records."
     : lang === "zh"
-      ? "照片和视频只统一归档到「今日供应链」「中国工厂」「现场记录」三个大类。"
-      : "写真と動画は「今日のサプライチェーン」「中国工場」「現場記録」の3分類だけで管理します。";
+      ? "照片和视频统一归档到「中国工厂・供应链实景」和「日本现场记录」。"
+      : "写真と動画は「中国工場・供給実景」と「日本現場記録」に集約します。";
   const lineNote = lang === "en"
     ? "Send drawings, site photos, dimensions, quantity, and delivery area."
     : lang === "zh"
@@ -769,7 +752,7 @@ function productDetailPage(lang, file) {
 <body class="v5-body">
   <header class="v5-header">
     <a href="${c.homeUrl}" class="v5-logo">${c.logo}</a>
-    <nav class="v5-nav"><a href="${c.homeUrl}#today">${c.nav[0]}</a><a href="${c.homeUrl}#products">${c.nav[4]}</a></nav>
+    <nav class="v5-nav"><a href="${c.homeUrl}#factory">${c.nav[0]}</a><a href="${c.homeUrl}#products">${c.nav[2]}</a></nav>
     <div class="v5-lang">${languageSwitch}</div>
   </header>
 
@@ -812,7 +795,7 @@ function productDetailPage(lang, file) {
       <p class="v5-kicker">${lang === "en" ? "RECORDS" : lang === "zh" ? "记录" : "記録"}</p>
       <h2>${siteTitle}</h2>
       <p class="v5-lead">${recordNote}</p>
-      <a class="v5-section-link" href="${c.homeUrl}#today">${lang === "en" ? "Open the three record modules" : lang === "zh" ? "查看三个记录大类" : "3つの記録分類を見る"}</a>
+      <a class="v5-section-link" href="${c.homeUrl}#factory">${lang === "en" ? "Open factory and site records" : lang === "zh" ? "查看工厂和现场记录" : "工場・現場記録を見る"}</a>
     </section>
 
     ${productStory(lang, detail.name)}
