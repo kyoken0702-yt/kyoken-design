@@ -478,7 +478,6 @@ function productCards(code) {
       <p>${product.one[code]}</p>
       <div class="inline-actions">
         <a href="${href(code, product.file)}">${lang[code].detail}</a>
-        <a href="${lineUrl}">${lang[code].line}</a>
       </div>
     </div>
   </article>`).join("");
