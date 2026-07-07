@@ -160,12 +160,55 @@
       font-weight: 600;
       word-break: break-all;
     }
-    .record {
-      display: grid;
-      gap: 9px;
-    }
-    .record strong { color: var(--red); }
-    .progress {
+	    .record {
+	      display: grid;
+	      gap: 9px;
+	    }
+	    .record strong { color: var(--red); }
+	    .media-editor {
+	      display: none;
+	      gap: 10px;
+	      padding: 10px;
+	      border: 1px solid #d8dee8;
+	      background: #f8fafc;
+	    }
+	    .media-editor.open { display: grid; }
+	    .media-actions {
+	      display: flex;
+	      flex-wrap: wrap;
+	      gap: 8px;
+	    }
+	    .media-grid {
+	      display: grid;
+	      grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+	      gap: 8px;
+	    }
+	    .media-item {
+	      display: grid;
+	      gap: 6px;
+	      padding: 6px;
+	      border: 1px solid var(--line);
+	      background: #fff;
+	    }
+	    .media-item img,
+	    .media-item video {
+	      display: block;
+	      width: 100%;
+	      aspect-ratio: 4 / 3;
+	      object-fit: cover;
+	      background: #dbe3ee;
+	    }
+	    .media-item label {
+	      display: flex;
+	      gap: 6px;
+	      align-items: center;
+	      color: var(--muted);
+	      font-size: 12px;
+	      font-weight: 600;
+	      word-break: break-all;
+	    }
+	    .media-item input { width: auto; }
+	    .progress {
       overflow: hidden;
       height: 12px;
       border: 1px solid #c8d1df;
@@ -382,17 +425,135 @@
           var mediaCount = Array.isArray(record.media) ? record.media.length : 0;
           var moduleText = record.module === "site" ? "日本现场记录" : "中国工厂・供应链实景";
           var channelText = record.module === "factory" && record.channel && channelLabels[record.channel] ? " / " + channelLabels[record.channel].title : "";
-          card.innerHTML = '<h3>' + escapeHtml(record.title || "未命名记录") + '</h3>' +
-            '<small>' + escapeHtml(moduleText + channelText) + '</small>' +
-            '<div><strong>' + mediaCount + '</strong> 个媒体</div>' +
-            '<small>' + escapeHtml(record.id || "") + '</small>' +
-            '<button class="danger" type="button">从前台移除</button>';
-          card.querySelector("button").addEventListener("click", function () { deleteRecord(record.id); });
-          recordList.appendChild(card);
-        });
-      }
+	          card.innerHTML = '<h3>' + escapeHtml(record.title || "未命名记录") + '</h3>' +
+	            '<small>' + escapeHtml(moduleText + channelText) + '</small>' +
+	            '<div><strong>' + mediaCount + '</strong> 个媒体</div>' +
+	            '<small>' + escapeHtml(record.id || "") + '</small>' +
+	            '<div class="actions">' +
+	            '<button class="secondary edit-media" type="button">编辑图片</button>' +
+	            '<button class="danger remove-record" type="button">从前台移除</button>' +
+	            '</div>' +
+	            '<div class="media-editor"></div>';
+	          card.querySelector(".remove-record").addEventListener("click", function () { deleteRecord(record.id); });
+	          card.querySelector(".edit-media").addEventListener("click", function () { toggleMediaEditor(card, record); });
+	          recordList.appendChild(card);
+	        });
+	      }
 
-      function bytesText(size) {
+	      function mediaName(src) {
+	        return String(src || "").split("/").pop() || "media";
+	      }
+
+	      function mediaPreview(src) {
+	        var safe = escapeHtml(src);
+	        if (isVideo(src)) return '<video src="' + safe + '" controls muted></video>';
+	        return '<img src="' + safe + '" alt="' + escapeHtml(mediaName(src)) + '">';
+	      }
+
+	      function renderMediaEditor(container, record) {
+	        var editor = container.querySelector(".media-editor");
+	        var media = Array.isArray(record.media) ? record.media : [];
+	        editor.innerHTML = '<div class="media-grid">' + media.map(function (src, index) {
+	          return '<div class="media-item">' +
+	            mediaPreview(src) +
+	            '<label><input type="checkbox" value="' + index + '"> ' + escapeHtml(String(index + 1).padStart(2, "0") + " " + mediaName(src)) + '</label>' +
+	            '</div>';
+	        }).join("") + '</div>' +
+	        '<div class="media-actions">' +
+	          '<button class="danger delete-selected" type="button">删除选中</button>' +
+	          '<button class="secondary select-all" type="button">全选</button>' +
+	          '<button class="secondary add-media" type="button">添加图片 / 视频</button>' +
+	        '</div>' +
+	        '<input class="file-input add-media-input" type="file" multiple accept="image/jpeg,image/png,image/webp,video/mp4,video/webm">';
+	        editor.querySelector(".delete-selected").addEventListener("click", function () { deleteSelectedMedia(record, editor); });
+	        editor.querySelector(".select-all").addEventListener("click", function () {
+	          editor.querySelectorAll('input[type="checkbox"]').forEach(function (input) { input.checked = true; });
+	        });
+	        editor.querySelector(".add-media").addEventListener("click", function () { editor.querySelector(".add-media-input").click(); });
+	        editor.querySelector(".add-media-input").addEventListener("change", function (event) { addMediaToRecord(record, Array.from(event.target.files || [])); });
+	      }
+
+	      function toggleMediaEditor(container, record) {
+	        var editor = container.querySelector(".media-editor");
+	        if (editor.classList.contains("open")) {
+	          editor.classList.remove("open");
+	          return;
+	        }
+	        renderMediaEditor(container, record);
+	        editor.classList.add("open");
+	      }
+
+	      async function saveRecordMedia(record, media, successMessage) {
+	        var result = await adminApi({ action: "update-media", id: record.id, media: media });
+	        records = result.records || records.map(function (item) {
+	          return item && item.id === record.id ? Object.assign({}, item, { media: media }) : item;
+	        });
+	        renderRecords();
+	        setStatus(successMessage, "ok");
+	      }
+
+	      async function deleteSelectedMedia(record, editor) {
+	        var selected = Array.from(editor.querySelectorAll('input[type="checkbox"]:checked')).map(function (input) {
+	          return Number(input.value);
+	        });
+	        if (!selected.length) return setStatus("请先勾选要删除的图片 / 视频。", "warn");
+	        if (!window.confirm("确定从这条记录移除选中的 " + selected.length + " 个媒体？\n媒体文件会保留，只是不再显示在前台。")) return;
+	        var selectedMap = {};
+	        selected.forEach(function (index) { selectedMap[index] = true; });
+	        var nextMedia = (record.media || []).filter(function (_src, index) { return !selectedMap[index]; });
+	        publishBtn.disabled = true;
+	        try {
+	          await saveRecordMedia(record, nextMedia, "已从这条记录移除 " + selected.length + " 个媒体。Vercel 会随后自动部署。");
+	        } catch (error) {
+	          setStatus("删除媒体失败：" + error.message, "warn");
+	        } finally {
+	          publishBtn.disabled = false;
+	        }
+	      }
+
+	      async function addMediaToRecord(record, files) {
+	        if (!files.length) return;
+	        var unsupported = files.filter(function (file) { return !isAllowed(file); });
+	        if (unsupported.length) return setStatus("不支持这些文件：" + unsupported.map(function (file) { return file.name; }).join("、") + "。HEIC / MOV 请先转换。", "warn");
+	        var oversizedVideos = files.filter(function (file) { return isVideo(file) && file.size > 25 * 1024 * 1024; });
+	        if (oversizedVideos.length) return setStatus("视频太大，请先压缩到 25MB 以下 MP4 / WebM。", "warn");
+	        publishBtn.disabled = true;
+	        setProgress(0, 1);
+	        try {
+	          var mediaPaths = [];
+	          var savedBytes = 0;
+	          var moduleName = record.module || "factory";
+	          var channelName = moduleName === "factory" ? (record.channel || "advertising") : "site";
+	          var imageOptions = moduleName === "site"
+	            ? { maxSide: 1280, quality: 0.64 }
+	            : { maxSide: 1500, quality: 0.7 };
+	          for (var i = 0; i < files.length; i += 1) {
+	            var source = files[i];
+	            setStatus("正在追加媒体 " + (i + 1) + " / " + files.length + "：" + source.name);
+	            var prepared = isVideo(source) ? { file: source, originalSize: source.size, compressed: false } : await compressImage(source, imageOptions);
+	            if (prepared.compressed) savedBytes += prepared.originalSize - prepared.compressedSize;
+	            var preparedFile = prepared.file;
+	            var mediaBase = moduleName === "factory"
+	              ? "media/records/factory/" + channelName + "/" + record.id
+	              : "media/records/site/" + record.id;
+	            var mediaPath = mediaBase + "/" + cleanFileName(preparedFile, i, isVideo(preparedFile) ? null : ".jpg");
+	            var base64 = await fileToBase64(preparedFile);
+	            if (base64.length > 3500000) throw new Error("单个文件压缩后仍然太大：" + source.name + "。请先裁剪或压缩后再上传。");
+	            var uploaded = await adminApi({ action: "blob", file: { path: mediaPath, content: base64 } });
+	            mediaPaths.push("/" + uploaded.file.path);
+	            setProgress(i + 1, files.length + 1);
+	          }
+	          var nextMedia = (record.media || []).concat(mediaPaths);
+	          setProgress(files.length + 1, files.length + 1);
+	          await saveRecordMedia(record, nextMedia, "已追加 " + mediaPaths.length + " 个媒体" + (savedBytes ? "，约减少 " + bytesText(savedBytes) : "") + "。Vercel 会随后自动部署。");
+	        } catch (error) {
+	          setStatus("追加媒体失败：" + error.message, "warn");
+	        } finally {
+	          publishBtn.disabled = false;
+	        }
+	      }
+
+	      function bytesText(size) {
         if (size > 1024 * 1024) return (size / 1024 / 1024).toFixed(1) + "MB";
         return Math.max(1, Math.round(size / 1024)) + "KB";
       }
