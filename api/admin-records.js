@@ -159,7 +159,7 @@ export default async function handler(req, res) {
       if (!id || !media) throw new Error("缺少要更新的记录 ID 或媒体列表。");
       const nextRecords = records.map((item) => item && item.id === id ? { ...item, media } : item);
       if (!nextRecords.some((item) => item && item.id === id)) throw new Error("找不到要更新的记录。");
-      const commit = await commitBundle([], nextRecords, "update kyoken supply record media");
+      const commit = await commitBundle(body.uploadFiles || [], nextRecords, "update kyoken supply record media");
       res.status(200).send(JSON.stringify({ ok: true, records: nextRecords, commit: commit.sha }));
       return;
     }

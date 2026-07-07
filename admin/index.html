@@ -278,9 +278,9 @@
       <div class="file-box">
         <strong>上传图片 / 视频</strong>
         <button id="selectFilesBtn" class="secondary" type="button">选择图片 / 视频（可多选）</button>
-        <input id="files" class="file-input" type="file" multiple accept="image/jpeg,image/png,image/webp,video/mp4,video/webm">
+        <input id="files" class="file-input" type="file" multiple accept="image/*,video/mp4,video/webm">
         <span id="fileSummary" class="hint">未选择文件。</span>
-        <span class="hint">支持 JPG / PNG / WebP / 小 MP4 / WebM。HEIC / MOV 请先转 JPG / MP4。图片会在浏览器本地压缩；日本现场照片会压到更适合后台上传的尺寸。</span>
+        <span class="hint">支持手机照片、JPG / PNG / WebP / 小 MP4 / WebM。图片会在浏览器本地压缩；日本现场照片会压到更适合后台上传的尺寸。</span>
       </div>
 
       <div id="previewGrid" class="preview-grid"></div>
@@ -464,7 +464,7 @@
 	          '<button class="secondary select-all" type="button">全选</button>' +
 	          '<button class="secondary add-media" type="button">添加图片 / 视频</button>' +
 	        '</div>' +
-	        '<input class="file-input add-media-input" type="file" multiple accept="image/jpeg,image/png,image/webp,video/mp4,video/webm">';
+	        '<input class="file-input add-media-input" type="file" multiple accept="image/*,video/mp4,video/webm">';
 	        editor.querySelector(".delete-selected").addEventListener("click", function () { deleteSelectedMedia(record, editor); });
 	        editor.querySelector(".select-all").addEventListener("click", function () {
 	          editor.querySelectorAll('input[type="checkbox"]').forEach(function (input) { input.checked = true; });
@@ -483,8 +483,8 @@
 	        editor.classList.add("open");
 	      }
 
-	      async function saveRecordMedia(record, media, successMessage) {
-	        var result = await adminApi({ action: "update-media", id: record.id, media: media });
+	      async function saveRecordMedia(record, media, successMessage, uploadFiles) {
+	        var result = await adminApi({ action: "update-media", id: record.id, media: media, uploadFiles: uploadFiles || [] });
 	        records = result.records || records.map(function (item) {
 	          return item && item.id === record.id ? Object.assign({}, item, { media: media }) : item;
 	        });
@@ -514,13 +514,14 @@
 	      async function addMediaToRecord(record, files) {
 	        if (!files.length) return;
 	        var unsupported = files.filter(function (file) { return !isAllowed(file); });
-	        if (unsupported.length) return setStatus("不支持这些文件：" + unsupported.map(function (file) { return file.name; }).join("、") + "。HEIC / MOV 请先转换。", "warn");
+	        if (unsupported.length) return setStatus("不支持这些文件：" + unsupported.map(function (file) { return file.name; }).join("、") + "。请使用手机照片、JPG / PNG / WebP 或 MP4 / WebM。", "warn");
 	        var oversizedVideos = files.filter(function (file) { return isVideo(file) && file.size > 25 * 1024 * 1024; });
 	        if (oversizedVideos.length) return setStatus("视频太大，请先压缩到 25MB 以下 MP4 / WebM。", "warn");
 	        publishBtn.disabled = true;
 	        setProgress(0, 1);
 	        try {
 	          var mediaPaths = [];
+	          var uploadFiles = [];
 	          var savedBytes = 0;
 	          var moduleName = record.module || "factory";
 	          var channelName = moduleName === "factory" ? (record.channel || "advertising") : "site";
@@ -540,12 +541,13 @@
 	            var base64 = await fileToBase64(preparedFile);
 	            if (base64.length > 3500000) throw new Error("单个文件压缩后仍然太大：" + source.name + "。请先裁剪或压缩后再上传。");
 	            var uploaded = await adminApi({ action: "blob", file: { path: mediaPath, content: base64 } });
+	            uploadFiles.push(uploaded.file);
 	            mediaPaths.push("/" + uploaded.file.path);
 	            setProgress(i + 1, files.length + 1);
 	          }
 	          var nextMedia = (record.media || []).concat(mediaPaths);
 	          setProgress(files.length + 1, files.length + 1);
-	          await saveRecordMedia(record, nextMedia, "已追加 " + mediaPaths.length + " 个媒体" + (savedBytes ? "，约减少 " + bytesText(savedBytes) : "") + "。Vercel 会随后自动部署。");
+	          await saveRecordMedia(record, nextMedia, "已追加 " + mediaPaths.length + " 个媒体" + (savedBytes ? "，约减少 " + bytesText(savedBytes) : "") + "。Vercel 会随后自动部署。", uploadFiles);
 	        } catch (error) {
 	          setStatus("追加媒体失败：" + error.message, "warn");
 	        } finally {
@@ -584,9 +586,10 @@
       }
 
       function isAllowed(file) {
-        return /^image\/(jpeg|jpg|png|webp)$/i.test(file.type || "") ||
+        return /^image\//i.test(file.type || "") ||
+          /\.(jpe?g|png|webp|heic|heif)$/i.test(file.name || "") ||
           /^video\/(mp4|webm)$/i.test(file.type || "") ||
-          /\.(jpe?g|png|webp|mp4|webm)$/i.test(file.name || "");
+          /\.(mp4|webm)$/i.test(file.name || "");
       }
 
       function fileToBase64(file) {
@@ -600,7 +603,7 @@
 
       function compressImage(file, options) {
         return new Promise(function (resolve, reject) {
-          if (!/^image\/(jpeg|jpg|png|webp)$/i.test(file.type || "") && !/\.(jpe?g|png|webp)$/i.test(file.name || "")) {
+          if (!/^image\//i.test(file.type || "") && !/\.(jpe?g|png|webp|heic|heif)$/i.test(file.name || "")) {
             resolve({ file: file, originalSize: file.size, compressed: false });
             return;
           }
@@ -629,7 +632,7 @@
           };
           image.onerror = function () {
             URL.revokeObjectURL(objectUrl);
-            reject(new Error("图片无法在浏览器内压缩：" + file.name + "。请先转成 JPG / PNG / WebP。"));
+            reject(new Error("图片无法在浏览器内压缩：" + file.name + "。如果是 HEIC，请在手机相册分享为 JPG，或在相机设置里选择“兼容性最佳”。"));
           };
           image.src = objectUrl;
         });
@@ -640,7 +643,7 @@
         var files = Array.from(filesInput.files || []);
         var rejected = files.filter(function (file) { return !isAllowed(file); });
         if (rejected.length) {
-          setStatus("有不支持的文件：" + rejected.map(function (file) { return file.name; }).join("、") + "。HEIC / MOV 请先转换。", "warn");
+          setStatus("有不支持的文件：" + rejected.map(function (file) { return file.name; }).join("、") + "。请使用手机照片、JPG / PNG / WebP 或 MP4 / WebM。", "warn");
         } else if (files.length) {
           setStatus("已选择 " + files.length + " 个文件。每张图片大小已显示，发布前会自动压缩。", "ok");
         }
@@ -673,7 +676,7 @@
         if (!title) return setStatus("请填写标题。", "warn");
         if (!files.length) return setStatus("请先选择至少一张图片或一个小视频。", "warn");
         var unsupported = files.filter(function (file) { return !isAllowed(file); });
-        if (unsupported.length) return setStatus("不支持这些文件：" + unsupported.map(function (file) { return file.name; }).join("、") + "。HEIC / MOV 请先转换。", "warn");
+        if (unsupported.length) return setStatus("不支持这些文件：" + unsupported.map(function (file) { return file.name; }).join("、") + "。请使用手机照片、JPG / PNG / WebP 或 MP4 / WebM。", "warn");
         var oversizedVideos = files.filter(function (file) { return isVideo(file) && file.size > 25 * 1024 * 1024; });
         if (oversizedVideos.length) return setStatus("视频太大，请先压缩到 25MB 以下 MP4 / WebM。", "warn");
 
