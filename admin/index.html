@@ -695,7 +695,9 @@
       }
 
       function login() {
-        var authUrl = "/api/auth?scope=repo";
+        var isLocal = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
+        var authBase = isLocal ? "" : "https://kyoken.design";
+        var authUrl = authBase + "/api/auth?scope=repo&return_origin=" + encodeURIComponent(window.location.origin);
         popup = window.open(authUrl, "kyoken_github_login", "width=720,height=760");
         if (!popup) window.location.href = authUrl;
       }

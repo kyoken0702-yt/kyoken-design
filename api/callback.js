@@ -4,7 +4,7 @@ function getCookie(req, name) {
   return target ? decodeURIComponent(target.slice(name.length + 1)) : "";
 }
 
-function oauthResultPage(provider, status, payload) {
+function oauthResultPage(provider, status, payload, returnOrigin) {
   const message = `authorization:${provider}:${status}:${JSON.stringify(payload)}`;
   const token = status === "success" && payload && payload.token ? payload.token : "";
   return `<!doctype html>
@@ -13,19 +13,26 @@ function oauthResultPage(provider, status, payload) {
 <body>
 <script>
 (function () {
-  var token = ${JSON.stringify(token)};
-  var tokenKey = "kyoken_supply_admin_token";
-  var adminPath = "/admin/";
-  function receiveMessage(event) {
-    if (!event || !event.origin) return;
-    window.opener.postMessage(${JSON.stringify(message)}, event.origin);
-    window.close();
-  }
-  if (window.opener) {
-    window.addEventListener("message", receiveMessage, false);
-    window.opener.postMessage("authorizing:github", "*");
-    return;
-  }
+	  var token = ${JSON.stringify(token)};
+	  var tokenKey = "kyoken_supply_admin_token";
+	  var adminPath = "/admin/";
+	  var returnOrigin = ${JSON.stringify(returnOrigin || "")};
+	  var message = ${JSON.stringify(message)};
+	  function receiveMessage(event) {
+	    if (!event || !event.origin) return;
+	    window.opener.postMessage(message, event.origin);
+	    window.close();
+	  }
+	  if (window.opener) {
+	    if (returnOrigin) {
+	      window.opener.postMessage(message, returnOrigin);
+	      window.setTimeout(function () { window.close(); }, 300);
+	      return;
+	    }
+	    window.addEventListener("message", receiveMessage, false);
+	    window.opener.postMessage("authorizing:github", "*");
+	    return;
+	  }
   if (token) {
     try {
       window.sessionStorage.setItem(tokenKey, token);
@@ -50,6 +57,7 @@ export default async function handler(req, res) {
   }
 
   const expectedState = getCookie(req, "kyoken_supply_oauth_state");
+  const returnOrigin = getCookie(req, "kyoken_supply_return_origin");
   if (!expectedState || expectedState !== req.query.state) {
     res.status(400).send("Invalid OAuth state.");
     return;
@@ -75,14 +83,15 @@ export default async function handler(req, res) {
   const tokenPayload = await tokenResponse.json();
 
   res.setHeader("Set-Cookie", [
-    "kyoken_supply_oauth_state=; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=0"
+    "kyoken_supply_oauth_state=; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=0",
+    "kyoken_supply_return_origin=; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=0"
   ]);
 
   if (!tokenPayload.access_token) {
-    res.status(400).send(oauthResultPage("github", "error", tokenPayload));
+    res.status(400).send(oauthResultPage("github", "error", tokenPayload, returnOrigin));
     return;
   }
 
   res.setHeader("Content-Type", "text/html; charset=utf-8");
-  res.status(200).send(oauthResultPage("github", "success", { token: tokenPayload.access_token }));
+  res.status(200).send(oauthResultPage("github", "success", { token: tokenPayload.access_token }, returnOrigin));
 }
