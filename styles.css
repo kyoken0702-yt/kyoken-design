@@ -44,7 +44,7 @@ h1, h2, h3, strong { letter-spacing: 0; }
 .brand {
   color: var(--navy);
   font-size: 20px;
-  font-weight: 700;
+  font-weight: 600;
   white-space: nowrap;
 }
 
@@ -55,7 +55,7 @@ nav {
   gap: 6px 18px;
   color: #24364f;
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 nav a:hover, .language a:hover { color: var(--red); }
@@ -66,7 +66,7 @@ nav a:hover, .language a:hover { color: var(--red); }
   gap: 8px;
   color: #44546a;
   font-size: 13px;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .language span {
@@ -112,7 +112,7 @@ nav a:hover, .language a:hover { color: var(--red); }
 .kicker {
   color: var(--red);
   font-size: 13px;
-  font-weight: 700;
+  font-weight: 600;
   text-transform: uppercase;
 }
 
@@ -121,21 +121,21 @@ nav a:hover, .language a:hover { color: var(--red); }
 h1 {
   font-size: clamp(38px, 5vw, 72px);
   line-height: 1.05;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 h2 {
   color: var(--navy);
   font-size: clamp(28px, 3vw, 44px);
   line-height: 1.12;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 h3 {
   color: var(--navy);
   font-size: 21px;
   line-height: 1.25;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .hero-copy p {
@@ -151,7 +151,7 @@ h3 {
   gap: 8px;
   color: #fff;
   font-size: clamp(19px, 2vw, 28px);
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .route span {
@@ -177,7 +177,7 @@ h3 {
   border: 1px solid var(--navy);
   background: var(--navy);
   color: #fff;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .actions a:nth-child(2),
@@ -236,17 +236,24 @@ h3 {
 
 .channel-stack {
   display: grid;
-  gap: 24px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  align-items: start;
 }
 
 .channel-section {
   display: grid;
   gap: 12px;
+  min-width: 0;
 }
 
 .channel-section > h3 {
   padding-left: 12px;
   border-left: 5px solid var(--red);
+}
+
+.channel-section .record-grid {
+  grid-template-columns: 1fr;
 }
 
 .record-grid.wide {
@@ -270,14 +277,14 @@ h3 {
 .record-card-head span {
   color: var(--red);
   font-size: 12px;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .record-card-head strong {
   color: var(--navy);
   font-size: 20px;
   line-height: 1.25;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .record-card p {
@@ -312,7 +319,7 @@ h3 {
   border: 1px solid #b8c3d4;
   background: linear-gradient(135deg, #dce4ee, #f5f7fa);
   color: #334155;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .product-grid {
@@ -347,7 +354,7 @@ h3 {
 
 .product-card strong {
   color: var(--red);
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .product-card p {
@@ -396,14 +403,14 @@ h3 {
 .company-list p {
   display: block;
   color: #263243;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .role-grid strong {
   margin-bottom: 8px;
   color: var(--navy);
   font-size: 21px;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .company {
@@ -498,7 +505,7 @@ h3 {
   margin: 4px 0 8px;
   color: var(--navy);
   font-size: 20px;
-  font-weight: 800;
+  font-weight: 600;
 }
 
 .plan-grid p,
@@ -512,7 +519,7 @@ h3 {
   margin-top: 10px;
   color: var(--red);
   font-style: normal;
-  font-weight: 800;
+  font-weight: 600;
 }
 
 .price-table-wrap {
@@ -549,11 +556,11 @@ h3 {
 .price-table th {
   background: var(--paper);
   color: var(--navy);
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .price-table td {
-  font-weight: 700;
+  font-weight: 500;
 }
 
 .price-table-wrap > p {
@@ -580,7 +587,7 @@ h3 {
   margin: 0 0 14px;
   padding-left: 20px;
   color: #263243;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .request-section a {
@@ -591,13 +598,13 @@ h3 {
   padding: 12px 18px;
   background: var(--red);
   color: #fff;
-  font-weight: 800;
+  font-weight: 600;
 }
 
 .process-grid span {
   display: block;
   color: var(--red);
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .process-grid strong {
@@ -605,7 +612,7 @@ h3 {
   margin: 6px 0;
   color: var(--navy);
   font-size: 20px;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .notice {
@@ -682,11 +689,11 @@ h3 {
   .page-hero p,
   .product-hero p,
   .partner p,
-  .contact p {
-    color: #1f2937;
-    font-size: 18px;
-    font-weight: 700;
-  }
+	  .contact p {
+	    color: #1f2937;
+	    font-size: 18px;
+	    font-weight: 400;
+	  }
 
   .hero-copy p {
     color: #eef4fb;
@@ -698,9 +705,10 @@ h3 {
     padding: 34px 16px;
   }
 
-  .record-grid,
-  .record-grid.wide,
-  .product-grid,
+	  .record-grid,
+	  .record-grid.wide,
+	  .channel-stack,
+	  .product-grid,
   .role-grid,
   .role-grid.large,
   .spec-grid,

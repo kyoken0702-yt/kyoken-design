@@ -37,9 +37,9 @@
       background: #fff;
       border-bottom: 1px solid var(--line);
     }
-    h1 { color: var(--navy); font-size: clamp(24px, 3vw, 36px); font-weight: 800; }
-    h2 { color: var(--navy); font-size: 23px; font-weight: 800; }
-    h3 { color: var(--navy); font-size: 18px; font-weight: 800; }
+    h1 { color: var(--navy); font-size: clamp(24px, 3vw, 36px); font-weight: 700; }
+    h2 { color: var(--navy); font-size: 23px; font-weight: 700; }
+    h3 { color: var(--navy); font-size: 18px; font-weight: 600; }
     main {
       display: grid;
       grid-template-columns: minmax(0, 1.1fr) minmax(330px, .9fr);
@@ -56,9 +56,9 @@
       background: #fff;
       border: 1px solid var(--line);
     }
-    .top-note, .hint { color: var(--muted); font-weight: 600; }
+    .top-note, .hint { color: var(--muted); font-weight: 400; }
     .hint { font-size: 14px; }
-    label { display: grid; gap: 7px; color: var(--navy); font-weight: 800; }
+    label { display: grid; gap: 7px; color: var(--navy); font-weight: 600; }
     input, select, textarea {
       width: 100%;
       border: 1px solid #c8d1df;
@@ -66,7 +66,7 @@
       color: var(--text);
       padding: 12px 13px;
       font: inherit;
-      font-weight: 800;
+      font-weight: 600;
       border-radius: 0;
     }
     textarea { min-height: 86px; resize: vertical; }
@@ -86,7 +86,7 @@
       color: #fff;
       padding: 12px 16px;
       font: inherit;
-      font-weight: 800;
+      font-weight: 600;
       cursor: pointer;
       border-radius: 0;
     }
@@ -99,7 +99,7 @@
       border-left: 5px solid var(--blue);
       background: #eef4ff;
       color: var(--navy);
-      font-weight: 700;
+      font-weight: 500;
       white-space: pre-wrap;
     }
     .status.ok { border-color: var(--green); background: #ecfdf5; color: #065f46; }
@@ -113,7 +113,7 @@
       border: 1px solid #ead49a;
       background: #fff8e6;
       color: var(--navy);
-      font-weight: 700;
+      font-weight: 500;
     }
     .login-strip.ok {
       border-color: #a7f3d0;
@@ -157,7 +157,7 @@
       margin-top: 6px;
       color: var(--muted);
       font-size: 12px;
-      font-weight: 800;
+      font-weight: 600;
       word-break: break-all;
     }
     .record {
@@ -188,10 +188,9 @@
   <header>
     <div>
       <h1>京建供应链记录后台</h1>
-      <p class="top-note">先选前台模块，再选材料通道；发布后前台同名模块会显示。</p>
+      <p class="top-note">直接进入后台。先选前台模块，再选材料通道；发布后前台同名模块会显示。</p>
     </div>
     <div class="actions">
-      <button id="loginBtn" type="button">登录 GitHub</button>
       <button id="reloadBtn" class="secondary" type="button">刷新记录</button>
     </div>
   </header>
@@ -199,11 +198,10 @@
   <main>
     <section class="panel">
       <h2>发布新记录</h2>
-      <div id="status" class="status">请先登录。可以先选择图片预览。</div>
+      <div id="status" class="status">后台已打开，可以先选择图片预览。</div>
       <div id="progress" class="progress"><div></div></div>
       <div id="loginStrip" class="login-strip">
-        <span id="loginText">未登录。发布前需要登录 GitHub。</span>
-        <button id="inlineLoginBtn" type="button">先登录</button>
+        <span id="loginText">免 GitHub 弹窗登录。发布会通过本站服务端提交到 GitHub。</span>
       </div>
 
       <label>
@@ -259,20 +257,11 @@
 
   <script>
     (function () {
-      var owner = "kyoken0702-yt";
-      var repo = "kyoken-design";
-      var branch = "master";
-      var recordsPath = "data/records.json";
-      var tokenKey = "kyoken_supply_admin_token";
-      var token = sessionStorage.getItem(tokenKey) || "";
-      var popup = null;
       var records = [];
 
       var $ = function (id) { return document.getElementById(id); };
       var status = $("status");
       var progressBar = $("progress").firstElementChild;
-      var loginBtn = $("loginBtn");
-      var inlineLoginBtn = $("inlineLoginBtn");
       var loginStrip = $("loginStrip");
       var loginText = $("loginText");
       var reloadBtn = $("reloadBtn");
@@ -333,21 +322,8 @@
       }
 
       function updateLoginUi() {
-        if (token) {
-          loginBtn.textContent = "已登录";
-          loginBtn.disabled = true;
-          inlineLoginBtn.textContent = "已登录";
-          inlineLoginBtn.disabled = true;
-          loginStrip.className = "login-strip ok";
-          loginText.textContent = "已登录，可以发布。";
-        } else {
-          loginBtn.textContent = "登录 GitHub";
-          loginBtn.disabled = false;
-          inlineLoginBtn.textContent = "先登录";
-          inlineLoginBtn.disabled = false;
-          loginStrip.className = "login-strip";
-          loginText.textContent = "未登录。发布前需要登录 GitHub。";
-        }
+        loginStrip.className = "login-strip ok";
+        loginText.textContent = "后台已打开。发布和删除会通过本站服务端提交，不再弹 GitHub 登录窗口。";
       }
 
       function syncModuleFields(forceTitle) {
@@ -365,41 +341,29 @@
         }
       }
 
-      function api(path, options) {
-        if (!token) return Promise.reject(new Error("请先登录 GitHub。"));
-        return fetch("https://api.github.com/repos/" + owner + "/" + repo + path, Object.assign({
-          headers: {
-            Accept: "application/vnd.github+json",
-            Authorization: "Bearer " + token,
-            "X-GitHub-Api-Version": "2022-11-28"
-          }
-        }, options || {})).then(async function (res) {
-          var text = await res.text();
-          var data = text ? JSON.parse(text) : null;
-          if (!res.ok) throw new Error((data && data.message) || ("GitHub API error: " + res.status));
-          return data;
-        });
-      }
-
-      function decodeBase64(content) {
-        return decodeURIComponent(escape(atob(String(content || "").replace(/\s/g, ""))));
-      }
-
-      async function getContent(path) {
-        return api("/contents/" + encodeURIComponent(path).replace(/%2F/g, "/") + "?ref=" + encodeURIComponent(branch));
+      async function adminApi(payload) {
+        var options = payload ? {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        } : {};
+        var res = await fetch("/api/admin-records", options);
+        var data = await res.json().catch(function () { return null; });
+        if (!res.ok || !data || !data.ok) throw new Error((data && data.message) || ("Admin API error: " + res.status));
+        return data;
       }
 
       async function loadRecords() {
         recordList.innerHTML = "";
-        if (!token) {
-          recordList.innerHTML = '<p class="hint">登录后显示记录。</p>';
-          return;
-        }
         try {
-          var file = await getContent(recordsPath);
-          records = JSON.parse(decodeBase64(file.content));
+          var data = await adminApi();
+          records = data.records || [];
           renderRecords();
-          setStatus("已读取前台记录 " + records.length + " 条。", "ok");
+          if (data.writable === false) {
+            setStatus("已读取前台记录 " + records.length + " 条。当前缺少服务端 GitHub 写入 token，只能查看，不能发布。", "warn");
+          } else {
+            setStatus("已读取前台记录 " + records.length + " 条。", "ok");
+          }
         } catch (error) {
           recordList.innerHTML = '<p class="hint">读取失败：' + escapeHtml(error.message) + '</p>';
           setStatus("读取 records.json 失败：" + error.message, "warn");
@@ -537,63 +501,7 @@
         });
       }
 
-      async function createBlob(content, encoding) {
-        var blob = await api("/git/blobs", {
-          method: "POST",
-          body: JSON.stringify({ content: content, encoding: encoding })
-        });
-        return blob.sha;
-      }
-
-      function cleanGitPath(path) {
-        var value = String(path || "").replace(/^\/+/, "");
-        if (!value || value.indexOf("..") !== -1 || value.indexOf(".git/") === 0) throw new Error("Invalid path: " + path);
-        return value;
-      }
-
-      async function commitBundle(uploadFiles, nextRecords, message) {
-        var ref = await api("/git/ref/heads/" + branch);
-        var baseCommitSha = ref.object.sha;
-        var baseCommit = await api("/git/commits/" + baseCommitSha);
-        var tree = [];
-        for (var i = 0; i < uploadFiles.length; i += 1) {
-          setStatus("正在准备一次性提交：" + (i + 1) + " / " + uploadFiles.length);
-          setProgress(i + 1, uploadFiles.length + 1);
-          tree.push({
-            path: cleanGitPath(uploadFiles[i].path),
-            mode: "100644",
-            type: "blob",
-            sha: await createBlob(uploadFiles[i].content, "base64")
-          });
-        }
-        tree.push({
-          path: recordsPath,
-          mode: "100644",
-          type: "blob",
-          sha: await createBlob(JSON.stringify(nextRecords, null, 2) + "\n", "utf-8")
-        });
-        setProgress(uploadFiles.length + 1, uploadFiles.length + 1);
-        var newTree = await api("/git/trees", {
-          method: "POST",
-          body: JSON.stringify({ base_tree: baseCommit.tree.sha, tree: tree })
-        });
-        var newCommit = await api("/git/commits", {
-          method: "POST",
-          body: JSON.stringify({ message: message, tree: newTree.sha, parents: [baseCommitSha] })
-        });
-        await api("/git/refs/heads/" + branch, {
-          method: "PATCH",
-          body: JSON.stringify({ sha: newCommit.sha, force: false })
-        });
-        return newCommit;
-      }
-
       async function publishRecord() {
-        if (!token) {
-          setStatus("需要先登录 GitHub。登录后请重新确认文件选择。", "warn");
-          login();
-          return;
-        }
         var moduleName = moduleInput.value;
         var channelName = moduleName === "factory" ? channelInput.value : "site";
         var channelMeta = channelLabels[channelName];
@@ -610,10 +518,6 @@
         publishBtn.disabled = true;
         setProgress(0, 1);
         try {
-          if (!records.length) {
-            var existing = await getContent(recordsPath);
-            records = JSON.parse(decodeBase64(existing.content));
-          }
           var stamp = nowStamp();
           var id = slugify(title) + "-" + stamp;
           var mediaPaths = [];
@@ -643,19 +547,12 @@
             createdAt: new Date().toISOString(),
             media: mediaPaths
           };
-          var nextRecords = [record].concat(records);
-          setStatus("正在发布：媒体 " + uploadFiles.length + " 个 + records.json 1 个。");
-          try {
-            await commitBundle(uploadFiles, nextRecords, "publish kyoken supply record");
-          } catch (error) {
-            if (!/reference|fast-forward|sha|conflict/i.test(error.message)) throw error;
-            setStatus("远端刚好有新提交，正在重读 records.json 后重试一次。");
-            var fresh = await getContent(recordsPath);
-            var freshRecords = JSON.parse(decodeBase64(fresh.content));
-            await commitBundle(uploadFiles, [record].concat(freshRecords), "publish kyoken supply record");
-          }
-          records = nextRecords;
+          setProgress(files.length + 1, files.length + 2);
+          setStatus("正在通过服务端发布：媒体 " + uploadFiles.length + " 个 + records.json 1 个。");
+          var result = await adminApi({ action: "publish", record: record, uploadFiles: uploadFiles });
+          records = result.records || [record].concat(records);
           renderRecords();
+          setProgress(1, 1);
           setStatus("发布成功。前台会显示这条记录。图片已自动压缩" + (savedBytes ? "，约减少 " + bytesText(savedBytes) : "") + "。Vercel 会随后自动部署。", "ok");
           clearForm();
         } catch (error) {
@@ -666,15 +563,13 @@
       }
 
       async function deleteRecord(id) {
-        if (!token) return setStatus("请先登录。", "warn");
         var target = records.find(function (record) { return record.id === id; });
         if (!target) return;
         if (!window.confirm("确定从前台移除这条记录？\n" + target.title + "\n媒体文件会保留。")) return;
         publishBtn.disabled = true;
         try {
-          var nextRecords = records.filter(function (record) { return record.id !== id; });
-          await commitBundle([], nextRecords, "remove kyoken supply record");
-          records = nextRecords;
+          var result = await adminApi({ action: "remove", id: id });
+          records = result.records || records.filter(function (record) { return record.id !== id; });
           renderRecords();
           setStatus("已从前台移除记录。Vercel 会随后自动部署。", "ok");
         } catch (error) {
@@ -694,34 +589,6 @@
         syncModuleFields(false);
       }
 
-      function login() {
-        var isLocal = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
-        var authBase = isLocal ? "" : "https://kyoken.design";
-        var authUrl = authBase + "/api/auth?scope=repo&return_origin=" + encodeURIComponent(window.location.origin);
-        popup = window.open(authUrl, "kyoken_github_login", "width=720,height=760");
-        if (!popup) window.location.href = authUrl;
-      }
-
-      window.addEventListener("message", function (event) {
-        if (event.data === "authorizing:github" && popup) {
-          popup.postMessage("ready", event.origin);
-          return;
-        }
-        if (typeof event.data !== "string" || event.data.indexOf("authorization:github:") !== 0) return;
-        var parts = event.data.split(":");
-        var state = parts[2];
-        var payloadText = event.data.slice(("authorization:github:" + state + ":").length);
-        if (state === "success") {
-          var payload = JSON.parse(payloadText);
-          token = payload.token;
-          sessionStorage.setItem(tokenKey, token);
-          updateLoginUi();
-          loadRecords();
-        } else {
-          setStatus("GitHub 登录失败。", "warn");
-        }
-      });
-
       function escapeHtml(value) {
         return String(value || "").replace(/[&<>"']/g, function (ch) {
           return ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;" })[ch];
@@ -735,12 +602,10 @@
       publishBtn.addEventListener("click", publishRecord);
       clearBtn.addEventListener("click", clearForm);
       reloadBtn.addEventListener("click", loadRecords);
-      loginBtn.addEventListener("click", login);
-      inlineLoginBtn.addEventListener("click", login);
 
       updateLoginUi();
       syncModuleFields(false);
-      if (token) loadRecords();
+      loadRecords();
     })();
   </script>
 </body>
