@@ -1,40 +1,8 @@
 [
   {
-    "id": "wpc-factory-20260706204749",
-    "module": "factory",
-    "title": "塑木板材料工厂",
-    "summary": "人工木地板材料、工厂库存与出货前状态记录。",
-    "i18n": {
-      "ja": {
-        "title": "人工木デッキ材工場",
-        "summary": "人工木デッキ材、工場在庫、出荷前状態の記録。"
-      },
-      "zh": {
-        "title": "塑木板材料工厂",
-        "summary": "人工木地板材料、工厂库存与出货前状态记录。"
-      },
-      "en": {
-        "title": "WPC Decking Material Factory",
-        "summary": "WPC decking material, factory stock, and pre-shipment status record."
-      }
-    },
-    "createdAt": "2026-07-06T20:47:49+09:00",
-    "media": [
-      "/media/records/factory/wpc/20260706204704-01-微信图片-20260630172032-6-611.jpg",
-      "/media/records/factory/wpc/20260706204707-02-微信图片-20260630172034-7-611.jpg",
-      "/media/records/factory/wpc/20260706204709-03-微信图片-20260630180133-15-611.jpg",
-      "/media/records/factory/wpc/20260706204713-04-ac4349a3328da250082ac1bb3bd58ca2-raw.mp4",
-      "/media/records/factory/wpc/20260706204728-05-cc2b3830cb0c96fae47de74caa21a12a.mp4",
-      "/media/records/factory/wpc/20260706204732-06-微信图片-20260630172048-8-611.jpg",
-      "/media/records/factory/wpc/20260706204734-07-微信图片-20260630172052-9-611.jpg",
-      "/media/records/factory/wpc/20260706204736-08-微信图片-20260630172059-11-611.jpg",
-      "/media/records/factory/wpc/20260706204738-09-微信图片-20260630172118-12-611.jpg",
-      "/media/records/factory/wpc/20260706204740-10-微信图片-20260630172130-13-611.jpg"
-    ]
-  },
-  {
     "id": "curtain-factory-20260628",
     "module": "factory",
+    "channel": "curtain",
     "title": "窗帘加工制作工厂",
     "summary": "窗帘材料、加工、包装状态记录。",
     "i18n": {
@@ -66,6 +34,7 @@
   {
     "id": "advertising-factory-20260705",
     "module": "factory",
+    "channel": "advertising",
     "title": "广告材料制作工厂",
     "summary": "广告材料制作、出货前确认、包装状态记录。",
     "i18n": {
@@ -97,6 +66,39 @@
       "/media/records/factory/advertising/img_3712.jpg",
       "/media/records/factory/advertising/img_3713.jpg",
       "/media/records/factory/advertising/img_3714.jpg"
+    ]
+  },
+  {
+    "id": "wpc-factory-20260706",
+    "module": "factory",
+    "channel": "wpc",
+    "title": "塑木板材料工厂",
+    "summary": "人工木地板材料、工厂库存与出货前状态记录。",
+    "i18n": {
+      "ja": {
+        "title": "人工木デッキ材工場",
+        "summary": "人工木デッキ材、工場在庫、出荷前状態の記録。"
+      },
+      "zh": {
+        "title": "塑木板材料工厂",
+        "summary": "人工木地板材料、工厂库存与出货前状态记录。"
+      },
+      "en": {
+        "title": "WPC Decking Material Factory",
+        "summary": "WPC decking material, factory stock, and pre-shipment status record."
+      }
+    },
+    "createdAt": "2026-07-06T20:41:51+09:00",
+    "media": [
+      "/media/records/factory/wpc/20260706204110-01-微信图片-20260630172032-6-611.jpg",
+      "/media/records/factory/wpc/20260706204113-02-微信图片-20260630172034-7-611.jpg",
+      "/media/records/factory/wpc/20260706204115-03-微信图片-20260630172130-13-611.jpg",
+      "/media/records/factory/wpc/20260706204125-04-微信图片-20260630180133-15-611.jpg",
+      "/media/records/factory/wpc/20260706204129-05-微信图片-20260630172048-8-611.jpg",
+      "/media/records/factory/wpc/20260706204131-06-微信图片-20260630172059-11-611.jpg",
+      "/media/records/factory/wpc/20260706204133-07-微信图片-20260630172052-9-611.jpg",
+      "/media/records/factory/wpc/20260706204134-08-微信图片-20260630172118-12-611.jpg",
+      "/media/records/factory/wpc/20260706204136-09-ac4349a3328da250082ac1bb3bd58ca2-raw.mp4"
     ]
   }
 ]

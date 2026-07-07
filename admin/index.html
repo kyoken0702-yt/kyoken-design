@@ -37,9 +37,9 @@
       background: #fff;
       border-bottom: 1px solid var(--line);
     }
-    h1 { color: var(--navy); font-size: clamp(24px, 3vw, 36px); font-weight: 950; }
-    h2 { color: var(--navy); font-size: 23px; font-weight: 950; }
-    h3 { color: var(--navy); font-size: 18px; font-weight: 950; }
+    h1 { color: var(--navy); font-size: clamp(24px, 3vw, 36px); font-weight: 800; }
+    h2 { color: var(--navy); font-size: 23px; font-weight: 800; }
+    h3 { color: var(--navy); font-size: 18px; font-weight: 800; }
     main {
       display: grid;
       grid-template-columns: minmax(0, 1.1fr) minmax(330px, .9fr);
@@ -56,9 +56,9 @@
       background: #fff;
       border: 1px solid var(--line);
     }
-    .top-note, .hint { color: var(--muted); font-weight: 780; }
+    .top-note, .hint { color: var(--muted); font-weight: 600; }
     .hint { font-size: 14px; }
-    label { display: grid; gap: 7px; color: var(--navy); font-weight: 950; }
+    label { display: grid; gap: 7px; color: var(--navy); font-weight: 800; }
     input, select, textarea {
       width: 100%;
       border: 1px solid #c8d1df;
@@ -86,7 +86,7 @@
       color: #fff;
       padding: 12px 16px;
       font: inherit;
-      font-weight: 950;
+      font-weight: 800;
       cursor: pointer;
       border-radius: 0;
     }
@@ -99,7 +99,7 @@
       border-left: 5px solid var(--blue);
       background: #eef4ff;
       color: var(--navy);
-      font-weight: 900;
+      font-weight: 700;
       white-space: pre-wrap;
     }
     .status.ok { border-color: var(--green); background: #ecfdf5; color: #065f46; }
@@ -113,7 +113,7 @@
       border: 1px solid #ead49a;
       background: #fff8e6;
       color: var(--navy);
-      font-weight: 900;
+      font-weight: 700;
     }
     .login-strip.ok {
       border-color: #a7f3d0;
@@ -188,7 +188,7 @@
   <header>
     <div>
       <h1>京建供应链记录后台</h1>
-      <p class="top-note">只填模块、标题、说明和图片 / 小视频。发布后前台读取同一个 records.json。</p>
+      <p class="top-note">先选前台模块，再选材料通道；发布后前台同名模块会显示。</p>
     </div>
     <div class="actions">
       <button id="loginBtn" type="button">登录 GitHub</button>
@@ -212,6 +212,16 @@
           <option value="factory">中国工厂・供应链实景</option>
           <option value="site">日本现场记录</option>
         </select>
+      </label>
+
+      <label id="channelField">
+        材料上传通道
+        <select id="channel">
+          <option value="advertising">广告材料制作工厂</option>
+          <option value="curtain">窗帘加工制作工厂</option>
+          <option value="wpc">塑木板材料工厂</option>
+        </select>
+        <span class="hint">选择后会自动填写标题和说明；前台会显示在同名工厂模块里。</span>
       </label>
 
       <label>
@@ -273,6 +283,44 @@
       var fileSummary = $("fileSummary");
       var previewGrid = $("previewGrid");
       var recordList = $("recordList");
+      var moduleInput = $("module");
+      var channelInput = $("channel");
+      var channelField = $("channelField");
+
+      var moduleLabels = {
+        factory: "中国工厂・供应链实景",
+        site: "日本现场记录"
+      };
+
+      var channelLabels = {
+        advertising: {
+          title: "广告材料制作工厂",
+          summary: "广告材料制作、出货前确认、包装状态记录。",
+          i18n: {
+            ja: { title: "広告材料制作工場", summary: "広告材料制作、出荷前確認、包装状態の記録。" },
+            zh: { title: "广告材料制作工厂", summary: "广告材料制作、出货前确认、包装状态记录。" },
+            en: { title: "Advertising Material Production Factory", summary: "Advertising material production, pre-shipment check, and packing status record." }
+          }
+        },
+        curtain: {
+          title: "窗帘加工制作工厂",
+          summary: "窗帘材料、加工、包装状态记录。",
+          i18n: {
+            ja: { title: "カーテン加工工場", summary: "カーテン資材、加工、包装状態の記録。" },
+            zh: { title: "窗帘加工制作工厂", summary: "窗帘材料、加工、包装状态记录。" },
+            en: { title: "Curtain Production Factory", summary: "Curtain material, processing, and packing status record." }
+          }
+        },
+        wpc: {
+          title: "塑木板材料工厂",
+          summary: "人工木地板材料、工厂库存与出货前状态记录。",
+          i18n: {
+            ja: { title: "人工木デッキ材工場", summary: "人工木デッキ材、工場在庫、出荷前状態の記録。" },
+            zh: { title: "塑木板材料工厂", summary: "人工木地板材料、工厂库存与出货前状态记录。" },
+            en: { title: "WPC Decking Material Factory", summary: "WPC decking material, factory stock, and pre-shipment status record." }
+          }
+        }
+      };
 
       function setStatus(message, type) {
         status.textContent = message;
@@ -299,6 +347,21 @@
           inlineLoginBtn.disabled = false;
           loginStrip.className = "login-strip";
           loginText.textContent = "未登录。发布前需要登录 GitHub。";
+        }
+      }
+
+      function syncModuleFields(forceTitle) {
+        var isFactory = moduleInput.value === "factory";
+        channelField.style.display = isFactory ? "grid" : "none";
+        if (isFactory) {
+          var channel = channelLabels[channelInput.value] || channelLabels.advertising;
+          if (forceTitle || !$("title").value.trim()) $("title").value = channel.title;
+          if (forceTitle || !$("summary").value.trim()) $("summary").value = channel.summary;
+          setStatus("将发布到前台：" + moduleLabels.factory + " → " + channel.title + "。", "ok");
+        } else {
+          if (forceTitle || !$("title").value.trim()) $("title").value = "日本现场到场记录";
+          if (forceTitle || !$("summary").value.trim()) $("summary").value = "材料到场、尺寸确认、安装前确认或交付状态记录。";
+          setStatus("将发布到前台：" + moduleLabels.site + "。", "ok");
         }
       }
 
@@ -353,8 +416,10 @@
           var card = document.createElement("div");
           card.className = "record";
           var mediaCount = Array.isArray(record.media) ? record.media.length : 0;
+          var moduleText = record.module === "site" ? "日本现场记录" : "中国工厂・供应链实景";
+          var channelText = record.module === "factory" && record.channel && channelLabels[record.channel] ? " / " + channelLabels[record.channel].title : "";
           card.innerHTML = '<h3>' + escapeHtml(record.title || "未命名记录") + '</h3>' +
-            '<small>' + escapeHtml(record.module === "site" ? "日本现场记录" : "中国工厂・供应链实景") + '</small>' +
+            '<small>' + escapeHtml(moduleText + channelText) + '</small>' +
             '<div><strong>' + mediaCount + '</strong> 个媒体</div>' +
             '<small>' + escapeHtml(record.id || "") + '</small>' +
             '<button class="danger" type="button">从前台移除</button>';
@@ -529,7 +594,9 @@
           login();
           return;
         }
-        var moduleName = $("module").value;
+        var moduleName = moduleInput.value;
+        var channelName = moduleName === "factory" ? channelInput.value : "site";
+        var channelMeta = channelLabels[channelName];
         var title = $("title").value.trim();
         var summary = $("summary").value.trim();
         var files = Array.from(filesInput.files || []);
@@ -558,7 +625,10 @@
             var prepared = isVideo(source) ? { file: source, originalSize: source.size, compressed: false } : await compressImage(source);
             if (prepared.compressed) savedBytes += prepared.originalSize - prepared.compressedSize;
             var preparedFile = prepared.file;
-            var mediaPath = "media/records/" + moduleName + "/" + id + "/" + cleanFileName(preparedFile, i, isVideo(preparedFile) ? null : ".jpg");
+            var mediaBase = moduleName === "factory"
+              ? "media/records/factory/" + channelName + "/" + id
+              : "media/records/site/" + id;
+            var mediaPath = mediaBase + "/" + cleanFileName(preparedFile, i, isVideo(preparedFile) ? null : ".jpg");
             uploadFiles.push({ path: mediaPath, content: await fileToBase64(preparedFile) });
             mediaPaths.push("/" + mediaPath);
             setProgress(i + 1, files.length * 2 + 1);
@@ -566,8 +636,10 @@
           var record = {
             id: id,
             module: moduleName,
+            channel: channelName,
             title: title,
             summary: summary,
+            i18n: channelMeta ? channelMeta.i18n : undefined,
             createdAt: new Date().toISOString(),
             media: mediaPaths
           };
@@ -619,6 +691,7 @@
         previewGrid.innerHTML = "";
         fileSummary.textContent = "未选择文件。";
         setProgress(0, 1);
+        syncModuleFields(false);
       }
 
       function login() {
@@ -655,6 +728,8 @@
 
       selectFilesBtn.addEventListener("click", function () { filesInput.click(); });
       filesInput.addEventListener("change", renderLocalPreviews);
+      moduleInput.addEventListener("change", function () { syncModuleFields(true); });
+      channelInput.addEventListener("change", function () { syncModuleFields(true); });
       publishBtn.addEventListener("click", publishRecord);
       clearBtn.addEventListener("click", clearForm);
       reloadBtn.addEventListener("click", loadRecords);
@@ -662,6 +737,7 @@
       inlineLoginBtn.addEventListener("click", login);
 
       updateLoginUi();
+      syncModuleFields(false);
       if (token) loadRecords();
     })();
   </script>

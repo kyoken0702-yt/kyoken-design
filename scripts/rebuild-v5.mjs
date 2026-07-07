@@ -21,6 +21,60 @@ const products = [
       en: "Curtain materials arranged after measurement, simple installation, and window checks."
     },
     quote: { ja: "仕様確認後に概算見積", zh: "规格确认后提供概算报价", en: "Rough quote after specification review" },
+    plans: {
+      ja: [
+        ["腰窓セット", "W 50-140cm / H 50-140cm", "参考 ¥11,800"],
+        ["ワイド窓セット", "W 141-200cm / H 141-200cm", "参考 ¥24,800"],
+        ["掃き出し窓セット", "W 201-300cm / H 201-260cm", "参考 ¥62,800"]
+      ],
+      zh: [
+        ["腰窗套餐", "宽 50-140cm / 高 50-140cm", "参考 ¥11,800"],
+        ["宽窗套餐", "宽 141-200cm / 高 141-200cm", "参考 ¥24,800"],
+        ["落地窗套餐", "宽 201-300cm / 高 201-260cm", "参考 ¥62,800"]
+      ],
+      en: [
+        ["Standard window set", "W 50-140cm / H 50-140cm", "Ref. ¥11,800"],
+        ["Wide window set", "W 141-200cm / H 141-200cm", "Ref. ¥24,800"],
+        ["Full-height window set", "W 201-300cm / H 201-260cm", "Ref. ¥62,800"]
+      ]
+    },
+    priceTable: {
+      ja: {
+        title: "1.8倍ヒダ 2重セット参考価格（厚地 + レース）",
+        head: ["丈 \\ 幅(cm)", "50-140", "141-200", "201-260", "261-300"],
+        rows: [
+          ["50-140", "¥11,800", "¥15,800", "¥26,800", "¥35,800"],
+          ["141-200", "¥16,800", "¥24,800", "¥38,800", "¥52,800"],
+          ["201-260", "¥19,800", "¥29,800", "¥46,800", "¥62,800"]
+        ],
+        note: "税込参考価格。生地、窓数、取付条件、配送先により変動します。カーテンレールは含みません。"
+      },
+      zh: {
+        title: "1.8 倍褶皱双层套餐参考价（厚帘 + 纱帘）",
+        head: ["高 \\ 宽(cm)", "50-140", "141-200", "201-260", "261-300"],
+        rows: [
+          ["50-140", "¥11,800", "¥15,800", "¥26,800", "¥35,800"],
+          ["141-200", "¥16,800", "¥24,800", "¥38,800", "¥52,800"],
+          ["201-260", "¥19,800", "¥29,800", "¥46,800", "¥62,800"]
+        ],
+        note: "含税参考价。会随面料、窗数、安装条件、配送地址变化。窗帘杆不包含在套餐价格内。"
+      },
+      en: {
+        title: "1.8x fullness double-layer set reference price (drape + sheer)",
+        head: ["H \\ W(cm)", "50-140", "141-200", "201-260", "261-300"],
+        rows: [
+          ["50-140", "¥11,800", "¥15,800", "¥26,800", "¥35,800"],
+          ["141-200", "¥16,800", "¥24,800", "¥38,800", "¥52,800"],
+          ["201-260", "¥19,800", "¥29,800", "¥46,800", "¥62,800"]
+        ],
+        note: "Tax-included reference only. Fabric, window count, installation conditions, and delivery address may change the quote. Curtain rods are not included."
+      }
+    },
+    materialDetails: {
+      ja: [["1級遮光", "寝室や西日の強い窓向けに遮光性を確認。"], ["形態安定加工", "熱セットでウェーブを整え、洗濯後の形崩れを抑えます。"], ["採寸基準", "掃き出し窓は床から -1cm、腰窓は窓枠から +15cm を目安に確認。"]],
+      zh: [["一级遮光", "适合卧室、西晒强的窗户，按案件确认遮光等级。"], ["形态安定加工", "通过热定型保持褶皱波形，减少洗后变形。"], ["测量基准", "落地窗通常离地 -1cm，腰窗通常在窗框下方 +15cm 左右确认。"]],
+      en: [["Blackout option", "Checked for bedrooms and strong afternoon-sun windows."], ["Shape-stabilizing finish", "Heat-set waves help the curtain keep its form after washing."], ["Measurement basis", "Full-height windows usually finish 1cm above floor; standard windows often extend about 15cm below frame."]]
+    },
     specs: {
       ja: ["1.8倍ヒダを基本仕様として確認", "生地、遮光、レース有無を案件ごとに確認", "カーテンレールは套餐価格に含みません", "採寸と標準簡易取付は手配可能。複雑施工、高所作業、特殊固定は現場ごとに確認"],
       zh: ["以 1.8 倍褶皱为基本规格", "面料、遮光、纱帘按案件确认", "窗帘套餐价格不包含窗帘杆", "可安排上门测量和标准简易安装；复杂施工、高空作业、特殊固定方式按现场另行确认"],
@@ -106,11 +160,36 @@ const products = [
       en: "WPC decking boards checked by long-material packing, carrying route, and substrate conditions."
     },
     quote: { ja: "案件ごとにお見積り", zh: "按案件报价", en: "Case-by-case quote" },
+    plans: {
+      ja: [["屋外デッキ材", "145 x 21mm / 150 x 23mm", "CSD-145H21 / CSD-150H23"], ["外壁材・フェンス", "180 x 24mm / 153 x 21mm / 90 x 24mm", "CSD-T180H24 / CSD-90H24"], ["施工アクセサリー", "根太 / クリップ / L型エッジ材", "WPC・アルミ・ステンレス部材"]],
+      zh: [["户外地板材料", "145 x 21mm / 150 x 23mm", "CSD-145H21 / CSD-150H23"], ["外墙材 / 围栏", "180 x 24mm / 153 x 21mm / 90 x 24mm", "CSD-T180H24 / CSD-90H24"], ["施工配件", "龙骨 / 卡扣 / L 型收边", "WPC、铝合金、不锈钢部材"]],
+      en: [["Outdoor decking", "145 x 21mm / 150 x 23mm", "CSD-145H21 / CSD-150H23"], ["Cladding / fence", "180 x 24mm / 153 x 21mm / 90 x 24mm", "CSD-T180H24 / CSD-90H24"], ["Installation accessories", "Joist / clips / L-edge trim", "WPC, aluminum, and stainless parts"]]
+    },
+    materialDetails: {
+      ja: [["WPC複合材", "木粉と樹脂の複合材。屋外使用、腐食、虫害、反りを案件ごとに確認。"], ["表面仕上げ", "3D木目、溝加工、色味、滑りにくさを現場用途に合わせて確認。"], ["施工条件", "下地、排水、日射、長物搬入、重量、固定部材を事前確認。"]],
+      zh: [["WPC 复合材料", "木粉与树脂复合材料。按案件确认户外使用、腐蚀、虫害、变形风险。"], ["表面处理", "确认 3D 木纹、沟槽、防滑、色味与使用场景是否匹配。"], ["施工条件", "事前确认基层、排水、日晒、长条搬入、重量和固定部材。"]],
+      en: [["WPC composite", "Wood-plastic composite checked for outdoor use, corrosion, insects, and warping risk."], ["Surface finish", "3D wood grain, groove pattern, slip resistance, and color are checked by use case."], ["Site conditions", "Substrate, drainage, sunlight, long-material carrying route, weight, and fixing parts are checked first."]]
+    },
     specs: {
       ja: ["面積、長さ、数量、色を確認", "根太、下地、固定部材の条件を確認", "屋外使用、排水、日射条件を確認", "長物梱包、重量、搬入経路を個別確認"],
       zh: ["确认面积、长度、数量、颜色", "确认龙骨、基层、固定部材条件", "确认户外使用、排水、日晒条件", "长条包装、重量、搬入路线单独确认"],
       en: ["Area, length, quantity, and color checked", "Joist, substrate, and fixing parts confirmed", "Outdoor use, drainage, and sunlight conditions checked", "Long-material packing, weight, and carrying route checked separately"]
     }
+  }
+];
+
+const recordChannels = [
+  {
+    id: "advertising",
+    title: { ja: "広告材料制作工場", zh: "广告材料制作工厂", en: "Advertising Material Production Factory" }
+  },
+  {
+    id: "curtain",
+    title: { ja: "カーテン加工工場", zh: "窗帘加工制作工厂", en: "Curtain Production Factory" }
+  },
+  {
+    id: "wpc",
+    title: { ja: "人工木デッキ材工場", zh: "塑木板材料工厂", en: "WPC Decking Material Factory" }
   }
 ];
 
@@ -368,6 +447,28 @@ function recordSection(code, module, limit = 4) {
   return list.map((record) => recordCard(record, code, true)).join("");
 }
 
+function factoryChannelSections(code, compact = true) {
+  return recordChannels.map((channel) => {
+    const list = records
+      .filter((record) => record.module === "factory")
+      .filter((record) => (record.channel || inferChannel(record)) === channel.id);
+    const body = list.length
+      ? list.map((record) => recordCard(record, code, compact)).join("")
+      : `<div class="record-card empty">${mediaGrid({ media: [] }, code)}</div>`;
+    return `<section class="channel-section">
+      <h3>${channel.title[code]}</h3>
+      <div class="record-grid${compact ? "" : " wide"}">${body}</div>
+    </section>`;
+  }).join("");
+}
+
+function inferChannel(record) {
+  const value = `${record.channel || ""} ${record.id || ""} ${record.title || ""}`.toLowerCase();
+  if (value.includes("wpc") || value.includes("塑木") || value.includes("人工木")) return "wpc";
+  if (value.includes("curtain") || value.includes("窗帘") || value.includes("カーテン")) return "curtain";
+  return "advertising";
+}
+
 function productCards(code) {
   return products.map((product) => `<article class="product-card">
     <img src="${prefix(code)}${product.image}" alt="${escapeHtml(product.names[code])}" loading="lazy">
@@ -441,7 +542,7 @@ function home(code) {
         <h2>${c.factoryTitle}</h2>
         <p>${c.factoryLead}</p>
       </div>
-      <div class="record-grid">${recordSection(code, "factory", 6)}</div>
+      <div class="channel-stack">${factoryChannelSections(code, true)}</div>
       <a class="section-link" href="supply-chain-records.html">${c.allRecords}</a>
     </section>
 
@@ -490,7 +591,7 @@ function recordsPage(code) {
     </section>
     <section class="section">
       <h2>${c.factoryTitle}</h2>
-      <div class="record-grid wide">${records.filter((record) => record.module === "factory").map((record) => recordCard(record, code, false)).join("") || recordSection(code, "factory")}</div>
+      <div class="channel-stack">${factoryChannelSections(code, false)}</div>
     </section>
     <section class="section muted">
       <h2>${c.siteTitle}</h2>
@@ -498,6 +599,78 @@ function recordsPage(code) {
     </section>
     ${contactSection(code)}
   </main>`);
+}
+
+function planGrid(code, product) {
+  const plans = product.plans?.[code] || [];
+  if (!plans.length) return "";
+  return `<div class="plan-grid">${plans.map((plan, index) => `<div>
+    <span>0${index + 1}</span>
+    <strong>${plan[0]}</strong>
+    <p>${plan[1]}</p>
+    <em>${plan[2]}</em>
+  </div>`).join("")}</div>`;
+}
+
+function priceTable(code, product) {
+  const table = product.priceTable?.[code];
+  if (!table) return "";
+  return `<div class="price-table-wrap">
+    <h3>${table.title}</h3>
+    <div class="price-table-scroll">
+      <table class="price-table">
+        <thead><tr>${table.head.map((item) => `<th>${item}</th>`).join("")}</tr></thead>
+        <tbody>${table.rows.map((row) => `<tr>${row.map((item, index) => index === 0 ? `<th>${item}</th>` : `<td>${item}</td>`).join("")}</tr>`).join("")}</tbody>
+      </table>
+    </div>
+    <p>${table.note}</p>
+  </div>`;
+}
+
+function materialDetails(code, product) {
+  const details = product.materialDetails?.[code] || [];
+  if (!details.length) return "";
+  return `<section class="section compact">
+    <div class="section-head">
+      <p class="kicker">${code === "ja" ? "仕様説明" : code === "zh" ? "材料说明" : "Material Notes"}</p>
+      <h2>${code === "ja" ? "材料と確認ポイント" : code === "zh" ? "材料和确认重点" : "Material and Checkpoints"}</h2>
+    </div>
+    <div class="detail-grid">${details.map((item) => `<div><strong>${item[0]}</strong><p>${item[1]}</p></div>`).join("")}</div>
+  </section>`;
+}
+
+function requestSection(code) {
+  const copy = {
+    ja: {
+      title: "図面・写真・寸法を送る",
+      lead: "現時点ではサイト内アップロードや決済フォームは作らず、LINEで資料を受け取ってから仕様確認します。",
+      items: ["製品名", "設計図または現場写真", "幅・高さ・数量", "納品先エリア", "希望納期"],
+      button: "LINEで資料を送る"
+    },
+    zh: {
+      title: "发送设计图、照片和尺寸",
+      lead: "现在先不做复杂上传和支付系统。先用 LINE 收设计图、现场照片、尺寸和数量，确认后再给报价或付款链接。",
+      items: ["产品名", "设计图或现场照片", "宽度、高度、数量", "配送区域", "希望交期"],
+      button: "用 LINE 发送资料"
+    },
+    en: {
+      title: "Send drawings, photos, and sizes",
+      lead: "For now, we keep this lightweight: send documents on LINE, then receive a specification check and quote or payment link.",
+      items: ["Product name", "Drawing or site photos", "Width, height, quantity", "Delivery area", "Preferred timing"],
+      button: "Send details on LINE"
+    }
+  }[code];
+  return `<section class="section request-section">
+    <div>
+      <p class="kicker">${code === "ja" ? "資料受付" : code === "zh" ? "需求资料" : "Request Details"}</p>
+      <h2>${copy.title}</h2>
+      <p>${copy.lead}</p>
+    </div>
+    <div>
+      <ul>${copy.items.map((item) => `<li>${item}</li>`).join("")}</ul>
+      <a href="${lineUrl}">${copy.button}</a>
+    </div>
+  </section>`;
 }
 
 function productPage(code, product) {
@@ -520,8 +693,11 @@ function productPage(code, product) {
         <h2>${product.quote[code]}</h2>
         <p>${c.productsLead}</p>
       </div>
+      ${planGrid(code, product)}
+      ${priceTable(code, product)}
       <div class="spec-grid">${product.specs[code].map((item) => `<div>${item}</div>`).join("")}</div>
     </section>
+    ${materialDetails(code, product)}
     <section class="section muted">
       <div class="section-head">
         <p class="kicker">${ui(code, "supplyKicker")}</p>
@@ -540,6 +716,7 @@ function productPage(code, product) {
       <h2>${c.notes}</h2>
       <p class="notice">${code === "ja" ? "価格はサイズ・数量・配送先により変動します。施工、現場責任、取付費用、エンドユーザー対応は施工会社様側でご確認ください。" : code === "zh" ? "价格会因尺寸、数量、配送地址变化。施工、现场责任、安装费用、终端客户沟通由施工方确认。" : "Pricing varies by dimensions, quantity, and delivery address. Installation, site responsibility, installation pricing, and end-customer communication remain with the contractor."}</p>
     </section>
+    ${requestSection(code)}
     ${contactSection(code)}
   </main>`);
 }
