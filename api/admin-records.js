@@ -69,7 +69,7 @@ async function commitBundle(uploadFiles, nextRecords, message) {
       path: cleanGitPath(file.path),
       mode: "100644",
       type: "blob",
-      sha: await createBlob(file.content, "base64")
+      sha: file.sha || await createBlob(file.content, "base64")
     });
   }
 
@@ -123,6 +123,15 @@ export default async function handler(req, res) {
     }
 
     const body = await parseBody(req);
+
+    if (body.action === "blob") {
+      const file = body.file;
+      if (!file || !file.path || !file.content) throw new Error("缺少上传文件。");
+      const sha = await createBlob(file.content, "base64");
+      res.status(200).send(JSON.stringify({ ok: true, file: { path: cleanGitPath(file.path), sha } }));
+      return;
+    }
+
     const records = await readRecords();
 
     if (body.action === "publish") {
