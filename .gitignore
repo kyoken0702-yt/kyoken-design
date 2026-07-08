@@ -7,5 +7,3 @@ media/*
 !media/remote/*
 !media/records/
 !media/records/**
-!media/product-guides/
-!media/product-guides/**

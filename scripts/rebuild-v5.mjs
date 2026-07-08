@@ -80,12 +80,6 @@ const products = [
       zh: [["一级遮光", "适合卧室、西晒强的窗户，按案件确认遮光等级。"], ["形态安定加工", "通过热定型保持褶皱波形，减少洗后变形。"], ["测量基准", "落地窗通常离地 -1cm，腰窗通常在窗框下方 +15cm 左右确认。"]],
       en: [["Blackout option", "Checked for bedrooms and strong afternoon-sun windows."], ["Shape-stabilizing finish", "Heat-set waves help the curtain keep its form after washing."], ["Measurement basis", "Full-height windows usually finish 1cm above floor; standard windows often extend about 15cm below frame."]]
     },
-    guideImages: [
-      "media/product-guides/curtains/product-guide-1.png",
-      "media/product-guides/curtains/product-guide-4.png",
-      "media/product-guides/curtains/product-guide-3.png",
-      "media/product-guides/curtains/product-guide-2.png"
-    ],
     specs: {
       ja: ["1.8倍ヒダを基本仕様として確認", "生地、遮光、レース有無を案件ごとに確認", "カーテンレールは套餐価格に含みません", "採寸と標準簡易取付は手配可能。複雑施工、高所作業、特殊固定は現場ごとに確認"],
       zh: ["以 1.8 倍褶皱为基本规格", "面料、遮光、纱帘按案件确认", "窗帘套餐价格不包含窗帘杆", "可安排上门测量和标准简易安装；复杂施工、高空作业、特殊固定方式按现场另行确认"],
