@@ -507,6 +507,17 @@ h3 {
   padding: 16px;
 }
 
+.plan-grid img {
+  display: block;
+  width: calc(100% + 32px);
+  max-width: none;
+  margin: -16px -16px 12px;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  background: #dbe3ee;
+  border-bottom: 1px solid var(--line);
+}
+
 .plan-grid span {
   color: var(--red);
   font-size: 15px;

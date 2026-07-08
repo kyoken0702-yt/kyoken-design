@@ -38,6 +38,11 @@ const products = [
         ["Full-height window set", "W 201-300cm / H 201-260cm", "Ref. ¥62,800"]
       ]
     },
+    planImages: [
+      "media/remote/e2f130af6ea5.png",
+      "media/records/factory/curtain/微信图片_20260605223620_68_266.jpg",
+      "media/records/factory/curtain/微信图片_20260629221839_127_266.jpg"
+    ],
     priceTable: {
       ja: {
         title: "1.8倍ヒダ 2重セット参考価格（厚地 + レース）",
@@ -604,12 +609,16 @@ function recordsPage(code) {
 function planGrid(code, product) {
   const plans = product.plans?.[code] || [];
   if (!plans.length) return "";
-  return `<div class="plan-grid">${plans.map((plan, index) => `<div>
+  const images = product.planImages || [];
+  return `<div class="plan-grid">${plans.map((plan, index) => {
+    const image = images[index] ? `<img src="${mediaSrc(code, images[index])}" alt="${escapeHtml(plan[0])}" loading="lazy">` : "";
+    return `<div>${image}
     <span>0${index + 1}</span>
     <strong>${plan[0]}</strong>
     <p>${plan[1]}</p>
     <em>${plan[2]}</em>
-  </div>`).join("")}</div>`;
+  </div>`;
+  }).join("")}</div>`;
 }
 
 function priceTable(code, product) {
