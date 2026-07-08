@@ -170,11 +170,21 @@ const products = [
       zh: [["户外地板材料", "145 x 21mm / 150 x 23mm", "CSD-145H21 / CSD-150H23"], ["外墙材 / 围栏", "180 x 24mm / 153 x 21mm / 90 x 24mm", "CSD-T180H24 / CSD-90H24"], ["施工配件", "龙骨 / 卡扣 / L 型收边", "WPC、铝合金、不锈钢部材"]],
       en: [["Outdoor decking", "145 x 21mm / 150 x 23mm", "CSD-145H21 / CSD-150H23"], ["Cladding / fence", "180 x 24mm / 153 x 21mm / 90 x 24mm", "CSD-T180H24 / CSD-90H24"], ["Installation accessories", "Joist / clips / L-edge trim", "WPC, aluminum, and stainless parts"]]
     },
+    planImages: [
+      "media/records/factory/wpc/20260706204134-08-微信图片-20260630172118-12-611.jpg",
+      "media/records/factory/wpc/20260706204115-03-微信图片-20260630172130-13-611.jpg",
+      "media/records/factory/wpc/20260706204110-01-微信图片-20260630172032-6-611.jpg"
+    ],
     materialDetails: {
       ja: [["WPC複合材", "木粉と樹脂の複合材。屋外使用、腐食、虫害、反りを案件ごとに確認。"], ["表面仕上げ", "3D木目、溝加工、色味、滑りにくさを現場用途に合わせて確認。"], ["施工条件", "下地、排水、日射、長物搬入、重量、固定部材を事前確認。"]],
       zh: [["WPC 复合材料", "木粉与树脂复合材料。按案件确认户外使用、腐蚀、虫害、变形风险。"], ["表面处理", "确认 3D 木纹、沟槽、防滑、色味与使用场景是否匹配。"], ["施工条件", "事前确认基层、排水、日晒、长条搬入、重量和固定部材。"]],
       en: [["WPC composite", "Wood-plastic composite checked for outdoor use, corrosion, insects, and warping risk."], ["Surface finish", "3D wood grain, groove pattern, slip resistance, and color are checked by use case."], ["Site conditions", "Substrate, drainage, sunlight, long-material carrying route, weight, and fixing parts are checked first."]]
     },
+    detailImages: [
+      "media/records/factory/wpc/20260706204125-04-微信图片-20260630180133-15-611.jpg",
+      "media/records/factory/wpc/20260706204134-08-微信图片-20260630172118-12-611.jpg",
+      "media/records/factory/wpc/20260706204110-01-微信图片-20260630172032-6-611.jpg"
+    ],
     specs: {
       ja: ["面積、長さ、数量、色を確認", "根太、下地、固定部材の条件を確認", "屋外使用、排水、日射条件を確認", "長物梱包、重量、搬入経路を個別確認"],
       zh: ["确认面积、长度、数量、颜色", "确认龙骨、基层、固定部材条件", "确认户外使用、排水、日晒条件", "长条包装、重量、搬入路线单独确认"],
@@ -639,12 +649,16 @@ function priceTable(code, product) {
 function materialDetails(code, product) {
   const details = product.materialDetails?.[code] || [];
   if (!details.length) return "";
+  const images = product.detailImages || [];
   return `<section class="section compact">
     <div class="section-head">
       <p class="kicker">${code === "ja" ? "仕様説明" : code === "zh" ? "材料说明" : "Material Notes"}</p>
       <h2>${code === "ja" ? "材料と確認ポイント" : code === "zh" ? "材料和确认重点" : "Material and Checkpoints"}</h2>
     </div>
-    <div class="detail-grid">${details.map((item) => `<div><strong>${item[0]}</strong><p>${item[1]}</p></div>`).join("")}</div>
+    <div class="detail-grid">${details.map((item, index) => {
+      const image = images[index] ? `<img src="${mediaSrc(code, images[index])}" alt="${escapeHtml(item[0])}" loading="lazy">` : "";
+      return `<div>${image}<strong>${item[0]}</strong><p>${item[1]}</p></div>`;
+    }).join("")}</div>
   </section>`;
 }
 
