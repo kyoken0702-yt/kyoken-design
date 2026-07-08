@@ -430,12 +430,13 @@ function mediaGrid(record, code, compact = false) {
   }).join("")}</div>`;
 }
 
-function recordCard(record, code, compact = true) {
+function recordCard(record, code, compact = true, options = {}) {
+  const showHeader = options.showHeader !== false;
   return `<article class="record-card">
-    <div class="record-card-head">
+    ${showHeader ? `<div class="record-card-head">
       <span>${record.module === "site" ? lang[code].siteTitle : lang[code].factoryTitle}</span>
       <strong>${escapeHtml(recordTitle(record, code))}</strong>
-    </div>
+    </div>` : ""}
     ${mediaGrid(record, code, compact)}
     ${recordSummary(record, code) ? `<p>${escapeHtml(recordSummary(record, code))}</p>` : ""}
   </article>`;
@@ -453,7 +454,7 @@ function factoryChannelSections(code, compact = true) {
       .filter((record) => record.module === "factory")
       .filter((record) => (record.channel || inferChannel(record)) === channel.id);
     const body = list.length
-      ? list.map((record) => recordCard(record, code, compact)).join("")
+      ? list.map((record) => recordCard(record, code, compact, { showHeader: false })).join("")
       : `<div class="record-card empty">${mediaGrid({ media: [] }, code)}</div>`;
     return `<section class="channel-section">
       <h3>${channel.title[code]}</h3>
