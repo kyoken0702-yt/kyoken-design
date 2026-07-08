@@ -80,6 +80,12 @@ const products = [
       zh: [["一级遮光", "适合卧室、西晒强的窗户，按案件确认遮光等级。"], ["形态安定加工", "通过热定型保持褶皱波形，减少洗后变形。"], ["测量基准", "落地窗通常离地 -1cm，腰窗通常在窗框下方 +15cm 左右确认。"]],
       en: [["Blackout option", "Checked for bedrooms and strong afternoon-sun windows."], ["Shape-stabilizing finish", "Heat-set waves help the curtain keep its form after washing."], ["Measurement basis", "Full-height windows usually finish 1cm above floor; standard windows often extend about 15cm below frame."]]
     },
+    guideImages: [
+      "media/product-guides/curtains/product-guide-1.png",
+      "media/product-guides/curtains/product-guide-4.png",
+      "media/product-guides/curtains/product-guide-3.png",
+      "media/product-guides/curtains/product-guide-2.png"
+    ],
     specs: {
       ja: ["1.8倍ヒダを基本仕様として確認", "生地、遮光、レース有無を案件ごとに確認", "カーテンレールは套餐価格に含みません", "採寸と標準簡易取付は手配可能。複雑施工、高所作業、特殊固定は現場ごとに確認"],
       zh: ["以 1.8 倍褶皱为基本规格", "面料、遮光、纱帘按案件确认", "窗帘套餐价格不包含窗帘杆", "可安排上门测量和标准简易安装；复杂施工、高空作业、特殊固定方式按现场另行确认"],
@@ -184,6 +190,12 @@ const products = [
       "media/records/factory/wpc/20260706204125-04-微信图片-20260630180133-15-611.jpg",
       "media/records/factory/wpc/20260706204134-08-微信图片-20260630172118-12-611.jpg",
       "media/records/factory/wpc/20260706204110-01-微信图片-20260630172032-6-611.jpg"
+    ],
+    guideImages: [
+      "media/records/factory/wpc/20260706204115-03-微信图片-20260630172130-13-611.jpg",
+      "media/records/factory/wpc/20260706204134-08-微信图片-20260630172118-12-611.jpg",
+      "media/records/factory/wpc/20260706204110-01-微信图片-20260630172032-6-611.jpg",
+      "media/records/factory/wpc/20260706204125-04-微信图片-20260630180133-15-611.jpg"
     ],
     specs: {
       ja: ["面積、長さ、数量、色を確認", "根太、下地、固定部材の条件を確認", "屋外使用、排水、日射条件を確認", "長物梱包、重量、搬入経路を個別確認"],
@@ -662,6 +674,25 @@ function materialDetails(code, product) {
   </section>`;
 }
 
+function guideImages(code, product) {
+  const images = product.guideImages || [];
+  if (!images.length) return "";
+  const copy = {
+    ja: ["製品説明画像", "サイズ、仕様、部材、選び方を画像で確認"],
+    zh: ["产品说明图片", "尺寸、规格、部材和选择方式用图片确认"],
+    en: ["Product Guide Images", "Check size, specification, parts, and selection flow visually"]
+  }[code];
+  return `<section class="section compact">
+    <div class="section-head">
+      <p class="kicker">${copy[0]}</p>
+      <h2>${copy[1]}</h2>
+    </div>
+    <div class="guide-grid">${images.map((image, index) => `<figure>
+      <img src="${mediaSrc(code, image)}" alt="${escapeHtml(`${copy[0]} ${index + 1}`)}" loading="lazy">
+    </figure>`).join("")}</div>
+  </section>`;
+}
+
 function requestSection(code) {
   const copy = {
     ja: {
@@ -719,8 +750,7 @@ function productPage(code, product) {
       ${planGrid(code, product)}
       ${priceTable(code, product)}
       <div class="spec-grid">${product.specs[code].map((item) => `<div>${item}</div>`).join("")}</div>
-    </section>
-    ${materialDetails(code, product)}
+    </section>${guideImages(code, product)}${materialDetails(code, product)}
     <section class="section muted">
       <div class="section-head">
         <p class="kicker">${ui(code, "supplyKicker")}</p>

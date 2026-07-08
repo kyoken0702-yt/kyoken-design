@@ -667,6 +667,27 @@ h3 {
   background: var(--paper);
 }
 
+.guide-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.guide-grid figure {
+  margin: 0;
+  min-width: 0;
+  border: 1px solid var(--line);
+  background: #fff;
+  padding: 10px;
+}
+
+.guide-grid img {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: #f3f6fa;
+}
+
 .sticky-line {
   position: fixed;
   right: 18px;
@@ -761,6 +782,7 @@ h3 {
 	  .record-grid.wide,
 	  .channel-stack,
 	  .product-grid,
+  .guide-grid,
   .role-grid,
   .role-grid.large,
   .spec-grid,
