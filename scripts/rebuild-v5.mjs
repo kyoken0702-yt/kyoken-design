@@ -39,8 +39,8 @@ const products = [
       ]
     },
     planImages: [
-      "media/remote/cdc5462a960d.png",
       "media/remote/e2f130af6ea5.png",
+      "media/remote/cdc5462a960d.png",
       "media/remote/f46b3f8c49c8.png"
     ],
     priceTable: {

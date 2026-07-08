@@ -512,9 +512,10 @@ h3 {
   width: calc(100% + 32px);
   max-width: none;
   margin: -16px -16px 12px;
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
-  background: #dbe3ee;
+  padding: 10px;
+  aspect-ratio: 16 / 10;
+  object-fit: contain;
+  background: #f4efe6;
   border-bottom: 1px solid var(--line);
 }
 
