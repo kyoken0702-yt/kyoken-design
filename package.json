@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "build": "node scripts/rebuild-v5.mjs"
+    "build": "node scripts/rebuild-v5.mjs",
+    "test": "node scripts/seo-check.mjs"
   },
   "dependencies": {
     "vercel": "^54.6.1"

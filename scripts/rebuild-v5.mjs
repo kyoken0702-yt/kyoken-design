@@ -223,15 +223,15 @@ const lang = {
     title: "京建サプライ | 中国工場 × 日本現場 × 工務店のサプライチェーンパートナー",
     desc: "中国工場と日本現場をつなぐ、工務店・内装会社・設計会社のための材料調達、包装、物流、現場確認のサプライチェーンパートナー。",
     nav: ["供給実景", "現場記録", "製品と見積", "工務店連携", "会社情報"],
-    heroTitle: "二十年、サプライチェーンだけを積み上げてきました。",
+    heroTitle: "東京の小規模内装会社・工務店向けに、中国工場での建材制作と日本現場確認を支援します",
     route: ["中国工場", "↓", "日本現場", "↓", "長期連携"],
-    heroBody: "京建は中国側の製作、包装、国際物流、日本到着後の現場確認を支えます。工務店・内装会社は現場施工、取付費用、顧客対応を自社の領域として守れます。",
-    primary: "供給実景を見る",
+    heroBody: "京建サプライは、カーテン、広告材料、看板、ホーローパネル、吸音パネル、壁装材、人工木デッキ材などを、中国工場で制作し、日本の現場条件に合わせて寸法、仕様、包装、輸送、到着確認を整理するサプライチェーン支援サービスです。",
+    primary: "LINEで現場写真を送る",
     secondary: "製品と見積を見る",
     line: "LINEで相談",
     quoteLine: "見積相談",
     factoryTitle: "中国工場・供給実景",
-    factoryLead: "工場、材料、包装、倉庫、出荷、積み込み、物流前の状態を写真で残します。京建が売るのは最低価格ではなく、安定して作り、梱包し、日本の現場に届く確実性です。",
+    factoryLead: "工場、材料、包装、倉庫、出荷、積み込み、物流前の状態を写真で残します。京建が売るのは単価だけではなく、安定して作り、梱包し、日本の現場に届くまでの確認です。",
     siteTitle: "日本現場記録",
     siteLead: "材料到着、寸法確認、取付前確認、引き渡し状態を残します。施工実績ではなく、材料が日本の現場へ届いた事実の記録です。",
     productsTitle: "製品と見積",
@@ -263,7 +263,7 @@ const lang = {
     line: "LINE 咨询",
     quoteLine: "发送照片和尺寸",
     factoryTitle: "中国工厂・供应链实景",
-    factoryLead: "展示工厂、材料、包装、仓库、发货、装车、物流前状态。京建卖的不是最低价，而是供应链确定性。",
+    factoryLead: "展示工厂、材料、包装、仓库、发货、装车、物流前状态。京建卖的不是单价噱头，而是供应链确定性。",
     siteTitle: "日本现场记录",
     siteLead: "展示材料到场、尺寸确认、安装前确认、交付状态。这里不是施工案例，而是材料真正落到日本现场的记录。",
     productsTitle: "产品与报价",
@@ -313,6 +313,110 @@ const lang = {
   }
 };
 
+const guidePages = [
+  {
+    file: "guides/tokyo-shop-signage-cost.html",
+    title: "東京の店舗看板交換はいくらかかるのか",
+    description: "東京で店舗看板を交換する費用が変わる要素、見積前に必要な写真、京建サプライが支援できる範囲を整理します。",
+    intent: "東京で店舗看板交換費用を調べる店舗オーナー・内装会社向け",
+    intro: "東京で店舗看板を交換する費用は、サイズ、素材、発光の有無、既存看板の撤去、取付高さ、電源条件、管理会社の確認、施工時間によって変わります。現場確認前に固定金額を出すより、まず写真、寸法、希望イメージを整理して概算範囲を確認することが重要です。",
+    sections: [
+      ["価格が変わる8つの要素", ["看板の横幅と高さ、厚み、素材、発光の有無で制作費は変わります。既存看板撤去、取付高さ、電源条件、作業時間帯、管理会社確認も見積に影響します。"]],
+      ["非発光サインと内照式看板の違い", ["非発光サインは構造が比較的シンプルです。内照式看板は面板、LED、電源、配線、夜間の見え方まで確認が必要です。"]],
+      ["アクリル、PVC、バックライトフィルムの違い", ["アクリルは透明感や立体感に向いています。PVCは軽量な板面表示に使いやすく、バックライトフィルムは内照式看板の発色確認が重要です。"]],
+      ["見積前に必要な写真", ["正面全体、近景、側面、取付高さ、電源まわり、搬入経路を送ってください。写真があると素材、固定方法、梱包方法を判断しやすくなります。"]],
+      ["すぐ制作しない方がよいケース", ["寸法が不明、管理会社確認が未完了、電源条件が分からない場合は急いで制作しない方が安全です。まず現場情報を整理します。"]],
+      ["京建が支援できる範囲", ["京建は中国工場での制作確認、仕様整理、包装確認、国際物流、日本到着後の確認を支援します。現場施工、電気工事、エンドユーザー対応は施工会社側で確認します。"]]
+    ],
+    faq: [
+      ["写真だけで概算相談できますか。", "はい、写真、寸法、希望素材があれば概算範囲の整理はできます。"],
+      ["内照式看板も相談できますか。", "面板、発光方式、電源条件を確認したうえで相談できます。"],
+      ["撤去や取付施工も京建が行いますか。", "京建は材料と供給確認が中心です。施工範囲は案件ごとに確認します。"]
+    ],
+    related: ["advertising-materials-details.html"]
+  },
+  {
+    file: "guides/shop-lightbox-checklist.html",
+    title: "店舗灯箱・内照式看板を作る前に確認すること",
+    description: "店舗灯箱や内照式看板の制作前に、設置場所、電源、明るさ、面板素材、梱包と搬入を確認するためのチェックリストです。",
+    intent: "店舗灯箱・内照式看板を作る前の確認事項を知りたい人向け",
+    intro: "店舗灯箱・内照式看板は、板面だけでなく電源、明るさ、設置環境、搬入経路まで確認してから制作する必要があります。写真と寸法を先に整理すると、制作ミスや破損リスクを減らせます。",
+    sections: [
+      ["設置場所と屋内外条件", ["屋内か屋外かで素材、発光、固定方法、耐候性の確認が変わります。雨、日射、人通り、管理規約も見ます。"]],
+      ["電源位置と明るさ", ["電源位置、配線ルート、夜間の見え方を確認します。明るすぎる看板は周辺環境や管理会社の確認が必要になる場合があります。"]],
+      ["面板素材と破損リスク", ["アクリル、塩ビ、フィルム、LED部材は梱包方法が変わります。角割れ、擦れ、曲がりを避ける梱包が必要です。"]],
+      ["管理会社確認", ["ビルや商業施設では、サイズ、色、発光、施工時間の確認が必要です。制作前に許可条件を整理します。"]],
+      ["写真チェックリスト", ["正面全体、取付場所の近景、電源、既存看板、搬入経路、夜間写真を送ってください。"]]
+    ],
+    faq: [
+      ["夜間写真は必要ですか。", "内照式看板では、周辺の明るさと見え方を判断するため有効です。"],
+      ["面板だけの制作もできますか。", "寸法、素材、固定方法が分かれば相談できます。"],
+      ["梱包方法も確認できますか。", "はい、割れや擦れを避ける梱包条件を案件ごとに確認します。"]
+    ],
+    related: ["advertising-materials-details.html"]
+  },
+  {
+    file: "guides/curtain-photo-measurement.html",
+    title: "カーテン見積の前に必要な写真と寸法",
+    description: "オーダーカーテンの見積前に必要な窓全体写真、レール写真、幅寸法、高さ寸法、遮光、防炎、レース有無を整理します。",
+    intent: "カーテン見積前に送る写真と寸法を知りたい人向け",
+    intro: "カーテン見積では、窓全体写真、レール写真、幅寸法、高さ寸法、腰窓か掃き出し窓かの確認が必要です。写真があると、遮光、防炎、レース有無、取付条件を判断しやすくなります。",
+    sections: [
+      ["窓全体写真とレール写真", ["窓全体、左右の壁、床、既存レールを写してください。レール形状が分かる近景写真も必要です。"]],
+      ["幅寸法と高さ寸法", ["幅はレール幅または窓枠幅を確認します。高さは腰窓、掃き出し窓で測り方が変わります。"]],
+      ["腰窓と掃き出し窓の違い", ["腰窓は窓枠下までの余裕を確認します。掃き出し窓は床との隙間を確認します。"]],
+      ["遮光等級、防炎仕様、レース有無", ["寝室や西日の強い窓は遮光を確認します。店舗、施設、民泊では防炎仕様が必要になる場合があります。"]],
+      ["取付条件", ["既存レール利用か、新規レールが必要かで確認内容が変わります。高所や特殊固定は別途確認します。"]]
+    ],
+    faq: [
+      ["スマホ写真でも大丈夫ですか。", "はい、窓全体とレール近景が分かればスマホ写真で相談できます。"],
+      ["防炎カーテンも相談できますか。", "必要条件を確認したうえで、案件ごとに仕様を整理します。"],
+      ["カーテン詳細ページはどこですか。", "オーダーカーテンの詳細は curtain-details.html で確認できます。"]
+    ],
+    related: ["curtain-details.html"]
+  },
+  {
+    file: "guides/small-contractor-china-materials.html",
+    title: "小工務店が中国建材を直接仕入れる前に確認すべきこと",
+    description: "小規模工務店が中国建材を直接仕入れる前に、仕様誤解、梱包、納期、日本到着後確認、施工責任を整理します。",
+    intent: "中国建材を直接仕入れたい小規模工務店向け",
+    intro: "小工務店が中国建材を直接仕入れる前には、言語、仕様、梱包、納期、日本到着後の確認、顧客対応と施工責任の分担を整理する必要があります。京建サプライは工務店の後方支援として、材料供給側の不確実性を減らします。",
+    sections: [
+      ["中国工場との言語確認", ["材料名、寸法、色、厚み、数量は言語違いで誤解が起こりやすい部分です。写真と図面で確認します。"]],
+      ["仕様の誤解と梱包破損", ["同じ商品名でも素材、厚み、表面処理が違うことがあります。割れや曲がりを避ける梱包条件も重要です。"]],
+      ["納期と日本到着後の確認", ["制作日数、出荷、国際輸送、日本側配送で時間が変わります。到着後は数量、破損、仕様を確認します。"]],
+      ["顧客対応と施工責任を誰が持つか", ["京建は工務店の顧客を取りません。現場施工、施工見積、顧客対応、施工責任は工務店側の領域として守ります。"]],
+      ["京建が工務店の後方支援としてできること", ["材料調達、仕様整理、包装確認、国際物流、日本到着後の確認、供給記録を支援します。"]]
+    ],
+    faq: [
+      ["京建は工務店の顧客に直接営業しますか。", "いいえ、工務店の顧客関係は工務店側の領域として守ります。"],
+      ["小ロットでも相談できますか。", "製品と数量によりますが、写真と寸法から相談できます。"],
+      ["施工責任も京建が持ちますか。", "施工責任は案件範囲を確認し、通常は施工会社側で管理します。"]
+    ],
+    related: ["contractor-partnership.html"]
+  },
+  {
+    file: "guides/why-site-photos-before-quote.html",
+    title: "内装材料の見積で現場写真が必要な理由",
+    description: "内装材料の見積前に現場写真が必要な理由を、寸法、遠景、近景、搬入経路、既存材料の状態から説明します。",
+    intent: "内装材料の見積前に写真を送る理由を知りたい人向け",
+    intro: "内装材料の見積では、寸法だけでは判断できない現場条件があります。遠景写真、近景写真、搬入経路、既存材料の状態を確認すると、制作ミス、破損、追加費用を減らしやすくなります。",
+    sections: [
+      ["寸法だけでは判断できない理由", ["同じ幅と高さでも、下地、段差、既存部材、周辺余白で必要な材料や取付方法が変わります。"]],
+      ["遠景写真が必要な理由", ["現場全体、搬入方向、周辺の障害物を確認できます。材料サイズや梱包方法の判断に役立ちます。"]],
+      ["近景写真が必要な理由", ["端部、下地、既存材料、劣化、固定位置を確認できます。仕様違いを防ぐために必要です。"]],
+      ["搬入経路が価格に影響する理由", ["階段、エレベーター、通路幅、駐車位置で配送や搬入の条件が変わります。"]],
+      ["写真が少ないと起こる失敗例", ["寸法違い、素材違い、梱包不足、搬入不可、追加施工が起こりやすくなります。"]]
+    ],
+    faq: [
+      ["何枚くらい写真が必要ですか。", "全体、近景、寸法が分かる写真、搬入経路を数枚送ると判断しやすくなります。"],
+      ["寸法だけ先に送ってもよいですか。", "可能ですが、写真がない場合は概算の精度が下がります。"],
+      ["古い材料の写真も必要ですか。", "はい、既存材料の厚み、状態、固定方法を判断するため役立ちます。"]
+    ],
+    related: products.map((product) => product.file)
+  }
+];
+
 function readJson(relativePath) {
   const target = path.join(root, relativePath);
   if (!fs.existsSync(target)) throw new Error(`${relativePath} is required.`);
@@ -335,6 +439,74 @@ function pagePath(code, file) {
 
 function href(code, file) {
   return code === "ja" ? file : file;
+}
+
+function absoluteUrl(code, file) {
+  return `${siteUrl}/${pagePath(code, file)}`;
+}
+
+function jsonLd(data) {
+  return `<script type="application/ld+json">${JSON.stringify(data)}</script>`;
+}
+
+function baseJsonLd(code, file) {
+  return [
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": lang[code].logo,
+      "url": siteUrl,
+      "email": "kyoken0702@gmail.com",
+      "telephone": "+81-3-6555-1306"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": lang[code].logo,
+      "url": siteUrl
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": lang[code].logo,
+      "url": siteUrl,
+      "telephone": "+81-3-6555-1306",
+      "address": {
+        "@type": "PostalAddress",
+        "postalCode": "103-0027",
+        "addressRegion": "東京都",
+        "addressLocality": "中央区",
+        "streetAddress": "日本橋3丁目7-7-4F",
+        "addressCountry": "JP"
+      }
+    },
+    breadcrumbJsonLd(code, [{ name: lang[code].logo, file: "index.html" }, ...(file === "index.html" ? [] : [{ name: file.replace(/\.html$/u, ""), file }])])
+  ];
+}
+
+function breadcrumbJsonLd(code, items) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": items.map((item, index) => ({
+      "@type": "ListItem",
+      "position": index + 1,
+      "name": item.name,
+      "item": item.url || absoluteUrl(code, item.file)
+    }))
+  };
+}
+
+function faqJsonLd(faq) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faq.map(([question, answer]) => ({
+      "@type": "Question",
+      "name": question,
+      "acceptedAnswer": { "@type": "Answer", "text": answer }
+    }))
+  };
 }
 
 function switcher(code, file = "index.html") {
@@ -505,9 +677,13 @@ function productCards(code) {
   </article>`).join("");
 }
 
-function shell(code, title, description, file, body) {
+function shell(code, title, description, file, body, options = {}) {
   const c = lang[code];
-  const p = prefix(code);
+  const depthPrefix = "../".repeat(Math.max(0, file.split("/").length - 1));
+  const p = `${depthPrefix}${prefix(code)}`;
+  const localRoot = depthPrefix;
+  const canonical = options.canonical || absoluteUrl(code, file);
+  const schemas = [...baseJsonLd(code, file), ...(options.schemas || [])];
   return `<!doctype html>
 <html lang="${c.html}">
 <head>
@@ -516,19 +692,25 @@ function shell(code, title, description, file, body) {
   <title>${escapeHtml(title)}</title>
   <meta name="description" content="${escapeHtml(description)}">
   <meta name="keywords" content="${code === "en" ? "China factory, Japan site, supply chain, contractors, interior companies, material sourcing, Tokyo delivery, construction materials" : code === "zh" ? "中国工厂,日本现场,供应链,工务店,内装会社,材料采购,东京交付,建材供应" : "中国工場,日本現場,サプライチェーン,工務店,内装会社,材料調達,東京交付,建材供給"}">
+  <link rel="canonical" href="${canonical}">
+  <meta property="og:title" content="${escapeHtml(title)}">
+  <meta property="og:description" content="${escapeHtml(description)}">
+  <meta property="og:type" content="${options.ogType || "website"}">
+  <meta property="og:url" content="${canonical}">
   <link rel="icon" type="image/png" href="${p}media/remote/6e64da3a8e48.png">
   <link rel="stylesheet" href="${p}styles.css?v=20260706-rebuild">
+  ${schemas.map(jsonLd).join("\n  ")}
 </head>
 <body>
   <header class="site-header">
-    <a class="brand" href="${file === "index.html" ? "index.html" : "index.html"}">${c.logo}</a>
+    <a class="brand" href="${localRoot}index.html">${c.logo}</a>
     <nav>
-      <a href="index.html#factory">${c.nav[0]}</a>
-      <a href="index.html#site">${c.nav[1]}</a>
-      <a href="index.html#products">${c.nav[2]}</a>
-      <a href="contractor-partnership.html">${c.nav[3]}</a>
+      <a href="${localRoot}index.html#factory">${c.nav[0]}</a>
+      <a href="${localRoot}index.html#site">${c.nav[1]}</a>
+      <a href="${localRoot}index.html#products">${c.nav[2]}</a>
+      <a href="${localRoot}contractor-partnership.html">${c.nav[3]}</a>
     </nav>
-    <div class="language">${switcher(code, file)}</div>
+    <div class="language">${options.hideSwitcher ? `<span>${c.label}</span>` : switcher(code, file)}</div>
   </header>
   ${body}
   <a class="sticky-line" href="${lineUrl}">${c.line}</a>
@@ -547,14 +729,57 @@ function home(code) {
       <div class="hero-copy">
         <p class="kicker">${ui(code, "heroKicker")}</p>
         <h1>${c.heroTitle}</h1>
-        <div class="route">${c.route.map((item) => `<span>${item}</span>`).join("")}</div>
         <p>${c.heroBody}</p>
         <div class="actions">
-          <a href="#factory">${c.primary}</a>
+          <a href="${lineUrl}">${c.primary}</a>
           <a href="#products">${c.secondary}</a>
-          <a href="${lineUrl}">${c.line}</a>
+          <a href="contractor-partnership.html">${c.partnerTitle}</a>
         </div>
       </div>
+    </section>
+
+    <section class="section compact intro-answer">
+      <div class="section-head">
+        <p class="kicker">What Kyoken Does</p>
+        <h2>京建サプライは何を支援する会社か</h2>
+        <p>小規模工務店、内装会社、店舗オーナーが中国工場の材料を使いたい時に、仕様整理、材料調達、包装確認、国際物流、日本到着後の確認を支援します。現場施工、施工見積、顧客対応は施工会社様側の仕事として守ります。</p>
+      </div>
+      <div class="route">${c.route.map((item) => `<span>${item}</span>`).join("")}</div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <p class="kicker">For Whom</p>
+        <h2>このような方に向いています</h2>
+      </div>
+      <div class="answer-grid">${["小規模工務店", "内装会社", "店舗オーナー", "民泊・宿泊施設運営者", "中国工場とのやり取りに不安がある施工会社", "現場写真から材料相談をしたい方"].map((item) => `<div>${item}</div>`).join("")}</div>
+    </section>
+
+    <section class="section muted">
+      <div class="section-head">
+        <p class="kicker">Role Split</p>
+        <h2>京建がすること、しないこと</h2>
+      </div>
+      <div class="two-column-list">
+        <div><h3>京建が支援すること</h3><ul>${["中国工場確認", "材料調達", "仕様整理", "包装確認", "国際物流確認", "日本到着後の確認", "供給記録"].map((item) => `<li>${item}</li>`).join("")}</ul></div>
+        <div><h3>京建が直接約束しないこと</h3><ul>${["全現場施工", "エンドユーザー対応", "施工保証", "24時間での見積回答", "最安値の保証", "DDPなど税務条件の固定約束"].map((item) => `<li>${item}</li>`).join("")}</ul></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <p class="kicker">Price Context</p>
+        <h2>建材は単価だけで判断できません</h2>
+      </div>
+      <div class="answer-grid">${["寸法が曖昧だと制作ミスになる", "素材と厚みで価格が変わる", "梱包方法で破損リスクが変わる", "搬入経路で費用が変わる", "日本現場の条件で取付方法が変わる", "写真がないと正確な判断ができない"].map((item) => `<div>${item}</div>`).join("")}</div>
+    </section>
+
+    <section class="section muted">
+      <div class="section-head">
+        <p class="kicker">Before Quote</p>
+        <h2>見積前に送ってほしい資料</h2>
+      </div>
+      <div class="answer-grid">${["現場全体写真", "設置場所の近景写真", "幅・高さが分かる写真", "既存材料の写真", "希望する仕上がりの参考画像", "数量", "納品先エリア", "希望納期"].map((item) => `<div>${item}</div>`).join("")}</div>
     </section>
 
     <section id="factory" class="section">
@@ -585,6 +810,8 @@ function home(code) {
       <div class="product-grid">${productCards(code)}</div>
     </section>
 
+    ${guideIndexSection(code)}
+
     <section class="section partner">
       <div>
         <p class="kicker">${ui(code, "partnerKicker")}</p>
@@ -599,7 +826,27 @@ function home(code) {
 
     ${companySection(code)}
     ${contactSection(code)}
-  </main>`);
+  </main>`, { schemas: [faqJsonLd(homeFaq())] });
+}
+
+function homeFaq() {
+  return [
+    ["京建サプライは何をする会社ですか。", "中国工場での建材制作、仕様整理、包装確認、国際物流、日本到着後の確認を支援する会社です。"],
+    ["工務店の顧客対応も京建が行いますか。", "いいえ、顧客対応、施工見積、施工責任、顧客関係の維持は工務店様側の領域です。"],
+    ["見積前に何を送ればよいですか。", "現場写真、近景写真、寸法、数量、納品先エリア、希望納期をLINEで送ってください。"]
+  ];
+}
+
+function guideIndexSection(code) {
+  if (code !== "ja") return "";
+  return `<section class="section muted">
+    <div class="section-head">
+      <p class="kicker">Guides</p>
+      <h2>相談前に読めるガイド</h2>
+      <p>看板、カーテン、中国建材、現場写真の準備について、見積前に確認しやすい形で整理しています。</p>
+    </div>
+    <div class="guide-link-grid">${guidePages.map((guide) => `<a href="${guide.file}"><strong>${guide.title}</strong><span>${guide.description}</span></a>`).join("")}</div>
+  </section>`;
 }
 
 function recordsPage(code) {
@@ -721,10 +968,139 @@ function requestSection(code) {
   </section>`;
 }
 
+function productSeoBlocks(code, product) {
+  const data = productSeoData(code, product);
+  return `<section class="section compact">
+    <div class="section-head">
+      <p class="kicker">${code === "ja" ? "現場適性" : code === "zh" ? "适用现场" : "Fit"}</p>
+      <h2>${data.goodTitle}</h2>
+    </div>
+    <div class="answer-grid">${data.good.map((item) => `<div>${item}</div>`).join("")}</div>
+  </section>
+  <section class="section compact muted">
+    <div class="section-head">
+      <p class="kicker">${code === "ja" ? "注意" : code === "zh" ? "注意" : "Caution"}</p>
+      <h2>${data.badTitle}</h2>
+    </div>
+    <div class="answer-grid">${data.bad.map((item) => `<div>${item}</div>`).join("")}</div>
+  </section>
+  <section class="section compact">
+    <div class="section-head">
+      <p class="kicker">${code === "ja" ? "見積前" : code === "zh" ? "报价前" : "Before Quote"}</p>
+      <h2>${data.checkTitle}</h2>
+    </div>
+    <div class="answer-grid">${data.check.map((item) => `<div>${item}</div>`).join("")}</div>
+  </section>
+  <section class="section compact muted">
+    <div class="section-head">
+      <p class="kicker">${code === "ja" ? "失敗例" : code === "zh" ? "常见错误" : "Common Issues"}</p>
+      <h2>${data.failTitle}</h2>
+    </div>
+    <div class="answer-grid">${data.fail.map((item) => `<div>${item}</div>`).join("")}</div>
+  </section>
+  <section class="section compact">
+    <div class="section-head">
+      <p class="kicker">${ui(code, "supplyKicker")}</p>
+      <h2>${data.supportTitle}</h2>
+      <p>${data.supportText}</p>
+    </div>
+  </section>
+  ${faqSection(code, data.faq)}`;
+}
+
+function productSeoData(code, product) {
+  const common = {
+    ja: {
+      goodTitle: "この製品が向いている現場",
+      badTitle: "向いていない現場",
+      checkTitle: "見積前に確認すること",
+      failTitle: "よくある失敗",
+      supportTitle: "京建が支援できる範囲",
+      check: ["現場全体写真", "設置場所の近景写真", "幅・高さ・厚み", "数量", "納品先エリア", "希望納期", "取付条件"],
+      supportText: "京建は中国工場確認、材料調達、仕様整理、包装確認、国際物流確認、日本到着後の確認、供給記録を支援します。現場施工、施工保証、エンドユーザー対応は施工会社様側で確認します。"
+    },
+    zh: {
+      goodTitle: "这个产品适合的现场",
+      badTitle: "不适合的现场",
+      checkTitle: "报价前需要确认的内容",
+      failTitle: "常见失败",
+      supportTitle: "京建可以支援的范围",
+      check: ["现场整体照片", "安装位置近景照片", "宽度、高度、厚度", "数量", "配送区域", "希望交期", "安装条件"],
+      supportText: "京建支援中国工厂确认、材料采购、规格整理、包装确认、国际物流确认、日本到场确认和供应链记录。现场施工、施工保证、终端客户沟通由施工方确认。"
+    },
+    en: {
+      goodTitle: "Sites This Product Fits",
+      badTitle: "Sites It May Not Fit",
+      checkTitle: "What to Check Before Quote",
+      failTitle: "Common Mistakes",
+      supportTitle: "What Kyoken Can Support",
+      check: ["Overall site photos", "Close-up photos", "Width, height, thickness", "Quantity", "Delivery area", "Preferred timing", "Installation conditions"],
+      supportText: "Kyoken supports factory coordination, sourcing, specification checks, packing, international logistics, arrival confirmation, and supply records. Installation, workmanship warranty, and end-customer communication remain with the contractor."
+    }
+  }[code];
+  const byKey = {
+    curtains: {
+      ja: {
+        good: ["賃貸、民泊、店舗、事務所の窓まわり", "既存レールを使う標準的なカーテン交換", "遮光、防炎、レース有無を写真で確認したい現場"],
+        bad: ["レール新設や高所作業が未確認の現場", "窓寸法が分からず写真もない現場", "特殊な電動レールを前提にした現場"],
+        fail: ["レール幅ではなく窓枠だけで発注する", "腰窓と掃き出し窓の高さを同じ考えで測る", "防炎仕様の必要性を後から確認する"],
+        faq: [["スマホ写真で相談できますか。", "はい、窓全体とレール近景があれば相談できます。"], ["防炎仕様は確認できますか。", "必要な場合は見積前に確認します。"], ["レールは価格に含まれますか。", "カーテン套餐価格には通常含めません。"], ["採寸は必要ですか。", "幅、高さ、レール状態の確認が必要です。"], ["LINEで何を送ればよいですか。", "窓全体写真、レール写真、幅、高さ、数量を送ってください。"]]
+      }
+    },
+    advertising: {
+      ja: {
+        good: ["店舗看板、アクリル文字、PVCプレートの制作相談", "図面や写真から素材と寸法を整理したい案件", "包装と日本到着後の確認が必要な案件"],
+        bad: ["設置許可や電源条件が未確認の内照式看板", "現場寸法がなくデザインだけで急ぎ制作する案件", "施工時間や管理会社条件が未整理の案件"],
+        fail: ["発光の有無を後から決める", "素材厚みと固定方法を確認しない", "梱包を軽く見て角割れが起きる"],
+        faq: [["看板の概算相談はできますか。", "写真、寸法、希望素材があれば相談できます。"], ["内照式看板も対応できますか。", "面板、電源、明るさを確認して相談できます。"], ["デザインデータは必要ですか。", "AI、PDF、画像など確認できるデータがあると進めやすいです。"], ["施工も含まれますか。", "京建は材料供給確認が中心で、施工範囲は案件ごとに確認します。"], ["梱包確認はできますか。", "はい、破損リスクに合わせて確認します。"]]
+      }
+    }
+  };
+  const genericJa = {
+    good: [`${product.names.ja}の材料仕様を写真と寸法で確認したい現場`, "中国工場制作と日本到着後確認を分けて整理したい案件", "梱包、数量、納品先を事前に確認したい案件"],
+    bad: ["現場写真、寸法、数量がまったくない案件", "施工責任や顧客対応を材料供給側に一括で預けたい案件", "仕様未確定のまま固定金額だけを急ぐ案件"],
+    fail: ["寸法だけで素材や厚みを確認しない", "搬入経路と梱包サイズを確認しない", "既存材料の状態を写真で残さない"],
+    faq: [["写真だけで相談できますか。", "写真と寸法があれば概算確認を始められます。"], ["価格は固定ですか。", "サイズ、数量、仕様、配送先で変わります。"], ["小ロットでも相談できますか。", "製品と数量によりますが、まず写真と希望内容を送ってください。"], ["施工も依頼できますか。", "京建は材料供給確認が中心です。施工範囲は案件ごとに確認します。"], ["LINEで何を送ればよいですか。", "現場写真、寸法、数量、納品先エリア、希望納期を送ってください。"]]
+  };
+  const ja = byKey[product.key]?.ja || genericJa;
+  if (code === "ja") return { ...common, ...ja };
+  return {
+    ...common,
+    good: code === "zh" ? ["需要按现场照片确认材料的案件", "需要整理中国工厂制作和日本到场确认的案件", "需要事前确认包装、数量、配送区域的案件"] : ["Sites where material specification should be checked by photos", "Cases needing China factory production and Japan arrival confirmation", "Cases needing packing, quantity, and delivery checks"],
+    bad: code === "zh" ? ["没有照片、尺寸、数量的案件", "希望材料方承担全部施工和客户对应的案件", "规格未确定但要求固定总价的案件"] : ["Cases without photos, dimensions, or quantity", "Cases expecting the supplier to own all installation and customer handling", "Cases requesting a fixed total before specification is clear"],
+    fail: code === "zh" ? ["只看尺寸不确认材料厚度", "不确认搬入路线和包装尺寸", "没有留下既有材料照片"] : ["Checking dimensions but not material thickness", "Ignoring carrying route and packing size", "Not recording existing material photos"],
+    faq: code === "zh" ? [["可以只用照片咨询吗？", "有照片和尺寸即可先做概算确认。"], ["价格固定吗？", "价格会随尺寸、数量、规格和配送地址变化。"], ["小批量可以咨询吗？", "按产品和数量确认，请先发送照片和需求。"], ["施工也可以委托吗？", "京建以材料供应确认为中心，施工范围逐案确认。"], ["LINE 要发送什么？", "请发送现场照片、尺寸、数量、配送区域和希望交期。"]] : [["Can we start with photos only?", "Photos and dimensions are enough to start a rough review."], ["Is the price fixed?", "Pricing changes by size, quantity, specification, and delivery address."], ["Can small quantity be discussed?", "It depends on product and quantity; send photos and requirements first."], ["Can installation be included?", "Kyoken mainly supports material supply confirmation; installation scope is checked case by case."], ["What should we send on LINE?", "Send site photos, dimensions, quantity, delivery area, and preferred timing."]]
+  };
+}
+
+function faqSection(code, faq) {
+  return `<section class="section compact faq-section">
+    <div class="section-head">
+      <p class="kicker">FAQ</p>
+      <h2>${code === "ja" ? "よくある質問" : code === "zh" ? "常见问题" : "Frequently Asked Questions"}</h2>
+    </div>
+    <div class="faq-list">${faq.map(([question, answer]) => `<details><summary>${question}</summary><p>${answer}</p></details>`).join("")}</div>
+  </section>`;
+}
+
+function guideRelatedLinks(code, product) {
+  if (code !== "ja") return "";
+  const related = guidePages.filter((guide) => guide.related?.includes(product.file)).slice(0, 3);
+  if (!related.length) return "";
+  return `<section class="section compact muted">
+    <div class="section-head">
+      <p class="kicker">Related Guides</p>
+      <h2>関連ガイド</h2>
+    </div>
+    <div class="guide-link-grid">${related.map((guide) => `<a href="${guide.file}"><strong>${guide.title}</strong><span>${guide.description}</span></a>`).join("")}</div>
+  </section>`;
+}
+
 function productPage(code, product) {
   const c = lang[code];
   const title = `${product.names[code]} | ${c.logo}`;
   const related = records.filter((record) => record.module === "factory").slice(0, 2);
+  const seoData = productSeoData(code, product);
   return shell(code, title, product.one[code], product.file, `<main>
     <section class="product-hero">
       <div>
@@ -745,6 +1121,7 @@ function productPage(code, product) {
       ${priceTable(code, product)}
       <div class="spec-grid">${product.specs[code].map((item) => `<div>${item}</div>`).join("")}</div>
     </section>${guideImages(code, product)}${materialDetails(code, product)}
+    ${productSeoBlocks(code, product)}
     <section class="section muted">
       <div class="section-head">
         <p class="kicker">${ui(code, "supplyKicker")}</p>
@@ -764,17 +1141,87 @@ function productPage(code, product) {
       <p class="notice">${code === "ja" ? "価格はサイズ・数量・配送先により変動します。施工、現場責任、取付費用、エンドユーザー対応は施工会社様側でご確認ください。" : code === "zh" ? "价格会因尺寸、数量、配送地址变化。施工、现场责任、安装费用、终端客户沟通由施工方确认。" : "Pricing varies by dimensions, quantity, and delivery address. Installation, site responsibility, installation pricing, and end-customer communication remain with the contractor."}</p>
     </section>
     ${requestSection(code)}
+    ${guideRelatedLinks(code, product)}
     ${contactSection(code)}
-  </main>`);
+  </main>`, {
+    ogType: "product",
+    schemas: [
+      {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        "name": product.names[code],
+        "description": product.one[code],
+        "image": `${siteUrl}/${product.image}`,
+        "brand": { "@type": "Brand", "name": c.logo }
+      },
+      faqJsonLd(seoData.faq)
+    ]
+  });
+}
+
+function guidePage(guide) {
+  return shell("ja", `${guide.title} | 京建サプライ`, guide.description, guide.file, `<main>
+    <article class="guide-page">
+      <section class="page-hero">
+        <p class="kicker">Guide</p>
+        <h1>${guide.title}</h1>
+        <p>${guide.intro}</p>
+        <div class="actions"><a href="${lineUrl}">LINEで現場写真を送る</a><a href="../index.html#products">製品と見積を見る</a></div>
+      </section>
+      ${guide.sections.map(([heading, paragraphs]) => `<section class="section compact">
+        <div class="section-head">
+          <h2>${heading}</h2>
+        </div>
+        ${paragraphs.map((text) => `<p class="guide-text">${text}</p>`).join("")}
+      </section>`).join("")}
+      ${guide.related?.length ? `<section class="section compact muted">
+        <div class="section-head">
+          <p class="kicker">Related</p>
+          <h2>関連ページ</h2>
+        </div>
+        <div class="guide-link-grid">${guide.related.slice(0, 6).map((file) => {
+          const product = products.find((item) => item.file === file);
+          const label = product ? product.names.ja : file === "contractor-partnership.html" ? "工務店連携" : file;
+          return `<a href="../${file}"><strong>${label}</strong><span>詳しい仕様、確認事項、LINE相談はこちら。</span></a>`;
+        }).join("")}</div>
+      </section>` : ""}
+      ${faqSection("ja", guide.faq)}
+      <section class="section contact">
+        <h2>LINEで写真と寸法を送る</h2>
+        <p>現場写真、寸法、数量、納品先エリア、希望納期を送ってください。仕様確認後に概算の進め方をご案内します。</p>
+        <div class="actions"><a href="${lineUrl}">LINEで相談する</a></div>
+      </section>
+    </article>
+  </main>`, {
+    hideSwitcher: true,
+    schemas: [
+      breadcrumbJsonLd("ja", [
+        { name: "京建サプライ", file: "index.html" },
+        { name: "ガイド", url: `${siteUrl}/guides/` },
+        { name: guide.title, file: guide.file }
+      ]),
+      faqJsonLd(guide.faq)
+    ]
+  });
 }
 
 function contractorPage(code) {
   const c = lang[code];
-  return shell(code, `${c.partnerTitle} | ${c.logo}`, c.partnerLead, "contractor-partnership.html", `<main>
+  const isJa = code === "ja";
+  const title = isJa ? "小規模工務店のための中国建材サプライチェーン支援" : c.partnerTitle;
+  const lead = isJa ? "京建サプライは、小規模工務店や内装会社が中国工場と直接やり取りする負担を減らすため、材料調達、仕様整理、包装確認、国際物流、日本到着後の確認を支援します。現場施工、顧客対応、施工見積、顧客関係は工務店様側の領域として守ります。" : c.partnerLead;
+  const faq = isJa ? [
+    ["京建は工務店の顧客を直接取りますか。", "いいえ、顧客対応と顧客関係は工務店様側の領域として守ります。"],
+    ["どこまで相談できますか。", "材料調達、仕様整理、包装確認、国際物流、日本到着後確認を相談できます。"],
+    ["施工まで一括で依頼できますか。", "京建は供給支援が中心です。施工範囲は案件ごとに確認します。"],
+    ["中国語で工場とやり取りできなくても大丈夫ですか。", "写真、寸法、仕様を整理しながら確認を支援します。"],
+    ["最初に何を送ればよいですか。", "現場写真、希望材料、寸法、数量、納品先、希望納期をLINEで送ってください。"]
+  ] : productSeoData(code, products[0]).faq;
+  return shell(code, `${title} | ${c.logo}`, lead, "contractor-partnership.html", `<main>
     <section class="page-hero">
       <p class="kicker">${ui(code, "partnerKicker")}</p>
-      <h1>${c.partnerTitle}</h1>
-      <p>${c.partnerLead}</p>
+      <h1>${title}</h1>
+      <p>${lead}</p>
     </section>
     <section class="section">
       <div class="role-grid large">
@@ -782,8 +1229,25 @@ function contractorPage(code) {
         <div><strong>${ui(code, "contractorRole")}</strong><span>${ui(code, "contractorRoleText")}</span></div>
       </div>
     </section>
+    <section class="section muted">
+      <div class="section-head"><p class="kicker">Scope</p><h2>${isJa ? "京建がすること" : c.partnerTitle}</h2></div>
+      <div class="answer-grid">${(isJa ? ["中国工場確認", "材料調達", "仕様整理", "包装確認", "国際物流確認", "日本到着後の確認", "供給記録"] : [ui(code, "kyokenRoleText")]).map((item) => `<div>${item}</div>`).join("")}</div>
+    </section>
+    <section class="section">
+      <div class="section-head"><p class="kicker">Boundary</p><h2>${isJa ? "京建がしないこと" : c.notes}</h2></div>
+      <div class="answer-grid">${(isJa ? ["工務店様の顧客を直接営業しない", "現場施工を無条件で請け負わない", "施工保証を材料供給側だけで約束しない", "24時間固定の見積回答を約束しない", "最安値を保証しない"] : [ui(code, "contractorRoleText")]).map((item) => `<div>${item}</div>`).join("")}</div>
+    </section>
+    <section class="section muted">
+      <div class="section-head"><p class="kicker">Contractor Work</p><h2>${isJa ? "工務店側に残る仕事" : ui(code, "contractorRole")}</h2></div>
+      <div class="answer-grid">${(isJa ? ["現場採寸", "顧客対応", "取付施工", "施工見積", "施工責任の管理", "顧客関係の維持"] : [ui(code, "contractorRoleText")]).map((item) => `<div>${item}</div>`).join("")}</div>
+    </section>
+    <section class="section">
+      <div class="section-head"><p class="kicker">Flow</p><h2>${isJa ? "連携の流れ" : ui(code, "supplyKicker")}</h2></div>
+      <div class="process-grid">${["現場写真と寸法を送る", "材料と仕様を整理する", "中国工場で制作可否を確認する", "包装と物流条件を確認する", "日本到着後に数量と状態を確認する"].map((item, index) => `<div><span>0${index + 1}</span><strong>${item}</strong><p>${index === 0 ? "LINEで資料を送ってください。" : "案件ごとに確認して記録します。"}</p></div>`).join("")}</div>
+    </section>
+    ${faqSection(code, faq)}
     ${contactSection(code)}
-  </main>`);
+  </main>`, { schemas: [faqJsonLd(faq)] });
 }
 
 function legalPage(code) {
@@ -852,10 +1316,31 @@ for (const code of Object.keys(lang)) {
   }
 }
 
+for (const guide of guidePages) {
+  write(guide.file, guidePage(guide));
+}
+
 write("sitemap.xml", `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${["", "en/", "zh/"].flatMap((dir) => ["index.html", "supply-chain-records.html", "contractor-partnership.html", "legal.html", ...products.map((product) => product.file)].map((file) => `  <url><loc>${siteUrl}/${dir}${file}</loc></url>`)).join("\n")}
+${[
+  ...["", "en/", "zh/"].flatMap((dir) => ["index.html", "supply-chain-records.html", "contractor-partnership.html", "legal.html", ...products.map((product) => product.file)].map((file) => `${dir}${file}`)),
+  ...guidePages.map((guide) => guide.file)
+].map((file) => `  <url><loc>${siteUrl}/${file}</loc></url>`).join("\n")}
 </urlset>
 `);
+
+write("robots.txt", `User-agent: *
+Allow: /
+Sitemap: ${siteUrl}/sitemap.xml
+`);
+
+write("404.html", shell("ja", "ページが見つかりません | 京建サプライ", "お探しのページは見つかりませんでした。製品、見積、工務店連携ページをご確認ください。", "404.html", `<main>
+  <section class="page-hero">
+    <p class="kicker">404</p>
+    <h1>ページが見つかりません</h1>
+    <p>URLが変更されたか、ページが削除された可能性があります。製品と見積、工務店連携、LINE相談から必要な情報をご確認ください。</p>
+    <div class="actions"><a href="index.html#products">製品と見積を見る</a><a href="${lineUrl}">LINEで相談する</a></div>
+  </section>
+</main>`, { hideSwitcher: true }));
 
 console.log(`Rebuilt Kyoken Supply static site from data/records.json (${records.length} records).`);
