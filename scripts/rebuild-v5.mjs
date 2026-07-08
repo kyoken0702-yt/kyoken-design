@@ -39,9 +39,9 @@ const products = [
       ]
     },
     planImages: [
+      "media/remote/cdc5462a960d.png",
       "media/remote/e2f130af6ea5.png",
-      "media/records/factory/curtain/微信图片_20260605223620_68_266.jpg",
-      "media/records/factory/curtain/微信图片_20260629221839_127_266.jpg"
+      "media/remote/f46b3f8c49c8.png"
     ],
     priceTable: {
       ja: {
