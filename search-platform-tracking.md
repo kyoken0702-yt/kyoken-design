@@ -19,7 +19,7 @@
 | 平台 | 目标 | 当前状态 | 下一步 | 记录日期 | 备注 |
 | --- | --- | --- | --- | --- | --- |
 | Google Search Console | sitemap / 重点页面索引 | 已提交过 Google sitemap 和重点页面 | 等待收录与查询词数据 | 2026-07-09 | 后续按真实查询词补 guide |
-| Bing Webmaster Tools | sitemap 提交 | 待提交 | 添加站点 https://www.kyoken.design 并提交 https://www.kyoken.design/sitemap.xml |  | Bing 也会影响部分 Microsoft / Copilot 结果 |
+| Bing Webmaster Tools | sitemap 提交 | 已验证站点并提交 sitemap | 等待 Processing 变为成功抓取 | 2026-07-09 | Bing 也会影响部分 Microsoft / Copilot 结果；后台显示 sitemap 已提交处理 |
 | Yahoo Japan | 兼容检查 | 站内兼容已准备 | 以 Google / Bing 收录状态为主做检查 |  | Yahoo Japan 搜索结果通常依赖外部搜索索引，重点是页面兼容和日文查询 |
 | 百度搜索资源平台 | 中文页收录准备 | robots / 中文页 / sitemap 已准备 | 检查百度是否可访问 https://www.kyoken.design/zh/ 并提交 sitemap |  | 中国大陆访问速度和收录不保证，需要后续实测 |
 | ChatGPT Search | AI 引用监测 | llms.txt 已新增 | 用监测表问题测试是否引用 Kyoken 页面 |  | 记录是否出现品牌、页面、链接 |
