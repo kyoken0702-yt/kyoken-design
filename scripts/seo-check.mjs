@@ -42,6 +42,31 @@ for (const required of ["robots.txt", "404.html"]) {
   assert(fs.existsSync(path.join(root, required)), `${required} is missing.`);
 }
 
+const languageLeakChecks = [
+  {
+    file: "zh/index.html",
+    blocked: ["京建サプライ", "このような方", "見積前に", "中国工場", "工務店様", "内装会社", "日本到着"]
+  },
+  {
+    file: "zh/contractor-partnership.html",
+    blocked: ["京建サプライ", "連携の流れ", "現場写真", "工務店様", "中国工場", "日本到着"]
+  },
+  {
+    file: "en/index.html",
+    blocked: ["京建サプライ", "このような方", "見積前に", "京建供应链", "中国工厂", "日本现场", "工务店"]
+  },
+  {
+    file: "en/contractor-partnership.html",
+    blocked: ["京建サプライ", "連携の流れ", "現場写真", "京建供应链", "中国工厂", "日本现场", "工务店"]
+  }
+];
+for (const check of languageLeakChecks) {
+  const html = read(check.file);
+  for (const term of check.blocked) {
+    assert(!html.includes(term), `${check.file} contains mixed-language term: ${term}`);
+  }
+}
+
 const generatedFiles = [
   "index.html",
   "curtain-details.html",

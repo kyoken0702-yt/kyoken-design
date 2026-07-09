@@ -269,7 +269,7 @@ const lang = {
     productsTitle: "产品与报价",
     productsLead: "产品与报价放在供应链记录后面。价格按尺寸、数量、规格、配送地址变化，规格确认后给出概算。",
     partnerTitle: "工务店合作",
-    partnerLead: "京建不是来抢施工客户。京建是工务店、内装会社、设计公司、店铺公司的供应链伙伴。",
+    partnerLead: "京建不是来抢施工客户。京建是工务店、内装公司、设计公司、店铺公司的供应链伙伴。",
     contactTitle: "通过 LINE 发送照片和尺寸",
     contactLead: "发送产品名、照片、尺寸、数量、配送地址。规格确认后给出概算报价。",
     noRecords: "照片 / 视频待补充",
@@ -621,6 +621,138 @@ function ui(code, key) {
   return labels[code][key];
 }
 
+function homeAnswerCopy(code) {
+  const copy = {
+    ja: {
+      introKicker: "What Kyoken Does",
+      introTitle: "京建サプライは何を支援する会社か",
+      introLead: "小規模工務店、内装会社、店舗オーナーが中国工場の材料を使いたい時に、仕様整理、材料調達、包装確認、国際物流、日本到着後の確認を支援します。現場施工、施工見積、顧客対応は施工会社様側の仕事として守ります。",
+      audienceKicker: "For Whom",
+      audienceTitle: "このような方に向いています",
+      audience: ["小規模工務店", "内装会社", "店舗オーナー", "民泊・宿泊施設運営者", "中国工場とのやり取りに不安がある施工会社", "現場写真から材料相談をしたい方"],
+      roleKicker: "Role Split",
+      roleTitle: "京建がすること、しないこと",
+      supportTitle: "京建が支援すること",
+      supportItems: ["中国工場確認", "材料調達", "仕様整理", "包装確認", "国際物流確認", "日本到着後の確認", "供給記録"],
+      boundaryTitle: "京建が直接約束しないこと",
+      boundaryItems: ["全現場施工", "エンドユーザー対応", "施工保証", "24時間での見積回答", "最安値の保証", "DDPなど税務条件の固定約束"],
+      priceKicker: "Price Context",
+      priceTitle: "建材は単価だけで判断できません",
+      priceItems: ["寸法が曖昧だと制作ミスになる", "素材と厚みで価格が変わる", "梱包方法で破損リスクが変わる", "搬入経路で費用が変わる", "日本現場の条件で取付方法が変わる", "写真がないと正確な判断ができない"],
+      quoteKicker: "Before Quote",
+      quoteTitle: "見積前に送ってほしい資料",
+      quoteItems: ["現場全体写真", "設置場所の近景写真", "幅・高さが分かる写真", "既存材料の写真", "希望する仕上がりの参考画像", "数量", "納品先エリア", "希望納期"]
+    },
+    zh: {
+      introKicker: "京建做什么",
+      introTitle: "京建供应链支援什么",
+      introLead: "当小规模工务店、内装公司、店铺业主希望使用中国工厂材料时，京建支援规格整理、材料采购、包装确认、国际物流和日本到场确认。现场施工、施工报价、客户沟通仍由施工方负责。",
+      audienceKicker: "适合对象",
+      audienceTitle: "适合这些客户",
+      audience: ["小规模工务店", "内装公司", "店铺业主", "民宿和住宿设施运营者", "不熟悉中国工厂沟通的施工方", "希望先用现场照片咨询材料的人"],
+      roleKicker: "分工边界",
+      roleTitle: "京建负责什么，不负责什么",
+      supportTitle: "京建支援的范围",
+      supportItems: ["中国工厂确认", "材料采购", "规格整理", "包装确认", "国际物流确认", "日本到场确认", "供应链记录"],
+      boundaryTitle: "京建不直接承诺的事项",
+      boundaryItems: ["全部现场施工", "终端客户对应", "施工保证", "24小时固定报价", "最低价保证", "DDP 等税务条件固定承诺"],
+      priceKicker: "报价判断",
+      priceTitle: "建材不能只看单价",
+      priceItems: ["尺寸不清容易造成制作错误", "材料和厚度会影响价格", "包装方式会影响破损风险", "搬入路线会影响费用", "日本现场条件会影响安装方式", "没有照片很难准确判断"],
+      quoteKicker: "报价前",
+      quoteTitle: "报价前希望先发送的资料",
+      quoteItems: ["现场整体照片", "安装位置近景照片", "能看出宽度和高度的照片", "既有材料照片", "希望完成效果的参考图", "数量", "配送地址区域", "希望交期"]
+    },
+    en: {
+      introKicker: "What Kyoken Does",
+      introTitle: "What Kyoken Supply Supports",
+      introLead: "When small contractors, interior companies, or shop owners want to use materials from Chinese factories, Kyoken supports specification checks, sourcing, packing checks, international logistics, and arrival confirmation in Japan. Site installation, construction pricing, and end-customer communication remain with the contractor.",
+      audienceKicker: "For Whom",
+      audienceTitle: "Who This Is For",
+      audience: ["Small contractors", "Interior companies", "Shop owners", "Minpaku and lodging operators", "Contractors unsure about factory communication in China", "Teams who want material advice from site photos"],
+      roleKicker: "Role Split",
+      roleTitle: "What Kyoken Does and Does Not Do",
+      supportTitle: "What Kyoken Supports",
+      supportItems: ["China factory confirmation", "Material sourcing", "Specification checks", "Packing confirmation", "International logistics check", "Arrival confirmation in Japan", "Supply records"],
+      boundaryTitle: "What Kyoken Does Not Directly Promise",
+      boundaryItems: ["All site construction work", "End-customer communication", "Construction warranty", "Fixed 24-hour quote response", "Lowest-price guarantee", "Fixed tax-term promises such as DDP"],
+      priceKicker: "Price Context",
+      priceTitle: "Material Pricing Is Not Just Unit Price",
+      priceItems: ["Unclear dimensions can cause production mistakes", "Material and thickness change the price", "Packing affects damage risk", "Carrying route affects cost", "Japan site conditions change installation methods", "Accurate judgment is difficult without photos"],
+      quoteKicker: "Before Quote",
+      quoteTitle: "What To Send Before a Quote",
+      quoteItems: ["Overall site photos", "Close-up photos of the installation area", "Photos showing width and height", "Photos of existing materials", "Reference images for the desired finish", "Quantity", "Delivery area", "Desired delivery timing"]
+    }
+  };
+  return copy[code];
+}
+
+function contractorPageCopy(code) {
+  const copy = {
+    ja: {
+      scopeKicker: "Scope",
+      scopeTitle: "京建がすること",
+      scopeItems: ["中国工場確認", "材料調達", "仕様整理", "包装確認", "国際物流確認", "日本到着後の確認", "供給記録"],
+      boundaryKicker: "Boundary",
+      boundaryTitle: "京建がしないこと",
+      boundaryItems: ["工務店様の顧客を直接営業しない", "現場施工を無条件で請け負わない", "施工保証を材料供給側だけで約束しない", "24時間固定の見積回答を約束しない", "最安値を保証しない"],
+      contractorKicker: "Contractor Work",
+      contractorTitle: "工務店側に残る仕事",
+      contractorItems: ["現場採寸", "顧客対応", "取付施工", "施工見積", "施工責任の管理", "顧客関係の維持"],
+      flowKicker: "Flow",
+      flowTitle: "連携の流れ",
+      flowItems: [
+        ["現場写真と寸法を送る", "LINEで資料を送ってください。"],
+        ["材料と仕様を整理する", "案件ごとに確認して記録します。"],
+        ["中国工場で制作可否を確認する", "案件ごとに確認して記録します。"],
+        ["包装と物流条件を確認する", "案件ごとに確認して記録します。"],
+        ["日本到着後に数量と状態を確認する", "案件ごとに確認して記録します。"]
+      ]
+    },
+    zh: {
+      scopeKicker: "支援范围",
+      scopeTitle: "京建负责的事项",
+      scopeItems: ["中国工厂确认", "材料采购", "规格整理", "包装确认", "国际物流确认", "日本到场确认", "供应链记录"],
+      boundaryKicker: "分工边界",
+      boundaryTitle: "京建不负责的事项",
+      boundaryItems: ["不直接开发工务店客户", "不无条件承接全部现场施工", "不只由材料供应侧承诺施工保证", "不承诺 24 小时固定报价", "不保证最低价"],
+      contractorKicker: "施工方工作",
+      contractorTitle: "工务店侧保留的工作",
+      contractorItems: ["现场测量", "客户沟通", "安装施工", "施工报价", "施工责任管理", "终端客户关系维护"],
+      flowKicker: "合作流程",
+      flowTitle: "合作流程",
+      flowItems: [
+        ["发送现场照片和尺寸", "请通过 LINE 发送资料。"],
+        ["整理材料和规格", "按案件确认并记录。"],
+        ["向中国工厂确认可制作性", "按案件确认并记录。"],
+        ["确认包装和物流条件", "按案件确认并记录。"],
+        ["日本到场后确认数量和状态", "按案件确认并记录。"]
+      ]
+    },
+    en: {
+      scopeKicker: "Scope",
+      scopeTitle: "What Kyoken Handles",
+      scopeItems: ["China factory confirmation", "Material sourcing", "Specification checks", "Packing confirmation", "International logistics check", "Arrival confirmation in Japan", "Supply records"],
+      boundaryKicker: "Boundary",
+      boundaryTitle: "What Kyoken Does Not Handle",
+      boundaryItems: ["We do not directly approach the contractor's customers", "We do not automatically take all site installation work", "We do not promise construction warranty from the supply side alone", "We do not guarantee fixed 24-hour quote replies", "We do not guarantee the lowest price"],
+      contractorKicker: "Contractor Work",
+      contractorTitle: "Work Kept by the Contractor",
+      contractorItems: ["Site measurement", "Customer communication", "Installation work", "Construction quote", "Construction responsibility management", "End-customer relationship"],
+      flowKicker: "Flow",
+      flowTitle: "Partnership Flow",
+      flowItems: [
+        ["Send site photos and dimensions", "Send the materials on LINE."],
+        ["Organize material and specifications", "Confirmed and recorded case by case."],
+        ["Check production feasibility with the China factory", "Confirmed and recorded case by case."],
+        ["Confirm packing and logistics conditions", "Confirmed and recorded case by case."],
+        ["Confirm quantity and condition after arrival in Japan", "Confirmed and recorded case by case."]
+      ]
+    }
+  };
+  return copy[code];
+}
+
 function mediaGrid(record, code, compact = false) {
   const media = Array.isArray(record.media) ? record.media.filter(Boolean) : [];
   if (!media.length) {
@@ -702,7 +834,7 @@ function shell(code, title, description, file, body, options = {}) {
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>${escapeHtml(title)}</title>
   <meta name="description" content="${escapeHtml(description)}">
-  <meta name="keywords" content="${code === "en" ? "China factory, Japan site, supply chain, contractors, interior companies, material sourcing, Tokyo delivery, construction materials" : code === "zh" ? "中国工厂,日本现场,供应链,工务店,内装会社,材料采购,东京交付,建材供应" : "中国工場,日本現場,サプライチェーン,工務店,内装会社,材料調達,東京交付,建材供給"}">
+  <meta name="keywords" content="${code === "en" ? "China factory, Japan site, supply chain, contractors, interior companies, material sourcing, Tokyo delivery, construction materials" : code === "zh" ? "中国工厂,日本现场,供应链,工务店,内装公司,材料采购,东京交付,建材供应" : "中国工場,日本現場,サプライチェーン,工務店,内装会社,材料調達,東京交付,建材供給"}">
   <link rel="canonical" href="${canonical}">
   <meta property="og:title" content="${escapeHtml(title)}">
   <meta property="og:description" content="${escapeHtml(description)}">
@@ -732,6 +864,7 @@ function shell(code, title, description, file, body, options = {}) {
 
 function home(code) {
   const c = lang[code];
+  const answer = homeAnswerCopy(code);
   const heroRecord = records.find((record) => record.media?.length) || null;
   const heroMedia = heroRecord ? mediaGrid({ ...heroRecord, media: heroRecord.media.slice(0, 1) }, code, true) : `<div class="record-placeholder"><span>${c.noRecords}</span></div>`;
   return shell(code, c.title, c.desc, "index.html", `<main>
@@ -751,46 +884,46 @@ function home(code) {
 
     <section class="section compact intro-answer">
       <div class="section-head">
-        <p class="kicker">What Kyoken Does</p>
-        <h2>京建サプライは何を支援する会社か</h2>
-        <p>小規模工務店、内装会社、店舗オーナーが中国工場の材料を使いたい時に、仕様整理、材料調達、包装確認、国際物流、日本到着後の確認を支援します。現場施工、施工見積、顧客対応は施工会社様側の仕事として守ります。</p>
+        <p class="kicker">${answer.introKicker}</p>
+        <h2>${answer.introTitle}</h2>
+        <p>${answer.introLead}</p>
       </div>
       <div class="route">${c.route.map((item) => `<span>${item}</span>`).join("")}</div>
     </section>
 
     <section class="section">
       <div class="section-head">
-        <p class="kicker">For Whom</p>
-        <h2>このような方に向いています</h2>
+        <p class="kicker">${answer.audienceKicker}</p>
+        <h2>${answer.audienceTitle}</h2>
       </div>
-      <div class="answer-grid">${["小規模工務店", "内装会社", "店舗オーナー", "民泊・宿泊施設運営者", "中国工場とのやり取りに不安がある施工会社", "現場写真から材料相談をしたい方"].map((item) => `<div>${item}</div>`).join("")}</div>
+      <div class="answer-grid">${answer.audience.map((item) => `<div>${item}</div>`).join("")}</div>
     </section>
 
     <section class="section muted">
       <div class="section-head">
-        <p class="kicker">Role Split</p>
-        <h2>京建がすること、しないこと</h2>
+        <p class="kicker">${answer.roleKicker}</p>
+        <h2>${answer.roleTitle}</h2>
       </div>
       <div class="two-column-list">
-        <div><h3>京建が支援すること</h3><ul>${["中国工場確認", "材料調達", "仕様整理", "包装確認", "国際物流確認", "日本到着後の確認", "供給記録"].map((item) => `<li>${item}</li>`).join("")}</ul></div>
-        <div><h3>京建が直接約束しないこと</h3><ul>${["全現場施工", "エンドユーザー対応", "施工保証", "24時間での見積回答", "最安値の保証", "DDPなど税務条件の固定約束"].map((item) => `<li>${item}</li>`).join("")}</ul></div>
+        <div><h3>${answer.supportTitle}</h3><ul>${answer.supportItems.map((item) => `<li>${item}</li>`).join("")}</ul></div>
+        <div><h3>${answer.boundaryTitle}</h3><ul>${answer.boundaryItems.map((item) => `<li>${item}</li>`).join("")}</ul></div>
       </div>
     </section>
 
     <section class="section">
       <div class="section-head">
-        <p class="kicker">Price Context</p>
-        <h2>建材は単価だけで判断できません</h2>
+        <p class="kicker">${answer.priceKicker}</p>
+        <h2>${answer.priceTitle}</h2>
       </div>
-      <div class="answer-grid">${["寸法が曖昧だと制作ミスになる", "素材と厚みで価格が変わる", "梱包方法で破損リスクが変わる", "搬入経路で費用が変わる", "日本現場の条件で取付方法が変わる", "写真がないと正確な判断ができない"].map((item) => `<div>${item}</div>`).join("")}</div>
+      <div class="answer-grid">${answer.priceItems.map((item) => `<div>${item}</div>`).join("")}</div>
     </section>
 
     <section class="section muted">
       <div class="section-head">
-        <p class="kicker">Before Quote</p>
-        <h2>見積前に送ってほしい資料</h2>
+        <p class="kicker">${answer.quoteKicker}</p>
+        <h2>${answer.quoteTitle}</h2>
       </div>
-      <div class="answer-grid">${["現場全体写真", "設置場所の近景写真", "幅・高さが分かる写真", "既存材料の写真", "希望する仕上がりの参考画像", "数量", "納品先エリア", "希望納期"].map((item) => `<div>${item}</div>`).join("")}</div>
+      <div class="answer-grid">${answer.quoteItems.map((item) => `<div>${item}</div>`).join("")}</div>
     </section>
 
     <section id="factory" class="section">
@@ -837,15 +970,28 @@ function home(code) {
 
     ${companySection(code)}
     ${contactSection(code)}
-  </main>`, { schemas: [faqJsonLd(homeFaq())] });
+  </main>`, { schemas: [faqJsonLd(homeFaq(code))] });
 }
 
-function homeFaq() {
-  return [
-    ["京建サプライは何をする会社ですか。", "中国工場での建材制作、仕様整理、包装確認、国際物流、日本到着後の確認を支援する会社です。"],
-    ["工務店の顧客対応も京建が行いますか。", "いいえ、顧客対応、施工見積、施工責任、顧客関係の維持は工務店様側の領域です。"],
-    ["見積前に何を送ればよいですか。", "現場写真、近景写真、寸法、数量、納品先エリア、希望納期をLINEで送ってください。"]
-  ];
+function homeFaq(code) {
+  const faq = {
+    ja: [
+      ["京建サプライは何をする会社ですか。", "中国工場での建材制作、仕様整理、包装確認、国際物流、日本到着後の確認を支援する会社です。"],
+      ["工務店の顧客対応も京建が行いますか。", "いいえ、顧客対応、施工見積、施工責任、顧客関係の維持は工務店様側の領域です。"],
+      ["見積前に何を送ればよいですか。", "現場写真、近景写真、寸法、数量、納品先エリア、希望納期をLINEで送ってください。"]
+    ],
+    zh: [
+      ["京建供应链是做什么的？", "京建支援中国工厂建材制作、规格整理、包装确认、国际物流和日本到场确认。"],
+      ["京建会直接对应工务店客户吗？", "不会。客户沟通、施工报价、施工责任和终端客户关系维护由工务店侧负责。"],
+      ["报价前需要发送什么？", "请通过 LINE 发送现场照片、近景照片、尺寸、数量、配送区域和希望交期。"]
+    ],
+    en: [
+      ["What does Kyoken Supply do?", "Kyoken supports material production with Chinese factories, specification checks, packing confirmation, international logistics, and arrival confirmation in Japan."],
+      ["Does Kyoken communicate directly with a contractor's customers?", "No. Customer communication, construction quotes, installation responsibility, and end-customer relationships remain with the contractor."],
+      ["What should I send before requesting a quote?", "Send site photos, close-up photos, dimensions, quantity, delivery area, and desired delivery timing on LINE."]
+    ]
+  };
+  return faq[code];
 }
 
 function guideIndexSection(code) {
@@ -1219,6 +1365,7 @@ function guidePage(guide) {
 function contractorPage(code) {
   const c = lang[code];
   const isJa = code === "ja";
+  const pageCopy = contractorPageCopy(code);
   const title = isJa ? "小規模工務店のための中国建材サプライチェーン支援" : c.partnerTitle;
   const lead = isJa ? "京建サプライは、小規模工務店や内装会社が中国工場と直接やり取りする負担を減らすため、材料調達、仕様整理、包装確認、国際物流、日本到着後の確認を支援します。現場施工、顧客対応、施工見積、顧客関係は工務店様側の領域として守ります。" : c.partnerLead;
   const faq = isJa ? [
@@ -1241,20 +1388,20 @@ function contractorPage(code) {
       </div>
     </section>
     <section class="section muted">
-      <div class="section-head"><p class="kicker">Scope</p><h2>${isJa ? "京建がすること" : c.partnerTitle}</h2></div>
-      <div class="answer-grid">${(isJa ? ["中国工場確認", "材料調達", "仕様整理", "包装確認", "国際物流確認", "日本到着後の確認", "供給記録"] : [ui(code, "kyokenRoleText")]).map((item) => `<div>${item}</div>`).join("")}</div>
+      <div class="section-head"><p class="kicker">${pageCopy.scopeKicker}</p><h2>${pageCopy.scopeTitle}</h2></div>
+      <div class="answer-grid">${pageCopy.scopeItems.map((item) => `<div>${item}</div>`).join("")}</div>
     </section>
     <section class="section">
-      <div class="section-head"><p class="kicker">Boundary</p><h2>${isJa ? "京建がしないこと" : c.notes}</h2></div>
-      <div class="answer-grid">${(isJa ? ["工務店様の顧客を直接営業しない", "現場施工を無条件で請け負わない", "施工保証を材料供給側だけで約束しない", "24時間固定の見積回答を約束しない", "最安値を保証しない"] : [ui(code, "contractorRoleText")]).map((item) => `<div>${item}</div>`).join("")}</div>
+      <div class="section-head"><p class="kicker">${pageCopy.boundaryKicker}</p><h2>${pageCopy.boundaryTitle}</h2></div>
+      <div class="answer-grid">${pageCopy.boundaryItems.map((item) => `<div>${item}</div>`).join("")}</div>
     </section>
     <section class="section muted">
-      <div class="section-head"><p class="kicker">Contractor Work</p><h2>${isJa ? "工務店側に残る仕事" : ui(code, "contractorRole")}</h2></div>
-      <div class="answer-grid">${(isJa ? ["現場採寸", "顧客対応", "取付施工", "施工見積", "施工責任の管理", "顧客関係の維持"] : [ui(code, "contractorRoleText")]).map((item) => `<div>${item}</div>`).join("")}</div>
+      <div class="section-head"><p class="kicker">${pageCopy.contractorKicker}</p><h2>${pageCopy.contractorTitle}</h2></div>
+      <div class="answer-grid">${pageCopy.contractorItems.map((item) => `<div>${item}</div>`).join("")}</div>
     </section>
     <section class="section">
-      <div class="section-head"><p class="kicker">Flow</p><h2>${isJa ? "連携の流れ" : ui(code, "supplyKicker")}</h2></div>
-      <div class="process-grid">${["現場写真と寸法を送る", "材料と仕様を整理する", "中国工場で制作可否を確認する", "包装と物流条件を確認する", "日本到着後に数量と状態を確認する"].map((item, index) => `<div><span>0${index + 1}</span><strong>${item}</strong><p>${index === 0 ? "LINEで資料を送ってください。" : "案件ごとに確認して記録します。"}</p></div>`).join("")}</div>
+      <div class="section-head"><p class="kicker">${pageCopy.flowKicker}</p><h2>${pageCopy.flowTitle}</h2></div>
+      <div class="process-grid">${pageCopy.flowItems.map(([title, text], index) => `<div><span>0${index + 1}</span><strong>${title}</strong><p>${text}</p></div>`).join("")}</div>
     </section>
     ${faqSection(code, faq)}
     ${contactSection(code)}
