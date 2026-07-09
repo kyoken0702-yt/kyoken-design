@@ -841,7 +841,7 @@ function shell(code, title, description, file, body, options = {}) {
   <meta property="og:type" content="${options.ogType || "website"}">
   <meta property="og:url" content="${canonical}">
   <link rel="icon" type="image/png" href="${p}media/remote/6e64da3a8e48.png">
-  <link rel="stylesheet" href="${p}styles.css?v=20260706-rebuild">
+  <link rel="stylesheet" href="${p}styles.css?v=20260709-zh-font">
   ${schemas.map(jsonLd).join("\n  ")}
 </head>
 <body>
