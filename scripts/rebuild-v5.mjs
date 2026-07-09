@@ -442,7 +442,18 @@ function href(code, file) {
 }
 
 function absoluteUrl(code, file) {
+  if (file === "index.html") {
+    if (code === "ja") return `${siteUrl}/`;
+    return `${siteUrl}/${lang[code].dir}/`;
+  }
   return `${siteUrl}/${pagePath(code, file)}`;
+}
+
+function sitemapUrl(file) {
+  if (file === "index.html") return `${siteUrl}/`;
+  if (file === "en/index.html") return `${siteUrl}/en/`;
+  if (file === "zh/index.html") return `${siteUrl}/zh/`;
+  return `${siteUrl}/${file}`;
 }
 
 function jsonLd(data) {
@@ -1325,7 +1336,7 @@ write("sitemap.xml", `<?xml version="1.0" encoding="UTF-8"?>
 ${[
   ...["", "en/", "zh/"].flatMap((dir) => ["index.html", "supply-chain-records.html", "contractor-partnership.html", "legal.html", ...products.map((product) => product.file)].map((file) => `${dir}${file}`)),
   ...guidePages.map((guide) => guide.file)
-].map((file) => `  <url><loc>${siteUrl}/${file}</loc></url>`).join("\n")}
+].map((file) => `  <url><loc>${sitemapUrl(file)}</loc></url>`).join("\n")}
 </urlset>
 `);
 
