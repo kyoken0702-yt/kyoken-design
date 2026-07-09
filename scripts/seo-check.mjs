@@ -14,6 +14,18 @@ function read(file) {
   return fs.readFileSync(path.join(root, file), "utf8");
 }
 
+function listHtmlFiles(dir = root) {
+  return fs.readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
+    const fullPath = path.join(dir, entry.name);
+    const relative = path.relative(root, fullPath);
+    if (entry.isDirectory()) {
+      if (["node_modules", ".git", ".vercel"].includes(entry.name)) return [];
+      return listHtmlFiles(fullPath);
+    }
+    return entry.isFile() && entry.name.endsWith(".html") ? [relative] : [];
+  });
+}
+
 function assert(condition, message) {
   if (!condition) throw new Error(message);
 }
@@ -79,10 +91,18 @@ const generatedFiles = [
   ...guides
 ];
 const riskTerms = ["圧倒的最安値", "完全保証", "24時間見積", "全日本対応", "必ず安くなる", "AIに必ず引用", "Google検索1位保証", "Google 1位保証", "DDP完全対応", "最低価格", "最低价"];
+const privateContactTerms = ["080 2465 5181", "080-2465-5181", "Mob：080", "Mob: 080"];
 for (const file of generatedFiles) {
   const html = read(file);
   for (const term of riskTerms) {
     assert(!html.includes(term), `${file} contains risky term: ${term}`);
+  }
+}
+
+for (const file of listHtmlFiles()) {
+  const html = read(file);
+  for (const term of privateContactTerms) {
+    assert(!html.includes(term), `${file} exposes private contact term: ${term}`);
   }
 }
 

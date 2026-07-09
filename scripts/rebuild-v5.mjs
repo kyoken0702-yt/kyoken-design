@@ -1428,7 +1428,8 @@ function companyInfo(code) {
     return `<div class="company-list">
       <p><strong>Kyoken Real Estate Development Co., Ltd.</strong></p>
       <p>Representative Director: Tong Ye</p>
-      <p>Mob: 080 2465 5181 / Tel: 03 6555 1306</p>
+      <p>Tel: 03-6555-1306</p>
+      <p>Inquiry: Please contact us through the website LINE link.</p>
       <p>Addr: 3-7-7-4F, Nihonbashi, Chuo-ku, Tokyo 103-0027</p>
       <p>Email: kyoken0702@gmail.com / Website: ${siteUrl}</p>
     </div>`;
@@ -1437,7 +1438,8 @@ function companyInfo(code) {
     return `<div class="company-list">
       <p><strong>京建不動産開発株式会社</strong></p>
       <p>代表取締役：葉 彤</p>
-      <p>Mob：080 2465 5181 / Tel：03 6555 1306</p>
+      <p>电话：03-6555-1306</p>
+      <p>咨询：请通过网站 LINE 联系</p>
       <p>Addr：〒103-0027 東京都中央区日本橋3丁目7-7-4F</p>
       <p>Email：kyoken0702@gmail.com / Website：${siteUrl}</p>
     </div>`;
@@ -1445,7 +1447,8 @@ function companyInfo(code) {
   return `<div class="company-list">
     <p><strong>京建不動産開発株式会社</strong></p>
     <p>代表取締役：葉 彤</p>
-    <p>Mob：080 2465 5181 / Tel：03 6555 1306</p>
+    <p>電話：03-6555-1306</p>
+    <p>お問い合わせ：サイトのLINEからご連絡ください</p>
     <p>Addr：〒103-0027 東京都中央区日本橋3丁目7-7-4F</p>
     <p>Email：kyoken0702@gmail.com / Website：${siteUrl}</p>
   </div>`;
