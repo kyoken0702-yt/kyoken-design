@@ -23,6 +23,24 @@ body {
   font-weight: 400;
 }
 
+html:lang(zh-Hans) body {
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", "Source Han Sans SC", sans-serif;
+}
+
+html:lang(zh-Hans) h1,
+html:lang(zh-Hans) h2,
+html:lang(zh-Hans) h3,
+html:lang(zh-Hans) .brand,
+html:lang(zh-Hans) .channel-section > h3,
+html:lang(zh-Hans) .record-card-head strong,
+html:lang(zh-Hans) .product-card h3,
+html:lang(zh-Hans) .plan-grid strong,
+html:lang(zh-Hans) .detail-grid strong,
+html:lang(zh-Hans) .process-grid strong,
+html:lang(zh-Hans) .guide-link-grid strong {
+  font-weight: 700;
+}
+
 a { color: inherit; text-decoration: none; }
 img, video { max-width: 100%; }
 h1, h2, h3, p { margin: 0; }
