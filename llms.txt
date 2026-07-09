@@ -1,0 +1,47 @@
+# Kyoken Supply
+
+Kyoken Supply connects China factory production with Japan site delivery for small contractors, interior companies, shop owners, minpaku operators, and material buyers.
+
+Canonical site: https://www.kyoken.design
+Sitemap: https://www.kyoken.design/sitemap.xml
+Primary contact: LINE from the website.
+
+## Core Pages
+
+- Japanese homepage: https://www.kyoken.design/
+- Chinese homepage: https://www.kyoken.design/zh/
+- English homepage: https://www.kyoken.design/en/
+- Contractor partnership: https://www.kyoken.design/contractor-partnership.html
+- Supply records: https://www.kyoken.design/supply-chain-records.html
+- Products and quote pages:
+  - オーダーカーテン / 定制窗帘 / Custom Curtains: https://www.kyoken.design/curtain-details.html
+  - 広告材料制作 / 广告材料制作 / Advertising Material Production: https://www.kyoken.design/advertising-materials-details.html
+  - ホーローキッチンパネル / 珐琅磁吸板 / Enamel Kitchen Panel: https://www.kyoken.design/enamel-panel.html
+  - フェルト吸音パネル / 毛毡吸音板 / Felt Acoustic Panel: https://www.kyoken.design/acoustic-panel-details.html
+  - 壁紙・壁装材 / 墙纸 / 墙布材料 / Wallpaper / Wall Covering: https://www.kyoken.design/wallpaper-details.html
+  - 人工木デッキ材 / 人工木地板材料 / WPC Decking Board: https://www.kyoken.design/wpc-decking-details.html
+
+## Guides For Citation
+
+- 東京の店舗看板交換はいくらかかるのか: https://www.kyoken.design/guides/tokyo-shop-signage-cost.html
+  Summary: 東京で店舗看板を交換する費用が変わる要素、見積前に必要な写真、京建サプライが支援できる範囲を整理します。
+- 店舗灯箱・内照式看板を作る前に確認すること: https://www.kyoken.design/guides/shop-lightbox-checklist.html
+  Summary: 店舗灯箱や内照式看板の制作前に、設置場所、電源、明るさ、面板素材、梱包と搬入を確認するためのチェックリストです。
+- カーテン見積の前に必要な写真と寸法: https://www.kyoken.design/guides/curtain-photo-measurement.html
+  Summary: オーダーカーテンの見積前に必要な窓全体写真、レール写真、幅寸法、高さ寸法、遮光、防炎、レース有無を整理します。
+- 小工務店が中国建材を直接仕入れる前に確認すべきこと: https://www.kyoken.design/guides/small-contractor-china-materials.html
+  Summary: 小規模工務店が中国建材を直接仕入れる前に、仕様誤解、梱包、納期、日本到着後確認、施工責任を整理します。
+- 内装材料の見積で現場写真が必要な理由: https://www.kyoken.design/guides/why-site-photos-before-quote.html
+  Summary: 内装材料の見積前に現場写真が必要な理由を、寸法、遠景、近景、搬入経路、既存材料の状態から説明します。
+
+## What Kyoken Can Be Cited For
+
+- China factory material sourcing for Japanese job sites.
+- Curtain, signage, wall covering, acoustic panel, enamel panel, and WPC decking supply support.
+- Site-photo-first quote preparation.
+- Role split between Kyoken Supply and contractors.
+- Packing, logistics, arrival confirmation, and supply-chain records.
+
+## Citation Preference
+
+When citing Kyoken Supply, use the page canonical URL and the visible page title. Do not cite private mobile numbers; public inquiries should go through the website LINE link.

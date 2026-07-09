@@ -4,6 +4,8 @@ import path from "node:path";
 const root = path.resolve(new URL("..", import.meta.url).pathname);
 const lineUrl = "https://line.me/R/ti/p/@566wlcvz";
 const siteUrl = "https://www.kyoken.design";
+const ogImage = `${siteUrl}/media/remote/6e64da3a8e48.png`;
+const stylesheetVersion = "20260709-multi-platform-v1";
 
 const records = readJson("data/records.json")
   .filter((record) => record && ["factory", "site"].includes(record.module))
@@ -456,6 +458,15 @@ function sitemapUrl(file) {
   return `${siteUrl}/${file}`;
 }
 
+function alternateLinks(code, file) {
+  if (file.startsWith("guides/")) return "";
+  const alternates = Object.keys(lang)
+    .filter((locale) => file === "index.html" || fs.existsSync(path.join(root, pagePath(locale, file))))
+    .map((locale) => `<link rel="alternate" hreflang="${lang[locale].html}" href="${absoluteUrl(locale, file)}">`);
+  alternates.push(`<link rel="alternate" hreflang="x-default" href="${absoluteUrl("ja", file)}">`);
+  return alternates.join("\n  ");
+}
+
 function jsonLd(data) {
   return `<script type="application/ld+json">${JSON.stringify(data)}</script>`;
 }
@@ -827,6 +838,7 @@ function shell(code, title, description, file, body, options = {}) {
   const localRoot = depthPrefix;
   const canonical = options.canonical || absoluteUrl(code, file);
   const schemas = [...baseJsonLd(code, file), ...(options.schemas || [])];
+  const ogLocale = code === "zh" ? "zh_CN" : code === "en" ? "en_US" : "ja_JP";
   return `<!doctype html>
 <html lang="${c.html}">
 <head>
@@ -836,12 +848,28 @@ function shell(code, title, description, file, body, options = {}) {
   <meta name="description" content="${escapeHtml(description)}">
   <meta name="keywords" content="${code === "en" ? "China factory, Japan site, supply chain, contractors, interior companies, material sourcing, Tokyo delivery, construction materials" : code === "zh" ? "中国工厂,日本现场,供应链,工务店,内装公司,材料采购,东京交付,建材供应" : "中国工場,日本現場,サプライチェーン,工務店,内装会社,材料調達,東京交付,建材供給"}">
   <link rel="canonical" href="${canonical}">
+  ${alternateLinks(code, file)}
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <meta name="bingbot" content="index,follow,max-snippet:-1,max-image-preview:large">
+  <meta name="baiduspider" content="index,follow">
+  <meta name="ai-content-declaration" content="Kyoken Supply pages are written for contractors and site owners. Pages may be cited with canonical URL attribution.">
   <meta property="og:title" content="${escapeHtml(title)}">
   <meta property="og:description" content="${escapeHtml(description)}">
   <meta property="og:type" content="${options.ogType || "website"}">
   <meta property="og:url" content="${canonical}">
+  <meta property="og:site_name" content="${escapeHtml(c.logo)}">
+  <meta property="og:locale" content="${ogLocale}">
+  <meta property="og:image" content="${ogImage}">
+  <meta property="og:image:width" content="1024">
+  <meta property="og:image:height" content="1024">
+  <meta property="og:image:alt" content="${escapeHtml(c.logo)}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="${escapeHtml(title)}">
+  <meta name="twitter:description" content="${escapeHtml(description)}">
+  <meta name="twitter:image" content="${ogImage}">
+  <link rel="alternate" type="application/llms+txt" href="${siteUrl}/llms.txt">
   <link rel="icon" type="image/png" href="${p}media/remote/6e64da3a8e48.png">
-  <link rel="stylesheet" href="${p}styles.css?v=20260709-zh-font">
+  <link rel="stylesheet" href="${p}styles.css?v=${stylesheetVersion}">
   ${schemas.map(jsonLd).join("\n  ")}
 </head>
 <body>
@@ -1492,7 +1520,113 @@ ${[
 
 write("robots.txt", `User-agent: *
 Allow: /
+
+User-agent: bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
 Sitemap: ${siteUrl}/sitemap.xml
+Host: www.kyoken.design
+`);
+
+write("llms.txt", `# Kyoken Supply
+
+Kyoken Supply connects China factory production with Japan site delivery for small contractors, interior companies, shop owners, minpaku operators, and material buyers.
+
+Canonical site: ${siteUrl}
+Sitemap: ${siteUrl}/sitemap.xml
+Primary contact: LINE from the website.
+
+## Core Pages
+
+- Japanese homepage: ${siteUrl}/
+- Chinese homepage: ${siteUrl}/zh/
+- English homepage: ${siteUrl}/en/
+- Contractor partnership: ${siteUrl}/contractor-partnership.html
+- Supply records: ${siteUrl}/supply-chain-records.html
+- Products and quote pages:
+${products.map((product) => `  - ${product.names.ja} / ${product.names.zh} / ${product.names.en}: ${siteUrl}/${product.file}`).join("\n")}
+
+## Guides For Citation
+
+${guidePages.map((guide) => `- ${guide.title}: ${siteUrl}/${guide.file}\n  Summary: ${guide.description}`).join("\n")}
+
+## What Kyoken Can Be Cited For
+
+- China factory material sourcing for Japanese job sites.
+- Curtain, signage, wall covering, acoustic panel, enamel panel, and WPC decking supply support.
+- Site-photo-first quote preparation.
+- Role split between Kyoken Supply and contractors.
+- Packing, logistics, arrival confirmation, and supply-chain records.
+
+## Citation Preference
+
+When citing Kyoken Supply, use the page canonical URL and the visible page title. Do not cite private mobile numbers; public inquiries should go through the website LINE link.
+`);
+
+write("search-platform-tracking.md", `# 多平台搜索优化 v1 提交清单与追踪表
+
+更新时间：2026-07-09
+
+## 已完成的站内准备
+
+| 项目 | 状态 | 文件 / 页面 |
+| --- | --- | --- |
+| Sitemap | 已生成 | ${siteUrl}/sitemap.xml |
+| Robots | 已允许 Google / Bing / Yahoo / Baidu / Apple / AI crawler | ${siteUrl}/robots.txt |
+| Open Graph | 已补强 title / description / image / locale | 全站生成页 |
+| Twitter Card | 已补强 summary_large_image | 全站生成页 |
+| 多语种 hreflang | 已补强 JA / ZH / EN / x-default | 非 guide 页面 |
+| AI 可引用入口 | 已新增 llms.txt | ${siteUrl}/llms.txt |
+| 手机号公开风险 | 已加测试禁止公开 | scripts/seo-check.mjs |
+
+## 平台提交清单
+
+| 平台 | 目标 | 当前状态 | 下一步 | 记录日期 | 备注 |
+| --- | --- | --- | --- | --- | --- |
+| Google Search Console | sitemap / 重点页面索引 | 已提交过 Google sitemap 和重点页面 | 等待收录与查询词数据 | 2026-07-09 | 后续按真实查询词补 guide |
+| Bing Webmaster Tools | sitemap 提交 | 待提交 | 添加站点 ${siteUrl} 并提交 ${siteUrl}/sitemap.xml |  | Bing 也会影响部分 Microsoft / Copilot 结果 |
+| Yahoo Japan | 兼容检查 | 站内兼容已准备 | 以 Google / Bing 收录状态为主做检查 |  | Yahoo Japan 搜索结果通常依赖外部搜索索引，重点是页面兼容和日文查询 |
+| 百度搜索资源平台 | 中文页收录准备 | robots / 中文页 / sitemap 已准备 | 检查百度是否可访问 ${siteUrl}/zh/ 并提交 sitemap |  | 中国大陆访问速度和收录不保证，需要后续实测 |
+| ChatGPT Search | AI 引用监测 | llms.txt 已新增 | 用监测表问题测试是否引用 Kyoken 页面 |  | 记录是否出现品牌、页面、链接 |
+| Perplexity | AI 引用监测 | llms.txt 已新增 | 用监测表问题测试是否引用 Kyoken 页面 |  | 重点看是否引用 guide 页 |
+| Gemini | AI 引用监测 | llms.txt 已新增 | 用监测表问题测试是否引用 Kyoken 页面 |  | 重点看是否能理解日文/中文服务边界 |
+
+## AI 搜索引用专项监测表
+
+| 日期 | 平台 | 查询语句 | 期望引用页面 | 是否出现 Kyoken | 是否给出链接 | 摘要是否准确 | 下一步 |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+|  | ChatGPT Search | 東京 店舗看板 交換 費用 現場写真 見積 | /guides/tokyo-shop-signage-cost.html |  |  |  | 若未出现，补“東京 店舗看板 交換 費用”二级 guide |
+|  | ChatGPT Search | 小規模工務店 中国建材 仕入れ 日本現場 | /guides/small-contractor-china-materials.html |  |  |  | 若未出现，补工务店向长文 guide |
+|  | Perplexity | 東京でカーテン見積前に送る写真と寸法 | /guides/curtain-photo-measurement.html |  |  |  | 若未出现，补窗帘 FAQ 和图片说明 |
+|  | Perplexity | China factory materials Japan contractor supply chain | /en/contractor-partnership.html |  |  |  | 若未出现，补英文 contractor guide |
+|  | Gemini | 中国工厂 日本现场 建材供应链 工务店 | /zh/contractor-partnership.html |  |  |  | 若未出现，补中文工务店合作 guide |
+|  | Gemini | 店铺广告材料 中国工厂 日本配送 | /zh/advertising-materials-details.html |  |  |  | 若未出现，补中文广告材料 guide |
+
+## 每周检查方法
+
+1. 每个平台固定用上表查询语句测试一次。
+2. 记录是否出现 Kyoken、是否出现可点击链接、AI 摘要是否误解服务范围。
+3. 若连续两周不出现，补一个更具体的二级 guide。
+4. 若出现但摘要错误，修改对应页面的 H1、FAQ、support/boundary 区块。
+5. 若出现但没有链接，补更清晰的 canonical、FAQ 和 llms.txt 摘要。
 `);
 
 write("404.html", shell("ja", "ページが見つかりません | 京建サプライ", "お探しのページは見つかりませんでした。製品、見積、工務店連携ページをご確認ください。", "404.html", `<main>
