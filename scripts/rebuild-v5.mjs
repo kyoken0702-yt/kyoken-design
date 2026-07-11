@@ -531,6 +531,64 @@ function faqJsonLd(faq) {
   };
 }
 
+function minVisiblePrice(product, code) {
+  const values = [];
+  const collect = (value) => {
+    const number = String(value || "").replace(/[^\d]/g, "");
+    if (number) values.push(Number(number));
+  };
+  product.priceTable?.[code]?.rows?.forEach((row) => row.slice(1).forEach(collect));
+  return values.length ? Math.min(...values) : null;
+}
+
+function productOrServiceJsonLd(code, product) {
+  const c = lang[code];
+  const url = absoluteUrl(code, product.file);
+  const price = minVisiblePrice(product, code);
+  if (price) {
+    return {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": product.names[code],
+      "description": product.one[code],
+      "image": `${siteUrl}/${product.image}`,
+      "sku": `kyoken-${product.key}`,
+      "brand": { "@type": "Brand", "name": c.logo },
+      "offers": {
+        "@type": "Offer",
+        "url": url,
+        "priceCurrency": "JPY",
+        "price": price,
+        "availability": "https://schema.org/InStock",
+        "itemCondition": "https://schema.org/NewCondition",
+        "seller": {
+          "@type": "Organization",
+          "name": c.logo,
+          "url": siteUrl
+        }
+      }
+    };
+  }
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": product.names[code],
+    "description": product.one[code],
+    "serviceType": product.names[code],
+    "url": url,
+    "provider": {
+      "@type": "Organization",
+      "name": c.logo,
+      "url": siteUrl,
+      "telephone": "+81-3-6555-1306"
+    },
+    "areaServed": {
+      "@type": "Country",
+      "name": code === "en" ? "Japan" : "日本"
+    }
+  };
+}
+
 function switcher(code, file = "index.html") {
   const jp = file === "index.html" ? "../index.html" : `../${file}`;
   const en = code === "ja" ? `en/${file}` : code === "zh" ? `../en/${file}` : file;
@@ -1331,14 +1389,7 @@ function productPage(code, product) {
   </main>`, {
     ogType: "product",
     schemas: [
-      {
-        "@context": "https://schema.org",
-        "@type": "Product",
-        "name": product.names[code],
-        "description": product.one[code],
-        "image": `${siteUrl}/${product.image}`,
-        "brand": { "@type": "Brand", "name": c.logo }
-      },
+      productOrServiceJsonLd(code, product),
       faqJsonLd(seoData.faq)
     ]
   });
@@ -1602,7 +1653,7 @@ write("search-platform-tracking.md", `# 多平台搜索优化 v1 提交清单与
 | 平台 | 目标 | 当前状态 | 下一步 | 记录日期 | 备注 |
 | --- | --- | --- | --- | --- | --- |
 | Google Search Console | sitemap / 重点页面索引 | 已提交过 Google sitemap 和重点页面 | 等待收录与查询词数据 | 2026-07-09 | 后续按真实查询词补 guide |
-| Bing Webmaster Tools | sitemap 提交 | 待提交 | 添加站点 ${siteUrl} 并提交 ${siteUrl}/sitemap.xml |  | Bing 也会影响部分 Microsoft / Copilot 结果 |
+| Bing Webmaster Tools | sitemap 提交 | 已验证站点并提交 sitemap | 等待 Processing 变为成功抓取 | 2026-07-09 | Bing 也会影响部分 Microsoft / Copilot 结果；后台显示 sitemap 已提交处理 |
 | Yahoo Japan | 兼容检查 | 站内兼容已准备 | 以 Google / Bing 收录状态为主做检查 |  | Yahoo Japan 搜索结果通常依赖外部搜索索引，重点是页面兼容和日文查询 |
 | 百度搜索资源平台 | 中文页收录准备 | robots / 中文页 / sitemap 已准备 | 检查百度是否可访问 ${siteUrl}/zh/ 并提交 sitemap |  | 中国大陆访问速度和收录不保证，需要后续实测 |
 | ChatGPT Search | AI 引用监测 | llms.txt 已新增 | 用监测表问题测试是否引用 Kyoken 页面 |  | 记录是否出现品牌、页面、链接 |

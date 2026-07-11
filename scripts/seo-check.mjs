@@ -30,6 +30,11 @@ function assert(condition, message) {
   if (!condition) throw new Error(message);
 }
 
+function jsonLdBlocks(html) {
+  return [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)]
+    .map((match) => JSON.parse(match[1]));
+}
+
 const home = read("index.html");
 assert(home.includes("東京の小規模内装会社・工務店向けに、中国工場での建材制作と日本現場確認を支援します"), "Home H1 was not updated.");
 assert(home.includes("LINEで現場写真を送る"), "Home LINE CTA is missing.");
@@ -110,6 +115,22 @@ for (const file of generatedFiles) {
   const html = read(file);
   for (const expected of ["og:image", "twitter:card", "application/llms+txt", "max-image-preview:large"]) {
     assert(html.includes(expected), `${file} is missing multi-platform meta: ${expected}`);
+  }
+}
+
+for (const file of listHtmlFiles()) {
+  for (const block of jsonLdBlocks(read(file))) {
+    const nodes = Array.isArray(block["@graph"]) ? block["@graph"] : [block];
+    for (const node of nodes) {
+      const types = Array.isArray(node["@type"]) ? node["@type"] : [node["@type"]];
+      if (types.includes("Product")) {
+        assert(node.offers || node.review || node.aggregateRating, `${file} Product JSON-LD is missing offers, review, or aggregateRating.`);
+        if (node.offers) {
+          assert(node.offers.price || node.offers.priceSpecification?.price || node.offers.lowPrice, `${file} Product offers are missing price data.`);
+          assert(node.offers.priceCurrency || node.offers.priceSpecification?.priceCurrency, `${file} Product offers are missing priceCurrency.`);
+        }
+      }
+    }
   }
 }
 
