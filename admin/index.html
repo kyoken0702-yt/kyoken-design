@@ -396,6 +396,12 @@
         return data;
       }
 
+      function deployMessage(result) {
+        if (!result || !result.deploy) return "部署状态未知，请刷新前台确认。";
+        if (result.deploy.ok) return "已触发 Vercel 生产部署，前台稍后自动更新。";
+        return result.deploy.message || "没有触发 Vercel 部署，请手动上线。";
+      }
+
       async function loadRecords() {
         recordList.innerHTML = "";
         try {
@@ -404,8 +410,10 @@
           renderRecords();
           if (data.writable === false) {
             setStatus("已读取前台记录 " + records.length + " 条。当前缺少服务端 GitHub 写入 token，只能查看，不能发布。", "warn");
+          } else if (data.deployHookConfigured === false) {
+            setStatus("已读取前台记录 " + records.length + " 条。注意：未配置 Vercel 部署钩子，发布后可能需要手动上线。", "warn");
           } else {
-            setStatus("已读取前台记录 " + records.length + " 条。", "ok");
+            setStatus("已读取前台记录 " + records.length + " 条。发布后会自动触发 Vercel 部署。", "ok");
           }
         } catch (error) {
           recordList.innerHTML = '<p class="hint">读取失败：' + escapeHtml(error.message) + '</p>';
@@ -489,7 +497,7 @@
 	          return item && item.id === record.id ? Object.assign({}, item, { media: media }) : item;
 	        });
 	        renderRecords();
-	        setStatus(successMessage, "ok");
+	        setStatus(successMessage + " " + deployMessage(result), result.deploy && result.deploy.ok ? "ok" : "warn");
 	      }
 
 	      async function deleteSelectedMedia(record, editor) {
@@ -503,7 +511,7 @@
 	        var nextMedia = (record.media || []).filter(function (_src, index) { return !selectedMap[index]; });
 	        publishBtn.disabled = true;
 	        try {
-	          await saveRecordMedia(record, nextMedia, "已从这条记录移除 " + selected.length + " 个媒体。Vercel 会随后自动部署。");
+	          await saveRecordMedia(record, nextMedia, "已从这条记录移除 " + selected.length + " 个媒体。");
 	        } catch (error) {
 	          setStatus("删除媒体失败：" + error.message, "warn");
 	        } finally {
@@ -547,7 +555,7 @@
 	          }
 	          var nextMedia = (record.media || []).concat(mediaPaths);
 	          setProgress(files.length + 1, files.length + 1);
-	          await saveRecordMedia(record, nextMedia, "已追加 " + mediaPaths.length + " 个媒体" + (savedBytes ? "，约减少 " + bytesText(savedBytes) : "") + "。Vercel 会随后自动部署。", uploadFiles);
+	          await saveRecordMedia(record, nextMedia, "已追加 " + mediaPaths.length + " 个媒体" + (savedBytes ? "，约减少 " + bytesText(savedBytes) : "") + "。", uploadFiles);
 	        } catch (error) {
 	          setStatus("追加媒体失败：" + error.message, "warn");
 	        } finally {
@@ -725,7 +733,7 @@
           records = result.records || [record].concat(records);
           renderRecords();
           setProgress(1, 1);
-          setStatus("发布成功。前台会显示这条记录。图片已自动压缩" + (savedBytes ? "，约减少 " + bytesText(savedBytes) : "") + "。Vercel 会随后自动部署。", "ok");
+          setStatus("发布成功。前台记录索引已更新。图片已自动压缩" + (savedBytes ? "，约减少 " + bytesText(savedBytes) : "") + "。" + deployMessage(result), result.deploy && result.deploy.ok ? "ok" : "warn");
           clearForm();
         } catch (error) {
           setStatus("发布失败：" + error.message, "warn");
@@ -743,7 +751,7 @@
           var result = await adminApi({ action: "remove", id: id });
           records = result.records || records.filter(function (record) { return record.id !== id; });
           renderRecords();
-          setStatus("已从前台移除记录。Vercel 会随后自动部署。", "ok");
+          setStatus("已从前台索引移除记录。" + deployMessage(result), result.deploy && result.deploy.ok ? "ok" : "warn");
         } catch (error) {
           setStatus("删除失败：" + error.message, "warn");
         } finally {

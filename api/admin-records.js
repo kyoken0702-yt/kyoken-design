@@ -10,6 +10,10 @@ function githubToken() {
   return process.env.GITHUB_ADMIN_TOKEN || process.env.KYOKEN_GITHUB_TOKEN || process.env.GITHUB_TOKEN || "";
 }
 
+function deployHookUrl() {
+  return process.env.VERCEL_DEPLOY_HOOK_URL || process.env.KYOKEN_DEPLOY_HOOK_URL || "";
+}
+
 function cleanGitPath(value) {
   const path = String(value || "").replace(/^\/+/, "");
   if (!path || path.includes("..") || path.startsWith(".git/")) throw new Error(`Invalid path: ${value}`);
@@ -95,6 +99,32 @@ async function commitBundle(uploadFiles, nextRecords, message) {
   return newCommit;
 }
 
+async function triggerDeployHook() {
+  const hook = deployHookUrl();
+  if (!hook) {
+    return {
+      ok: false,
+      configured: false,
+      message: "未配置 VERCEL_DEPLOY_HOOK_URL，前台需要等待 Vercel 自动部署或手动上线。"
+    };
+  }
+
+  const response = await fetch(hook, { method: "POST" });
+  const text = await response.text();
+  if (!response.ok) {
+    return {
+      ok: false,
+      configured: true,
+      message: text || `Vercel Deploy Hook error: ${response.status}`
+    };
+  }
+  return {
+    ok: true,
+    configured: true,
+    message: "已触发 Vercel 生产部署。"
+  };
+}
+
 export default async function handler(req, res) {
   res.setHeader("Content-Type", "application/json; charset=utf-8");
   try {
@@ -105,7 +135,12 @@ export default async function handler(req, res) {
 
     if (req.method === "GET") {
       const records = await readRecords();
-      res.status(200).send(JSON.stringify({ ok: true, records, writable: Boolean(githubToken()) }));
+      res.status(200).send(JSON.stringify({
+        ok: true,
+        records,
+        writable: Boolean(githubToken()),
+        deployHookConfigured: Boolean(deployHookUrl())
+      }));
       return;
     }
 
@@ -140,7 +175,8 @@ export default async function handler(req, res) {
       const existing = records.filter((item) => item && item.id !== record.id);
       const nextRecords = [record].concat(existing);
       const commit = await commitBundle(body.uploadFiles || [], nextRecords, "publish kyoken supply record");
-      res.status(200).send(JSON.stringify({ ok: true, records: nextRecords, commit: commit.sha }));
+      const deploy = await triggerDeployHook();
+      res.status(200).send(JSON.stringify({ ok: true, records: nextRecords, commit: commit.sha, deploy }));
       return;
     }
 
@@ -149,7 +185,8 @@ export default async function handler(req, res) {
       if (!id) throw new Error("缺少要删除的记录 ID。");
       const nextRecords = records.filter((item) => item && item.id !== id);
       const commit = await commitBundle([], nextRecords, "remove kyoken supply record");
-      res.status(200).send(JSON.stringify({ ok: true, records: nextRecords, commit: commit.sha }));
+      const deploy = await triggerDeployHook();
+      res.status(200).send(JSON.stringify({ ok: true, records: nextRecords, commit: commit.sha, deploy }));
       return;
     }
 
@@ -160,7 +197,8 @@ export default async function handler(req, res) {
       const nextRecords = records.map((item) => item && item.id === id ? { ...item, media } : item);
       if (!nextRecords.some((item) => item && item.id === id)) throw new Error("找不到要更新的记录。");
       const commit = await commitBundle(body.uploadFiles || [], nextRecords, "update kyoken supply record media");
-      res.status(200).send(JSON.stringify({ ok: true, records: nextRecords, commit: commit.sha }));
+      const deploy = await triggerDeployHook();
+      res.status(200).send(JSON.stringify({ ok: true, records: nextRecords, commit: commit.sha, deploy }));
       return;
     }
 
