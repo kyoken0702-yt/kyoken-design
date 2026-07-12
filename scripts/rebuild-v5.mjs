@@ -837,20 +837,21 @@ function mediaGrid(record, code, compact = false) {
 
 function recordCard(record, code, compact = true, options = {}) {
   const showHeader = options.showHeader !== false;
+  const showSummary = options.showSummary !== false;
   return `<article class="record-card">
     ${showHeader ? `<div class="record-card-head">
       <span>${record.module === "site" ? lang[code].siteTitle : lang[code].factoryTitle}</span>
       <strong>${escapeHtml(recordTitle(record, code))}</strong>
     </div>` : ""}
     ${mediaGrid(record, code, compact)}
-    ${recordSummary(record, code) ? `<p>${escapeHtml(recordSummary(record, code))}</p>` : ""}
+    ${showSummary && recordSummary(record, code) ? `<p>${escapeHtml(recordSummary(record, code))}</p>` : ""}
   </article>`;
 }
 
-function recordSection(code, module, limit = 4) {
+function recordSection(code, module, limit = 4, options = {}) {
   const list = records.filter((record) => record.module === module).slice(0, limit);
   if (!list.length) return `<div class="record-card empty">${mediaGrid({ media: [] }, code)}</div>`;
-  return list.map((record) => recordCard(record, code, true)).join("");
+  return list.map((record) => recordCard(record, code, true, options)).join("");
 }
 
 function factoryChannelSections(code, compact = true) {
@@ -1028,7 +1029,7 @@ function home(code) {
         <h2>${c.siteTitle}</h2>
         <p>${c.siteLead}</p>
       </div>
-      <div class="record-grid">${recordSection(code, "site", 3)}</div>
+      <div class="record-grid">${recordSection(code, "site", 3, { showHeader: false, showSummary: false })}</div>
     </section>
 
     <section id="products" class="section">
@@ -1106,7 +1107,7 @@ function recordsPage(code) {
     </section>
     <section class="section muted">
       <h2>${c.siteTitle}</h2>
-      <div class="record-grid wide">${records.filter((record) => record.module === "site").map((record) => recordCard(record, code, false)).join("") || recordSection(code, "site")}</div>
+      <div class="record-grid wide">${records.filter((record) => record.module === "site").map((record) => recordCard(record, code, false, { showHeader: false, showSummary: false })).join("") || recordSection(code, "site", 4, { showHeader: false, showSummary: false })}</div>
     </section>
     ${contactSection(code)}
   </main>`);
