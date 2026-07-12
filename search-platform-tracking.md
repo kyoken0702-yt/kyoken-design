@@ -31,10 +31,10 @@
 | 日期 | 平台 | 查询语句 | 期望引用页面 | 是否出现 Kyoken | 是否给出链接 | 摘要是否准确 | 下一步 |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 |  | ChatGPT Search | 東京 店舗看板 交換 費用 現場写真 見積 | /guides/tokyo-shop-signage-cost.html |  |  |  | 若未出现，补“東京 店舗看板 交換 費用”二级 guide |
-|  | ChatGPT Search | 小規模工務店 中国建材 仕入れ 日本現場 | /guides/small-contractor-china-materials.html |  |  |  | 若未出现，补工务店向长文 guide |
+|  | ChatGPT Search | 小規模工務店 中国建材 仕入れ 工事現場 | /guides/small-contractor-china-materials.html |  |  |  | 若未出现，补工务店向长文 guide |
 |  | Perplexity | 東京でカーテン見積前に送る写真と寸法 | /guides/curtain-photo-measurement.html |  |  |  | 若未出现，补窗帘 FAQ 和图片说明 |
 |  | Perplexity | China factory materials Japan contractor supply chain | /en/contractor-partnership.html |  |  |  | 若未出现，补英文 contractor guide |
-|  | Gemini | 中国工厂 日本现场 建材供应链 工务店 | /zh/contractor-partnership.html |  |  |  | 若未出现，补中文工务店合作 guide |
+|  | Gemini | 中国工厂 工地现场 建材供应链 工务店 | /zh/contractor-partnership.html |  |  |  | 若未出现，补中文工务店合作 guide |
 |  | Gemini | 店铺广告材料 中国工厂 日本配送 | /zh/advertising-materials-details.html |  |  |  | 若未出现，补中文广告材料 guide |
 
 ## 每周检查方法

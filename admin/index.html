@@ -251,7 +251,7 @@
         选择前台模块
         <select id="module">
           <option value="factory">中国工厂・供应链实景</option>
-          <option value="site">日本现场记录</option>
+          <option value="site">工地现场记录</option>
         </select>
       </label>
 
@@ -280,7 +280,7 @@
         <button id="selectFilesBtn" class="secondary" type="button">选择图片 / 视频（可多选）</button>
         <input id="files" class="file-input" type="file" multiple accept="image/*,video/mp4,video/webm">
         <span id="fileSummary" class="hint">未选择文件。</span>
-        <span class="hint">支持手机照片、JPG / PNG / WebP / 小 MP4 / WebM。图片会在浏览器本地压缩；日本现场照片会压到更适合后台上传的尺寸。</span>
+        <span class="hint">支持手机照片、JPG / PNG / WebP / 小 MP4 / WebM。图片会在浏览器本地压缩；工地现场照片会压到更适合后台上传的尺寸。</span>
       </div>
 
       <div id="previewGrid" class="preview-grid"></div>
@@ -321,7 +321,7 @@
 
       var moduleLabels = {
         factory: "中国工厂・供应链实景",
-        site: "日本现场记录"
+        site: "工地现场记录"
       };
 
       var channelLabels = {
@@ -378,7 +378,7 @@
           if (forceTitle || !$("summary").value.trim()) $("summary").value = channel.summary;
           setStatus("将发布到前台：" + moduleLabels.factory + " → " + channel.title + "。", "ok");
         } else {
-          if (forceTitle || !$("title").value.trim()) $("title").value = "日本现场到场记录";
+          if (forceTitle || !$("title").value.trim()) $("title").value = "工地现场到场记录";
           if (forceTitle || !$("summary").value.trim()) $("summary").value = "材料到场、尺寸确认、安装前确认或交付状态记录。";
           setStatus("将发布到前台：" + moduleLabels.site + "。", "ok");
         }
@@ -431,7 +431,7 @@
           var card = document.createElement("div");
           card.className = "record";
           var mediaCount = Array.isArray(record.media) ? record.media.length : 0;
-          var moduleText = record.module === "site" ? "日本现场记录" : "中国工厂・供应链实景";
+          var moduleText = record.module === "site" ? "工地现场记录" : "中国工厂・供应链实景";
           var channelText = record.module === "factory" && record.channel && channelLabels[record.channel] ? " / " + channelLabels[record.channel].title : "";
 	          card.innerHTML = '<h3>' + escapeHtml(record.title || "未命名记录") + '</h3>' +
 	            '<small>' + escapeHtml(moduleText + channelText) + '</small>' +

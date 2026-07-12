@@ -222,20 +222,20 @@ const lang = {
     html: "ja",
     label: "日本語",
     logo: "京建サプライ",
-    title: "京建サプライ | 中国工場 × 日本現場 × 工務店のサプライチェーンパートナー",
-    desc: "中国工場と日本現場をつなぐ、工務店・内装会社・設計会社のための材料調達、包装、物流、現場確認のサプライチェーンパートナー。",
+    title: "京建サプライ | 中国工場 × 工事現場 × 工務店のサプライチェーンパートナー",
+    desc: "中国工場と工事現場をつなぐ、工務店・内装会社・設計会社のための材料調達、包装、物流、現場確認のサプライチェーンパートナー。",
     nav: ["供給実景", "現場記録", "製品と見積", "工務店連携", "会社情報"],
-    heroTitle: "東京の小規模内装会社・工務店向けに、中国工場での建材制作と日本現場確認を支援します",
-    route: ["中国工場", "↓", "日本現場", "↓", "長期連携"],
-    heroBody: "京建サプライは、カーテン、広告材料、看板、ホーローパネル、吸音パネル、壁装材、人工木デッキ材などを、中国工場で制作し、日本の現場条件に合わせて寸法、仕様、包装、輸送、到着確認を整理するサプライチェーン支援サービスです。",
+    heroTitle: "東京の小規模内装会社・工務店向けに、中国工場での建材制作と工事現場確認を支援します",
+    route: ["中国工場", "↓", "工事現場", "↓", "長期連携"],
+    heroBody: "京建サプライは、カーテン、広告材料、看板、ホーローパネル、吸音パネル、壁装材、人工木デッキ材などを、中国工場で制作し、現場条件に合わせて寸法、仕様、包装、輸送、到着確認を整理するサプライチェーン支援サービスです。",
     primary: "LINEで現場写真を送る",
     secondary: "製品と見積を見る",
     line: "LINEで相談",
     quoteLine: "見積相談",
     factoryTitle: "中国工場・供給実景",
-    factoryLead: "工場、材料、包装、倉庫、出荷、積み込み、物流前の状態を写真で残します。京建が売るのは単価だけではなく、安定して作り、梱包し、日本の現場に届くまでの確認です。",
-    siteTitle: "日本現場記録",
-    siteLead: "材料到着、寸法確認、取付前確認、引き渡し状態を残します。施工実績ではなく、材料が日本の現場へ届いた事実の記録です。",
+    factoryLead: "工場、材料、包装、倉庫、出荷、積み込み、物流前の状態を写真で残します。京建が売るのは単価だけではなく、安定して作り、梱包し、工事現場に届くまでの確認です。",
+    siteTitle: "工事現場記録",
+    siteLead: "材料到着、寸法確認、取付前確認、引き渡し状態を残します。施工実績ではなく、材料が工事現場へ届いた事実の記録です。",
     productsTitle: "製品と見積",
     productsLead: "価格はサイズ、数量、仕様、配送先で変動します。図面、写真、寸法をLINEで送ってください。",
     partnerTitle: "工務店連携",
@@ -254,20 +254,20 @@ const lang = {
     html: "zh-Hans",
     label: "中文",
     logo: "京建供应链",
-    title: "京建供应链 | 中国工厂 × 日本现场 × 工务店供应链合作伙伴",
-    desc: "京建供应链连接中国工厂和日本现场，为工务店、内装公司、设计公司提供材料采购、包装、物流、现场确认支持。",
+    title: "京建供应链 | 中国工厂 × 工地现场 × 工务店供应链合作伙伴",
+    desc: "京建供应链连接中国工厂和工地现场，为工务店、内装公司、设计公司提供材料采购、包装、物流、现场确认支持。",
     nav: ["供应链实景", "现场记录", "产品与报价", "工务店合作", "公司信息"],
     heroTitle: "二十年，只做好供应链这一件事。",
-    route: ["中国工厂", "↓", "日本现场", "↓", "长期合作"],
-    heroBody: "京建负责中国侧生产、包装、运输、日本到场确认。工务店负责现场施工、安装报价、终端客户维护。我们把材料从中国工厂稳定交付到日本现场。",
+    route: ["中国工厂", "↓", "工地现场", "↓", "长期合作"],
+    heroBody: "京建负责中国侧生产、包装、运输和到场确认。工务店负责现场施工、安装报价、终端客户维护。我们把材料从中国工厂稳定交付到工地现场。",
     primary: "查看供应链实景",
     secondary: "查看产品与报价",
     line: "LINE 咨询",
     quoteLine: "发送照片和尺寸",
     factoryTitle: "中国工厂・供应链实景",
     factoryLead: "展示工厂、材料、包装、仓库、发货、装车、物流前状态。京建卖的不是单价噱头，而是供应链确定性。",
-    siteTitle: "日本现场记录",
-    siteLead: "展示材料到场、尺寸确认、安装前确认、交付状态。这里不是施工案例，而是材料真正落到日本现场的记录。",
+    siteTitle: "工地现场记录",
+    siteLead: "展示材料到场、尺寸确认、安装前确认、交付状态。这里不是施工案例，而是材料真正落到工地现场的记录。",
     productsTitle: "产品与报价",
     productsLead: "产品与报价放在供应链记录后面。价格按尺寸、数量、规格、配送地址变化，规格确认后给出概算。",
     partnerTitle: "工务店合作",
@@ -286,20 +286,20 @@ const lang = {
     html: "en",
     label: "English",
     logo: "Kyoken Supply",
-    title: "Kyoken Supply | China Factory × Japan Site × Contractor Supply Chain Partner",
-    desc: "Kyoken Supply connects Chinese factories with Japanese job sites for contractors, interior companies, and design offices through sourcing, packing, logistics, and site confirmation.",
+    title: "Kyoken Supply | China Factory × Job Site × Contractor Supply Chain Partner",
+    desc: "Kyoken Supply connects Chinese factories with job sites for contractors, interior companies, and design offices through sourcing, packing, logistics, and site confirmation.",
     nav: ["Supply Records", "Site Records", "Products & Quotes", "Partners", "Company"],
     heroTitle: "Twenty years, focused on supply chain certainty.",
-    route: ["China Factory", "↓", "Japan Site", "↓", "Long-term Partnership"],
-    heroBody: "Kyoken supports production coordination, packaging, international logistics, and arrival confirmation in Japan. Contractors keep control of installation, pricing, and end-customer relationships.",
+    route: ["China Factory", "↓", "Job Site", "↓", "Long-term Partnership"],
+    heroBody: "Kyoken supports production coordination, packaging, logistics, and arrival confirmation at the job site. Contractors keep control of installation, pricing, and end-customer relationships.",
     primary: "View supply records",
     secondary: "View products & quotes",
     line: "Consult on LINE",
     quoteLine: "Send photos and sizes",
     factoryTitle: "China Factory & Supply Records",
     factoryLead: "Factory, materials, packing, warehouse, shipment, loading, and pre-logistics conditions. Kyoken is not selling the lowest price; we are reducing supply-chain uncertainty.",
-    siteTitle: "Japan Site Records",
-    siteLead: "Material arrival, dimension checks, pre-installation confirmation, and handover status. These are not construction case studies; they are records of materials landing at Japanese sites.",
+    siteTitle: "Job Site Records",
+    siteLead: "Material arrival, dimension checks, pre-installation confirmation, and handover status. These are not construction case studies; they are records of materials landing at job sites.",
     productsTitle: "Products & Quotes",
     productsLead: "Products come after the supply records. Pricing changes by size, quantity, specification, and delivery address.",
     partnerTitle: "Contractor Partnership",
@@ -621,9 +621,9 @@ function recordSummary(record, code) {
 function ui(code, key) {
   const labels = {
     ja: {
-      heroKicker: "中国工場 × 日本現場",
+      heroKicker: "中国工場 × 工事現場",
       factoryKicker: "工場 / 梱包 / 出荷",
-      siteKicker: "日本現場",
+      siteKicker: "工事現場",
       productsKicker: "製品 / 見積",
       partnerKicker: "工務店連携",
       recordsKicker: "記録",
@@ -643,9 +643,9 @@ function ui(code, key) {
       company: "会社情報"
     },
     zh: {
-      heroKicker: "中国工厂 × 日本现场",
+      heroKicker: "中国工厂 × 工地现场",
       factoryKicker: "工厂 / 包装 / 发货",
-      siteKicker: "日本现场",
+      siteKicker: "工地现场",
       productsKicker: "产品 / 报价",
       partnerKicker: "工务店合作",
       recordsKicker: "记录",
@@ -665,9 +665,9 @@ function ui(code, key) {
       company: "公司信息"
     },
     en: {
-      heroKicker: "China Factory × Japan Site",
+      heroKicker: "China Factory × Job Site",
       factoryKicker: "Factory / Packing / Shipment",
-      siteKicker: "Japan Site",
+      siteKicker: "Job Site",
       productsKicker: "Products / Quotes",
       partnerKicker: "Partnership",
       recordsKicker: "Records",
@@ -707,7 +707,7 @@ function homeAnswerCopy(code) {
       boundaryItems: ["全現場施工", "エンドユーザー対応", "施工保証", "24時間での見積回答", "最安値の保証", "DDPなど税務条件の固定約束"],
       priceKicker: "Price Context",
       priceTitle: "建材は単価だけで判断できません",
-      priceItems: ["寸法が曖昧だと制作ミスになる", "素材と厚みで価格が変わる", "梱包方法で破損リスクが変わる", "搬入経路で費用が変わる", "日本現場の条件で取付方法が変わる", "写真がないと正確な判断ができない"],
+      priceItems: ["寸法が曖昧だと制作ミスになる", "素材と厚みで価格が変わる", "梱包方法で破損リスクが変わる", "搬入経路で費用が変わる", "工事現場の条件で取付方法が変わる", "写真がないと正確な判断ができない"],
       quoteKicker: "Before Quote",
       quoteTitle: "見積前に送ってほしい資料",
       quoteItems: ["現場全体写真", "設置場所の近景写真", "幅・高さが分かる写真", "既存材料の写真", "希望する仕上がりの参考画像", "数量", "納品先エリア", "希望納期"]
@@ -727,7 +727,7 @@ function homeAnswerCopy(code) {
       boundaryItems: ["全部现场施工", "终端客户对应", "施工保证", "24小时固定报价", "最低价保证", "DDP 等税务条件固定承诺"],
       priceKicker: "报价判断",
       priceTitle: "建材不能只看单价",
-      priceItems: ["尺寸不清容易造成制作错误", "材料和厚度会影响价格", "包装方式会影响破损风险", "搬入路线会影响费用", "日本现场条件会影响安装方式", "没有照片很难准确判断"],
+      priceItems: ["尺寸不清容易造成制作错误", "材料和厚度会影响价格", "包装方式会影响破损风险", "搬入路线会影响费用", "工地现场条件会影响安装方式", "没有照片很难准确判断"],
       quoteKicker: "报价前",
       quoteTitle: "报价前希望先发送的资料",
       quoteItems: ["现场整体照片", "安装位置近景照片", "能看出宽度和高度的照片", "既有材料照片", "希望完成效果的参考图", "数量", "配送地址区域", "希望交期"]
@@ -905,7 +905,7 @@ function shell(code, title, description, file, body, options = {}) {
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>${escapeHtml(title)}</title>
   <meta name="description" content="${escapeHtml(description)}">
-  <meta name="keywords" content="${code === "en" ? "China factory, Japan site, supply chain, contractors, interior companies, material sourcing, Tokyo delivery, construction materials" : code === "zh" ? "中国工厂,日本现场,供应链,工务店,内装公司,材料采购,东京交付,建材供应" : "中国工場,日本現場,サプライチェーン,工務店,内装会社,材料調達,東京交付,建材供給"}">
+  <meta name="keywords" content="${code === "en" ? "China factory, job site, supply chain, contractors, interior companies, material sourcing, delivery, construction materials" : code === "zh" ? "中国工厂,工地现场,供应链,工务店,内装公司,材料采购,建材供应" : "中国工場,工事現場,サプライチェーン,工務店,内装会社,材料調達,建材供給"}">
   <link rel="canonical" href="${canonical}">
   ${alternateLinks(code, file)}
   <meta name="robots" content="index,follow,max-image-preview:large">
@@ -1666,10 +1666,10 @@ write("search-platform-tracking.md", `# 多平台搜索优化 v1 提交清单与
 | 日期 | 平台 | 查询语句 | 期望引用页面 | 是否出现 Kyoken | 是否给出链接 | 摘要是否准确 | 下一步 |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 |  | ChatGPT Search | 東京 店舗看板 交換 費用 現場写真 見積 | /guides/tokyo-shop-signage-cost.html |  |  |  | 若未出现，补“東京 店舗看板 交換 費用”二级 guide |
-|  | ChatGPT Search | 小規模工務店 中国建材 仕入れ 日本現場 | /guides/small-contractor-china-materials.html |  |  |  | 若未出现，补工务店向长文 guide |
+|  | ChatGPT Search | 小規模工務店 中国建材 仕入れ 工事現場 | /guides/small-contractor-china-materials.html |  |  |  | 若未出现，补工务店向长文 guide |
 |  | Perplexity | 東京でカーテン見積前に送る写真と寸法 | /guides/curtain-photo-measurement.html |  |  |  | 若未出现，补窗帘 FAQ 和图片说明 |
 |  | Perplexity | China factory materials Japan contractor supply chain | /en/contractor-partnership.html |  |  |  | 若未出现，补英文 contractor guide |
-|  | Gemini | 中国工厂 日本现场 建材供应链 工务店 | /zh/contractor-partnership.html |  |  |  | 若未出现，补中文工务店合作 guide |
+|  | Gemini | 中国工厂 工地现场 建材供应链 工务店 | /zh/contractor-partnership.html |  |  |  | 若未出现，补中文工务店合作 guide |
 |  | Gemini | 店铺广告材料 中国工厂 日本配送 | /zh/advertising-materials-details.html |  |  |  | 若未出现，补中文广告材料 guide |
 
 ## 每周检查方法

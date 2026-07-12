@@ -36,7 +36,7 @@ function jsonLdBlocks(html) {
 }
 
 const home = read("index.html");
-assert(home.includes("東京の小規模内装会社・工務店向けに、中国工場での建材制作と日本現場確認を支援します"), "Home H1 was not updated.");
+assert(home.includes("東京の小規模内装会社・工務店向けに、中国工場での建材制作と工事現場確認を支援します"), "Home H1 was not updated.");
 assert(home.includes("LINEで現場写真を送る"), "Home LINE CTA is missing.");
 
 const sitemap = read("sitemap.xml");
@@ -86,11 +86,11 @@ const languageLeakChecks = [
   },
   {
     file: "en/index.html",
-    blocked: ["京建サプライ", "このような方", "見積前に", "京建供应链", "中国工厂", "日本现场", "工务店"]
+    blocked: ["京建サプライ", "このような方", "見積前に", "京建供应链", "中国工厂", "工地现场", "工务店"]
   },
   {
     file: "en/contractor-partnership.html",
-    blocked: ["京建サプライ", "連携の流れ", "現場写真", "京建供应链", "中国工厂", "日本现场", "工务店"]
+    blocked: ["京建サプライ", "連携の流れ", "現場写真", "京建供应链", "中国工厂", "工地现场", "工务店"]
   }
 ];
 for (const check of languageLeakChecks) {
