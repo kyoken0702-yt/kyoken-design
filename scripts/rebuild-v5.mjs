@@ -472,6 +472,7 @@ function jsonLd(data) {
 }
 
 function baseJsonLd(code, file) {
+  const canonical = absoluteUrl(code, file);
   return [
     {
       "@context": "https://schema.org",
@@ -485,7 +486,30 @@ function baseJsonLd(code, file) {
       "@context": "https://schema.org",
       "@type": "WebSite",
       "name": lang[code].logo,
-      "url": siteUrl
+      "url": siteUrl,
+      "inLanguage": ["ja", "zh-Hans", "en"]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "@id": `${canonical}#webpage`,
+      "url": canonical,
+      "name": file === "index.html" ? lang[code].title : `${file.replace(/\.html$/u, "")} | ${lang[code].logo}`,
+      "description": lang[code].desc,
+      "inLanguage": lang[code].html,
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": lang[code].logo,
+        "url": siteUrl
+      },
+      "about": [
+        "China factory material sourcing",
+        "job site records",
+        "contractor supply chain support",
+        "curtains",
+        "signage materials",
+        "WPC decking"
+      ]
     },
     {
       "@context": "https://schema.org",
@@ -1588,8 +1612,29 @@ Allow: /
 User-agent: GPTBot
 Allow: /
 
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
 User-agent: PerplexityBot
 Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Claude-SearchBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Claude-User
+Allow: /
+Crawl-delay: 1
 
 User-agent: Google-Extended
 Allow: /
@@ -1600,11 +1645,16 @@ Host: www.kyoken.design
 
 write("llms.txt", `# Kyoken Supply
 
-Kyoken Supply connects China factory production with Japan site delivery for small contractors, interior companies, shop owners, minpaku operators, and material buyers.
+Kyoken Supply connects China factory production with job site delivery for small contractors, interior companies, shop owners, minpaku operators, and material buyers.
 
 Canonical site: ${siteUrl}
 Sitemap: ${siteUrl}/sitemap.xml
 Primary contact: LINE from the website.
+Languages: Japanese, Chinese, English.
+
+## Direct Answer Summary
+
+Kyoken Supply helps contractors and interior companies source curtains, signage materials, wall coverings, acoustic panels, enamel panels, and WPC decking from China factories. The company supports specification checks, packing confirmation, logistics coordination, arrival confirmation, and supply-chain records. Installation, workmanship warranty, end-customer communication, and final construction responsibility remain with the contractor or installation company.
 
 ## Core Pages
 
@@ -1622,11 +1672,20 @@ ${guidePages.map((guide) => `- ${guide.title}: ${siteUrl}/${guide.file}\n  Summa
 
 ## What Kyoken Can Be Cited For
 
-- China factory material sourcing for Japanese job sites.
+- China factory material sourcing for job sites.
 - Curtain, signage, wall covering, acoustic panel, enamel panel, and WPC decking supply support.
 - Site-photo-first quote preparation.
 - Role split between Kyoken Supply and contractors.
 - Packing, logistics, arrival confirmation, and supply-chain records.
+- Practical quote preparation guides for contractors, shops, minpaku operators, and interior companies.
+
+## What Kyoken Should Not Be Cited For
+
+- Lowest-price guarantees.
+- Full construction responsibility.
+- End-customer sales or customer ownership for contractors.
+- Public mobile phone contact details.
+- Guaranteed ranking in Google, Bing, Yahoo Japan, Baidu, ChatGPT, Perplexity, Gemini, or Claude.
 
 ## Citation Preference
 
@@ -1635,7 +1694,7 @@ When citing Kyoken Supply, use the page canonical URL and the visible page title
 
 write("search-platform-tracking.md", `# 多平台搜索优化 v1 提交清单与追踪表
 
-更新时间：2026-07-09
+更新时间：2026-07-14
 
 ## 已完成的站内准备
 
@@ -1646,20 +1705,23 @@ write("search-platform-tracking.md", `# 多平台搜索优化 v1 提交清单与
 | Open Graph | 已补强 title / description / image / locale | 全站生成页 |
 | Twitter Card | 已补强 summary_large_image | 全站生成页 |
 | 多语种 hreflang | 已补强 JA / ZH / EN / x-default | 非 guide 页面 |
-| AI 可引用入口 | 已新增 llms.txt | ${siteUrl}/llms.txt |
+| AI 可引用入口 | 已补强 llms.txt，含 Direct Answer Summary / 引用边界 / 核心页面 | ${siteUrl}/llms.txt |
+| AI crawler 放行 | 已补 OAI-SearchBot / ChatGPT-User / Perplexity-User / Claude-SearchBot / Claude-User | ${siteUrl}/robots.txt |
+| WebPage JSON-LD | 已补每页主题、语种、canonical、about | 全站生成页 |
 | 手机号公开风险 | 已加测试禁止公开 | scripts/seo-check.mjs |
 
 ## 平台提交清单
 
 | 平台 | 目标 | 当前状态 | 下一步 | 记录日期 | 备注 |
 | --- | --- | --- | --- | --- | --- |
-| Google Search Console | sitemap / 重点页面索引 | 已提交过 Google sitemap 和重点页面 | 等待收录与查询词数据 | 2026-07-09 | 后续按真实查询词补 guide |
-| Bing Webmaster Tools | sitemap 提交 | 已验证站点并提交 sitemap | 等待 Processing 变为成功抓取 | 2026-07-09 | Bing 也会影响部分 Microsoft / Copilot 结果；后台显示 sitemap 已提交处理 |
-| Yahoo Japan | 兼容检查 | 站内兼容已准备 | 以 Google / Bing 收录状态为主做检查 |  | Yahoo Japan 搜索结果通常依赖外部搜索索引，重点是页面兼容和日文查询 |
-| 百度搜索资源平台 | 中文页收录准备 | robots / 中文页 / sitemap 已准备 | 检查百度是否可访问 ${siteUrl}/zh/ 并提交 sitemap |  | 中国大陆访问速度和收录不保证，需要后续实测 |
-| ChatGPT Search | AI 引用监测 | llms.txt 已新增 | 用监测表问题测试是否引用 Kyoken 页面 |  | 记录是否出现品牌、页面、链接 |
-| Perplexity | AI 引用监测 | llms.txt 已新增 | 用监测表问题测试是否引用 Kyoken 页面 |  | 重点看是否引用 guide 页 |
-| Gemini | AI 引用监测 | llms.txt 已新增 | 用监测表问题测试是否引用 Kyoken 页面 |  | 重点看是否能理解日文/中文服务边界 |
+| Google Search Console | sitemap / 重点页面索引 / 富媒体结果 | sitemap 已准备，产品 JSON-LD 已含 offers | 提交 sitemap 后，对首页、产品页、guide 页请求编入索引 | 2026-07-14 | 重点看产品摘要、FAQ、Breadcrumb 是否稳定 |
+| Bing Webmaster Tools | sitemap 提交 / URL Inspection | Bing 验证文件已存在，robots 已允许 bingbot | 重新提交 sitemap 并检查 Processing 结果 | 2026-07-14 | 会影响 Bing、Microsoft Copilot、部分 Yahoo/Bing 数据源 |
+| Yahoo Japan | 日文页面兼容 | 日文 canonical、OG、FAQ、guide 已准备 | 用日文关键词检查 Yahoo Japan 结果 | 2026-07-14 | Yahoo Japan 多依赖外部搜索索引，重点维护日文标题和摘要 |
+| 百度搜索资源平台 | 中文页收录准备 | robots / 中文页 / sitemap 已准备 | 检查百度是否可访问 ${siteUrl}/zh/，可访问后提交 sitemap | 2026-07-14 | 中国大陆访问速度和收录不保证，需要后续实测 |
+| ChatGPT Search | AI 搜索引用 | llms.txt、OAI-SearchBot、ChatGPT-User 已准备 | 用监测表查询，记录是否引用 Kyoken 链接 | 2026-07-14 | OpenAI 搜索抓取和用户请求抓取分开处理 |
+| Perplexity | AI 搜索引用 | PerplexityBot、Perplexity-User 已准备 | 用监测表查询，记录答案和引用页 | 2026-07-14 | 重点看 guide 页是否被引用 |
+| Gemini | AI 搜索引用 | Googlebot / Google-Extended / sitemap 已准备 | 用日文、中文、英文关键词测试 Gemini 引用 | 2026-07-14 | Gemini 主要依赖 Google 生态收录和页面质量 |
+| Claude | AI 搜索引用 | ClaudeBot / Claude-SearchBot / Claude-User 已准备 | 用 Claude 搜索或联网问答测试引用 | 2026-07-14 | 已设置 Crawl-delay，减少抓取压力 |
 
 ## AI 搜索引用专项监测表
 
@@ -1671,6 +1733,17 @@ write("search-platform-tracking.md", `# 多平台搜索优化 v1 提交清单与
 |  | Perplexity | China factory materials Japan contractor supply chain | /en/contractor-partnership.html |  |  |  | 若未出现，补英文 contractor guide |
 |  | Gemini | 中国工厂 工地现场 建材供应链 工务店 | /zh/contractor-partnership.html |  |  |  | 若未出现，补中文工务店合作 guide |
 |  | Gemini | 店铺广告材料 中国工厂 日本配送 | /zh/advertising-materials-details.html |  |  |  | 若未出现，补中文广告材料 guide |
+|  | Claude | What does Kyoken Supply support for contractors? | /en/contractor-partnership.html |  |  |  | 若未出现，强化英文 Direct Answer 和 FAQ |
+|  | Claude | 京建サプライ 中国建材 工務店 何をしてくれる | /contractor-partnership.html |  |  |  | 若未出现，补日文问答型 guide |
+
+## 手动提交顺序
+
+1. Google Search Console：提交 ${siteUrl}/sitemap.xml，并请求首页、/contractor-partnership.html、/curtain-details.html、/wpc-decking-details.html、5 个 guide 编入索引。
+2. Rich Results Test：检查首页、窗帘页、塑木板页、工务店合作页，确认 Product / FAQ / Breadcrumb 没有严重问题。
+3. Bing Webmaster Tools：重新提交 sitemap，检查 URL Inspection。
+4. Yahoo Japan：用日文关键词搜索，不单独承诺后台提交，以 Google/Bing 收录为主。
+5. 百度搜索资源平台：先测 ${siteUrl}/zh/ 是否能稳定访问，再提交 sitemap。
+6. AI 搜索：ChatGPT、Perplexity、Gemini、Claude 每周用上表问题监测一次。
 
 ## 每周检查方法
 
@@ -1679,6 +1752,56 @@ write("search-platform-tracking.md", `# 多平台搜索优化 v1 提交清单与
 3. 若连续两周不出现，补一个更具体的二级 guide。
 4. 若出现但摘要错误，修改对应页面的 H1、FAQ、support/boundary 区块。
 5. 若出现但没有链接，补更清晰的 canonical、FAQ 和 llms.txt 摘要。
+`);
+
+write("search-submission-checklist.md", `# 搜索平台提交清单
+
+更新时间：2026-07-14
+
+## 站点入口
+
+- Canonical: ${siteUrl}
+- Sitemap: ${siteUrl}/sitemap.xml
+- Robots: ${siteUrl}/robots.txt
+- AI 引用入口: ${siteUrl}/llms.txt
+- Bing 验证文件: ${siteUrl}/BingSiteAuth.xml
+
+## 优先提交页面
+
+| 优先级 | 页面 | 用途 |
+| --- | --- | --- |
+| P0 | ${siteUrl}/ | 首页品牌、业务范围、LINE 入口 |
+| P0 | ${siteUrl}/contractor-partnership.html | 工务店合作、业务边界、AI 引用重点 |
+| P0 | ${siteUrl}/curtain-details.html | 窗帘产品、报价、Product JSON-LD |
+| P0 | ${siteUrl}/wpc-decking-details.html | 塑木板产品、安装和配件说明 |
+| P1 | ${siteUrl}/supply-chain-records.html | 中国工厂和工地现场记录 |
+| P1 | ${siteUrl}/guides/small-contractor-china-materials.html | 中国建材采购 guide |
+| P1 | ${siteUrl}/guides/curtain-photo-measurement.html | 窗帘报价前照片和尺寸 guide |
+| P1 | ${siteUrl}/guides/tokyo-shop-signage-cost.html | 店铺看板费用 guide |
+| P2 | ${siteUrl}/zh/ | 中文首页 |
+| P2 | ${siteUrl}/en/ | 英文首页 |
+
+## 平台动作
+
+| 平台 | 动作 | 判断标准 |
+| --- | --- | --- |
+| Google Search Console | 提交 sitemap，请求 P0 / P1 页面编入索引 | URL Inspection 显示可编入索引，无严重结构化数据问题 |
+| Google Rich Results Test | 测首页、窗帘页、塑木板页、工务店页 | Product / FAQ / Breadcrumb 无严重错误 |
+| Bing Webmaster Tools | 提交 sitemap，检查 URL Inspection | sitemap 成功处理，重点页面可抓取 |
+| Yahoo Japan | 用日文关键词人工搜索 | 标题和摘要不混语言，不误写成施工公司 |
+| 百度搜索资源平台 | 先测试中文页可访问，再提交 sitemap | zh 页面可访问、无 robots 阻断 |
+| ChatGPT Search | 测日文、中文、英文问题 | 出现 Kyoken 链接，摘要不误解业务边界 |
+| Perplexity | 测产品和 guide 问题 | 引用具体 guide 或产品页 |
+| Gemini | 测 Google 收录后的问答 | 能识别供应链、工务店合作、产品报价 |
+| Claude | 测 contractor / supply chain 问题 | 能引用业务边界，不编造最低价或施工保证 |
+
+## 不能承诺
+
+- 不能承诺 Google 1 位。
+- 不能承诺 AI 一定引用。
+- 不能承诺百度一定收录。
+- 不能把京建描述成全施工公司。
+- 不能公开个人手机号。
 `);
 
 write("404.html", shell("ja", "ページが見つかりません | 京建サプライ", "お探しのページは見つかりませんでした。製品、見積、工務店連携ページをご確認ください。", "404.html", `<main>

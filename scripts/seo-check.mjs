@@ -55,24 +55,29 @@ for (const expected of ["小規模工務店のための中国建材サプライ�
   assert(contractor.includes(expected), `contractor-partnership.html is missing ${expected}.`);
 }
 
-for (const required of ["robots.txt", "404.html", "llms.txt", "search-platform-tracking.md", "BingSiteAuth.xml"]) {
+for (const required of ["robots.txt", "404.html", "llms.txt", "search-platform-tracking.md", "search-submission-checklist.md", "BingSiteAuth.xml"]) {
   assert(fs.existsSync(path.join(root, required)), `${required} is missing.`);
 }
 
 assert(read("BingSiteAuth.xml").includes("A4DCF09CC5073A478E38501EC1FD4DB9"), "BingSiteAuth.xml token is missing.");
 
-for (const expected of ["GPTBot", "PerplexityBot", "Baiduspider", "bingbot", "Sitemap: https://www.kyoken.design/sitemap.xml"]) {
+for (const expected of ["GPTBot", "OAI-SearchBot", "ChatGPT-User", "PerplexityBot", "Perplexity-User", "ClaudeBot", "Claude-SearchBot", "Claude-User", "Baiduspider", "bingbot", "Sitemap: https://www.kyoken.design/sitemap.xml"]) {
   assert(read("robots.txt").includes(expected), `robots.txt is missing ${expected}.`);
 }
 
 const llms = read("llms.txt");
-for (const expected of ["Kyoken Supply", "Guides For Citation", "https://www.kyoken.design/sitemap.xml", "Do not cite private mobile numbers"]) {
+for (const expected of ["Kyoken Supply", "Direct Answer Summary", "Guides For Citation", "What Kyoken Should Not Be Cited For", "https://www.kyoken.design/sitemap.xml", "Do not cite private mobile numbers"]) {
   assert(llms.includes(expected), `llms.txt is missing ${expected}.`);
 }
 
 const tracking = read("search-platform-tracking.md");
-for (const expected of ["Bing Webmaster Tools", "Yahoo Japan", "百度搜索资源平台", "ChatGPT Search", "Perplexity", "Gemini", "AI 搜索引用专项监测表"]) {
+for (const expected of ["Bing Webmaster Tools", "Yahoo Japan", "百度搜索资源平台", "ChatGPT Search", "Perplexity", "Gemini", "Claude", "AI 搜索引用专项监测表"]) {
   assert(tracking.includes(expected), `search-platform-tracking.md is missing ${expected}.`);
+}
+
+const submissionChecklist = read("search-submission-checklist.md");
+for (const expected of ["Google Search Console", "Google Rich Results Test", "Bing Webmaster Tools", "ChatGPT Search", "Perplexity", "Gemini", "Claude", "不能承诺 Google 1 位"]) {
+  assert(submissionChecklist.includes(expected), `search-submission-checklist.md is missing ${expected}.`);
 }
 
 const languageLeakChecks = [
@@ -119,7 +124,12 @@ for (const file of generatedFiles) {
 }
 
 for (const file of listHtmlFiles()) {
-  for (const block of jsonLdBlocks(read(file))) {
+  if (file.startsWith("admin/")) continue;
+  if (file.startsWith("google")) continue;
+  const blocks = jsonLdBlocks(read(file));
+  const allNodes = blocks.flatMap((block) => Array.isArray(block["@graph"]) ? block["@graph"] : [block]);
+  assert(allNodes.some((node) => node["@type"] === "WebPage"), `${file} is missing WebPage JSON-LD.`);
+  for (const block of blocks) {
     const nodes = Array.isArray(block["@graph"]) ? block["@graph"] : [block];
     for (const node of nodes) {
       const types = Array.isArray(node["@type"]) ? node["@type"] : [node["@type"]];
