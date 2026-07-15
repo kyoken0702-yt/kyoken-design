@@ -143,6 +143,19 @@ h1 {
   font-weight: 800;
 }
 
+.hero-copy h1 {
+  max-width: 760px;
+  text-wrap: balance;
+}
+
+.hero-copy .hero-subtitle {
+  max-width: 700px;
+  color: #ffffff;
+  font-size: clamp(23px, 2.2vw, 32px);
+  line-height: 1.24;
+  font-weight: 700;
+}
+
 h2 {
   color: var(--navy);
   font-size: clamp(30px, 3vw, 44px);
@@ -848,8 +861,13 @@ h3 {
   }
 
   h1 {
-    font-size: clamp(38px, 11vw, 48px);
+    font-size: clamp(35px, 10vw, 48px);
     line-height: 1.1;
+  }
+
+  .hero-copy .hero-subtitle {
+    font-size: clamp(21px, 6vw, 28px);
+    line-height: 1.28;
   }
 
   h2 {

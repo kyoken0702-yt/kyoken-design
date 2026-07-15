@@ -36,8 +36,9 @@ function jsonLdBlocks(html) {
 }
 
 const home = read("index.html");
-assert(home.includes("東京の小規模内装会社・工務店向けに、中国工場での建材制作と工事現場確認を支援します"), "Home H1 was not updated.");
-assert(home.includes("LINEで現場写真を送る"), "Home LINE CTA is missing.");
+assert(home.includes("中国工場と、日本の施工現場をつなぐ"), "Home H1 was not updated.");
+assert(home.includes("工務店・内装会社のための建材調達パートナー"), "Home subtitle was not updated.");
+assert(home.includes("写真を送って相談する"), "Home photo consultation CTA is missing.");
 
 const sitemap = read("sitemap.xml");
 for (const guide of guides) {

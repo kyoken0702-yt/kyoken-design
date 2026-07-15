@@ -222,14 +222,16 @@ const lang = {
     html: "ja",
     label: "日本語",
     logo: "京建サプライ",
-    title: "京建サプライ | 中国工場 × 工事現場 × 工務店のサプライチェーンパートナー",
+    title: "京建サプライ｜中国工場と日本の施工現場をつなぐ建材調達パートナー",
     desc: "中国工場と工事現場をつなぐ、工務店・内装会社・設計会社のための材料調達、包装、物流、現場確認のサプライチェーンパートナー。",
+    homeDesc: "中国工場との仕様確認、材料調達、梱包確認、国際物流、日本到着後の確認まで、工務店・内装会社の建材調達を支援します。",
     nav: ["供給実景", "現場記録", "製品と見積", "工務店連携", "会社情報"],
-    heroTitle: "東京の小規模内装会社・工務店向けに、中国工場での建材制作と工事現場確認を支援します",
+    heroTitle: "中国工場と、日本の施工現場をつなぐ",
+    heroSubtitle: "工務店・内装会社のための建材調達パートナー",
     route: ["中国工場", "↓", "工事現場", "↓", "長期連携"],
-    heroBody: "京建サプライは、カーテン、広告材料、看板、ホーローパネル、吸音パネル、壁装材、人工木デッキ材などを、中国工場で制作し、現場条件に合わせて寸法、仕様、包装、輸送、到着確認を整理するサプライチェーン支援サービスです。",
-    primary: "LINEで現場写真を送る",
-    secondary: "製品と見積を見る",
+    heroBody: "中国工場との仕様確認、材料調達、梱包確認、国際物流、日本到着後の確認まで、京建サプライが一貫して支援します。",
+    primary: "製品を見る",
+    secondary: "写真を送って相談する",
     line: "LINEで相談",
     quoteLine: "見積相談",
     factoryTitle: "中国工場・供給実景",
@@ -254,14 +256,16 @@ const lang = {
     html: "zh-Hans",
     label: "中文",
     logo: "京建供应链",
-    title: "京建供应链 | 中国工厂 × 工地现场 × 工务店供应链合作伙伴",
+    title: "京建供应链｜连接中国工厂与日本施工现场的建材采购合作伙伴",
     desc: "京建供应链连接中国工厂和工地现场，为工务店、内装公司、设计公司提供材料采购、包装、物流、现场确认支持。",
+    homeDesc: "为日本工务店和内装公司提供中国工厂规格确认、材料采购、包装确认、国际物流及到货日本后的确认支持。",
     nav: ["供应链实景", "现场记录", "产品与报价", "工务店合作", "公司信息"],
-    heroTitle: "二十年，只做好供应链这一件事。",
+    heroTitle: "连接中国工厂与日本施工现场",
+    heroSubtitle: "面向工务店和内装公司的建材采购合作伙伴",
     route: ["中国工厂", "↓", "工地现场", "↓", "长期合作"],
-    heroBody: "京建负责中国侧生产、包装、运输和到场确认。工务店负责现场施工、安装报价、终端客户维护。我们把材料从中国工厂稳定交付到工地现场。",
-    primary: "查看供应链实景",
-    secondary: "查看产品与报价",
+    heroBody: "从中国工厂的规格确认、材料采购、包装确认、国际物流，到货日本后的确认，由京建供应链提供一贯支持。",
+    primary: "查看产品",
+    secondary: "发送照片咨询",
     line: "LINE 咨询",
     quoteLine: "发送照片和尺寸",
     factoryTitle: "中国工厂・供应链实景",
@@ -286,14 +290,16 @@ const lang = {
     html: "en",
     label: "English",
     logo: "Kyoken Supply",
-    title: "Kyoken Supply | China Factory × Job Site × Contractor Supply Chain Partner",
+    title: "Kyoken Supply | Building Material Sourcing from China to Japan",
     desc: "Kyoken Supply connects Chinese factories with job sites for contractors, interior companies, and design offices through sourcing, packing, logistics, and site confirmation.",
+    homeDesc: "Kyoken Supply helps contractors and interior companies source building materials from China, covering specifications, packaging, international logistics, and delivery confirmation in Japan.",
     nav: ["Supply Records", "Site Records", "Products & Quotes", "Partners", "Company"],
-    heroTitle: "Twenty years, focused on supply chain certainty.",
+    heroTitle: "Connecting Chinese Factories with Japanese Job Sites",
+    heroSubtitle: "A Building Material Sourcing Partner for Contractors and Interior Companies",
     route: ["China Factory", "↓", "Job Site", "↓", "Long-term Partnership"],
-    heroBody: "Kyoken supports production coordination, packaging, logistics, and arrival confirmation at the job site. Contractors keep control of installation, pricing, and end-customer relationships.",
-    primary: "View supply records",
-    secondary: "View products & quotes",
+    heroBody: "Kyoken Supply supports specification confirmation, material sourcing, packaging checks, international logistics, and delivery confirmation in Japan.",
+    primary: "View Products",
+    secondary: "Send Photos for Consultation",
     line: "Consult on LINE",
     quoteLine: "Send photos and sizes",
     factoryTitle: "China Factory & Supply Records",
@@ -471,8 +477,10 @@ function jsonLd(data) {
   return `<script type="application/ld+json">${JSON.stringify(data)}</script>`;
 }
 
-function baseJsonLd(code, file) {
+function baseJsonLd(code, file, pageTitle = "", pageDescription = "") {
   const canonical = absoluteUrl(code, file);
+  const webPageName = file === "index.html" ? (pageTitle || lang[code].title) : `${file.replace(/\.html$/u, "")} | ${lang[code].logo}`;
+  const webPageDescription = file === "index.html" ? (pageDescription || lang[code].desc) : lang[code].desc;
   return [
     {
       "@context": "https://schema.org",
@@ -494,8 +502,8 @@ function baseJsonLd(code, file) {
       "@type": "WebPage",
       "@id": `${canonical}#webpage`,
       "url": canonical,
-      "name": file === "index.html" ? lang[code].title : `${file.replace(/\.html$/u, "")} | ${lang[code].logo}`,
-      "description": lang[code].desc,
+      "name": webPageName,
+      "description": webPageDescription,
       "inLanguage": lang[code].html,
       "isPartOf": {
         "@type": "WebSite",
@@ -645,7 +653,7 @@ function recordSummary(record, code) {
 function ui(code, key) {
   const labels = {
     ja: {
-      heroKicker: "中国工場 × 工事現場",
+      heroKicker: "建材調達支援",
       factoryKicker: "工場 / 梱包 / 出荷",
       siteKicker: "工事現場",
       productsKicker: "製品 / 見積",
@@ -667,7 +675,7 @@ function ui(code, key) {
       company: "会社情報"
     },
     zh: {
-      heroKicker: "中国工厂 × 工地现场",
+      heroKicker: "建材采购支持",
       factoryKicker: "工厂 / 包装 / 发货",
       siteKicker: "工地现场",
       productsKicker: "产品 / 报价",
@@ -689,7 +697,7 @@ function ui(code, key) {
       company: "公司信息"
     },
     en: {
-      heroKicker: "China Factory × Job Site",
+      heroKicker: "Building Material Sourcing",
       factoryKicker: "Factory / Packing / Shipment",
       siteKicker: "Job Site",
       productsKicker: "Products / Quotes",
@@ -920,7 +928,7 @@ function shell(code, title, description, file, body, options = {}) {
   const p = `${depthPrefix}${prefix(code)}`;
   const localRoot = depthPrefix;
   const canonical = options.canonical || absoluteUrl(code, file);
-  const schemas = [...baseJsonLd(code, file), ...(options.schemas || [])];
+  const schemas = [...baseJsonLd(code, file, title, description), ...(options.schemas || [])];
   const ogLocale = code === "zh" ? "zh_CN" : code === "en" ? "en_US" : "ja_JP";
   return `<!doctype html>
 <html lang="${c.html}">
@@ -978,16 +986,17 @@ function home(code) {
   const answer = homeAnswerCopy(code);
   const heroRecord = records.find((record) => record.media?.length) || null;
   const heroMedia = heroRecord ? mediaGrid({ ...heroRecord, media: heroRecord.media.slice(0, 1) }, code, true) : `<div class="record-placeholder"><span>${c.noRecords}</span></div>`;
-  return shell(code, c.title, c.desc, "index.html", `<main>
+  return shell(code, c.title, c.homeDesc || c.desc, "index.html", `<main>
     <section class="hero">
       <div class="hero-media">${heroMedia}</div>
       <div class="hero-copy">
         <p class="kicker">${ui(code, "heroKicker")}</p>
         <h1>${c.heroTitle}</h1>
+        <p class="hero-subtitle">${c.heroSubtitle}</p>
         <p>${c.heroBody}</p>
         <div class="actions">
-          <a href="${lineUrl}">${c.primary}</a>
-          <a href="#products">${c.secondary}</a>
+          <a href="#products">${c.primary}</a>
+          <a href="${lineUrl}">${c.secondary}</a>
           <a href="contractor-partnership.html">${c.partnerTitle}</a>
         </div>
       </div>
