@@ -4,7 +4,8 @@ import path from "node:path";
 const root = path.resolve(new URL("..", import.meta.url).pathname);
 const lineUrl = "https://line.me/R/ti/p/@566wlcvz";
 const siteUrl = "https://www.kyoken.design";
-const ogImage = `${siteUrl}/media/remote/6e64da3a8e48.png`;
+const homeHeroImage = "media/hero/home-gree-showroom.jpg";
+const ogImage = `${siteUrl}/${homeHeroImage}`;
 const stylesheetVersion = "20260709-multi-platform-v1";
 
 const records = readJson("data/records.json")
@@ -953,8 +954,8 @@ function shell(code, title, description, file, body, options = {}) {
   <meta property="og:site_name" content="${escapeHtml(c.logo)}">
   <meta property="og:locale" content="${ogLocale}">
   <meta property="og:image" content="${ogImage}">
-  <meta property="og:image:width" content="1024">
-  <meta property="og:image:height" content="1024">
+  <meta property="og:image:width" content="1600">
+  <meta property="og:image:height" content="912">
   <meta property="og:image:alt" content="${escapeHtml(c.logo)}">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="${escapeHtml(title)}">
@@ -986,8 +987,7 @@ function shell(code, title, description, file, body, options = {}) {
 function home(code) {
   const c = lang[code];
   const answer = homeAnswerCopy(code);
-  const heroRecord = records.find((record) => record.media?.length) || null;
-  const heroMedia = heroRecord ? mediaGrid({ ...heroRecord, media: heroRecord.media.slice(0, 1) }, code, true, { eagerFirst: true }) : `<div class="record-placeholder"><span>${c.noRecords}</span></div>`;
+  const heroMedia = `<div class="record-media-grid"><img src="${mediaSrc(code, homeHeroImage)}" alt="${escapeHtml(c.heroTitle)}" loading="eager" decoding="async" fetchpriority="high"></div>`;
   return shell(code, c.title, c.homeDesc || c.desc, "index.html", `<main>
     <section class="hero">
       <div class="hero-media">${heroMedia}</div>
