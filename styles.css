@@ -18,8 +18,8 @@ body {
   background: var(--white);
   color: var(--text);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Yu Gothic", "Noto Sans JP", "Microsoft YaHei", sans-serif;
-  font-size: 17px;
-  line-height: 1.62;
+  font-size: 16px;
+  line-height: 1.55;
   font-weight: 400;
 }
 
@@ -53,8 +53,8 @@ h1, h2, h3, strong { letter-spacing: 0; }
   display: grid;
   grid-template-columns: auto 1fr auto;
   align-items: center;
-  gap: 18px;
-  padding: 12px clamp(18px, 4vw, 50px);
+  gap: 16px;
+  padding: 10px clamp(18px, 4vw, 46px);
   background: rgba(255, 255, 255, .96);
   border-bottom: 1px solid var(--line);
   backdrop-filter: blur(10px);
@@ -95,13 +95,13 @@ nav a:hover, .language a:hover { color: var(--red); }
 .hero {
   display: grid;
   grid-template-columns: minmax(0, 1.16fr) minmax(420px, .84fr);
-  min-height: min(720px, calc(100vh - 58px));
+  min-height: min(640px, calc(100vh - 54px));
   background: var(--navy);
   color: var(--white);
 }
 
 .hero-media {
-  min-height: 460px;
+  min-height: 410px;
   background: #26384f;
 }
 
@@ -115,7 +115,7 @@ nav a:hover, .language a:hover { color: var(--red); }
 .hero-media video {
   width: 100%;
   height: 100%;
-  min-height: 460px;
+  min-height: 410px;
   object-fit: cover;
   filter: saturate(.9) contrast(1.02);
 }
@@ -123,8 +123,8 @@ nav a:hover, .language a:hover { color: var(--red); }
 .hero-copy {
   display: grid;
   align-content: center;
-  gap: 20px;
-  padding: clamp(28px, 4.4vw, 58px);
+  gap: 14px;
+  padding: clamp(24px, 3.6vw, 48px);
   border-left: 1px solid rgba(255,255,255,.14);
 }
 
@@ -138,8 +138,8 @@ nav a:hover, .language a:hover { color: var(--red); }
 .hero .kicker { color: #f0b3bd; }
 
 h1 {
-  font-size: clamp(42px, 4.8vw, 66px);
-  line-height: 1.06;
+  font-size: clamp(40px, 4.5vw, 62px);
+  line-height: 1.05;
   font-weight: 800;
 }
 
@@ -151,21 +151,21 @@ h1 {
 .hero-copy .hero-subtitle {
   max-width: 700px;
   color: #ffffff;
-  font-size: clamp(23px, 2.2vw, 32px);
+  font-size: clamp(22px, 2vw, 30px);
   line-height: 1.24;
   font-weight: 700;
 }
 
 h2 {
   color: var(--navy);
-  font-size: clamp(30px, 3vw, 44px);
+  font-size: clamp(28px, 2.7vw, 40px);
   line-height: 1.12;
   font-weight: 800;
 }
 
 h3 {
   color: var(--navy);
-  font-size: 24px;
+  font-size: 22px;
   line-height: 1.28;
   font-weight: 700;
 }
@@ -173,8 +173,8 @@ h3 {
 .hero-copy p {
   max-width: 660px;
   color: #e3e9f2;
-  font-size: 19px;
-  line-height: 1.62;
+  font-size: 18px;
+  line-height: 1.55;
   font-weight: 400;
 }
 
@@ -236,7 +236,7 @@ h3 {
 }
 
 .section {
-  padding: clamp(34px, 4.8vw, 62px) clamp(20px, 4.2vw, 58px);
+  padding: clamp(26px, 3.4vw, 44px) clamp(20px, 4vw, 50px);
 }
 
 .section.muted {
@@ -246,9 +246,9 @@ h3 {
 
 .section-head {
   display: grid;
-  gap: 10px;
+  gap: 7px;
   max-width: 980px;
-  margin-bottom: 22px;
+  margin-bottom: 16px;
 }
 
 .section-head p,
@@ -258,8 +258,8 @@ h3 {
 .contact p,
 .notice {
   color: var(--muted);
-  font-size: 18px;
-  line-height: 1.66;
+  font-size: 17px;
+  line-height: 1.56;
   font-weight: 400;
   max-width: 900px;
 }
@@ -267,19 +267,19 @@ h3 {
 .record-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 14px;
+  gap: 12px;
 }
 
 .channel-stack {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
+  gap: 14px;
   align-items: start;
 }
 
 .channel-section {
   display: grid;
-  gap: 10px;
+  gap: 8px;
   min-width: 0;
 }
 
@@ -300,16 +300,16 @@ h3 {
 
 .record-card {
   display: grid;
-  gap: 11px;
+  gap: 9px;
   min-width: 0;
-  padding: 12px;
+  padding: 10px;
   border: 1px solid var(--line);
   background: #fff;
 }
 
 .record-card-head {
   display: grid;
-  gap: 6px;
+  gap: 4px;
 }
 
 .record-card-head span {
@@ -320,22 +320,22 @@ h3 {
 
 .record-card-head strong {
   color: var(--navy);
-  font-size: 23px;
-  line-height: 1.32;
+  font-size: 21px;
+  line-height: 1.25;
   font-weight: 700;
 }
 
 .record-card p {
   color: #334155;
   font-size: 15px;
-  line-height: 1.55;
+  line-height: 1.48;
   font-weight: 400;
 }
 
 .record-media-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 8px;
+  gap: 6px;
 }
 
 .record-grid.wide .record-media-grid {
@@ -364,16 +364,16 @@ h3 {
 .product-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 14px;
+  gap: 12px;
 }
 
 .product-card {
   display: grid;
-  grid-template-columns: 148px 1fr;
-  gap: 14px;
+  grid-template-columns: 136px 1fr;
+  gap: 12px;
   align-items: start;
   min-width: 0;
-  padding: 14px;
+  padding: 12px;
   border: 1px solid var(--line);
   background: #fff;
 }
@@ -387,7 +387,7 @@ h3 {
 
 .product-card div {
   display: grid;
-  gap: 7px;
+  gap: 5px;
   min-width: 0;
 }
 
@@ -400,7 +400,7 @@ h3 {
 .product-card p {
   color: #334155;
   font-size: 15px;
-  line-height: 1.56;
+  line-height: 1.48;
   font-weight: 400;
 }
 
@@ -413,7 +413,7 @@ h3 {
 .partner {
   display: grid;
   grid-template-columns: minmax(0, .7fr) minmax(0, 1fr);
-  gap: 18px;
+  gap: 14px;
   align-items: start;
   background: #fbfbfc;
 }
@@ -421,7 +421,7 @@ h3 {
 .role-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
+  gap: 10px;
 }
 
 .role-grid.large {
@@ -434,7 +434,7 @@ h3 {
 .company-list {
   border: 1px solid var(--line);
   background: #fff;
-  padding: 16px;
+  padding: 13px;
 }
 
 .role-grid strong,
@@ -444,16 +444,16 @@ h3 {
 .company-list p {
   display: block;
   color: #1f2937;
-  font-size: 16px;
-  line-height: 1.58;
+  font-size: 15px;
+  line-height: 1.5;
   font-weight: 500;
 }
 
 .role-grid strong {
-  margin-bottom: 7px;
+  margin-bottom: 5px;
   color: var(--navy);
-  font-size: 21px;
-  line-height: 1.3;
+  font-size: 19px;
+  line-height: 1.24;
   font-weight: 700;
 }
 
@@ -469,39 +469,39 @@ h3 {
 }
 
 .company .company-list {
-  margin-top: 18px;
+  margin-top: 12px;
   border-color: rgba(255,255,255,.18);
   background: rgba(255,255,255,.06);
 }
 
 .contact {
   display: grid;
-  gap: 12px;
+  gap: 8px;
   background: #fff;
 }
 
 .page-hero,
 .product-hero {
-  padding: clamp(38px, 5vw, 68px) clamp(20px, 4.2vw, 58px);
+  padding: clamp(28px, 3.8vw, 48px) clamp(20px, 4vw, 50px);
   background: var(--paper);
   border-bottom: 1px solid var(--line);
 }
 
 .page-hero {
   display: grid;
-  gap: 10px;
+  gap: 7px;
 }
 
 .product-hero {
   display: grid;
   grid-template-columns: minmax(0, .9fr) minmax(360px, .55fr);
-  gap: 24px;
+  gap: 18px;
   align-items: center;
 }
 
 .product-hero > div {
   display: grid;
-  gap: 12px;
+  gap: 9px;
 }
 
 .product-hero img {
@@ -513,7 +513,7 @@ h3 {
 }
 
 .compact {
-  padding-block: clamp(30px, 4.2vw, 52px);
+  padding-block: clamp(24px, 3.2vw, 40px);
 }
 
 .spec-grid,
@@ -522,28 +522,28 @@ h3 {
 .detail-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 12px;
+  gap: 10px;
 }
 
 .plan-grid,
 .detail-grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  margin-bottom: 14px;
+  margin-bottom: 10px;
 }
 
 .plan-grid div,
 .detail-grid div {
   border: 1px solid var(--line);
   background: #fff;
-  padding: 16px;
+  padding: 13px;
 }
 
 .plan-grid img {
   display: block;
-  width: calc(100% + 32px);
+  width: calc(100% + 26px);
   max-width: none;
-  margin: -16px -16px 12px;
-  padding: 10px;
+  margin: -13px -13px 10px;
+  padding: 8px;
   aspect-ratio: 16 / 10;
   object-fit: contain;
   background: #f4efe6;
@@ -552,9 +552,9 @@ h3 {
 
 .detail-grid img {
   display: block;
-  width: calc(100% + 32px);
+  width: calc(100% + 26px);
   max-width: none;
-  margin: -16px -16px 12px;
+  margin: -13px -13px 10px;
   aspect-ratio: 16 / 10;
   object-fit: cover;
   background: #dbe3ee;
@@ -570,10 +570,10 @@ h3 {
 .plan-grid strong,
 .detail-grid strong {
   display: block;
-  margin: 4px 0 7px;
+  margin: 3px 0 5px;
   color: var(--navy);
-  font-size: 21px;
-  line-height: 1.3;
+  font-size: 20px;
+  line-height: 1.24;
   font-weight: 700;
 }
 
@@ -581,13 +581,13 @@ h3 {
 .detail-grid p {
   color: #334155;
   font-size: 15px;
-  line-height: 1.58;
+  line-height: 1.5;
   font-weight: 400;
 }
 
 .plan-grid em {
   display: block;
-  margin-top: 12px;
+  margin-top: 8px;
   color: var(--red);
   font-style: normal;
   font-size: 18px;
@@ -596,15 +596,15 @@ h3 {
 
 .price-table-wrap {
   display: grid;
-  gap: 10px;
-  margin: 14px 0;
+  gap: 8px;
+  margin: 10px 0;
   border: 1px solid var(--line);
   background: #fff;
-  padding: 16px;
+  padding: 13px;
 }
 
 .price-table-wrap h3 {
-  font-size: 24px;
+  font-size: 22px;
 }
 
 .price-table-scroll {
@@ -621,7 +621,7 @@ h3 {
 .price-table th,
 .price-table td {
   border: 1px solid var(--line);
-  padding: 9px 10px;
+  padding: 7px 9px;
   text-align: center;
 }
 
@@ -638,14 +638,14 @@ h3 {
 .price-table-wrap > p {
   color: var(--muted);
   font-size: 15px;
-  line-height: 1.7;
+  line-height: 1.5;
   font-weight: 400;
 }
 
 .request-section {
   display: grid;
   grid-template-columns: minmax(0, .9fr) minmax(320px, .55fr);
-  gap: 20px;
+  gap: 14px;
   align-items: start;
   background: var(--paper);
   border-block: 1px solid var(--line);
@@ -653,17 +653,17 @@ h3 {
 
 .request-section p {
   color: var(--muted);
-  font-size: 17px;
-  line-height: 1.62;
+  font-size: 16px;
+  line-height: 1.52;
   font-weight: 400;
 }
 
 .request-section ul {
-  margin: 0 0 14px;
+  margin: 0 0 10px;
   padding-left: 20px;
   color: #1f2937;
-  font-size: 17px;
-  line-height: 1.62;
+  font-size: 16px;
+  line-height: 1.52;
   font-weight: 500;
 }
 
@@ -694,7 +694,7 @@ h3 {
 }
 
 .notice {
-  padding: 16px;
+  padding: 13px;
   border-left: 5px solid var(--red);
   background: var(--paper);
 }
@@ -702,7 +702,7 @@ h3 {
 .guide-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px;
+  gap: 12px;
 }
 
 .guide-grid figure {
@@ -710,7 +710,7 @@ h3 {
   min-width: 0;
   border: 1px solid var(--line);
   background: #fff;
-  padding: 10px;
+  padding: 8px;
 }
 
 .guide-grid img {
@@ -729,7 +729,7 @@ h3 {
 .two-column-list {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 12px;
+  gap: 10px;
 }
 
 .two-column-list {
@@ -743,7 +743,7 @@ h3 {
   min-width: 0;
   border: 1px solid var(--line);
   background: #fff;
-  padding: 16px;
+  padding: 13px;
 }
 
 .answer-grid div {
@@ -755,13 +755,13 @@ h3 {
 
 .guide-link-grid a {
   display: grid;
-  gap: 8px;
+  gap: 6px;
 }
 
 .guide-link-grid strong {
   color: var(--navy);
-  font-size: 19px;
-  line-height: 1.35;
+  font-size: 18px;
+  line-height: 1.3;
   font-weight: 700;
 }
 
@@ -770,13 +770,13 @@ h3 {
 .faq-list p,
 .two-column-list li {
   color: var(--muted);
-  font-size: 17px;
-  line-height: 1.66;
+  font-size: 16px;
+  line-height: 1.56;
   font-weight: 400;
 }
 
 .two-column-list ul {
-  margin: 12px 0 0;
+  margin: 8px 0 0;
   padding-left: 22px;
 }
 
@@ -790,7 +790,7 @@ h3 {
 
 .faq-list {
   display: grid;
-  gap: 10px;
+  gap: 8px;
 }
 
 .faq-list summary {
@@ -802,7 +802,7 @@ h3 {
 }
 
 .faq-list p {
-  margin-top: 10px;
+  margin-top: 7px;
 }
 
 .sticky-line {
@@ -822,20 +822,20 @@ h3 {
 
 @media (max-width: 860px) {
   body {
-    font-size: 16px;
-    line-height: 1.6;
+    font-size: 15px;
+    line-height: 1.52;
   }
 
   .site-header {
     position: static;
     grid-template-columns: 1fr;
-    gap: 10px;
-    padding: 14px 16px;
+    gap: 8px;
+    padding: 10px 16px;
   }
 
   nav {
     justify-content: flex-start;
-    gap: 10px 14px;
+    gap: 8px 12px;
     font-size: 14px;
   }
 
@@ -852,31 +852,32 @@ h3 {
   .hero-media,
   .hero-media img,
   .hero-media video {
-    min-height: 310px;
+    min-height: 250px;
   }
 
   .hero-copy {
-    padding: 28px 18px 32px;
+    gap: 12px;
+    padding: 22px 16px 24px;
     border-left: 0;
   }
 
   h1 {
-    font-size: clamp(35px, 10vw, 48px);
-    line-height: 1.1;
+    font-size: clamp(32px, 9vw, 44px);
+    line-height: 1.08;
   }
 
   .hero-copy .hero-subtitle {
-    font-size: clamp(21px, 6vw, 28px);
-    line-height: 1.28;
+    font-size: clamp(20px, 5.6vw, 26px);
+    line-height: 1.24;
   }
 
   h2 {
-    font-size: clamp(28px, 8vw, 36px);
-    line-height: 1.18;
+    font-size: clamp(25px, 7vw, 34px);
+    line-height: 1.14;
   }
 
   h3 {
-    font-size: 22px;
+    font-size: 20px;
   }
 
   .hero-copy p,
@@ -886,8 +887,8 @@ h3 {
   .partner p,
 	  .contact p {
 	    color: #1f2937;
-	    font-size: 16px;
-	    line-height: 1.62;
+	    font-size: 15px;
+	    line-height: 1.52;
 	  }
 
   .hero-copy p {
@@ -897,7 +898,7 @@ h3 {
   .section,
   .page-hero,
   .product-hero {
-    padding: 30px 16px;
+    padding: 22px 16px;
   }
 
 	  .record-grid,
@@ -923,22 +924,22 @@ h3 {
   }
 
   .product-card {
-    grid-template-columns: 132px 1fr;
-    gap: 12px;
-    padding: 12px;
+    grid-template-columns: 122px 1fr;
+    gap: 10px;
+    padding: 10px;
   }
 
   .record-card {
-    padding: 12px;
+    padding: 10px;
   }
 
   .record-card-head strong {
-    font-size: 21px;
+    font-size: 20px;
   }
 
   .product-card p,
   .record-card p {
-    font-size: 15px;
+    font-size: 14px;
   }
 
   .actions a {

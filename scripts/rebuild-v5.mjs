@@ -6,7 +6,7 @@ const lineUrl = "https://line.me/R/ti/p/@566wlcvz";
 const siteUrl = "https://www.kyoken.design";
 const homeHeroImage = "media/hero/home-gree-showroom.jpg";
 const ogImage = `${siteUrl}/${homeHeroImage}`;
-const stylesheetVersion = "20260709-multi-platform-v1";
+const stylesheetVersion = "20260715-density-v1";
 
 const records = readJson("data/records.json")
   .filter((record) => record && ["factory", "site"].includes(record.module))
