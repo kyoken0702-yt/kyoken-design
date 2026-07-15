@@ -15,7 +15,7 @@ const products = [
   {
     file: "curtain-details.html",
     key: "curtains",
-    image: "media/remote/e2f130af6ea5.png",
+    image: "media/remote/e2f130af6ea5.jpg",
     names: { ja: "オーダーカーテン", zh: "定制窗帘", en: "Custom Curtains" },
     one: {
       ja: "採寸、標準簡易取付、窓まわり条件を確認して手配するカーテン資材。",
@@ -41,9 +41,9 @@ const products = [
       ]
     },
     planImages: [
-      "media/remote/e2f130af6ea5.png",
-      "media/remote/cdc5462a960d.png",
-      "media/remote/f46b3f8c49c8.png"
+      "media/remote/e2f130af6ea5.jpg",
+      "media/remote/cdc5462a960d.jpg",
+      "media/remote/f46b3f8c49c8.jpg"
     ],
     priceTable: {
       ja: {
@@ -91,7 +91,7 @@ const products = [
   {
     file: "advertising-materials-details.html",
     key: "advertising",
-    image: "media/remote/c1f2ceb8eb9d.png",
+    image: "media/remote/c1f2ceb8eb9d.jpg",
     names: { ja: "広告材料制作", zh: "广告材料制作", en: "Advertising Material Production" },
     one: {
       ja: "店舗・施設向け広告材料を図面、寸法、設置条件ごとに確認します。",
@@ -108,7 +108,7 @@ const products = [
   {
     file: "enamel-panel.html",
     key: "enamel",
-    image: "media/remote/f35f79d49094.png",
+    image: "media/remote/f35f79d49094.jpg",
     names: { ja: "ホーローキッチンパネル", zh: "珐琅磁吸板", en: "Enamel Kitchen Panel" },
     one: {
       ja: "厨房・水回り・店舗壁面向けに、板材仕様と搬入条件を確認するパネル。",
@@ -125,7 +125,7 @@ const products = [
   {
     file: "acoustic-panel-details.html",
     key: "acoustic",
-    image: "media/remote/c3805c6eb4b0.png",
+    image: "media/remote/c3805c6eb4b0.jpg",
     names: { ja: "フェルト吸音パネル", zh: "毛毡吸音板", en: "Felt Acoustic Panel" },
     one: {
       ja: "色、厚み、下地、固定方法を確認する吸音材。",
@@ -159,7 +159,7 @@ const products = [
   {
     file: "wpc-decking-details.html",
     key: "wpc",
-    image: "media/remote/937250ddfe38.png",
+    image: "media/remote/937250ddfe38.jpg",
     names: { ja: "人工木デッキ材", zh: "人工木地板材料", en: "WPC Decking Board" },
     one: {
       ja: "長物梱包、搬入、下地条件を確認する人工木デッキ材。",
@@ -632,7 +632,7 @@ function switcher(code, file = "index.html") {
 
 function mediaSrc(code, value) {
   if (/^(https?:)?\/\//u.test(value)) return value;
-  return `${prefix(code)}${String(value).replace(/^\/+/u, "")}`;
+  return `${prefix(code)}${String(value || "").replace(/^\/+/u, "")}`;
 }
 
 function isVideo(value) {
@@ -854,16 +854,18 @@ function contractorPageCopy(code) {
   return copy[code];
 }
 
-function mediaGrid(record, code, compact = false) {
+function mediaGrid(record, code, compact = false, options = {}) {
   const media = Array.isArray(record.media) ? record.media.filter(Boolean) : [];
   if (!media.length) {
     return `<div class="record-placeholder"><span>${lang[code].noRecords}</span></div>`;
   }
   const selected = compact ? media.slice(0, 6) : media;
-  return `<div class="record-media-grid">${selected.map((item) => {
+  return `<div class="record-media-grid">${selected.map((item, index) => {
     const src = mediaSrc(code, item);
     if (isVideo(item)) return `<video controls playsinline preload="metadata" src="${src}"></video>`;
-    return `<img src="${src}" alt="${escapeHtml(recordTitle(record, code))}" loading="lazy">`;
+    const loading = options.eagerFirst && index === 0 ? "eager" : "lazy";
+    const priority = options.eagerFirst && index === 0 ? ' fetchpriority="high"' : ' fetchpriority="low"';
+    return `<img src="${src}" alt="${escapeHtml(recordTitle(record, code))}" loading="${loading}" decoding="async"${priority}>`;
   }).join("")}</div>`;
 }
 
@@ -910,7 +912,7 @@ function inferChannel(record) {
 
 function productCards(code) {
   return products.map((product) => `<article class="product-card">
-    <img src="${prefix(code)}${product.image}" alt="${escapeHtml(product.names[code])}" loading="lazy">
+    <img src="${mediaSrc(code, product.image)}" alt="${escapeHtml(product.names[code])}" loading="lazy" decoding="async" fetchpriority="low">
     <div>
       <h3>${product.names[code]}</h3>
       <strong>${product.quote[code]}</strong>
@@ -985,7 +987,7 @@ function home(code) {
   const c = lang[code];
   const answer = homeAnswerCopy(code);
   const heroRecord = records.find((record) => record.media?.length) || null;
-  const heroMedia = heroRecord ? mediaGrid({ ...heroRecord, media: heroRecord.media.slice(0, 1) }, code, true) : `<div class="record-placeholder"><span>${c.noRecords}</span></div>`;
+  const heroMedia = heroRecord ? mediaGrid({ ...heroRecord, media: heroRecord.media.slice(0, 1) }, code, true, { eagerFirst: true }) : `<div class="record-placeholder"><span>${c.noRecords}</span></div>`;
   return shell(code, c.title, c.homeDesc || c.desc, "index.html", `<main>
     <section class="hero">
       <div class="hero-media">${heroMedia}</div>
@@ -1151,7 +1153,7 @@ function planGrid(code, product) {
   if (!plans.length) return "";
   const images = product.planImages || [];
   return `<div class="plan-grid">${plans.map((plan, index) => {
-    const image = images[index] ? `<img src="${mediaSrc(code, images[index])}" alt="${escapeHtml(plan[0])}" loading="lazy">` : "";
+    const image = images[index] ? `<img src="${mediaSrc(code, images[index])}" alt="${escapeHtml(plan[0])}" loading="lazy" decoding="async" fetchpriority="low">` : "";
     return `<div>${image}
     <span>0${index + 1}</span>
     <strong>${plan[0]}</strong>
@@ -1186,7 +1188,7 @@ function materialDetails(code, product) {
       <h2>${code === "ja" ? "材料と確認ポイント" : code === "zh" ? "材料和确认重点" : "Material and Checkpoints"}</h2>
     </div>
     <div class="detail-grid">${details.map((item, index) => {
-      const image = images[index] ? `<img src="${mediaSrc(code, images[index])}" alt="${escapeHtml(item[0])}" loading="lazy">` : "";
+      const image = images[index] ? `<img src="${mediaSrc(code, images[index])}" alt="${escapeHtml(item[0])}" loading="lazy" decoding="async" fetchpriority="low">` : "";
       return `<div>${image}<strong>${item[0]}</strong><p>${item[1]}</p></div>`;
     }).join("")}</div>
   </section>`;
@@ -1206,7 +1208,7 @@ function guideImages(code, product) {
       <h2>${copy[1]}</h2>
     </div>
     <div class="guide-grid">${images.map((image, index) => `<figure>
-      <img src="${mediaSrc(code, image)}" alt="${escapeHtml(`${copy[0]} ${index + 1}`)}" loading="lazy">
+      <img src="${mediaSrc(code, image)}" alt="${escapeHtml(`${copy[0]} ${index + 1}`)}" loading="lazy" decoding="async" fetchpriority="low">
     </figure>`).join("")}</div>
   </section>`;
 }
@@ -1386,7 +1388,7 @@ function productPage(code, product) {
         <p>${product.one[code]}</p>
         <div class="actions"><a href="${lineUrl}">${c.quoteLine}</a><a href="index.html#products">${c.productsTitle}</a></div>
       </div>
-      <img src="${prefix(code)}${product.image}" alt="${escapeHtml(product.names[code])}">
+      <img src="${mediaSrc(code, product.image)}" alt="${escapeHtml(product.names[code])}" loading="eager" decoding="async" fetchpriority="high">
     </section>
     <section class="section compact">
       <div class="section-head">
