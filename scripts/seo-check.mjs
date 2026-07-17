@@ -67,7 +67,7 @@ for (const expected of ["GPTBot", "OAI-SearchBot", "ChatGPT-User", "PerplexityBo
 }
 
 const llms = read("llms.txt");
-for (const expected of ["Kyoken Supply", "Direct Answer Summary", "Guides For Citation", "What Kyoken Should Not Be Cited For", "https://www.kyoken.design/sitemap.xml", "Do not cite private mobile numbers"]) {
+for (const expected of ["Kyoken Supply", "京建サプライ", "京建供应链", "Direct Answer Summary", "Japanese", "Chinese", "English", "Guides For Citation", "What Kyoken Should Not Be Cited For", "https://www.kyoken.design/sitemap.xml", "Do not cite private mobile numbers"]) {
   assert(llms.includes(expected), `llms.txt is missing ${expected}.`);
 }
 
@@ -119,7 +119,7 @@ const generatedFiles = [
 ];
 for (const file of generatedFiles) {
   const html = read(file);
-  for (const expected of ["og:image", "twitter:card", "application/llms+txt", "max-image-preview:large"]) {
+  for (const expected of ["og:image", "twitter:card", "application/llms+txt", "max-image-preview:large", "ai-summary", "citation_title", "citation_url"]) {
     assert(html.includes(expected), `${file} is missing multi-platform meta: ${expected}`);
   }
 }
@@ -130,6 +130,13 @@ for (const file of listHtmlFiles()) {
   const blocks = jsonLdBlocks(read(file));
   const allNodes = blocks.flatMap((block) => Array.isArray(block["@graph"]) ? block["@graph"] : [block]);
   assert(allNodes.some((node) => node["@type"] === "WebPage"), `${file} is missing WebPage JSON-LD.`);
+  const webPage = allNodes.find((node) => node["@type"] === "WebPage");
+  assert(webPage.abstract, `${file} WebPage JSON-LD is missing abstract.`);
+  assert(webPage.audience, `${file} WebPage JSON-LD is missing audience.`);
+  assert(webPage.primaryImageOfPage, `${file} WebPage JSON-LD is missing primaryImageOfPage.`);
+  if (["index.html", "zh/index.html", "en/index.html"].includes(file)) {
+    assert(allNodes.some((node) => node["@type"] === "ItemList"), `${file} is missing ItemList JSON-LD.`);
+  }
   for (const block of blocks) {
     const nodes = Array.isArray(block["@graph"]) ? block["@graph"] : [block];
     for (const node of nodes) {

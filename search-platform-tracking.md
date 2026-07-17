@@ -1,6 +1,6 @@
 # 多平台搜索优化 v1 提交清单与追踪表
 
-更新时间：2026-07-14
+更新时间：2026-07-17
 
 ## 已完成的站内准备
 
@@ -11,23 +11,24 @@
 | Open Graph | 已补强 title / description / image / locale | 全站生成页 |
 | Twitter Card | 已补强 summary_large_image | 全站生成页 |
 | 多语种 hreflang | 已补强 JA / ZH / EN / x-default | 非 guide 页面 |
-| AI 可引用入口 | 已补强 llms.txt，含 Direct Answer Summary / 引用边界 / 核心页面 | https://www.kyoken.design/llms.txt |
+| AI 可引用入口 | 已补强 llms.txt，含三语 Direct Answer Summary / 引用边界 / 核心页面 | https://www.kyoken.design/llms.txt |
 | AI crawler 放行 | 已补 OAI-SearchBot / ChatGPT-User / Perplexity-User / Claude-SearchBot / Claude-User | https://www.kyoken.design/robots.txt |
-| WebPage JSON-LD | 已补每页主题、语种、canonical、about | 全站生成页 |
+| WebPage JSON-LD | 已补每页主题、语种、canonical、audience、abstract、primaryImageOfPage | 全站生成页 |
+| ItemList JSON-LD | 已补首页产品目录和 guide 目录 | 三语首页 |
 | 手机号公开风险 | 已加测试禁止公开 | scripts/seo-check.mjs |
 
 ## 平台提交清单
 
 | 平台 | 目标 | 当前状态 | 下一步 | 记录日期 | 备注 |
 | --- | --- | --- | --- | --- | --- |
-| Google Search Console | sitemap / 重点页面索引 / 富媒体结果 | sitemap 已准备，产品 JSON-LD 已含 offers | 提交 sitemap 后，对首页、产品页、guide 页请求编入索引 | 2026-07-14 | 重点看产品摘要、FAQ、Breadcrumb 是否稳定 |
-| Bing Webmaster Tools | sitemap 提交 / URL Inspection | Bing 验证文件已存在，robots 已允许 bingbot | 重新提交 sitemap 并检查 Processing 结果 | 2026-07-14 | 会影响 Bing、Microsoft Copilot、部分 Yahoo/Bing 数据源 |
-| Yahoo Japan | 日文页面兼容 | 日文 canonical、OG、FAQ、guide 已准备 | 用日文关键词检查 Yahoo Japan 结果 | 2026-07-14 | Yahoo Japan 多依赖外部搜索索引，重点维护日文标题和摘要 |
-| 百度搜索资源平台 | 中文页收录准备 | robots / 中文页 / sitemap 已准备 | 检查百度是否可访问 https://www.kyoken.design/zh/，可访问后提交 sitemap | 2026-07-14 | 中国大陆访问速度和收录不保证，需要后续实测 |
-| ChatGPT Search | AI 搜索引用 | llms.txt、OAI-SearchBot、ChatGPT-User 已准备 | 用监测表查询，记录是否引用 Kyoken 链接 | 2026-07-14 | OpenAI 搜索抓取和用户请求抓取分开处理 |
-| Perplexity | AI 搜索引用 | PerplexityBot、Perplexity-User 已准备 | 用监测表查询，记录答案和引用页 | 2026-07-14 | 重点看 guide 页是否被引用 |
-| Gemini | AI 搜索引用 | Googlebot / Google-Extended / sitemap 已准备 | 用日文、中文、英文关键词测试 Gemini 引用 | 2026-07-14 | Gemini 主要依赖 Google 生态收录和页面质量 |
-| Claude | AI 搜索引用 | ClaudeBot / Claude-SearchBot / Claude-User 已准备 | 用 Claude 搜索或联网问答测试引用 | 2026-07-14 | 已设置 Crawl-delay，减少抓取压力 |
+| Google Search Console | sitemap / 重点页面索引 / 富媒体结果 | sitemap、Product offers、FAQ、Breadcrumb、ItemList 已准备 | 重新提交 sitemap 后，对首页、产品页、guide 页请求编入索引 | 2026-07-17 | 重点看产品摘要、FAQ、Breadcrumb 是否稳定 |
+| Bing Webmaster Tools | sitemap 提交 / URL Inspection | Bing 验证文件已存在，robots 已允许 bingbot | 重新提交 sitemap 并检查 Processing 结果 | 2026-07-17 | 会影响 Bing、Microsoft Copilot、部分 Yahoo/Bing 数据源 |
+| Yahoo Japan | 日文页面兼容 | 日文 canonical、OG、FAQ、guide 已准备 | 用日文关键词检查 Yahoo Japan 结果 | 2026-07-17 | Yahoo Japan 多依赖外部搜索索引，重点维护日文标题和摘要 |
+| 百度搜索资源平台 | 中文页收录准备 | robots / 中文页 / sitemap 已准备 | 检查百度是否可访问 https://www.kyoken.design/zh/，可访问后提交 sitemap | 2026-07-17 | 中国大陆访问速度和收录不保证，需要后续实测 |
+| ChatGPT Search | AI 搜索引用 | llms.txt 三语摘要、OAI-SearchBot、ChatGPT-User 已准备 | 用监测表查询，记录是否引用 Kyoken 链接 | 2026-07-17 | OpenAI 搜索抓取和用户请求抓取分开处理 |
+| Perplexity | AI 搜索引用 | PerplexityBot、Perplexity-User、guide 摘要已准备 | 用监测表查询，记录答案和引用页 | 2026-07-17 | 重点看 guide 页是否被引用 |
+| Gemini | AI 搜索引用 | Googlebot / Google-Extended / sitemap / WebPage abstract 已准备 | 用日文、中文、英文关键词测试 Gemini 引用 | 2026-07-17 | Gemini 主要依赖 Google 生态收录和页面质量 |
+| Claude | AI 搜索引用 | ClaudeBot / Claude-SearchBot / Claude-User / 三语引用边界已准备 | 用 Claude 搜索或联网问答测试引用 | 2026-07-17 | 已设置 Crawl-delay，减少抓取压力 |
 
 ## AI 搜索引用专项监测表
 
