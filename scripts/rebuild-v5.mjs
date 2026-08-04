@@ -7,7 +7,7 @@ const siteUrl = "https://www.kyoken.design";
 const homeHeroImage = "media/hero/home-gree-showroom.jpg";
 const ogImage = `${siteUrl}/${homeHeroImage}`;
 const stylesheetVersion = "20260715-density-v1";
-const today = "2026-07-17";
+const today = "2026-08-04";
 
 const records = readJson("data/records.json")
   .filter((record) => record && ["factory", "site"].includes(record.module))
@@ -225,7 +225,7 @@ const lang = {
     label: "日本語",
     logo: "京建サプライ",
     title: "京建サプライ｜中国工場と日本の施工現場をつなぐ建材調達パートナー",
-    desc: "中国工場と工事現場をつなぐ、工務店・内装会社・設計会社のための材料調達、包装、物流、現場確認のサプライチェーンパートナー。",
+    desc: "中国工場との仕様確認、材料調達、梱包確認、国際物流、日本到着後の確認まで、工務店・内装会社の建材調達を支援します。",
     homeDesc: "中国工場との仕様確認、材料調達、梱包確認、国際物流、日本到着後の確認まで、工務店・内装会社の建材調達を支援します。",
     nav: ["供給実景", "現場記録", "製品と見積", "工務店連携", "会社情報"],
     heroTitle: "中国工場と、日本の施工現場をつなぐ",
@@ -259,7 +259,7 @@ const lang = {
     label: "中文",
     logo: "京建供应链",
     title: "京建供应链｜连接中国工厂与日本施工现场的建材采购合作伙伴",
-    desc: "京建供应链连接中国工厂和工地现场，为工务店、内装公司、设计公司提供材料采购、包装、物流、现场确认支持。",
+    desc: "为日本工务店和内装公司提供中国工厂规格确认、材料采购、包装确认、国际物流及到货日本后的确认支持。",
     homeDesc: "为日本工务店和内装公司提供中国工厂规格确认、材料采购、包装确认、国际物流及到货日本后的确认支持。",
     nav: ["供应链实景", "现场记录", "产品与报价", "工务店合作", "公司信息"],
     heroTitle: "连接中国工厂与日本施工现场",
@@ -293,7 +293,7 @@ const lang = {
     label: "English",
     logo: "Kyoken Supply",
     title: "Kyoken Supply | Building Material Sourcing from China to Japan",
-    desc: "Kyoken Supply connects Chinese factories with job sites for contractors, interior companies, and design offices through sourcing, packing, logistics, and site confirmation.",
+    desc: "Kyoken Supply helps contractors and interior companies source building materials from China, covering specifications, packaging, international logistics, and delivery confirmation in Japan.",
     homeDesc: "Kyoken Supply helps contractors and interior companies source building materials from China, covering specifications, packaging, international logistics, and delivery confirmation in Japan.",
     nav: ["Supply Records", "Site Records", "Products & Quotes", "Partners", "Company"],
     heroTitle: "Connecting Chinese Factories with Japanese Job Sites",
@@ -439,6 +439,20 @@ function write(relativePath, content) {
   fs.writeFileSync(target, content);
 }
 
+function assetExists(value) {
+  if (!value || /^(https?:)?\/\//u.test(value)) return Boolean(value);
+  return fs.existsSync(path.join(root, String(value).replace(/^\/+/, "")));
+}
+
+function existingAssets(values) {
+  return (Array.isArray(values) ? values : []).filter(assetExists);
+}
+
+function absoluteAssetUrl(value) {
+  if (/^(https?:)?\/\//u.test(value)) return value;
+  return `${siteUrl}/${String(value || "").replace(/^\/+/, "")}`;
+}
+
 function prefix(code) {
   return code === "ja" ? "" : "../";
 }
@@ -535,10 +549,17 @@ function guideItemListJsonLd() {
   })));
 }
 
-function baseJsonLd(code, file, pageTitle = "", pageDescription = "") {
+function baseJsonLd(code, file, pageTitle = "", pageDescription = "", options = {}) {
   const canonical = absoluteUrl(code, file);
-  const webPageName = file === "index.html" ? (pageTitle || lang[code].title) : `${file.replace(/\.html$/u, "")} | ${lang[code].logo}`;
-  const webPageDescription = file === "index.html" ? (pageDescription || lang[code].desc) : lang[code].desc;
+  const webPageName = pageTitle || (file === "index.html" ? lang[code].title : `${file.replace(/\.html$/u, "")} | ${lang[code].logo}`);
+  const webPageDescription = pageDescription || lang[code].desc;
+  const primaryImage = options.primaryImage && assetExists(options.primaryImage)
+    ? {
+        "@type": "ImageObject",
+        "url": absoluteAssetUrl(options.primaryImage),
+        ...(options.primaryImage === homeHeroImage ? { "width": 1600, "height": 912 } : {})
+      }
+    : null;
   return [
     {
       "@context": "https://schema.org",
@@ -584,12 +605,7 @@ function baseJsonLd(code, file, pageTitle = "", pageDescription = "") {
       "inLanguage": lang[code].html,
       "abstract": aiSummary(code),
       "audience": audienceFor(code),
-      "primaryImageOfPage": {
-        "@type": "ImageObject",
-        "url": ogImage,
-        "width": 1600,
-        "height": 912
-      },
+      ...(primaryImage ? { "primaryImageOfPage": primaryImage } : {}),
       "isPartOf": {
         "@type": "WebSite",
         "name": lang[code].logo,
@@ -943,7 +959,7 @@ function contractorPageCopy(code) {
 }
 
 function mediaGrid(record, code, compact = false, options = {}) {
-  const media = Array.isArray(record.media) ? record.media.filter(Boolean) : [];
+  const media = existingAssets(record.media);
   if (!media.length) {
     return `<div class="record-placeholder"><span>${lang[code].noRecords}</span></div>`;
   }
@@ -1018,7 +1034,7 @@ function shell(code, title, description, file, body, options = {}) {
   const p = `${depthPrefix}${prefix(code)}`;
   const localRoot = depthPrefix;
   const canonical = options.canonical || absoluteUrl(code, file);
-  const schemas = [...baseJsonLd(code, file, title, description), ...(options.schemas || [])];
+  const schemas = [...baseJsonLd(code, file, title, description, { primaryImage: options.primaryImage }), ...(options.schemas || [])];
   const ogLocale = code === "zh" ? "zh_CN" : code === "en" ? "en_US" : "ja_JP";
   return `<!doctype html>
 <html lang="${c.html}">
@@ -1030,7 +1046,7 @@ function shell(code, title, description, file, body, options = {}) {
   <meta name="keywords" content="${seoKeywords(code)}">
   <link rel="canonical" href="${canonical}">
   ${alternateLinks(code, file)}
-  <meta name="robots" content="index,follow,max-image-preview:large">
+  <meta name="robots" content="${options.noindex ? "noindex,follow,max-image-preview:large" : "index,follow,max-image-preview:large"}">
   <meta name="bingbot" content="index,follow,max-snippet:-1,max-image-preview:large">
   <meta name="baiduspider" content="index,follow">
   <meta name="ai-summary" content="${escapeHtml(aiSummary(code))}">
@@ -1182,7 +1198,7 @@ function home(code) {
 
     ${companySection(code)}
     ${contactSection(code)}
-  </main>`, { schemas: [productItemListJsonLd(code), ...(code === "ja" ? [guideItemListJsonLd()] : []), faqJsonLd(homeFaq(code))] });
+  </main>`, { primaryImage: homeHeroImage, schemas: [productItemListJsonLd(code), ...(code === "ja" ? [guideItemListJsonLd()] : []), faqJsonLd(homeFaq(code))] });
 }
 
 function homeFaq(code) {
@@ -1243,7 +1259,7 @@ function planGrid(code, product) {
   if (!plans.length) return "";
   const images = product.planImages || [];
   return `<div class="plan-grid">${plans.map((plan, index) => {
-    const image = images[index] ? `<img src="${mediaSrc(code, images[index])}" alt="${escapeHtml(plan[0])}" loading="lazy" decoding="async" fetchpriority="low">` : "";
+    const image = assetExists(images[index]) ? `<img src="${mediaSrc(code, images[index])}" alt="${escapeHtml(plan[0])}" loading="lazy" decoding="async" fetchpriority="low">` : "";
     return `<div>${image}
     <span>0${index + 1}</span>
     <strong>${plan[0]}</strong>
@@ -1278,14 +1294,14 @@ function materialDetails(code, product) {
       <h2>${code === "ja" ? "材料と確認ポイント" : code === "zh" ? "材料和确认重点" : "Material and Checkpoints"}</h2>
     </div>
     <div class="detail-grid">${details.map((item, index) => {
-      const image = images[index] ? `<img src="${mediaSrc(code, images[index])}" alt="${escapeHtml(item[0])}" loading="lazy" decoding="async" fetchpriority="low">` : "";
+    const image = assetExists(images[index]) ? `<img src="${mediaSrc(code, images[index])}" alt="${escapeHtml(item[0])}" loading="lazy" decoding="async" fetchpriority="low">` : "";
       return `<div>${image}<strong>${item[0]}</strong><p>${item[1]}</p></div>`;
     }).join("")}</div>
   </section>`;
 }
 
 function guideImages(code, product) {
-  const images = product.guideImages || [];
+  const images = existingAssets(product.guideImages);
   if (!images.length) return "";
   const copy = {
     ja: ["製品説明画像", "サイズ、仕様、部材、選び方を画像で確認"],
@@ -1514,6 +1530,7 @@ function productPage(code, product) {
     ${contactSection(code)}
   </main>`, {
     ogType: "product",
+    primaryImage: product.image,
     schemas: [
       productOrServiceJsonLd(code, product),
       faqJsonLd(seoData.faq)
@@ -1686,12 +1703,23 @@ for (const guide of guidePages) {
   write(guide.file, guidePage(guide));
 }
 
-write("sitemap.xml", `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${[
+const sitemapFiles = [
   ...["", "en/", "zh/"].flatMap((dir) => ["index.html", "supply-chain-records.html", "contractor-partnership.html", "legal.html", ...products.map((product) => product.file)].map((file) => `${dir}${file}`)),
   ...guidePages.map((guide) => guide.file)
-].map((file) => `  <url><loc>${sitemapUrl(file)}</loc></url>`).join("\n")}
+];
+
+function sitemapAlternates(file) {
+  if (file.startsWith("guides/")) return "";
+  const page = file.replace(/^(en|zh)\//u, "");
+  return Object.keys(lang)
+    .map((code) => `\n    <xhtml:link rel="alternate" hreflang="${lang[code].html}" href="${absoluteUrl(code, page)}"/>`)
+    .concat(`\n    <xhtml:link rel="alternate" hreflang="x-default" href="${absoluteUrl("ja", page)}"/>`)
+    .join("");
+}
+
+write("sitemap.xml", `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+${sitemapFiles.map((file) => `  <url><loc>${sitemapUrl(file)}</loc>${sitemapAlternates(file)}\n  </url>`).join("\n")}
 </urlset>
 `);
 
@@ -1938,6 +1966,6 @@ write("404.html", shell("ja", "ページが見つかりません | 京建サプ�
     <p>URLが変更されたか、ページが削除された可能性があります。製品と見積、工務店連携、LINE相談から必要な情報をご確認ください。</p>
     <div class="actions"><a href="index.html#products">製品と見積を見る</a><a href="${lineUrl}">LINEで相談する</a></div>
   </section>
-</main>`, { hideSwitcher: true }));
+</main>`, { hideSwitcher: true, noindex: true }));
 
 console.log(`Rebuilt Kyoken Supply static site from data/records.json (${records.length} records).`);

@@ -35,12 +35,56 @@ function jsonLdBlocks(html) {
     .map((match) => JSON.parse(match[1]));
 }
 
+function metaContent(html, name) {
+  const match = html.match(new RegExp(`<meta (?:name|property)="${name}" content="([^"]*)">`));
+  return match?.[1] || "";
+}
+
+function canonicalUrl(html) {
+  return html.match(/<link rel="canonical" href="([^"]+)">/)?.[1] || "";
+}
+
+function expectedUrl(file) {
+  if (file === "index.html") return "https://www.kyoken.design/";
+  if (file === "en/index.html") return "https://www.kyoken.design/en/";
+  if (file === "zh/index.html") return "https://www.kyoken.design/zh/";
+  return `https://www.kyoken.design/${file}`;
+}
+
+function localFileForUrl(url) {
+  const pathname = new URL(url).pathname;
+  if (pathname === "/") return "index.html";
+  if (pathname === "/en/") return "en/index.html";
+  if (pathname === "/zh/") return "zh/index.html";
+  return pathname.replace(/^\//, "");
+}
+
+function localAssetFor(file, value) {
+  const clean = value.split(/[?#]/, 1)[0];
+  if (!clean || clean.startsWith("#") || /^(?:https?:)?\/\//.test(clean) || /^(?:mailto|tel):/.test(clean)) return null;
+  return path.normalize(path.join(path.dirname(path.join(root, file)), clean));
+}
+
 const home = read("index.html");
 assert(home.includes("中国工場と、日本の施工現場をつなぐ"), "Home H1 was not updated.");
 assert(home.includes("工務店・内装会社のための建材調達パートナー"), "Home subtitle was not updated.");
 assert(home.includes("写真を送って相談する"), "Home photo consultation CTA is missing.");
 
 const sitemap = read("sitemap.xml");
+assert(sitemap.includes('xmlns:xhtml="http://www.w3.org/1999/xhtml"'), "sitemap.xml is missing the xhtml namespace for language alternates.");
+const sitemapUrls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
+assert(sitemapUrls.length === 35, `sitemap.xml should contain 35 canonical URLs, found ${sitemapUrls.length}.`);
+for (const url of sitemapUrls) {
+  const localFile = localFileForUrl(url);
+  assert(fs.existsSync(path.join(root, localFile)), `sitemap.xml references missing file: ${url}`);
+  assert(canonicalUrl(read(localFile)) === url, `${localFile} canonical does not match its sitemap URL.`);
+}
+for (const file of ["index.html", "supply-chain-records.html", "contractor-partnership.html", "legal.html", "curtain-details.html", "advertising-materials-details.html", "enamel-panel.html", "acoustic-panel-details.html", "wallpaper-details.html", "wpc-decking-details.html"]) {
+  for (const [code, hreflang] of [["ja", "ja"], ["zh", "zh-Hans"], ["en", "en"]]) {
+    const expected = code === "ja" ? expectedUrl(file) : expectedUrl(`${code}/${file}`);
+    assert(sitemap.includes(`hreflang="${hreflang}" href="${expected}"`), `sitemap.xml is missing ${hreflang} alternate for ${file}.`);
+  }
+}
 for (const guide of guides) {
   const html = read(guide);
   assert(html.includes("<h1>"), `${guide} is missing H1.`);
@@ -131,9 +175,14 @@ for (const file of listHtmlFiles()) {
   const allNodes = blocks.flatMap((block) => Array.isArray(block["@graph"]) ? block["@graph"] : [block]);
   assert(allNodes.some((node) => node["@type"] === "WebPage"), `${file} is missing WebPage JSON-LD.`);
   const webPage = allNodes.find((node) => node["@type"] === "WebPage");
+  const html = read(file);
   assert(webPage.abstract, `${file} WebPage JSON-LD is missing abstract.`);
   assert(webPage.audience, `${file} WebPage JSON-LD is missing audience.`);
-  assert(webPage.primaryImageOfPage, `${file} WebPage JSON-LD is missing primaryImageOfPage.`);
+  assert(webPage.name === html.match(/<title>([^<]+)<\/title>/)?.[1], `${file} WebPage JSON-LD name does not match its title.`);
+  assert(webPage.description === metaContent(html, "description"), `${file} WebPage JSON-LD description does not match its meta description.`);
+  if (webPage.primaryImageOfPage?.url?.startsWith("https://www.kyoken.design/")) {
+    assert(fs.existsSync(path.join(root, localFileForUrl(webPage.primaryImageOfPage.url))), `${file} WebPage JSON-LD references a missing primary image.`);
+  }
   if (["index.html", "zh/index.html", "en/index.html"].includes(file)) {
     assert(allNodes.some((node) => node["@type"] === "ItemList"), `${file} is missing ItemList JSON-LD.`);
   }
@@ -149,6 +198,27 @@ for (const file of listHtmlFiles()) {
         }
       }
     }
+  }
+}
+
+for (const file of listHtmlFiles()) {
+  if (file.startsWith("admin/") || file.startsWith("google")) continue;
+  const html = read(file);
+  assert(canonicalUrl(html) === expectedUrl(file), `${file} has an unexpected canonical URL.`);
+  if (file === "404.html") {
+    assert(metaContent(html, "robots").startsWith("noindex,follow"), "404.html must be noindex.");
+    continue;
+  }
+  if (!file.startsWith("guides/")) {
+    const baseFile = file.replace(/^(en|zh)\//, "");
+    for (const [code, hreflang] of [["ja", "ja"], ["zh", "zh-Hans"], ["en", "en"]]) {
+      const target = code === "ja" ? expectedUrl(baseFile) : expectedUrl(`${code}/${baseFile}`);
+      assert(html.includes(`hreflang="${hreflang}" href="${target}"`), `${file} is missing ${hreflang} hreflang alternate.`);
+    }
+  }
+  for (const match of html.matchAll(/<(?:a|img|link|script)[^>]+(?:href|src)="([^"]+)"/g)) {
+    const target = localAssetFor(file, match[1]);
+    if (target) assert(fs.existsSync(target), `${file} references missing local asset: ${match[1]}`);
   }
 }
 

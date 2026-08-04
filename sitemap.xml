@@ -1,38 +1,193 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://www.kyoken.design/</loc></url>
-  <url><loc>https://www.kyoken.design/supply-chain-records.html</loc></url>
-  <url><loc>https://www.kyoken.design/contractor-partnership.html</loc></url>
-  <url><loc>https://www.kyoken.design/legal.html</loc></url>
-  <url><loc>https://www.kyoken.design/curtain-details.html</loc></url>
-  <url><loc>https://www.kyoken.design/advertising-materials-details.html</loc></url>
-  <url><loc>https://www.kyoken.design/enamel-panel.html</loc></url>
-  <url><loc>https://www.kyoken.design/acoustic-panel-details.html</loc></url>
-  <url><loc>https://www.kyoken.design/wallpaper-details.html</loc></url>
-  <url><loc>https://www.kyoken.design/wpc-decking-details.html</loc></url>
-  <url><loc>https://www.kyoken.design/en/</loc></url>
-  <url><loc>https://www.kyoken.design/en/supply-chain-records.html</loc></url>
-  <url><loc>https://www.kyoken.design/en/contractor-partnership.html</loc></url>
-  <url><loc>https://www.kyoken.design/en/legal.html</loc></url>
-  <url><loc>https://www.kyoken.design/en/curtain-details.html</loc></url>
-  <url><loc>https://www.kyoken.design/en/advertising-materials-details.html</loc></url>
-  <url><loc>https://www.kyoken.design/en/enamel-panel.html</loc></url>
-  <url><loc>https://www.kyoken.design/en/acoustic-panel-details.html</loc></url>
-  <url><loc>https://www.kyoken.design/en/wallpaper-details.html</loc></url>
-  <url><loc>https://www.kyoken.design/en/wpc-decking-details.html</loc></url>
-  <url><loc>https://www.kyoken.design/zh/</loc></url>
-  <url><loc>https://www.kyoken.design/zh/supply-chain-records.html</loc></url>
-  <url><loc>https://www.kyoken.design/zh/contractor-partnership.html</loc></url>
-  <url><loc>https://www.kyoken.design/zh/legal.html</loc></url>
-  <url><loc>https://www.kyoken.design/zh/curtain-details.html</loc></url>
-  <url><loc>https://www.kyoken.design/zh/advertising-materials-details.html</loc></url>
-  <url><loc>https://www.kyoken.design/zh/enamel-panel.html</loc></url>
-  <url><loc>https://www.kyoken.design/zh/acoustic-panel-details.html</loc></url>
-  <url><loc>https://www.kyoken.design/zh/wallpaper-details.html</loc></url>
-  <url><loc>https://www.kyoken.design/zh/wpc-decking-details.html</loc></url>
-  <url><loc>https://www.kyoken.design/guides/tokyo-shop-signage-cost.html</loc></url>
-  <url><loc>https://www.kyoken.design/guides/shop-lightbox-checklist.html</loc></url>
-  <url><loc>https://www.kyoken.design/guides/curtain-photo-measurement.html</loc></url>
-  <url><loc>https://www.kyoken.design/guides/small-contractor-china-materials.html</loc></url>
-  <url><loc>https://www.kyoken.design/guides/why-site-photos-before-quote.html</loc></url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url><loc>https://www.kyoken.design/</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.kyoken.design/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.kyoken.design/zh/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kyoken.design/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kyoken.design/"/>
+  </url>
+  <url><loc>https://www.kyoken.design/supply-chain-records.html</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.kyoken.design/supply-chain-records.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.kyoken.design/zh/supply-chain-records.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kyoken.design/en/supply-chain-records.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kyoken.design/supply-chain-records.html"/>
+  </url>
+  <url><loc>https://www.kyoken.design/contractor-partnership.html</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.kyoken.design/contractor-partnership.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.kyoken.design/zh/contractor-partnership.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kyoken.design/en/contractor-partnership.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kyoken.design/contractor-partnership.html"/>
+  </url>
+  <url><loc>https://www.kyoken.design/legal.html</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.kyoken.design/legal.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.kyoken.design/zh/legal.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kyoken.design/en/legal.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kyoken.design/legal.html"/>
+  </url>
+  <url><loc>https://www.kyoken.design/curtain-details.html</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.kyoken.design/curtain-details.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.kyoken.design/zh/curtain-details.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kyoken.design/en/curtain-details.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kyoken.design/curtain-details.html"/>
+  </url>
+  <url><loc>https://www.kyoken.design/advertising-materials-details.html</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.kyoken.design/advertising-materials-details.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.kyoken.design/zh/advertising-materials-details.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kyoken.design/en/advertising-materials-details.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kyoken.design/advertising-materials-details.html"/>
+  </url>
+  <url><loc>https://www.kyoken.design/enamel-panel.html</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.kyoken.design/enamel-panel.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.kyoken.design/zh/enamel-panel.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kyoken.design/en/enamel-panel.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kyoken.design/enamel-panel.html"/>
+  </url>
+  <url><loc>https://www.kyoken.design/acoustic-panel-details.html</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.kyoken.design/acoustic-panel-details.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.kyoken.design/zh/acoustic-panel-details.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kyoken.design/en/acoustic-panel-details.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kyoken.design/acoustic-panel-details.html"/>
+  </url>
+  <url><loc>https://www.kyoken.design/wallpaper-details.html</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.kyoken.design/wallpaper-details.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.kyoken.design/zh/wallpaper-details.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kyoken.design/en/wallpaper-details.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kyoken.design/wallpaper-details.html"/>
+  </url>
+  <url><loc>https://www.kyoken.design/wpc-decking-details.html</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.kyoken.design/wpc-decking-details.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.kyoken.design/zh/wpc-decking-details.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kyoken.design/en/wpc-decking-details.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kyoken.design/wpc-decking-details.html"/>
+  </url>
+  <url><loc>https://www.kyoken.design/en/</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.kyoken.design/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.kyoken.design/zh/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kyoken.design/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kyoken.design/"/>
+  </url>
+  <url><loc>https://www.kyoken.design/en/supply-chain-records.html</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.kyoken.design/supply-chain-records.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.kyoken.design/zh/supply-chain-records.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kyoken.design/en/supply-chain-records.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kyoken.design/supply-chain-records.html"/>
+  </url>
+  <url><loc>https://www.kyoken.design/en/contractor-partnership.html</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.kyoken.design/contractor-partnership.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.kyoken.design/zh/contractor-partnership.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kyoken.design/en/contractor-partnership.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kyoken.design/contractor-partnership.html"/>
+  </url>
+  <url><loc>https://www.kyoken.design/en/legal.html</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.kyoken.design/legal.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.kyoken.design/zh/legal.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kyoken.design/en/legal.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kyoken.design/legal.html"/>
+  </url>
+  <url><loc>https://www.kyoken.design/en/curtain-details.html</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.kyoken.design/curtain-details.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.kyoken.design/zh/curtain-details.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kyoken.design/en/curtain-details.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kyoken.design/curtain-details.html"/>
+  </url>
+  <url><loc>https://www.kyoken.design/en/advertising-materials-details.html</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.kyoken.design/advertising-materials-details.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.kyoken.design/zh/advertising-materials-details.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kyoken.design/en/advertising-materials-details.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kyoken.design/advertising-materials-details.html"/>
+  </url>
+  <url><loc>https://www.kyoken.design/en/enamel-panel.html</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.kyoken.design/enamel-panel.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.kyoken.design/zh/enamel-panel.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kyoken.design/en/enamel-panel.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kyoken.design/enamel-panel.html"/>
+  </url>
+  <url><loc>https://www.kyoken.design/en/acoustic-panel-details.html</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.kyoken.design/acoustic-panel-details.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.kyoken.design/zh/acoustic-panel-details.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kyoken.design/en/acoustic-panel-details.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kyoken.design/acoustic-panel-details.html"/>
+  </url>
+  <url><loc>https://www.kyoken.design/en/wallpaper-details.html</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.kyoken.design/wallpaper-details.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.kyoken.design/zh/wallpaper-details.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kyoken.design/en/wallpaper-details.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kyoken.design/wallpaper-details.html"/>
+  </url>
+  <url><loc>https://www.kyoken.design/en/wpc-decking-details.html</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.kyoken.design/wpc-decking-details.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.kyoken.design/zh/wpc-decking-details.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kyoken.design/en/wpc-decking-details.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kyoken.design/wpc-decking-details.html"/>
+  </url>
+  <url><loc>https://www.kyoken.design/zh/</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.kyoken.design/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.kyoken.design/zh/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kyoken.design/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kyoken.design/"/>
+  </url>
+  <url><loc>https://www.kyoken.design/zh/supply-chain-records.html</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.kyoken.design/supply-chain-records.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.kyoken.design/zh/supply-chain-records.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kyoken.design/en/supply-chain-records.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kyoken.design/supply-chain-records.html"/>
+  </url>
+  <url><loc>https://www.kyoken.design/zh/contractor-partnership.html</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.kyoken.design/contractor-partnership.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.kyoken.design/zh/contractor-partnership.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kyoken.design/en/contractor-partnership.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kyoken.design/contractor-partnership.html"/>
+  </url>
+  <url><loc>https://www.kyoken.design/zh/legal.html</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.kyoken.design/legal.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.kyoken.design/zh/legal.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kyoken.design/en/legal.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kyoken.design/legal.html"/>
+  </url>
+  <url><loc>https://www.kyoken.design/zh/curtain-details.html</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.kyoken.design/curtain-details.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.kyoken.design/zh/curtain-details.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kyoken.design/en/curtain-details.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kyoken.design/curtain-details.html"/>
+  </url>
+  <url><loc>https://www.kyoken.design/zh/advertising-materials-details.html</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.kyoken.design/advertising-materials-details.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.kyoken.design/zh/advertising-materials-details.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kyoken.design/en/advertising-materials-details.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kyoken.design/advertising-materials-details.html"/>
+  </url>
+  <url><loc>https://www.kyoken.design/zh/enamel-panel.html</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.kyoken.design/enamel-panel.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.kyoken.design/zh/enamel-panel.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kyoken.design/en/enamel-panel.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kyoken.design/enamel-panel.html"/>
+  </url>
+  <url><loc>https://www.kyoken.design/zh/acoustic-panel-details.html</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.kyoken.design/acoustic-panel-details.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.kyoken.design/zh/acoustic-panel-details.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kyoken.design/en/acoustic-panel-details.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kyoken.design/acoustic-panel-details.html"/>
+  </url>
+  <url><loc>https://www.kyoken.design/zh/wallpaper-details.html</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.kyoken.design/wallpaper-details.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.kyoken.design/zh/wallpaper-details.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kyoken.design/en/wallpaper-details.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kyoken.design/wallpaper-details.html"/>
+  </url>
+  <url><loc>https://www.kyoken.design/zh/wpc-decking-details.html</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.kyoken.design/wpc-decking-details.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.kyoken.design/zh/wpc-decking-details.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kyoken.design/en/wpc-decking-details.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kyoken.design/wpc-decking-details.html"/>
+  </url>
+  <url><loc>https://www.kyoken.design/guides/tokyo-shop-signage-cost.html</loc>
+  </url>
+  <url><loc>https://www.kyoken.design/guides/shop-lightbox-checklist.html</loc>
+  </url>
+  <url><loc>https://www.kyoken.design/guides/curtain-photo-measurement.html</loc>
+  </url>
+  <url><loc>https://www.kyoken.design/guides/small-contractor-china-materials.html</loc>
+  </url>
+  <url><loc>https://www.kyoken.design/guides/why-site-photos-before-quote.html</loc>
+  </url>
 </urlset>

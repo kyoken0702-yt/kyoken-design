@@ -1,6 +1,6 @@
 # 多平台搜索优化 v1 提交清单与追踪表
 
-更新时间：2026-07-17
+更新时间：2026-08-04
 
 ## 已完成的站内准备
 
@@ -21,14 +21,14 @@
 
 | 平台 | 目标 | 当前状态 | 下一步 | 记录日期 | 备注 |
 | --- | --- | --- | --- | --- | --- |
-| Google Search Console | sitemap / 重点页面索引 / 富媒体结果 | sitemap、Product offers、FAQ、Breadcrumb、ItemList 已准备 | 重新提交 sitemap 后，对首页、产品页、guide 页请求编入索引 | 2026-07-17 | 重点看产品摘要、FAQ、Breadcrumb 是否稳定 |
-| Bing Webmaster Tools | sitemap 提交 / URL Inspection | Bing 验证文件已存在，robots 已允许 bingbot | 重新提交 sitemap 并检查 Processing 结果 | 2026-07-17 | 会影响 Bing、Microsoft Copilot、部分 Yahoo/Bing 数据源 |
-| Yahoo Japan | 日文页面兼容 | 日文 canonical、OG、FAQ、guide 已准备 | 用日文关键词检查 Yahoo Japan 结果 | 2026-07-17 | Yahoo Japan 多依赖外部搜索索引，重点维护日文标题和摘要 |
-| 百度搜索资源平台 | 中文页收录准备 | robots / 中文页 / sitemap 已准备 | 检查百度是否可访问 https://www.kyoken.design/zh/，可访问后提交 sitemap | 2026-07-17 | 中国大陆访问速度和收录不保证，需要后续实测 |
-| ChatGPT Search | AI 搜索引用 | llms.txt 三语摘要、OAI-SearchBot、ChatGPT-User 已准备 | 用监测表查询，记录是否引用 Kyoken 链接 | 2026-07-17 | OpenAI 搜索抓取和用户请求抓取分开处理 |
-| Perplexity | AI 搜索引用 | PerplexityBot、Perplexity-User、guide 摘要已准备 | 用监测表查询，记录答案和引用页 | 2026-07-17 | 重点看 guide 页是否被引用 |
-| Gemini | AI 搜索引用 | Googlebot / Google-Extended / sitemap / WebPage abstract 已准备 | 用日文、中文、英文关键词测试 Gemini 引用 | 2026-07-17 | Gemini 主要依赖 Google 生态收录和页面质量 |
-| Claude | AI 搜索引用 | ClaudeBot / Claude-SearchBot / Claude-User / 三语引用边界已准备 | 用 Claude 搜索或联网问答测试引用 | 2026-07-17 | 已设置 Crawl-delay，减少抓取压力 |
+| Google Search Console | sitemap / 重点页面索引 / 富媒体结果 | sitemap、Product offers、FAQ、Breadcrumb、ItemList 已准备 | 重新提交 sitemap 后，对首页、产品页、guide 页请求编入索引 | 2026-08-04 | 重点看产品摘要、FAQ、Breadcrumb 是否稳定 |
+| Bing Webmaster Tools | sitemap 提交 / URL Inspection | Bing 验证文件已存在，robots 已允许 bingbot | 重新提交 sitemap 并检查 Processing 结果 | 2026-08-04 | 会影响 Bing、Microsoft Copilot、部分 Yahoo/Bing 数据源 |
+| Yahoo Japan | 日文页面兼容 | 日文 canonical、OG、FAQ、guide 已准备 | 用日文关键词检查 Yahoo Japan 结果 | 2026-08-04 | Yahoo Japan 多依赖外部搜索索引，重点维护日文标题和摘要 |
+| 百度搜索资源平台 | 中文页收录准备 | robots / 中文页 / sitemap 已准备 | 检查百度是否可访问 https://www.kyoken.design/zh/，可访问后提交 sitemap | 2026-08-04 | 中国大陆访问速度和收录不保证，需要后续实测 |
+| ChatGPT Search | AI 搜索引用 | llms.txt 三语摘要、OAI-SearchBot、ChatGPT-User 已准备 | 用监测表查询，记录是否引用 Kyoken 链接 | 2026-08-04 | OpenAI 搜索抓取和用户请求抓取分开处理 |
+| Perplexity | AI 搜索引用 | PerplexityBot、Perplexity-User、guide 摘要已准备 | 用监测表查询，记录答案和引用页 | 2026-08-04 | 重点看 guide 页是否被引用 |
+| Gemini | AI 搜索引用 | Googlebot / Google-Extended / sitemap / WebPage abstract 已准备 | 用日文、中文、英文关键词测试 Gemini 引用 | 2026-08-04 | Gemini 主要依赖 Google 生态收录和页面质量 |
+| Claude | AI 搜索引用 | ClaudeBot / Claude-SearchBot / Claude-User / 三语引用边界已准备 | 用 Claude 搜索或联网问答测试引用 | 2026-08-04 | 已设置 Crawl-delay，减少抓取压力 |
 
 ## AI 搜索引用专项监测表
 
