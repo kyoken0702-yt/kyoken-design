@@ -37,7 +37,7 @@
 | ChatGPT Search | 测日文、中文、英文问题 | 出现 Kyoken 链接，摘要不误解业务边界 |
 | Perplexity | 测产品和 guide 问题 | 引用具体 guide 或产品页 |
 | Gemini | 测 Google 收录后的问答 | 能识别供应链、工务店合作、产品报价 |
-| Claude | 测 contractor / supply chain 问题 | 能引用业务边界，不编造最低价或施工保证 |
+| Claude | 测 contractor / supply chain 问题 | 能引用业务边界，不编造固定价格或过度承诺 |
 
 ## 不能承诺
 

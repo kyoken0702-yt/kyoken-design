@@ -110,18 +110,94 @@ const products = [
   {
     file: "enamel-panel.html",
     key: "enamel",
-    image: "media/remote/f35f79d49094.jpg",
+    image: "media/remote/hanke-enamel-kitchen-panel.jpg",
     names: { ja: "ホーローキッチンパネル", zh: "珐琅磁吸板", en: "Enamel Kitchen Panel" },
     one: {
-      ja: "厨房・水回り・店舗壁面向けに、板材仕様と搬入条件を確認するパネル。",
-      zh: "面向厨房、水回和店铺墙面，确认板材规格和搬入条件的磁吸板材。",
-      en: "Panel materials for kitchens, wet areas, and shop walls."
+      ja: "厨房・水回り・店舗壁面向けに、材料、現地採寸、標準施工、保証範囲確認までまとめるホーロー磁石パネル。",
+      zh: "面向厨房、水回和店铺墙面，包含材料、上门测量、标准安装和保修范围确认的珐琅磁吸板。",
+      en: "Enamel magnetic panels for kitchens, wet areas, and shop walls, arranged with material, site measurement, standard installation, and warranty scope confirmation."
     },
-    quote: { ja: "案件ごとにお見積り", zh: "按案件报价", en: "Case-by-case quote" },
+    quote: { ja: "材工一式 参考 ¥29,800/㎡～", zh: "包工包料参考 ¥29,800/㎡～", en: "Material + install ref. ¥29,800/sqm～" },
+    plans: {
+      ja: [
+        ["標準キッチン壁", "材料、現地採寸、標準施工、施工範囲内の初期不具合確認", "参考 ¥29,800/㎡～"],
+        ["下地調整あり", "不陸、既存壁、開口位置、固定方法を現場ごとに確認", "参考 ¥36,800/㎡～"],
+        ["大面積・店舗壁面", "数量、搬入、カット、梱包条件により単価を調整", "参考 ¥24,800/㎡～"]
+      ],
+      zh: [
+        ["标准厨房墙面", "材料、上门测量、标准安装、施工范围内初期问题确认", "参考 ¥29,800/㎡～"],
+        ["需要基层调整", "墙面平整度、既有墙面、开孔位置、固定方式按现场确认", "参考 ¥36,800/㎡～"],
+        ["大面积 / 店铺墙面", "按数量、搬入、切割和包装条件调整单价", "参考 ¥24,800/㎡～"]
+      ],
+      en: [
+        ["Standard kitchen wall", "Material, site measurement, standard installation, and initial issue check within scope", "Ref. ¥29,800/sqm～"],
+        ["With substrate adjustment", "Wall flatness, existing wall, openings, and fixing method checked on site", "Ref. ¥36,800/sqm～"],
+        ["Large area / shop wall", "Unit price adjusted by quantity, carrying route, cutting, and packing conditions", "Ref. ¥24,800/sqm～"]
+      ]
+    },
+    planImages: [
+      "media/remote/hanke-enamel-kitchen-panel.jpg",
+      "media/remote/hanke-enamel-kitchen-panel.jpg",
+      "media/remote/hanke-enamel-kitchen-panel.jpg"
+    ],
+    priceTable: {
+      ja: {
+        title: "ホーローキッチンパネル 材工一式 参考価格",
+        head: ["仕様", "標準キッチン壁", "下地調整あり", "大面積・店舗"],
+        rows: [
+          ["0.4mm 成品 / 約3.4kg㎡", "¥27,800/㎡～", "¥34,800/㎡～", "¥24,800/㎡～"],
+          ["0.5mm 成品 / 約4.3kg㎡", "¥29,800/㎡～", "¥36,800/㎡～", "¥26,800/㎡～"],
+          ["0.6mm 成品 / 約5.2kg㎡", "¥32,800/㎡～", "¥39,800/㎡～", "¥29,800/㎡～"]
+        ],
+        note: "税込参考価格。材料、工場標準梱包、基本物流費、現地採寸、標準施工、引き渡し確認、施工範囲内の初期不具合確認を含みます。駐車料金、高速料金、搬入困難作業、既存材撤去、下地補修、高所作業、特殊固定、開口加工、遠方案件、管理会社指定資料は別途確認します。"
+      },
+      zh: {
+        title: "珐琅磁吸厨房板 包工包料参考价",
+        head: ["规格", "标准厨房墙面", "需要基层调整", "大面积 / 店铺"],
+        rows: [
+          ["0.4mm 成品 / 约3.4kg㎡", "¥27,800/㎡～", "¥34,800/㎡～", "¥24,800/㎡～"],
+          ["0.5mm 成品 / 约4.3kg㎡", "¥29,800/㎡～", "¥36,800/㎡～", "¥26,800/㎡～"],
+          ["0.6mm 成品 / 约5.2kg㎡", "¥32,800/㎡～", "¥39,800/㎡～", "¥29,800/㎡～"]
+        ],
+        note: "含税参考价。包含材料、工厂标准包装、基本物流费、上门测量、标准安装、交付确认和施工范围内初期问题确认。停车费、高速费、搬入困难作业、既有材料拆除、基层修补、高空作业、特殊固定、开孔加工、远距离案件、管理会社指定资料另行确认。"
+      },
+      en: {
+        title: "Enamel Kitchen Panel Material + Installation Reference Price",
+        head: ["Specification", "Standard kitchen wall", "With substrate adjustment", "Large area / shop"],
+        rows: [
+          ["0.4mm finished / approx. 3.4kg/sqm", "¥27,800/sqm～", "¥34,800/sqm～", "¥24,800/sqm～"],
+          ["0.5mm finished / approx. 4.3kg/sqm", "¥29,800/sqm～", "¥36,800/sqm～", "¥26,800/sqm～"],
+          ["0.6mm finished / approx. 5.2kg/sqm", "¥32,800/sqm～", "¥39,800/sqm～", "¥29,800/sqm～"]
+        ],
+        note: "Tax-included reference. Includes material, factory standard packing, basic logistics cost, site measurement, standard installation, handover check, and initial issue check within the agreed scope. Parking fees, tolls, difficult carrying work, removal of existing material, substrate repair, high-place work, special fixing, opening cuts, remote areas, and building-management documents are checked separately."
+      }
+    },
+    detailImages: ["media/remote/hanke-enamel-kitchen-panel.jpg"],
+    guideImages: ["media/remote/hanke-enamel-kitchen-panel.jpg"],
+    materialDetails: {
+      ja: [
+        ["板厚と構成", "成品厚み 0.4 / 0.5 / 0.6mm を確認。基材 0.2 / 0.3 / 0.4mm、表釉約150μm、裏面約50μm を目安に案件ごとに確認します。"],
+        ["焼成と重量", "800℃以上の焼成工程を前提に確認。重量目安は 0.4mm 約3.4kg/㎡、0.5mm 約4.3kg/㎡、0.6mm 約5.2kg/㎡です。"],
+        ["加工と最大寸法", "最大 3150mm x 950mm を目安に、色指定、工場プレカット、開口、端部処理を図面ごとに確認します。"],
+        ["検査資料", "検査資料、防火仕様、法令確認は案件ごとに確認します。確認できた範囲だけを個別にご案内します。"]
+      ],
+      zh: [
+        ["板厚和构成", "成品厚度按 0.4 / 0.5 / 0.6mm 确认。基材 0.2 / 0.3 / 0.4mm，表釉约150μm，背面约50μm，按案件确认。"],
+        ["烧成和重量", "按 800℃以上烧成工艺确认。重量参考：0.4mm 约3.4kg/㎡，0.5mm 约4.3kg/㎡，0.6mm 约5.2kg/㎡。"],
+        ["加工和最大尺寸", "最大 3150mm x 950mm 为确认基准，颜色指定、工厂预切、开孔、边部处理按图纸确认。"],
+        ["检测资料", "检测资料、防火规格、法规确认逐案确认，只说明已经确认过的范围。"]
+      ],
+      en: [
+        ["Thickness and structure", "Finished thickness is checked at 0.4 / 0.5 / 0.6mm. Base steel 0.2 / 0.3 / 0.4mm, front enamel about 150μm, back side about 50μm are checked case by case."],
+        ["Firing and weight", "Checked on the basis of 800°C+ firing. Reference weight: 0.4mm approx. 3.4kg/sqm, 0.5mm approx. 4.3kg/sqm, 0.6mm approx. 5.2kg/sqm."],
+        ["Processing and max size", "Maximum 3150mm x 950mm is used as a reference. Color, factory pre-cut, openings, and edge processing are checked by drawing."],
+        ["Inspection documents", "Inspection documents, fire-related specification, and regulatory checks are confirmed case by case. We do not present them as universally certified."]
+      ]
+    },
     specs: {
-      ja: ["サイズ、厚み、枚数を確認", "カット、穴あけ、端部処理の可否を確認", "搬入経路、重量、割れ防止梱包を確認", "水回り条件は案件ごとに確認"],
-      zh: ["确认尺寸、厚度、数量", "确认切割、开孔、边部处理可否", "确认搬入路线、重量、防破损包装", "水回条件逐案确认"],
-      en: ["Size, thickness, and quantity checked", "Cutting, drilling, and edge processing confirmed", "Carrying route, weight, and anti-breakage packing checked", "Wet-area conditions checked case by case"]
+      ja: ["材料、工場標準梱包、基本物流費、現地採寸、標準施工まで材工一式で相談可能", "保証範囲は材料と施工範囲を分けて契約時に明記", "カット、開口、端部処理は図面確認後に再計算", "駐車料金、高速料金、搬入困難、複雑施工、高所作業、特殊固定、下地補修は現場ごとに別途確認"],
+      zh: ["可按材料、工厂标准包装、基本物流费、上门测量、标准安装的包工包料方式咨询", "保修范围按材料和施工范围在合同中分别写清", "切割、开孔、边部处理按图纸确认后重新计算", "停车费、高速费、搬入困难、复杂施工、高空作业、特殊固定、基层修补按现场另行确认"],
+      en: ["Can be discussed as material, factory standard packing, basic logistics, site measurement, and standard installation package", "Warranty scope is separated by material and installation scope in the agreement", "Cutting, openings, and edge finishing are recalculated after drawing review", "Parking, tolls, difficult carrying, complex work, high-place work, special fixing, and substrate repair are checked separately on site"]
     }
   },
   {
@@ -224,14 +300,14 @@ const lang = {
     html: "ja",
     label: "日本語",
     logo: "京建サプライ",
-    title: "京建サプライ｜中国工場と日本の施工現場をつなぐ建材調達パートナー",
-    desc: "中国工場との仕様確認、材料調達、梱包確認、国際物流、日本到着後の確認まで、工務店・内装会社の建材調達を支援します。",
-    homeDesc: "中国工場との仕様確認、材料調達、梱包確認、国際物流、日本到着後の確認まで、工務店・内装会社の建材調達を支援します。",
-    nav: ["供給実景", "現場記録", "製品と見積", "工務店連携", "会社情報"],
-    heroTitle: "中国工場と、日本の施工現場をつなぐ",
-    heroSubtitle: "工務店・内装会社のための建材調達パートナー",
-    route: ["中国工場", "↓", "工事現場", "↓", "長期連携"],
-    heroBody: "中国工場との仕様確認、材料調達、梱包確認、国際物流、日本到着後の確認まで、京建サプライが一貫して支援します。",
+    title: "京建サプライ｜中国工場から日本現場までの材工一式サービス",
+    desc: "中国工場での製作確認、材料手配、梱包、輸送、日本側の現地採寸、標準施工、保証範囲確認まで、一条龍で支援します。",
+    homeDesc: "中国工場での製作確認、材料手配、梱包、輸送、日本側の現地採寸、標準施工、保証範囲確認まで、一条龍で支援します。",
+    nav: ["供給実景", "現場記録", "製品と見積", "材工一式", "会社情報"],
+    heroTitle: "材料だけで終わらせない。最後の施工まで整える。",
+    heroSubtitle: "中国工場から日本現場までの材工一式サービス",
+    route: ["中国工場", "↓", "日本現場", "↓", "施工・確認"],
+    heroBody: "京建サプライは、中国側の製作、梱包、輸送に加え、日本側の現地採寸、標準施工、引き渡し、保証範囲確認まで一貫して支援します。",
     primary: "製品を見る",
     secondary: "写真を送って相談する",
     line: "LINEで相談",
@@ -242,8 +318,8 @@ const lang = {
     siteLead: "材料到着、寸法確認、取付前確認、引き渡し状態を残します。施工実績ではなく、材料が工事現場へ届いた事実の記録です。",
     productsTitle: "製品と見積",
     productsLead: "価格はサイズ、数量、仕様、配送先で変動します。図面、写真、寸法をLINEで送ってください。",
-    partnerTitle: "工務店連携",
-    partnerLead: "京建は施工顧客を取りません。材料調達、包装、輸送、到着確認を支え、現場施工・見積・顧客維持は工務店様側の仕事です。",
+    partnerTitle: "材工一式・工務店連携",
+    partnerLead: "京建は案件に応じて材工一式で対応します。工務店様との協業案件では、顧客関係、紹介条件、施工範囲、保証範囲を事前に整理します。",
     contactTitle: "LINEで写真と寸法を送る",
     contactLead: "製品名、現場写真、寸法、数量、納品先を送ってください。仕様確認後に概算見積をご案内します。",
     noRecords: "写真 / 動画を追加予定",
@@ -258,14 +334,14 @@ const lang = {
     html: "zh-Hans",
     label: "中文",
     logo: "京建供应链",
-    title: "京建供应链｜连接中国工厂与日本施工现场的建材采购合作伙伴",
-    desc: "为日本工务店和内装公司提供中国工厂规格确认、材料采购、包装确认、国际物流及到货日本后的确认支持。",
-    homeDesc: "为日本工务店和内装公司提供中国工厂规格确认、材料采购、包装确认、国际物流及到货日本后的确认支持。",
-    nav: ["供应链实景", "现场记录", "产品与报价", "工务店合作", "公司信息"],
-    heroTitle: "连接中国工厂与日本施工现场",
-    heroSubtitle: "面向工务店和内装公司的建材采购合作伙伴",
-    route: ["中国工厂", "↓", "工地现场", "↓", "长期合作"],
-    heroBody: "从中国工厂的规格确认、材料采购、包装确认、国际物流，到货日本后的确认，由京建供应链提供一贯支持。",
+    title: "京建供应链｜从中国工厂到日本现场的包工包料服务",
+    desc: "京建供应链提供中国工厂制作确认、材料安排、包装运输、日本上门测量、标准安装、交付确认和保修范围确认的一条龙服务。",
+    homeDesc: "京建供应链提供中国工厂制作确认、材料安排、包装运输、日本上门测量、标准安装、交付确认和保修范围确认的一条龙服务。",
+    nav: ["供应链实景", "现场记录", "产品与报价", "包工包料", "公司信息"],
+    heroTitle: "不只卖材料。把最后安装也一起解决。",
+    heroSubtitle: "从中国工厂到日本现场的包工包料服务",
+    route: ["中国工厂", "↓", "日本现场", "↓", "安装确认"],
+    heroBody: "京建供应链负责中国侧制作、包装、运输，也可以安排日本侧上门测量、标准安装、交付确认和保修范围说明。",
     primary: "查看产品",
     secondary: "发送照片咨询",
     line: "LINE 咨询",
@@ -276,8 +352,8 @@ const lang = {
     siteLead: "展示材料到场、尺寸确认、安装前确认、交付状态。这里不是施工案例，而是材料真正落到工地现场的记录。",
     productsTitle: "产品与报价",
     productsLead: "产品与报价放在供应链记录后面。价格按尺寸、数量、规格、配送地址变化，规格确认后给出概算。",
-    partnerTitle: "工务店合作",
-    partnerLead: "京建不是来抢施工客户。京建是工务店、内装公司、设计公司、店铺公司的供应链伙伴。",
+    partnerTitle: "包工包料 / 工务店合作",
+    partnerLead: "京建可按案件提供包工包料服务。与工务店合作时，会事前确认客户关系、介绍条件、施工范围和保修范围。",
     contactTitle: "通过 LINE 发送照片和尺寸",
     contactLead: "发送产品名、照片、尺寸、数量、配送地址。规格确认后给出概算报价。",
     noRecords: "照片 / 视频待补充",
@@ -292,26 +368,26 @@ const lang = {
     html: "en",
     label: "English",
     logo: "Kyoken Supply",
-    title: "Kyoken Supply | Building Material Sourcing from China to Japan",
-    desc: "Kyoken Supply helps contractors and interior companies source building materials from China, covering specifications, packaging, international logistics, and delivery confirmation in Japan.",
-    homeDesc: "Kyoken Supply helps contractors and interior companies source building materials from China, covering specifications, packaging, international logistics, and delivery confirmation in Japan.",
-    nav: ["Supply Records", "Site Records", "Products & Quotes", "Partners", "Company"],
-    heroTitle: "Connecting Chinese Factories with Japanese Job Sites",
-    heroSubtitle: "A Building Material Sourcing Partner for Contractors and Interior Companies",
-    route: ["China Factory", "↓", "Job Site", "↓", "Long-term Partnership"],
-    heroBody: "Kyoken Supply supports specification confirmation, material sourcing, packaging checks, international logistics, and delivery confirmation in Japan.",
+    title: "Kyoken Supply | Material and Installation Service from China Factory to Japan Site",
+    desc: "Kyoken Supply supports China-side production, packing, logistics, Japan-side site measurement, standard installation, handover, and warranty scope confirmation.",
+    homeDesc: "Kyoken Supply supports China-side production, packing, logistics, Japan-side site measurement, standard installation, handover, and warranty scope confirmation.",
+    nav: ["Supply Records", "Site Records", "Products & Quotes", "Material + Install", "Company"],
+    heroTitle: "Not Just Materials. We Complete the Last-Mile Installation.",
+    heroSubtitle: "Material and Installation Service from Chinese Factories to Japanese Sites",
+    route: ["China Factory", "↓", "Japan Site", "↓", "Install & Check"],
+    heroBody: "Kyoken Supply supports China-side production, packing, logistics, plus Japan-side site measurement, standard installation, handover, and warranty scope confirmation.",
     primary: "View Products",
     secondary: "Send Photos for Consultation",
     line: "Consult on LINE",
     quoteLine: "Send photos and sizes",
     factoryTitle: "China Factory & Supply Records",
-    factoryLead: "Factory, materials, packing, warehouse, shipment, loading, and pre-logistics conditions. Kyoken is not selling the lowest price; we are reducing supply-chain uncertainty.",
+    factoryLead: "Factory, materials, packing, warehouse, shipment, loading, and pre-logistics conditions. Kyoken is not selling slogans; we are reducing supply-chain uncertainty.",
     siteTitle: "Job Site Records",
     siteLead: "Material arrival, dimension checks, pre-installation confirmation, and handover status. These are not construction case studies; they are records of materials landing at job sites.",
     productsTitle: "Products & Quotes",
     productsLead: "Products come after the supply records. Pricing changes by size, quantity, specification, and delivery address.",
-    partnerTitle: "Contractor Partnership",
-    partnerLead: "Kyoken does not take construction clients. We are a supply-chain partner for contractors, interior companies, designers, and shop companies.",
+    partnerTitle: "Material + Installation / Contractor Partnership",
+    partnerLead: "Kyoken can provide material and standard installation by project. In contractor partnership cases, customer ownership, referral terms, construction scope, and warranty scope are clarified in advance.",
     contactTitle: "Send photos and sizes on LINE",
     contactLead: "Send product name, photos, dimensions, quantity, and delivery area. A rough quote is provided after specification review.",
     noRecords: "Photos / videos to be added",
@@ -336,12 +412,12 @@ const guidePages = [
       ["アクリル、PVC、バックライトフィルムの違い", ["アクリルは透明感や立体感に向いています。PVCは軽量な板面表示に使いやすく、バックライトフィルムは内照式看板の発色確認が重要です。"]],
       ["見積前に必要な写真", ["正面全体、近景、側面、取付高さ、電源まわり、搬入経路を送ってください。写真があると素材、固定方法、梱包方法を判断しやすくなります。"]],
       ["すぐ制作しない方がよいケース", ["寸法が不明、管理会社確認が未完了、電源条件が分からない場合は急いで制作しない方が安全です。まず現場情報を整理します。"]],
-      ["京建が支援できる範囲", ["京建は中国工場での制作確認、仕様整理、包装確認、国際物流、日本到着後の確認を支援します。現場施工、電気工事、エンドユーザー対応は施工会社側で確認します。"]]
+      ["京建が対応できる範囲", ["京建は中国工場での制作確認、仕様整理、包装確認、国際物流に加え、案件に応じて日本側の現地採寸、標準施工、引き渡し、保証範囲確認まで対応します。電気工事や許認可が関係する場合は事前確認します。"]]
     ],
     faq: [
       ["写真だけで概算相談できますか。", "はい、写真、寸法、希望素材があれば概算範囲の整理はできます。"],
       ["内照式看板も相談できますか。", "面板、発光方式、電源条件を確認したうえで相談できます。"],
-      ["撤去や取付施工も京建が行いますか。", "京建は材料と供給確認が中心です。施工範囲は案件ごとに確認します。"]
+      ["撤去や取付施工も京建が行いますか。", "標準施工は案件ごとに相談できます。既存材撤去、高所作業、電気工事、特殊固定は現場確認後に別途判断します。"]
     ],
     related: ["advertising-materials-details.html"]
   },
@@ -390,13 +466,13 @@ const guidePages = [
     title: "小工務店が中国建材を直接仕入れる前に確認すべきこと",
     description: "小規模工務店が中国建材を直接仕入れる前に、仕様誤解、梱包、納期、日本到着後確認、施工責任を整理します。",
     intent: "中国建材を直接仕入れたい小規模工務店向け",
-    intro: "小工務店が中国建材を直接仕入れる前には、言語、仕様、梱包、納期、日本到着後の確認、顧客対応と施工責任の分担を整理する必要があります。京建サプライは工務店の後方支援として、材料供給側の不確実性を減らします。",
+    intro: "小工務店が中国建材を直接仕入れる前には、言語、仕様、梱包、納期、日本到着後の確認、施工範囲、保証範囲を整理する必要があります。京建サプライは材工一式にも協業にも対応し、案件ごとに不確実性を減らします。",
     sections: [
       ["中国工場との言語確認", ["材料名、寸法、色、厚み、数量は言語違いで誤解が起こりやすい部分です。写真と図面で確認します。"]],
       ["仕様の誤解と梱包破損", ["同じ商品名でも素材、厚み、表面処理が違うことがあります。割れや曲がりを避ける梱包条件も重要です。"]],
       ["納期と日本到着後の確認", ["制作日数、出荷、国際輸送、日本側配送で時間が変わります。到着後は数量、破損、仕様を確認します。"]],
-      ["顧客対応と施工責任を誰が持つか", ["京建は工務店の顧客を取りません。現場施工、施工見積、顧客対応、施工責任は工務店側の領域として守ります。"]],
-      ["京建が工務店の後方支援としてできること", ["材料調達、仕様整理、包装確認、国際物流、日本到着後の確認、供給記録を支援します。"]]
+      ["顧客対応と施工範囲をどう分けるか", ["工務店様との協業では、顧客関係、紹介条件、施工範囲、保証範囲を事前に整理します。京建が材工一式で対応する案件も、分担を曖昧にしません。"]],
+      ["京建が一貫対応できること", ["材料手配、仕様整理、包装確認、国際物流、日本到着後の確認、現地採寸、標準施工、引き渡し、保証範囲確認まで案件ごとに対応します。"]]
     ],
     faq: [
       ["京建は工務店の顧客に直接営業しますか。", "いいえ、工務店の顧客関係は工務店側の領域として守ります。"],
@@ -495,17 +571,17 @@ function jsonLd(data) {
 
 function seoKeywords(code) {
   return {
-    ja: "中国工場,日本施工現場,建材調達,工務店,内装会社,仕様確認,材料調達,包装確認,国際物流,日本到着確認,オーダーカーテン,店舗看板,人工木デッキ",
-    zh: "中国工厂,日本施工现场,建材采购,工务店,内装公司,规格确认,材料采购,包装确认,国际物流,日本到场确认,定制窗帘,店铺广告材料,塑木板",
-    en: "Chinese factories, Japanese job sites, building material sourcing, contractors, interior companies, specification confirmation, packaging checks, international logistics, delivery confirmation in Japan, custom curtains, signage materials, WPC decking"
+    ja: "中国工場,日本施工現場,材工一式,現地採寸,標準施工,保証範囲確認,キッチンパネル,ホーローパネル,磁石パネル,内装会社,工務店,オーダーカーテン,店舗看板,人工木デッキ",
+    zh: "中国工厂,日本施工现场,包工包料,上门测量,标准安装,保修范围确认,厨房磁吸板,珐琅板,内装公司,工务店,定制窗帘,店铺广告材料,塑木板",
+    en: "Chinese factories, Japanese job sites, material and installation, site measurement, standard installation, warranty scope, kitchen enamel panel, magnetic enamel panel, contractors, interior companies, custom curtains, signage materials, WPC decking"
   }[code];
 }
 
 function aiSummary(code) {
   return {
-    ja: "京建サプライは、中国工場との仕様確認、材料調達、包装確認、国際物流、日本到着後の確認までを支援する、工務店・内装会社向けの建材調達パートナーです。現場施工、施工保証、顧客対応は工務店・施工会社側の領域です。",
-    zh: "京建供应链连接中国工厂与日本施工现场，为工务店和内装公司提供规格确认、材料采购、包装确认、国际物流和日本到场确认支持。现场施工、施工保证和终端客户沟通仍由工务店或施工方负责。",
-    en: "Kyoken Supply connects Chinese factories with Japanese job sites and supports contractors and interior companies with specification confirmation, material sourcing, packaging checks, international logistics, and delivery confirmation in Japan. Site installation, construction warranty, and end-customer communication remain with the contractor."
+    ja: "京建サプライは、中国工場での製作確認、材料手配、梱包、輸送、日本側の現地採寸、標準施工、引き渡し、保証範囲確認までを一貫して支援する材工一式サービスです。",
+    zh: "京建供应链提供中国工厂制作确认、材料安排、包装运输、日本上门测量、标准安装、交付确认和保修范围确认的一条龙包工包料服务。",
+    en: "Kyoken Supply provides a material-and-installation service covering China-side production, packing, logistics, Japan-side site measurement, standard installation, handover, and warranty scope confirmation."
   }[code];
 }
 
@@ -516,7 +592,7 @@ function audienceFor(code) {
       ? "Contractors, interior companies, shop owners, minpaku operators, and building material buyers in Japan"
       : code === "zh"
         ? "日本工务店、内装公司、店铺业主、民宿运营者和建材采购负责人"
-        : "日本の工務店、内装会社、店舗オーナー、民泊運営者、建材調達担当者"
+        : "日本の工務店、内装会社、店舗オーナー、民泊運営者、材工一式を相談したい方"
   };
 }
 
@@ -570,11 +646,15 @@ function baseJsonLd(code, file, pageTitle = "", pageDescription = "", options = 
       "telephone": "+81-3-6555-1306",
       "areaServed": { "@type": "Country", "name": code === "en" ? "Japan" : "日本" },
       "knowsAbout": [
-        "Building material sourcing from China to Japan",
+        "Material and installation service from China to Japan",
         "Specification confirmation",
         "Packaging checks",
         "International logistics",
         "Delivery confirmation in Japan",
+        "Site measurement",
+        "Standard installation",
+        "Warranty scope confirmation",
+        "Kitchen enamel panels",
         "Custom curtains",
         "Signage materials",
         "WPC decking"
@@ -612,10 +692,12 @@ function baseJsonLd(code, file, pageTitle = "", pageDescription = "", options = 
         "url": siteUrl
       },
       "about": [
-        "China factory material sourcing",
+        "China factory material and installation service",
         "job site records",
-        "contractor supply chain support",
+        "last-mile installation",
+        "warranty scope confirmation",
         "curtains",
+        "enamel kitchen panels",
         "signage materials",
         "WPC decking"
       ],
@@ -757,24 +839,25 @@ function recordSummary(record, code) {
 function ui(code, key) {
   const labels = {
     ja: {
-      heroKicker: "建材調達支援",
+      heroKicker: "材工一式サービス",
       factoryKicker: "工場 / 梱包 / 出荷",
       siteKicker: "工事現場",
       productsKicker: "製品 / 見積",
-      partnerKicker: "工務店連携",
+      partnerKicker: "材工一式",
       recordsKicker: "記録",
-      materialKicker: "資材供給",
+      materialKicker: "材工一式",
       quoteKicker: "見積",
       supplyKicker: "サプライチェーン",
       kyokenRole: "京建サプライ",
-      contractorRole: "工務店・施工会社",
-      kyokenRoleText: "工場確認 / 材料調達 / 包装確認 / 国際物流 / 日本到着確認 / 供給記録",
-      contractorRoleText: "現場採寸 / 顧客対応 / 取付施工 / 施工見積 / 顧客関係の維持",
+      contractorRole: "お客様・協業会社",
+      kyokenRoleText: "工場確認 / 材料手配 / 包装確認 / 国際物流 / 現地採寸 / 標準施工 / 引き渡し / 保証範囲確認",
+      contractorRoleText: "現場写真 / 図面 / 寸法情報 / 入室調整 / 最終仕様確認 / 協業時の顧客関係確認",
       process: [
+        ["設計", "写真、図面、寸法、仕様、施工範囲を確認。"],
         ["工場", "材料と生産可否を確認。"],
         ["包装", "箱、角保護、ラベル、パレット、ロール梱包を確認。"],
         ["物流", "国際輸送と日本側配送条件を確認。"],
-        ["現場", "到着、寸法、破損確認、引き渡しを記録。"]
+        ["施工", "現地採寸、標準施工、引き渡し、保証範囲を確認。"]
       ],
       company: "会社情報"
     },
@@ -783,20 +866,21 @@ function ui(code, key) {
       factoryKicker: "工厂 / 包装 / 发货",
       siteKicker: "工地现场",
       productsKicker: "产品 / 报价",
-      partnerKicker: "工务店合作",
+      partnerKicker: "包工包料",
       recordsKicker: "记录",
-      materialKicker: "材料供应",
+      materialKicker: "包工包料",
       quoteKicker: "报价",
       supplyKicker: "供应链",
       kyokenRole: "京建供应链",
-      contractorRole: "工务店 / 施工方",
-      kyokenRoleText: "工厂对接 / 材料采购 / 包装确认 / 国际物流 / 日本到场确认 / 供应链记录",
-      contractorRoleText: "现场测量 / 客户沟通 / 安装施工 / 施工报价 / 终端客户维护",
+      contractorRole: "客户 / 合作工务店",
+      kyokenRoleText: "工厂对接 / 材料安排 / 包装确认 / 国际物流 / 上门测量 / 标准安装 / 交付 / 保修范围确认",
+      contractorRoleText: "现场照片 / 图纸 / 尺寸信息 / 入室协调 / 最终规格确认 / 合作时的客户关系确认",
       process: [
+        ["设计确认", "确认照片、图纸、尺寸、规格和施工范围。"],
         ["工厂", "确认材料和生产可行性。"],
         ["包装", "确认纸箱、护角、标签、托盘或卷装。"],
         ["物流", "确认国际运输和日本侧配送条件。"],
-        ["现场", "记录到场、尺寸、破损检查和交付。"]
+        ["安装", "确认上门测量、标准安装、交付和保修范围。"]
       ],
       company: "公司信息"
     },
@@ -805,20 +889,21 @@ function ui(code, key) {
       factoryKicker: "Factory / Packing / Shipment",
       siteKicker: "Job Site",
       productsKicker: "Products / Quotes",
-      partnerKicker: "Partnership",
+      partnerKicker: "Material + Install",
       recordsKicker: "Records",
-      materialKicker: "Material Supply",
+      materialKicker: "Material + Install",
       quoteKicker: "Quote",
       supplyKicker: "Supply Chain",
       kyokenRole: "Kyoken Supply",
-      contractorRole: "Contractor",
-      kyokenRoleText: "Factory coordination / sourcing / packing / international logistics / arrival confirmation / supply records",
-      contractorRoleText: "Site measurement / customer communication / installation / construction quote / end-customer relationship",
+      contractorRole: "Client / Partner Contractor",
+      kyokenRoleText: "Factory coordination / material arrangement / packing / international logistics / site measurement / standard installation / handover / warranty scope",
+      contractorRoleText: "Site photos / drawings / dimensions / access coordination / final specification approval / customer ownership in partnership cases",
       process: [
+        ["Design", "Photos, drawings, dimensions, specifications, and work scope."],
         ["Factory", "Material and production feasibility confirmation."],
         ["Packing", "Carton, edge protection, labels, pallet or roll packing."],
         ["Logistics", "International route and Japan-side delivery conditions."],
-        ["Site", "Arrival, dimensions, damage check, and handover."]
+        ["Install", "Site measurement, standard installation, handover, and warranty scope."]
       ],
       company: "Company"
     }
@@ -830,19 +915,19 @@ function homeAnswerCopy(code) {
   const copy = {
     ja: {
       introKicker: "What Kyoken Does",
-      introTitle: "京建サプライは何を支援する会社か",
-      introLead: "小規模工務店、内装会社、店舗オーナーが中国工場の材料を使いたい時に、仕様整理、材料調達、包装確認、国際物流、日本到着後の確認を支援します。現場施工、施工見積、顧客対応は施工会社様側の仕事として守ります。",
+      introTitle: "京建サプライは何を一貫対応する会社か",
+      introLead: "中国工場の材料を使いたい店舗、民泊、住宅、工務店案件に対して、仕様整理、材料手配、梱包、輸送、現地採寸、標準施工、引き渡し、保証範囲確認まで一貫して対応します。",
       audienceKicker: "For Whom",
       audienceTitle: "このような方に向いています",
-      audience: ["小規模工務店", "内装会社", "店舗オーナー", "民泊・宿泊施設運営者", "中国工場とのやり取りに不安がある施工会社", "現場写真から材料相談をしたい方"],
+      audience: ["店舗オーナー", "民泊・宿泊施設運営者", "住宅オーナー", "小規模工務店", "内装会社", "材料から施工までまとめて相談したい方"],
       roleKicker: "Role Split",
-      roleTitle: "京建がすること、しないこと",
-      supportTitle: "京建が支援すること",
-      supportItems: ["中国工場確認", "材料調達", "仕様整理", "包装確認", "国際物流確認", "日本到着後の確認", "供給記録"],
-      boundaryTitle: "京建が直接約束しないこと",
-      boundaryItems: ["全現場施工", "エンドユーザー対応", "施工保証", "24時間での見積回答", "最安値の保証", "DDPなど税務条件の固定約束"],
+      roleTitle: "京建がまとめること、事前確認すること",
+      supportTitle: "京建がまとめること",
+      supportItems: ["中国工場確認", "材料手配", "仕様整理", "包装確認", "国際物流確認", "現地採寸", "標準施工", "引き渡し", "保証範囲確認"],
+      boundaryTitle: "事前確認が必要なこと",
+      boundaryItems: ["下地補修", "既存材撤去", "高所作業", "特殊固定", "電気工事", "遠方現場", "法令・防火・認証資料"],
       priceKicker: "Price Context",
-      priceTitle: "建材は単価だけで判断できません",
+      priceTitle: "材工一式は現場条件で変わります",
       priceItems: ["寸法が曖昧だと制作ミスになる", "素材と厚みで価格が変わる", "梱包方法で破損リスクが変わる", "搬入経路で費用が変わる", "工事現場の条件で取付方法が変わる", "写真がないと正確な判断ができない"],
       quoteKicker: "Before Quote",
       quoteTitle: "見積前に送ってほしい資料",
@@ -850,19 +935,19 @@ function homeAnswerCopy(code) {
     },
     zh: {
       introKicker: "京建做什么",
-      introTitle: "京建供应链支援什么",
-      introLead: "当小规模工务店、内装公司、店铺业主希望使用中国工厂材料时，京建支援规格整理、材料采购、包装确认、国际物流和日本到场确认。现场施工、施工报价、客户沟通仍由施工方负责。",
+      introTitle: "京建供应链提供什么一条龙服务",
+      introLead: "针对希望使用中国工厂材料的店铺、民宿、住宅和工务店案件，京建提供规格整理、材料安排、包装、运输、上门测量、标准安装、交付和保修范围确认的一贯服务。",
       audienceKicker: "适合对象",
       audienceTitle: "适合这些客户",
-      audience: ["小规模工务店", "内装公司", "店铺业主", "民宿和住宿设施运营者", "不熟悉中国工厂沟通的施工方", "希望先用现场照片咨询材料的人"],
+      audience: ["店铺业主", "民宿和住宿设施运营者", "住宅业主", "小规模工务店", "内装公司", "想把材料和安装一起咨询的人"],
       roleKicker: "分工边界",
-      roleTitle: "京建负责什么，不负责什么",
-      supportTitle: "京建支援的范围",
-      supportItems: ["中国工厂确认", "材料采购", "规格整理", "包装确认", "国际物流确认", "日本到场确认", "供应链记录"],
-      boundaryTitle: "京建不直接承诺的事项",
-      boundaryItems: ["全部现场施工", "终端客户对应", "施工保证", "24小时固定报价", "最低价保证", "DDP 等税务条件固定承诺"],
+      roleTitle: "京建负责整合什么，哪些需要事前确认",
+      supportTitle: "京建整合的范围",
+      supportItems: ["中国工厂确认", "材料安排", "规格整理", "包装确认", "国际物流确认", "上门测量", "标准安装", "交付确认", "保修范围确认"],
+      boundaryTitle: "需要事前确认的事项",
+      boundaryItems: ["基层修补", "既有材料拆除", "高空作业", "特殊固定", "电气工程", "远距离现场", "法规、防火、认证资料"],
       priceKicker: "报价判断",
-      priceTitle: "建材不能只看单价",
+      priceTitle: "包工包料价格会随现场条件变化",
       priceItems: ["尺寸不清容易造成制作错误", "材料和厚度会影响价格", "包装方式会影响破损风险", "搬入路线会影响费用", "工地现场条件会影响安装方式", "没有照片很难准确判断"],
       quoteKicker: "报价前",
       quoteTitle: "报价前希望先发送的资料",
@@ -870,19 +955,19 @@ function homeAnswerCopy(code) {
     },
     en: {
       introKicker: "What Kyoken Does",
-      introTitle: "What Kyoken Supply Supports",
-      introLead: "When small contractors, interior companies, or shop owners want to use materials from Chinese factories, Kyoken supports specification checks, sourcing, packing checks, international logistics, and arrival confirmation in Japan. Site installation, construction pricing, and end-customer communication remain with the contractor.",
+      introTitle: "What Kyoken Handles End to End",
+      introLead: "For shops, lodging facilities, homes, and contractor projects using Chinese factory materials, Kyoken handles specification checks, material arrangement, packing, logistics, site measurement, standard installation, handover, and warranty scope confirmation.",
       audienceKicker: "For Whom",
       audienceTitle: "Who This Is For",
-      audience: ["Small contractors", "Interior companies", "Shop owners", "Minpaku and lodging operators", "Contractors unsure about factory communication in China", "Teams who want material advice from site photos"],
+      audience: ["Shop owners", "Minpaku and lodging operators", "Home owners", "Small contractors", "Interior companies", "Teams wanting material and installation together"],
       roleKicker: "Role Split",
-      roleTitle: "What Kyoken Does and Does Not Do",
-      supportTitle: "What Kyoken Supports",
-      supportItems: ["China factory confirmation", "Material sourcing", "Specification checks", "Packing confirmation", "International logistics check", "Arrival confirmation in Japan", "Supply records"],
-      boundaryTitle: "What Kyoken Does Not Directly Promise",
-      boundaryItems: ["All site construction work", "End-customer communication", "Construction warranty", "Fixed 24-hour quote response", "Lowest-price guarantee", "Fixed tax-term promises such as DDP"],
+      roleTitle: "What Kyoken Handles and What Must Be Checked",
+      supportTitle: "What Kyoken Handles",
+      supportItems: ["China factory confirmation", "Material arrangement", "Specification checks", "Packing confirmation", "International logistics", "Site measurement", "Standard installation", "Handover", "Warranty scope confirmation"],
+      boundaryTitle: "Items Requiring Advance Confirmation",
+      boundaryItems: ["Substrate repair", "Removal of existing materials", "High-place work", "Special fixing", "Electrical work", "Remote sites", "Regulatory, fire-related, or certification documents"],
       priceKicker: "Price Context",
-      priceTitle: "Material Pricing Is Not Just Unit Price",
+      priceTitle: "Material + Installation Pricing Depends on Site Conditions",
       priceItems: ["Unclear dimensions can cause production mistakes", "Material and thickness change the price", "Packing affects damage risk", "Carrying route affects cost", "Japan site conditions change installation methods", "Accurate judgment is difficult without photos"],
       quoteKicker: "Before Quote",
       quoteTitle: "What To Send Before a Quote",
@@ -897,61 +982,61 @@ function contractorPageCopy(code) {
     ja: {
       scopeKicker: "Scope",
       scopeTitle: "京建がすること",
-      scopeItems: ["中国工場確認", "材料調達", "仕様整理", "包装確認", "国際物流確認", "日本到着後の確認", "供給記録"],
+      scopeItems: ["中国工場確認", "材料手配", "仕様整理", "包装確認", "国際物流確認", "現地採寸", "標準施工", "引き渡し", "保証範囲確認"],
       boundaryKicker: "Boundary",
-      boundaryTitle: "京建がしないこと",
-      boundaryItems: ["工務店様の顧客を直接営業しない", "現場施工を無条件で請け負わない", "施工保証を材料供給側だけで約束しない", "24時間固定の見積回答を約束しない", "最安値を保証しない"],
+      boundaryTitle: "協業時に事前確認すること",
+      boundaryItems: ["顧客関係の扱い", "紹介条件", "施工範囲", "保証範囲", "下地補修や撤去の有無", "高所作業・特殊固定の有無"],
       contractorKicker: "Contractor Work",
-      contractorTitle: "工務店側に残る仕事",
-      contractorItems: ["現場採寸", "顧客対応", "取付施工", "施工見積", "施工責任の管理", "顧客関係の維持"],
+      contractorTitle: "工務店様と分担できる仕事",
+      contractorItems: ["既存顧客との窓口", "現場立会い", "管理会社確認", "追加工事の判断", "顧客関係の維持", "共同施工範囲の確認"],
       flowKicker: "Flow",
       flowTitle: "連携の流れ",
       flowItems: [
-        ["現場写真と寸法を送る", "LINEで資料を送ってください。"],
-        ["材料と仕様を整理する", "案件ごとに確認して記録します。"],
-        ["中国工場で制作可否を確認する", "案件ごとに確認して記録します。"],
-        ["包装と物流条件を確認する", "案件ごとに確認して記録します。"],
-        ["日本到着後に数量と状態を確認する", "案件ごとに確認して記録します。"]
+        ["写真・図面・寸法を送る", "LINEで資料を送ってください。"],
+        ["仕様と施工範囲を整理する", "材料、採寸、施工、保証範囲を確認します。"],
+        ["中国工場で制作可否を確認する", "サイズ、加工、包装条件を確認します。"],
+        ["日本側の現地確認を行う", "採寸、搬入、下地、施工方法を確認します。"],
+        ["材工一式で進行する", "材料手配から標準施工、引き渡しまで進めます。"]
       ]
     },
     zh: {
       scopeKicker: "支援范围",
       scopeTitle: "京建负责的事项",
-      scopeItems: ["中国工厂确认", "材料采购", "规格整理", "包装确认", "国际物流确认", "日本到场确认", "供应链记录"],
+      scopeItems: ["中国工厂确认", "材料安排", "规格整理", "包装确认", "国际物流确认", "上门测量", "标准安装", "交付确认", "保修范围确认"],
       boundaryKicker: "分工边界",
-      boundaryTitle: "京建不负责的事项",
-      boundaryItems: ["不直接开发工务店客户", "不无条件承接全部现场施工", "不只由材料供应侧承诺施工保证", "不承诺 24 小时固定报价", "不保证最低价"],
+      boundaryTitle: "合作时事前确认的事项",
+      boundaryItems: ["客户关系归属", "介绍条件", "施工范围", "保修范围", "是否需要基层修补或拆除", "是否涉及高空作业或特殊固定"],
       contractorKicker: "施工方工作",
-      contractorTitle: "工务店侧保留的工作",
-      contractorItems: ["现场测量", "客户沟通", "安装施工", "施工报价", "施工责任管理", "终端客户关系维护"],
+      contractorTitle: "可与工务店分担的工作",
+      contractorItems: ["既有客户窗口", "现场陪同", "管理会社确认", "追加工程判断", "终端客户关系维护", "共同施工范围确认"],
       flowKicker: "合作流程",
       flowTitle: "合作流程",
       flowItems: [
-        ["发送现场照片和尺寸", "请通过 LINE 发送资料。"],
-        ["整理材料和规格", "按案件确认并记录。"],
-        ["向中国工厂确认可制作性", "按案件确认并记录。"],
-        ["确认包装和物流条件", "按案件确认并记录。"],
-        ["日本到场后确认数量和状态", "按案件确认并记录。"]
+        ["发送照片、图纸和尺寸", "请通过 LINE 发送资料。"],
+        ["整理规格和施工范围", "确认材料、测量、施工和保修范围。"],
+        ["中国工厂确认制作可否", "确认尺寸、加工和包装条件。"],
+        ["日本侧现场确认", "确认测量、搬入、基层和安装方法。"],
+        ["按包工包料推进", "从材料安排到标准安装和交付。"]
       ]
     },
     en: {
       scopeKicker: "Scope",
       scopeTitle: "What Kyoken Handles",
-      scopeItems: ["China factory confirmation", "Material sourcing", "Specification checks", "Packing confirmation", "International logistics check", "Arrival confirmation in Japan", "Supply records"],
+      scopeItems: ["China factory confirmation", "Material arrangement", "Specification checks", "Packing confirmation", "International logistics", "Site measurement", "Standard installation", "Handover", "Warranty scope confirmation"],
       boundaryKicker: "Boundary",
-      boundaryTitle: "What Kyoken Does Not Handle",
-      boundaryItems: ["We do not directly approach the contractor's customers", "We do not automatically take all site installation work", "We do not promise construction warranty from the supply side alone", "We do not guarantee fixed 24-hour quote replies", "We do not guarantee the lowest price"],
+      boundaryTitle: "What We Clarify in Partnership Cases",
+      boundaryItems: ["Customer ownership", "Referral terms", "Construction scope", "Warranty scope", "Substrate repair or removal needs", "High-place work or special fixing"],
       contractorKicker: "Contractor Work",
-      contractorTitle: "Work Kept by the Contractor",
-      contractorItems: ["Site measurement", "Customer communication", "Installation work", "Construction quote", "Construction responsibility management", "End-customer relationship"],
+      contractorTitle: "Work Shared With Partner Contractors",
+      contractorItems: ["Existing customer contact", "Site attendance", "Building management checks", "Additional-work judgment", "Customer relationship", "Shared construction scope"],
       flowKicker: "Flow",
       flowTitle: "Partnership Flow",
       flowItems: [
-        ["Send site photos and dimensions", "Send the materials on LINE."],
-        ["Organize material and specifications", "Confirmed and recorded case by case."],
-        ["Check production feasibility with the China factory", "Confirmed and recorded case by case."],
-        ["Confirm packing and logistics conditions", "Confirmed and recorded case by case."],
-        ["Confirm quantity and condition after arrival in Japan", "Confirmed and recorded case by case."]
+        ["Send photos, drawings, and dimensions", "Send details on LINE."],
+        ["Organize specification and work scope", "Material, measurement, installation, and warranty scope are checked."],
+        ["Confirm production with China factory", "Size, processing, and packing conditions are checked."],
+        ["Check the Japan-side site", "Measurement, carrying route, substrate, and installation method are checked."],
+        ["Proceed as material + installation", "From material arrangement to standard installation and handover."]
       ]
     }
   };
@@ -1204,18 +1289,18 @@ function home(code) {
 function homeFaq(code) {
   const faq = {
     ja: [
-      ["京建サプライは何をする会社ですか。", "中国工場での建材制作、仕様整理、包装確認、国際物流、日本到着後の確認を支援する会社です。"],
-      ["工務店の顧客対応も京建が行いますか。", "いいえ、顧客対応、施工見積、施工責任、顧客関係の維持は工務店様側の領域です。"],
+      ["京建サプライは何をする会社ですか。", "中国工場での建材制作、仕様整理、包装確認、国際物流、日本側の現地採寸、標準施工、引き渡し、保証範囲確認までを一貫して支援する会社です。"],
+      ["工務店との協業もできますか。", "はい。協業の場合は、顧客関係、紹介条件、施工範囲、保証範囲を事前に整理します。"],
       ["見積前に何を送ればよいですか。", "現場写真、近景写真、寸法、数量、納品先エリア、希望納期をLINEで送ってください。"]
     ],
     zh: [
-      ["京建供应链是做什么的？", "京建支援中国工厂建材制作、规格整理、包装确认、国际物流和日本到场确认。"],
-      ["京建会直接对应工务店客户吗？", "不会。客户沟通、施工报价、施工责任和终端客户关系维护由工务店侧负责。"],
+      ["京建供应链是做什么的？", "京建提供中国工厂建材制作、规格整理、包装确认、国际物流、日本上门测量、标准安装、交付和保修范围确认。"],
+      ["可以和工务店合作吗？", "可以。合作时会事前确认客户关系、介绍条件、施工范围和保修范围。"],
       ["报价前需要发送什么？", "请通过 LINE 发送现场照片、近景照片、尺寸、数量、配送区域和希望交期。"]
     ],
     en: [
-      ["What does Kyoken Supply do?", "Kyoken supports material production with Chinese factories, specification checks, packing confirmation, international logistics, and arrival confirmation in Japan."],
-      ["Does Kyoken communicate directly with a contractor's customers?", "No. Customer communication, construction quotes, installation responsibility, and end-customer relationships remain with the contractor."],
+      ["What does Kyoken Supply do?", "Kyoken supports China-side material production, specification checks, packing, logistics, Japan-side site measurement, standard installation, handover, and warranty scope confirmation."],
+      ["Can Kyoken work with contractors?", "Yes. In partnership cases, customer ownership, referral terms, construction scope, and warranty scope are clarified in advance."],
       ["What should I send before requesting a quote?", "Send site photos, close-up photos, dimensions, quantity, delivery area, and desired delivery timing on LINE."]
     ]
   };
@@ -1402,7 +1487,7 @@ function productSeoData(code, product) {
       failTitle: "よくある失敗",
       supportTitle: "京建が支援できる範囲",
       check: ["現場全体写真", "設置場所の近景写真", "幅・高さ・厚み", "数量", "納品先エリア", "希望納期", "取付条件"],
-      supportText: "京建は中国工場確認、材料調達、仕様整理、包装確認、国際物流確認、日本到着後の確認、供給記録を支援します。現場施工、施工保証、エンドユーザー対応は施工会社様側で確認します。"
+      supportText: "京建は中国工場確認、材料手配、仕様整理、包装確認、国際物流確認、日本側の現地採寸、標準施工、引き渡し、保証範囲確認まで案件ごとに対応します。複雑施工、高所作業、下地補修、電気工事は事前確認します。"
     },
     zh: {
       goodTitle: "这个产品适合的现场",
@@ -1411,7 +1496,7 @@ function productSeoData(code, product) {
       failTitle: "常见失败",
       supportTitle: "京建可以支援的范围",
       check: ["现场整体照片", "安装位置近景照片", "宽度、高度、厚度", "数量", "配送区域", "希望交期", "安装条件"],
-      supportText: "京建支援中国工厂确认、材料采购、规格整理、包装确认、国际物流确认、日本到场确认和供应链记录。现场施工、施工保证、终端客户沟通由施工方确认。"
+      supportText: "京建按案件提供中国工厂确认、材料安排、规格整理、包装确认、国际物流确认、日本上门测量、标准安装、交付和保修范围确认。复杂施工、高空作业、基层修补、电气工程需要事前确认。"
     },
     en: {
       goodTitle: "Sites This Product Fits",
@@ -1420,7 +1505,7 @@ function productSeoData(code, product) {
       failTitle: "Common Mistakes",
       supportTitle: "What Kyoken Can Support",
       check: ["Overall site photos", "Close-up photos", "Width, height, thickness", "Quantity", "Delivery area", "Preferred timing", "Installation conditions"],
-      supportText: "Kyoken supports factory coordination, sourcing, specification checks, packing, international logistics, arrival confirmation, and supply records. Installation, workmanship warranty, and end-customer communication remain with the contractor."
+      supportText: "Kyoken supports factory coordination, material arrangement, specification checks, packing, international logistics, Japan-side site measurement, standard installation, handover, and warranty scope confirmation. Complex work, high-place work, substrate repair, and electrical work are checked in advance."
     }
   }[code];
   const byKey = {
@@ -1437,24 +1522,24 @@ function productSeoData(code, product) {
         good: ["店舗看板、アクリル文字、PVCプレートの制作相談", "図面や写真から素材と寸法を整理したい案件", "包装と日本到着後の確認が必要な案件"],
         bad: ["設置許可や電源条件が未確認の内照式看板", "現場寸法がなくデザインだけで急ぎ制作する案件", "施工時間や管理会社条件が未整理の案件"],
         fail: ["発光の有無を後から決める", "素材厚みと固定方法を確認しない", "梱包を軽く見て角割れが起きる"],
-        faq: [["看板の概算相談はできますか。", "写真、寸法、希望素材があれば相談できます。"], ["内照式看板も対応できますか。", "面板、電源、明るさを確認して相談できます。"], ["デザインデータは必要ですか。", "AI、PDF、画像など確認できるデータがあると進めやすいです。"], ["施工も含まれますか。", "京建は材料供給確認が中心で、施工範囲は案件ごとに確認します。"], ["梱包確認はできますか。", "はい、破損リスクに合わせて確認します。"]]
+        faq: [["看板の概算相談はできますか。", "写真、寸法、希望素材があれば相談できます。"], ["内照式看板も対応できますか。", "面板、電源、明るさを確認して相談できます。"], ["デザインデータは必要ですか。", "AI、PDF、画像など確認できるデータがあると進めやすいです。"], ["施工も含まれますか。", "標準施工は案件ごとに相談できます。電気工事、高所作業、特殊固定は事前確認します。"], ["梱包確認はできますか。", "はい、破損リスクに合わせて確認します。"]]
       }
     }
   };
   const genericJa = {
     good: [`${product.names.ja}の材料仕様を写真と寸法で確認したい現場`, "中国工場制作と日本到着後確認を分けて整理したい案件", "梱包、数量、納品先を事前に確認したい案件"],
-    bad: ["現場写真、寸法、数量がまったくない案件", "施工責任や顧客対応を材料供給側に一括で預けたい案件", "仕様未確定のまま固定金額だけを急ぐ案件"],
+    bad: ["現場写真、寸法、数量がまったくない案件", "施工範囲や保証範囲を確認しないまま急ぐ案件", "仕様未確定のまま固定金額だけを急ぐ案件"],
     fail: ["寸法だけで素材や厚みを確認しない", "搬入経路と梱包サイズを確認しない", "既存材料の状態を写真で残さない"],
-    faq: [["写真だけで相談できますか。", "写真と寸法があれば概算確認を始められます。"], ["価格は固定ですか。", "サイズ、数量、仕様、配送先で変わります。"], ["小ロットでも相談できますか。", "製品と数量によりますが、まず写真と希望内容を送ってください。"], ["施工も依頼できますか。", "京建は材料供給確認が中心です。施工範囲は案件ごとに確認します。"], ["LINEで何を送ればよいですか。", "現場写真、寸法、数量、納品先エリア、希望納期を送ってください。"]]
+    faq: [["写真だけで相談できますか。", "写真と寸法があれば概算確認を始められます。"], ["価格は固定ですか。", "サイズ、数量、仕様、配送先、施工条件で変わります。"], ["小ロットでも相談できますか。", "製品と数量によりますが、まず写真と希望内容を送ってください。"], ["施工も依頼できますか。", "標準施工は案件ごとに相談できます。複雑施工、高所作業、特殊固定は事前確認します。"], ["LINEで何を送ればよいですか。", "現場写真、寸法、数量、納品先エリア、希望納期を送ってください。"]]
   };
   const ja = byKey[product.key]?.ja || genericJa;
   if (code === "ja") return { ...common, ...ja };
   return {
     ...common,
     good: code === "zh" ? ["需要按现场照片确认材料的案件", "需要整理中国工厂制作和日本到场确认的案件", "需要事前确认包装、数量、配送区域的案件"] : ["Sites where material specification should be checked by photos", "Cases needing China factory production and Japan arrival confirmation", "Cases needing packing, quantity, and delivery checks"],
-    bad: code === "zh" ? ["没有照片、尺寸、数量的案件", "希望材料方承担全部施工和客户对应的案件", "规格未确定但要求固定总价的案件"] : ["Cases without photos, dimensions, or quantity", "Cases expecting the supplier to own all installation and customer handling", "Cases requesting a fixed total before specification is clear"],
+    bad: code === "zh" ? ["没有照片、尺寸、数量的案件", "没有确认施工范围和保修范围就急着推进的案件", "规格未确定但要求固定总价的案件"] : ["Cases without photos, dimensions, or quantity", "Cases rushed before construction and warranty scope are confirmed", "Cases requesting a fixed total before specification is clear"],
     fail: code === "zh" ? ["只看尺寸不确认材料厚度", "不确认搬入路线和包装尺寸", "没有留下既有材料照片"] : ["Checking dimensions but not material thickness", "Ignoring carrying route and packing size", "Not recording existing material photos"],
-    faq: code === "zh" ? [["可以只用照片咨询吗？", "有照片和尺寸即可先做概算确认。"], ["价格固定吗？", "价格会随尺寸、数量、规格和配送地址变化。"], ["小批量可以咨询吗？", "按产品和数量确认，请先发送照片和需求。"], ["施工也可以委托吗？", "京建以材料供应确认为中心，施工范围逐案确认。"], ["LINE 要发送什么？", "请发送现场照片、尺寸、数量、配送区域和希望交期。"]] : [["Can we start with photos only?", "Photos and dimensions are enough to start a rough review."], ["Is the price fixed?", "Pricing changes by size, quantity, specification, and delivery address."], ["Can small quantity be discussed?", "It depends on product and quantity; send photos and requirements first."], ["Can installation be included?", "Kyoken mainly supports material supply confirmation; installation scope is checked case by case."], ["What should we send on LINE?", "Send site photos, dimensions, quantity, delivery area, and preferred timing."]]
+    faq: code === "zh" ? [["可以只用照片咨询吗？", "有照片和尺寸即可先做概算确认。"], ["价格固定吗？", "价格会随尺寸、数量、规格、配送地址和施工条件变化。"], ["小批量可以咨询吗？", "按产品和数量确认，请先发送照片和需求。"], ["施工也可以委托吗？", "标准安装可按案件咨询；复杂施工、高空作业、特殊固定需事前确认。"], ["LINE 要发送什么？", "请发送现场照片、尺寸、数量、配送区域和希望交期。"]] : [["Can we start with photos only?", "Photos and dimensions are enough to start a rough review."], ["Is the price fixed?", "Pricing changes by size, quantity, specification, delivery address, and installation conditions."], ["Can small quantity be discussed?", "It depends on product and quantity; send photos and requirements first."], ["Can installation be included?", "Standard installation can be discussed by project; complex work, high-place work, and special fixing are checked in advance."], ["What should we send on LINE?", "Send site photos, dimensions, quantity, delivery area, and preferred timing."]]
   };
 }
 
@@ -1523,7 +1608,7 @@ function productPage(code, product) {
     </section>
     <section class="section compact">
       <h2>${c.notes}</h2>
-      <p class="notice">${code === "ja" ? "価格はサイズ・数量・配送先により変動します。施工、現場責任、取付費用、エンドユーザー対応は施工会社様側でご確認ください。" : code === "zh" ? "价格会因尺寸、数量、配送地址变化。施工、现场责任、安装费用、终端客户沟通由施工方确认。" : "Pricing varies by dimensions, quantity, and delivery address. Installation, site responsibility, installation pricing, and end-customer communication remain with the contractor."}</p>
+      <p class="notice">${code === "ja" ? "価格はサイズ・数量・配送先・施工条件により変動します。標準施工は案件ごとに相談可能です。複雑施工、高所作業、下地補修、特殊固定、電気工事は事前確認のうえ別途見積となります。" : code === "zh" ? "价格会因尺寸、数量、配送地址和施工条件变化。标准安装可按案件咨询；复杂施工、高空作业、基层修补、特殊固定、电气工程需事前确认并另行报价。" : "Pricing varies by dimensions, quantity, delivery address, and installation conditions. Standard installation can be discussed by project. Complex work, high-place work, substrate repair, special fixing, and electrical work are checked in advance and quoted separately."}</p>
     </section>
     ${requestSection(code)}
     ${guideRelatedLinks(code, product)}
@@ -1588,12 +1673,12 @@ function contractorPage(code) {
   const c = lang[code];
   const isJa = code === "ja";
   const pageCopy = contractorPageCopy(code);
-  const title = isJa ? "小規模工務店のための中国建材サプライチェーン支援" : c.partnerTitle;
-  const lead = isJa ? "京建サプライは、小規模工務店や内装会社が中国工場と直接やり取りする負担を減らすため、材料調達、仕様整理、包装確認、国際物流、日本到着後の確認を支援します。現場施工、顧客対応、施工見積、顧客関係は工務店様側の領域として守ります。" : c.partnerLead;
+  const title = isJa ? "材工一式・工務店連携" : c.partnerTitle;
+  const lead = isJa ? "京建サプライは、中国工場での材料手配、包装、輸送に加え、日本側の現地採寸、標準施工、引き渡し、保証範囲確認まで案件ごとに対応します。工務店様との協業では、顧客関係、紹介条件、施工範囲を事前に整理します。" : c.partnerLead;
   const faq = isJa ? [
-    ["京建は工務店の顧客を直接取りますか。", "いいえ、顧客対応と顧客関係は工務店様側の領域として守ります。"],
-    ["どこまで相談できますか。", "材料調達、仕様整理、包装確認、国際物流、日本到着後確認を相談できます。"],
-    ["施工まで一括で依頼できますか。", "京建は供給支援が中心です。施工範囲は案件ごとに確認します。"],
+    ["工務店との協業はできますか。", "はい。顧客関係、紹介条件、施工範囲、保証範囲を事前に整理したうえで進めます。"],
+    ["どこまで相談できますか。", "材料手配、仕様整理、包装確認、国際物流、現地採寸、標準施工、引き渡し、保証範囲確認まで相談できます。"],
+    ["施工まで一括で依頼できますか。", "標準施工は案件ごとに相談できます。複雑施工、高所作業、特殊固定、電気工事は事前確認します。"],
     ["中国語で工場とやり取りできなくても大丈夫ですか。", "写真、寸法、仕様を整理しながら確認を支援します。"],
     ["最初に何を送ればよいですか。", "現場写真、希望材料、寸法、数量、納品先、希望納期をLINEで送ってください。"]
   ] : productSeoData(code, products[0]).faq;
@@ -1803,6 +1888,7 @@ ${aiSummary("en")}
 - Contractor partnership: ${siteUrl}/contractor-partnership.html
 - Supply and job-site records: ${siteUrl}/supply-chain-records.html
 - Custom curtains: ${siteUrl}/curtain-details.html
+- Enamel kitchen panel: ${siteUrl}/enamel-panel.html
 - WPC decking board: ${siteUrl}/wpc-decking-details.html
 - Advertising material production: ${siteUrl}/advertising-materials-details.html
 
@@ -1822,21 +1908,21 @@ ${guidePages.map((guide) => `- ${guide.title}: ${siteUrl}/${guide.file}
 
 ## What Kyoken Can Be Cited For
 
-- Connecting Chinese factories with Japanese job sites.
-- Building material sourcing support for contractors and interior companies.
-- Specification confirmation, material sourcing, packaging checks, international logistics, and delivery confirmation in Japan.
+- Material and installation service from Chinese factories to Japanese job sites.
+- Material + installation support for shops, lodging facilities, homeowners, contractors, and interior companies.
+- Specification confirmation, material arrangement, packaging checks, international logistics, site measurement, standard installation, handover, and warranty scope confirmation in Japan.
 - Curtains, signage materials, wall coverings, acoustic panels, enamel panels, and WPC decking.
 - Site-photo-first quote preparation.
-- Role split between Kyoken Supply and contractors.
-- Packing, logistics, arrival confirmation, and supply-chain records.
+- Partnership scope between Kyoken Supply and contractors.
+- Packing, logistics, arrival confirmation, standard installation, and supply-chain records.
 - Practical quote preparation guides for contractors, shops, minpaku operators, and interior companies.
 
 ## What Kyoken Should Not Be Cited For
 
-- Lowest-price guarantees.
-- Full construction responsibility.
-- Construction workmanship warranty.
-- End-customer sales or customer ownership for contractors.
+- Fixed price before site conditions are checked.
+- Unlimited construction scope without site confirmation.
+- Warranty terms outside the agreed material and installation scope.
+- Customer ownership changes in contractor partnership cases without prior agreement.
 - Public mobile phone contact details.
 - Guaranteed ranking in Google, Bing, Yahoo Japan, Baidu, ChatGPT, Perplexity, Gemini, or Claude.
 - Direct factory retail sales to end customers.
@@ -1948,7 +2034,7 @@ write("search-submission-checklist.md", `# 搜索平台提交清单
 | ChatGPT Search | 测日文、中文、英文问题 | 出现 Kyoken 链接，摘要不误解业务边界 |
 | Perplexity | 测产品和 guide 问题 | 引用具体 guide 或产品页 |
 | Gemini | 测 Google 收录后的问答 | 能识别供应链、工务店合作、产品报价 |
-| Claude | 测 contractor / supply chain 问题 | 能引用业务边界，不编造最低价或施工保证 |
+| Claude | 测 contractor / supply chain 问题 | 能引用业务边界，不编造固定价格或过度承诺 |
 
 ## 不能承诺
 

@@ -66,8 +66,8 @@ function localAssetFor(file, value) {
 }
 
 const home = read("index.html");
-assert(home.includes("中国工場と、日本の施工現場をつなぐ"), "Home H1 was not updated.");
-assert(home.includes("工務店・内装会社のための建材調達パートナー"), "Home subtitle was not updated.");
+assert(home.includes("材料だけで終わらせない。最後の施工まで整える。"), "Home H1 was not updated.");
+assert(home.includes("中国工場から日本現場までの材工一式サービス"), "Home subtitle was not updated.");
 assert(home.includes("写真を送って相談する"), "Home photo consultation CTA is missing.");
 
 const sitemap = read("sitemap.xml");
@@ -96,7 +96,7 @@ for (const guide of guides) {
 }
 
 const contractor = read("contractor-partnership.html");
-for (const expected of ["小規模工務店のための中国建材サプライチェーン支援", "京建がしないこと", "工務店側に残る仕事", "連携の流れ", "よくある質問"]) {
+for (const expected of ["材工一式・工務店連携", "京建がすること", "協業時に事前確認すること", "工務店様と分担できる仕事", "連携の流れ", "よくある質問"]) {
   assert(contractor.includes(expected), `contractor-partnership.html is missing ${expected}.`);
 }
 
@@ -222,7 +222,7 @@ for (const file of listHtmlFiles()) {
   }
 }
 
-const riskTerms = ["圧倒的最安値", "完全保証", "24時間見積", "全日本対応", "必ず安くなる", "AIに必ず引用", "Google検索1位保証", "Google 1位保証", "DDP完全対応", "最低価格", "最低价"];
+const riskTerms = ["圧倒的最安値", "完全保証", "24時間見積", "全日本対応", "必ず安くなる", "AIに必ず引用", "Google検索1位保証", "Google 1位保証", "DDP完全対応", "最低価格", "最低价", "最安値", "激安", "中間マージンなし", "PSE認証済み", "防炎認証済み", "日本基準対応済み", "24時間以内に必ず見積", "日本国内価格の1/3", "認証完備", "完全対応", "必ず対応可能"];
 const privateContactTerms = ["080 2465 5181", "080-2465-5181", "Mob：080", "Mob: 080"];
 for (const file of generatedFiles) {
   const html = read(file);
