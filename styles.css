@@ -65,6 +65,17 @@ h1, h2, h3, strong { letter-spacing: 0; }
   font-size: 21px;
   font-weight: 700;
   white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.brand-mark {
+  display: block;
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+  flex: 0 0 auto;
 }
 
 nav {
@@ -831,6 +842,15 @@ h3 {
     grid-template-columns: 1fr;
     gap: 8px;
     padding: 10px 16px;
+  }
+
+  .brand {
+    font-size: 19px;
+  }
+
+  .brand-mark {
+    width: 30px;
+    height: 30px;
   }
 
   nav {

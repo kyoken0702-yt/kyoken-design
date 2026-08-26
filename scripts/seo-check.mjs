@@ -35,6 +35,10 @@ function jsonLdBlocks(html) {
     .map((match) => JSON.parse(match[1]));
 }
 
+function visibleHtml(html) {
+  return html.replace(/<script[\s\S]*?<\/script>/g, "");
+}
+
 function metaContent(html, name) {
   const match = html.match(new RegExp(`<meta (?:name|property)="${name}" content="([^"]*)">`));
   return match?.[1] || "";
@@ -93,6 +97,7 @@ for (const guide of guides) {
   assert(html.includes("よくある質問"), `${guide} is missing visible FAQ.`);
   assert(html.includes("LINEで"), `${guide} is missing LINE CTA.`);
   assert(sitemap.includes(`https://www.kyoken.design/${guide}`), `${guide} is missing from sitemap.`);
+  assert(jsonLdBlocks(html).some((block) => block["@type"] === "Article"), `${guide} is missing Article JSON-LD.`);
 }
 
 const contractor = read("contractor-partnership.html");
@@ -114,6 +119,7 @@ const llms = read("llms.txt");
 for (const expected of ["Kyoken Supply", "京建サプライ", "京建供应链", "Direct Answer Summary", "Japanese", "Chinese", "English", "Guides For Citation", "What Kyoken Should Not Be Cited For", "https://www.kyoken.design/sitemap.xml", "Do not cite private mobile numbers"]) {
   assert(llms.includes(expected), `llms.txt is missing ${expected}.`);
 }
+assert(llms.includes("Last reviewed: 2026-08-26"), "llms.txt review date is stale.");
 
 const tracking = read("search-platform-tracking.md");
 for (const expected of ["Bing Webmaster Tools", "Yahoo Japan", "百度搜索资源平台", "ChatGPT Search", "Perplexity", "Gemini", "Claude", "AI 搜索引用专项监测表"]) {
@@ -144,7 +150,7 @@ const languageLeakChecks = [
   }
 ];
 for (const check of languageLeakChecks) {
-  const html = read(check.file);
+  const html = visibleHtml(read(check.file));
   for (const term of check.blocked) {
     assert(!html.includes(term), `${check.file} contains mixed-language term: ${term}`);
   }
@@ -161,6 +167,14 @@ const generatedFiles = [
   "wpc-decking-details.html",
   ...guides
 ];
+
+for (const [file, image] of [
+  ["curtain-details.html", "media/remote/e2f130af6ea5.jpg"],
+  ["enamel-panel.html", "media/remote/hanke-enamel-kitchen-panel.jpg"],
+  ["wpc-decking-details.html", "media/remote/937250ddfe38.jpg"]
+]) {
+  assert(metaContent(read(file), "og:image") === `https://www.kyoken.design/${image}`, `${file} must use its own product image for social sharing.`);
+}
 for (const file of generatedFiles) {
   const html = read(file);
   for (const expected of ["og:image", "twitter:card", "application/llms+txt", "max-image-preview:large", "ai-summary", "citation_title", "citation_url"]) {
@@ -173,6 +187,7 @@ for (const file of listHtmlFiles()) {
   if (file.startsWith("google")) continue;
   const blocks = jsonLdBlocks(read(file));
   const allNodes = blocks.flatMap((block) => Array.isArray(block["@graph"]) ? block["@graph"] : [block]);
+  assert(allNodes.some((node) => node["@type"] === "Organization" && node.name === "京建不動産開発株式会社"), `${file} is missing the consistent legal business entity.`);
   assert(allNodes.some((node) => node["@type"] === "WebPage"), `${file} is missing WebPage JSON-LD.`);
   const webPage = allNodes.find((node) => node["@type"] === "WebPage");
   const html = read(file);

@@ -5,9 +5,12 @@ const root = path.resolve(new URL("..", import.meta.url).pathname);
 const lineUrl = "https://line.me/R/ti/p/@566wlcvz";
 const siteUrl = "https://www.kyoken.design";
 const homeHeroImage = "media/hero/home-gree-showroom.jpg";
-const ogImage = `${siteUrl}/${homeHeroImage}`;
-const stylesheetVersion = "20260715-density-v1";
-const today = "2026-08-04";
+const stylesheetVersion = "20260826-brandmark-v1";
+const contentUpdatedAt = "2026-08-26";
+const legalBusiness = {
+  name: "京建不動産開発株式会社",
+  alternateName: ["Kyoken Real Estate Development Co., Ltd.", "京建サプライ", "京建供应链", "Kyoken Supply"]
+};
 
 const records = readJson("data/records.json")
   .filter((record) => record && ["factory", "site"].includes(record.module))
@@ -640,7 +643,8 @@ function baseJsonLd(code, file, pageTitle = "", pageDescription = "", options = 
     {
       "@context": "https://schema.org",
       "@type": "Organization",
-      "name": lang[code].logo,
+      "name": legalBusiness.name,
+      "alternateName": legalBusiness.alternateName,
       "url": siteUrl,
       "email": "kyoken0702@gmail.com",
       "telephone": "+81-3-6555-1306",
@@ -673,7 +677,7 @@ function baseJsonLd(code, file, pageTitle = "", pageDescription = "", options = 
       "url": siteUrl,
       "inLanguage": ["ja", "zh-Hans", "en"],
       "description": aiSummary(code),
-      "publisher": { "@type": "Organization", "name": lang[code].logo, "url": siteUrl }
+      "publisher": { "@type": "Organization", "name": legalBusiness.name, "url": siteUrl }
     },
     {
       "@context": "https://schema.org",
@@ -706,7 +710,8 @@ function baseJsonLd(code, file, pageTitle = "", pageDescription = "", options = 
     {
       "@context": "https://schema.org",
       "@type": "LocalBusiness",
-      "name": lang[code].logo,
+      "name": legalBusiness.name,
+      "alternateName": legalBusiness.alternateName,
       "url": siteUrl,
       "telephone": "+81-3-6555-1306",
       "description": aiSummary(code),
@@ -781,7 +786,7 @@ function productOrServiceJsonLd(code, product) {
         "itemCondition": "https://schema.org/NewCondition",
         "seller": {
           "@type": "Organization",
-          "name": c.logo,
+          "name": legalBusiness.name,
           "url": siteUrl
         }
       }
@@ -796,7 +801,7 @@ function productOrServiceJsonLd(code, product) {
     "url": url,
     "provider": {
       "@type": "Organization",
-      "name": c.logo,
+      "name": legalBusiness.name,
       "url": siteUrl,
       "telephone": "+81-3-6555-1306"
     },
@@ -1119,6 +1124,11 @@ function shell(code, title, description, file, body, options = {}) {
   const p = `${depthPrefix}${prefix(code)}`;
   const localRoot = depthPrefix;
   const canonical = options.canonical || absoluteUrl(code, file);
+  const socialImage = options.ogImage || options.primaryImage || homeHeroImage;
+  const socialImageUrl = absoluteAssetUrl(socialImage);
+  const socialImageDimensions = socialImage === homeHeroImage
+    ? `\n  <meta property="og:image:width" content="1600">\n  <meta property="og:image:height" content="912">`
+    : "";
   const schemas = [...baseJsonLd(code, file, title, description, { primaryImage: options.primaryImage }), ...(options.schemas || [])];
   const ogLocale = code === "zh" ? "zh_CN" : code === "en" ? "en_US" : "ja_JP";
   return `<!doctype html>
@@ -1144,14 +1154,12 @@ function shell(code, title, description, file, body, options = {}) {
   <meta property="og:url" content="${canonical}">
   <meta property="og:site_name" content="${escapeHtml(c.logo)}">
   <meta property="og:locale" content="${ogLocale}">
-  <meta property="og:image" content="${ogImage}">
-  <meta property="og:image:width" content="1600">
-  <meta property="og:image:height" content="912">
-  <meta property="og:image:alt" content="${escapeHtml(c.logo)}">
+  <meta property="og:image" content="${socialImageUrl}">${socialImageDimensions}
+  <meta property="og:image:alt" content="${escapeHtml(options.ogImageAlt || title)}">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="${escapeHtml(title)}">
   <meta name="twitter:description" content="${escapeHtml(description)}">
-  <meta name="twitter:image" content="${ogImage}">
+  <meta name="twitter:image" content="${socialImageUrl}">
   <link rel="alternate" type="application/llms+txt" href="${siteUrl}/llms.txt">
   <link rel="icon" type="image/png" href="${p}media/remote/6e64da3a8e48.png">
   <link rel="stylesheet" href="${p}styles.css?v=${stylesheetVersion}">
@@ -1159,7 +1167,7 @@ function shell(code, title, description, file, body, options = {}) {
 </head>
 <body>
   <header class="site-header">
-    <a class="brand" href="${localRoot}index.html">${c.logo}</a>
+    <a class="brand" href="${localRoot}index.html"><img class="brand-mark" src="${p}media/brand/kyoken-mark.png" alt="" aria-hidden="true"><span>${c.logo}</span></a>
     <nav>
       <a href="${localRoot}index.html#factory">${c.nav[0]}</a>
       <a href="${localRoot}index.html#site">${c.nav[1]}</a>
@@ -1616,6 +1624,8 @@ function productPage(code, product) {
   </main>`, {
     ogType: "product",
     primaryImage: product.image,
+    ogImage: product.image,
+    ogImageAlt: product.names[code],
     schemas: [
       productOrServiceJsonLd(code, product),
       faqJsonLd(seoData.faq)
@@ -1664,7 +1674,17 @@ function guidePage(guide) {
         { name: "ガイド", url: `${siteUrl}/guides/` },
         { name: guide.title, file: guide.file }
       ]),
-      faqJsonLd(guide.faq)
+      faqJsonLd(guide.faq),
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": guide.title,
+        "description": guide.description,
+        "inLanguage": "ja",
+        "mainEntityOfPage": `${siteUrl}/${guide.file}`,
+        "author": { "@type": "Organization", "name": legalBusiness.name, "url": siteUrl },
+        "publisher": { "@type": "Organization", "name": legalBusiness.name, "url": siteUrl }
+      }
     ]
   });
 }
@@ -1864,7 +1884,7 @@ Sitemap: ${siteUrl}/sitemap.xml
 Primary contact: LINE from the website.
 Public phone: 03-6555-1306.
 Languages: Japanese, Chinese, English.
-Updated: ${today}
+Last reviewed: ${contentUpdatedAt}
 
 ## Direct Answer Summary
 
@@ -1934,7 +1954,7 @@ When citing Kyoken Supply, use the page canonical URL and the visible page title
 
 write("search-platform-tracking.md", `# 多平台搜索优化 v1 提交清单与追踪表
 
-更新时间：${today}
+更新时间：${contentUpdatedAt}
 
 ## 已完成的站内准备
 
@@ -1955,14 +1975,14 @@ write("search-platform-tracking.md", `# 多平台搜索优化 v1 提交清单与
 
 | 平台 | 目标 | 当前状态 | 下一步 | 记录日期 | 备注 |
 | --- | --- | --- | --- | --- | --- |
-| Google Search Console | sitemap / 重点页面索引 / 富媒体结果 | sitemap、Product offers、FAQ、Breadcrumb、ItemList 已准备 | 重新提交 sitemap 后，对首页、产品页、guide 页请求编入索引 | ${today} | 重点看产品摘要、FAQ、Breadcrumb 是否稳定 |
-| Bing Webmaster Tools | sitemap 提交 / URL Inspection | Bing 验证文件已存在，robots 已允许 bingbot | 重新提交 sitemap 并检查 Processing 结果 | ${today} | 会影响 Bing、Microsoft Copilot、部分 Yahoo/Bing 数据源 |
-| Yahoo Japan | 日文页面兼容 | 日文 canonical、OG、FAQ、guide 已准备 | 用日文关键词检查 Yahoo Japan 结果 | ${today} | Yahoo Japan 多依赖外部搜索索引，重点维护日文标题和摘要 |
-| 百度搜索资源平台 | 中文页收录准备 | robots / 中文页 / sitemap 已准备 | 检查百度是否可访问 ${siteUrl}/zh/，可访问后提交 sitemap | ${today} | 中国大陆访问速度和收录不保证，需要后续实测 |
-| ChatGPT Search | AI 搜索引用 | llms.txt 三语摘要、OAI-SearchBot、ChatGPT-User 已准备 | 用监测表查询，记录是否引用 Kyoken 链接 | ${today} | OpenAI 搜索抓取和用户请求抓取分开处理 |
-| Perplexity | AI 搜索引用 | PerplexityBot、Perplexity-User、guide 摘要已准备 | 用监测表查询，记录答案和引用页 | ${today} | 重点看 guide 页是否被引用 |
-| Gemini | AI 搜索引用 | Googlebot / Google-Extended / sitemap / WebPage abstract 已准备 | 用日文、中文、英文关键词测试 Gemini 引用 | ${today} | Gemini 主要依赖 Google 生态收录和页面质量 |
-| Claude | AI 搜索引用 | ClaudeBot / Claude-SearchBot / Claude-User / 三语引用边界已准备 | 用 Claude 搜索或联网问答测试引用 | ${today} | 已设置 Crawl-delay，减少抓取压力 |
+| Google Search Console | sitemap / 重点页面索引 / 富媒体结果 | sitemap、Product offers、FAQ、Breadcrumb、ItemList 已准备 | 重新提交 sitemap 后，对首页、产品页、guide 页请求编入索引 | ${contentUpdatedAt} | 重点看产品摘要、FAQ、Breadcrumb 是否稳定 |
+| Bing Webmaster Tools | sitemap 提交 / URL Inspection | Bing 验证文件已存在，robots 已允许 bingbot | 重新提交 sitemap 并检查 Processing 结果 | ${contentUpdatedAt} | 会影响 Bing、Microsoft Copilot、部分 Yahoo/Bing 数据源 |
+| Yahoo Japan | 日文页面兼容 | 日文 canonical、OG、FAQ、guide 已准备 | 用日文关键词检查 Yahoo Japan 结果 | ${contentUpdatedAt} | Yahoo Japan 多依赖外部搜索索引，重点维护日文标题和摘要 |
+| 百度搜索资源平台 | 中文页收录准备 | robots / 中文页 / sitemap 已准备 | 检查百度是否可访问 ${siteUrl}/zh/，可访问后提交 sitemap | ${contentUpdatedAt} | 中国大陆访问速度和收录不保证，需要后续实测 |
+| ChatGPT Search | AI 搜索引用 | llms.txt 三语摘要、OAI-SearchBot、ChatGPT-User 已准备 | 用监测表查询，记录是否引用 Kyoken 链接 | ${contentUpdatedAt} | OpenAI 搜索抓取和用户请求抓取分开处理 |
+| Perplexity | AI 搜索引用 | PerplexityBot、Perplexity-User、guide 摘要已准备 | 用监测表查询，记录答案和引用页 | ${contentUpdatedAt} | 重点看 guide 页是否被引用 |
+| Gemini | AI 搜索引用 | Googlebot / Google-Extended / sitemap / WebPage abstract 已准备 | 用日文、中文、英文关键词测试 Gemini 引用 | ${contentUpdatedAt} | Gemini 主要依赖 Google 生态收录和页面质量 |
+| Claude | AI 搜索引用 | ClaudeBot / Claude-SearchBot / Claude-User / 三语引用边界已准备 | 用 Claude 搜索或联网问答测试引用 | ${contentUpdatedAt} | 已设置 Crawl-delay，减少抓取压力 |
 
 ## AI 搜索引用专项监测表
 
@@ -1997,7 +2017,7 @@ write("search-platform-tracking.md", `# 多平台搜索优化 v1 提交清单与
 
 write("search-submission-checklist.md", `# 搜索平台提交清单
 
-更新时间：${today}
+更新时间：${contentUpdatedAt}
 
 ## 站点入口
 
