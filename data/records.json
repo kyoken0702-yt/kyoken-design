@@ -1,5 +1,34 @@
 [
   {
+    "id": "record-20261006172357",
+    "module": "factory",
+    "channel": "advertising",
+    "title": "广告材料制作工厂",
+    "summary": "广告材料制作、出货前确认、包装状态记录。",
+    "i18n": {
+      "ja": {
+        "title": "広告材料制作工場",
+        "summary": "広告材料制作、出荷前確認、包装状態の記録。"
+      },
+      "zh": {
+        "title": "广告材料制作工厂",
+        "summary": "广告材料制作、出货前确认、包装状态记录。"
+      },
+      "en": {
+        "title": "Advertising Material Production Factory",
+        "summary": "Advertising material production, pre-shipment check, and packing status record."
+      }
+    },
+    "createdAt": "2026-10-06T08:24:05.445Z",
+    "media": [
+      "/media/records/factory/advertising/record-20261006172357/20261006172357-01-2ba7b1158e0eef0e0eaf7110dfd6322b.jpg",
+      "/media/records/factory/advertising/record-20261006172357/20261006172359-02-3b0c1397ce2afb938940a0deb10b7991.jpg",
+      "/media/records/factory/advertising/record-20261006172357/20261006172400-03-8bdf74c0a4464f6b892feaca87945601.jpg",
+      "/media/records/factory/advertising/record-20261006172357/20261006172402-04-9d06857885002e2da9376343fbb84af0.jpg",
+      "/media/records/factory/advertising/record-20261006172357/20261006172404-05-26e13ede8f6f19a1210bd50fe24fc1ff.jpg"
+    ]
+  },
+  {
     "id": "record-20260712100907",
     "module": "site",
     "channel": "site",
