@@ -303,6 +303,32 @@
   <script>
     (function () {
       var records = [];
+      var canWrite = false;
+      var busy = false;
+
+      function updateControls() {
+        document.querySelectorAll('button, select, input, textarea').forEach(function (control) {
+          control.disabled = busy;
+        });
+        publishBtn.disabled = busy || !canWrite;
+        recordList.querySelectorAll('.remove-record, .delete-selected, .add-media').forEach(function (control) {
+          control.disabled = busy || !canWrite;
+        });
+      }
+
+      function setBusy(value) {
+        busy = value;
+        updateControls();
+      }
+
+      function canMutate() {
+        if (busy) return false;
+        if (!canWrite) {
+          setStatus("请先登录管理员账号，确认后台可写后再操作。", "warn");
+          return false;
+        }
+        return true;
+      }
 
       var $ = function (id) { return document.getElementById(id); };
       var status = $("status");
@@ -404,6 +430,8 @@
         var res = await fetch("/api/admin-records", options);
         var data = await res.json().catch(function () { return null; });
         if (res.status === 401) {
+          canWrite = false;
+          updateControls();
           $("loginLink").hidden = false;
           loginText.textContent = "登录已过期或尚未登录，请使用 kyoken0702-yt 登录。";
         }
@@ -418,9 +446,12 @@
       }
 
       async function loadRecords() {
+        if (busy) return;
+        setBusy(true);
         recordList.innerHTML = "";
         try {
           var data = await adminApi();
+          canWrite = data.writable === true;
           $("loginLink").hidden = true;
           loginStrip.className = "login-strip ok";
           loginText.textContent = "管理员已登录。";
@@ -434,8 +465,12 @@
             setStatus("已读取前台记录 " + records.length + " 条。发布后会自动触发 Vercel 部署。", "ok");
           }
         } catch (error) {
+          canWrite = false;
+          records = [];
           recordList.innerHTML = '<p class="hint">读取失败：' + escapeHtml(error.message) + '</p>';
           setStatus("读取 records.json 失败：" + error.message, "warn");
+        } finally {
+          setBusy(false);
         }
       }
 
@@ -497,6 +532,7 @@
 	        });
 	        editor.querySelector(".add-media").addEventListener("click", function () { editor.querySelector(".add-media-input").click(); });
 	        editor.querySelector(".add-media-input").addEventListener("change", function (event) { addMediaToRecord(record, Array.from(event.target.files || [])); });
+            updateControls();
 	      }
 
 	      function toggleMediaEditor(container, record) {
@@ -519,6 +555,7 @@
 	      }
 
 	      async function deleteSelectedMedia(record, editor) {
+            if (!canMutate()) return;
 	        var selected = Array.from(editor.querySelectorAll('input[type="checkbox"]:checked')).map(function (input) {
 	          return Number(input.value);
 	        });
@@ -527,23 +564,24 @@
 	        var selectedMap = {};
 	        selected.forEach(function (index) { selectedMap[index] = true; });
 	        var nextMedia = (record.media || []).filter(function (_src, index) { return !selectedMap[index]; });
-	        publishBtn.disabled = true;
+	        setBusy(true);
 	        try {
 	          await saveRecordMedia(record, nextMedia, "已从这条记录移除 " + selected.length + " 个媒体。");
 	        } catch (error) {
 	          setStatus("删除媒体失败：" + error.message, "warn");
 	        } finally {
-	          publishBtn.disabled = false;
+	          setBusy(false);
 	        }
 	      }
 
 	      async function addMediaToRecord(record, files) {
+            if (!canMutate()) return;
 	        if (!files.length) return;
 	        var unsupported = files.filter(function (file) { return !isAllowed(file); });
 	        if (unsupported.length) return setStatus("不支持这些文件：" + unsupported.map(function (file) { return file.name; }).join("、") + "。请使用手机照片、JPG / PNG / WebP 或 MP4 / WebM。", "warn");
 	        var oversizedVideos = files.filter(function (file) { return isVideo(file) && file.size > 25 * 1024 * 1024; });
 	        if (oversizedVideos.length) return setStatus("视频太大，请先压缩到 25MB 以下 MP4 / WebM。", "warn");
-	        publishBtn.disabled = true;
+	        setBusy(true);
 	        setProgress(0, 1);
 	        try {
 	          var mediaPaths = [];
@@ -577,7 +615,7 @@
 	        } catch (error) {
 	          setStatus("追加媒体失败：" + error.message, "warn");
 	        } finally {
-	          publishBtn.disabled = false;
+	          setBusy(false);
 	        }
 	      }
 
@@ -693,6 +731,7 @@
       }
 
       async function publishRecord() {
+        if (!canMutate()) return;
         var moduleName = moduleInput.value;
         var channelName = moduleName === "factory" ? channelInput.value : "site";
         var channelMeta = channelLabels[channelName];
@@ -706,7 +745,7 @@
         var oversizedVideos = files.filter(function (file) { return isVideo(file) && file.size > 25 * 1024 * 1024; });
         if (oversizedVideos.length) return setStatus("视频太大，请先压缩到 25MB 以下 MP4 / WebM。", "warn");
 
-        publishBtn.disabled = true;
+        setBusy(true);
         setProgress(0, 1);
         try {
           var stamp = nowStamp();
@@ -750,21 +789,22 @@
           var result = await adminApi({ action: "publish", record: record, uploadFiles: uploadFiles });
           records = result.records || [record].concat(records);
           renderRecords();
+          clearForm();
           setProgress(1, 1);
           setStatus("发布成功。前台记录索引已更新。图片已自动压缩" + (savedBytes ? "，约减少 " + bytesText(savedBytes) : "") + "。" + deployMessage(result), result.deploy && result.deploy.ok ? "ok" : "warn");
-          clearForm();
         } catch (error) {
           setStatus("发布失败：" + error.message, "warn");
         } finally {
-          publishBtn.disabled = false;
+          setBusy(false);
         }
       }
 
       async function deleteRecord(id) {
+        if (!canMutate()) return;
         var target = records.find(function (record) { return record.id === id; });
         if (!target) return;
         if (!window.confirm("确定从前台移除这条记录？\n" + target.title + "\n媒体文件会保留。")) return;
-        publishBtn.disabled = true;
+        setBusy(true);
         try {
           var result = await adminApi({ action: "remove", id: id });
           records = result.records || records.filter(function (record) { return record.id !== id; });
@@ -773,7 +813,7 @@
         } catch (error) {
           setStatus("删除失败：" + error.message, "warn");
         } finally {
-          publishBtn.disabled = false;
+          setBusy(false);
         }
       }
 
@@ -802,6 +842,7 @@
       reloadBtn.addEventListener("click", loadRecords);
 
       updateLoginUi();
+      updateControls();
       syncModuleFields(false);
       loadRecords();
     })();
