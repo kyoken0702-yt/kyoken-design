@@ -9,7 +9,7 @@ process.env.GITHUB_CLIENT_SECRET = "local-test-secret-not-a-credential";
 process.env.GITHUB_CLIENT_ID = "test-client";
 process.env.GITHUB_ADMIN_TOKEN = "test-server-token";
 const session = sessionCookie("kyoken0702-yt").split(";")[0];
-const headers = { cookie: session, origin: "https://kyoken.design", "content-type": "application/json" };
+const headers = { cookie: session, origin: "https://www.kyoken.design", "content-type": "application/json" };
 function response() {
   return { code: 200, headers: {}, setHeader(k, v) { this.headers[k] = v; }, status(n) { this.code = n; return this; }, send(v) { this.body = v; return this; }, end() {}, redirect(v) { this.code = 302; this.location = v; } };
 }
@@ -45,9 +45,9 @@ for (const filePath of ["api/auth.js", "media/records/site/x.html", "media/recor
 }
 assert.equal(calls, 0);
 const login = response();
-auth({ method: "GET", headers: { host: "kyoken.design" }, query: { scope: "repo", return_origin: "https://evil.example" } }, login);
+auth({ method: "GET", headers: { host: "www.kyoken.design" }, query: { scope: "repo", return_origin: "https://evil.example" } }, login);
 assert.equal(new URL(login.location).searchParams.get("scope"), "read:user");
-assert.equal(new URL(login.location).searchParams.get("redirect_uri"), "https://kyoken.design/api/callback");
+assert.equal(new URL(login.location).searchParams.get("redirect_uri"), "https://www.kyoken.design/api/callback");
 const invalid = response();
 await callback({ method: "GET", headers: {}, query: { state: "bad", code: "test" } }, invalid);
 assert.equal(invalid.code, 400);
