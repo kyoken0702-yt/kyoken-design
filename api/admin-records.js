@@ -1,5 +1,6 @@
 import fs from "node:fs/promises";
 import path from "node:path";
+import { protectAdmin } from "../lib/admin-session.js";
 
 const owner = process.env.GITHUB_OWNER || "kyoken0702-yt";
 const repo = process.env.GITHUB_REPO || "kyoken-design";
@@ -16,7 +17,7 @@ function deployHookUrl() {
 
 function cleanGitPath(value) {
   const path = String(value || "").replace(/^\/+/, "");
-  if (!path || path.includes("..") || path.startsWith(".git/")) throw new Error(`Invalid path: ${value}`);
+  if (!/^media\/records\/(?:factory\/(?:advertising|curtain|wpc|enamel)|site)\/.+\.(?:jpe?g|png|webp|gif|mp4|webm)$/i.test(path) || path.includes("..") || /[\\\x00-\x1f%]/.test(path)) throw new Error("Invalid media path.");
   return path;
 }
 
@@ -127,6 +128,7 @@ async function triggerDeployHook() {
 
 export default async function handler(req, res) {
   res.setHeader("Content-Type", "application/json; charset=utf-8");
+  if (!protectAdmin(req, res)) return;
   try {
     if (req.method === "HEAD") {
       res.status(200).end();
@@ -162,6 +164,8 @@ export default async function handler(req, res) {
     if (body.action === "blob") {
       const file = body.file;
       if (!file || !file.path || !file.content) throw new Error("缺少上传文件。");
+      cleanGitPath(file.path);
+      if (typeof file.content !== "string" || file.content.length > 3500000 || !/^[A-Za-z0-9+/]*={0,2}$/.test(file.content)) throw new Error("Invalid media content.");
       const sha = await createBlob(file.content, "base64");
       res.status(200).send(JSON.stringify({ ok: true, file: { path: cleanGitPath(file.path), sha } }));
       return;

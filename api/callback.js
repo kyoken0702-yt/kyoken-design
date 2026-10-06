@@ -1,97 +1,34 @@
-function getCookie(req, name) {
-  const cookies = String(req.headers.cookie || "").split(";").map((item) => item.trim());
-  const target = cookies.find((item) => item.startsWith(`${name}=`));
-  return target ? decodeURIComponent(target.slice(name.length + 1)) : "";
-}
-
-function oauthResultPage(provider, status, payload, returnOrigin) {
-  const message = `authorization:${provider}:${status}:${JSON.stringify(payload)}`;
-  const token = status === "success" && payload && payload.token ? payload.token : "";
-  return `<!doctype html>
-<html>
-<head><meta charset="utf-8"><title>Kyoken Admin Login</title></head>
-<body>
-<script>
-(function () {
-	  var token = ${JSON.stringify(token)};
-	  var tokenKey = "kyoken_supply_admin_token";
-	  var adminPath = "/admin/";
-	  var returnOrigin = ${JSON.stringify(returnOrigin || "")};
-	  var message = ${JSON.stringify(message)};
-	  function receiveMessage(event) {
-	    if (!event || !event.origin) return;
-	    window.opener.postMessage(message, event.origin);
-	    window.close();
-	  }
-	  if (window.opener) {
-	    if (returnOrigin) {
-	      window.opener.postMessage(message, returnOrigin);
-	      window.setTimeout(function () { window.close(); }, 300);
-	      return;
-	    }
-	    window.addEventListener("message", receiveMessage, false);
-	    window.opener.postMessage("authorizing:github", "*");
-	    return;
-	  }
-  if (token) {
-    try {
-      window.sessionStorage.setItem(tokenKey, token);
-    } catch (error) {}
-    window.location.replace(adminPath);
-    return;
-  }
-  document.body.textContent = "GitHub login failed. Please return to admin and try again.";
-})();
-</script>
-<p>Authentication complete. Returning to admin...</p>
-</body>
-</html>`;
-}
+import { adminOrigin, adminLogin, cookie, sessionCookie } from "../lib/admin-session.js";
 
 export default async function handler(req, res) {
+  res.setHeader("Cache-Control", "no-store");
+  if (req.method !== "GET") return res.status(405).send("Method not allowed.");
+  const expected = cookie(req, "__Host-kyoken_oauth_state");
+  const clearState = "__Host-kyoken_oauth_state=; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=0";
+  res.setHeader("Set-Cookie", clearState);
+  if (!expected || expected !== req.query.state || typeof req.query.code !== "string") {
+    return res.status(400).send("Login expired or invalid. Please return to /admin/ and sign in again.");
+  }
   const clientId = process.env.GITHUB_CLIENT_ID;
   const clientSecret = process.env.GITHUB_CLIENT_SECRET;
-  if (!clientId || !clientSecret) {
-    res.status(500).send("Missing GITHUB_CLIENT_ID or GITHUB_CLIENT_SECRET.");
-    return;
+  if (!clientId || !clientSecret) return res.status(503).send("Admin authentication is not configured.");
+  try {
+    const response = await fetch("https://github.com/login/oauth/access_token", {
+      method: "POST",
+      headers: { Accept: "application/json", "Content-Type": "application/json" },
+      body: JSON.stringify({ client_id: clientId, client_secret: clientSecret, code: req.query.code, redirect_uri: `${adminOrigin}/api/callback` })
+    });
+    const token = await response.json();
+    if (!response.ok || !token.access_token) return res.status(401).send("GitHub login failed. Please try again.");
+    const userResponse = await fetch("https://api.github.com/user", {
+      headers: { Accept: "application/vnd.github+json", Authorization: `Bearer ${token.access_token}` }
+    });
+    const user = await userResponse.json();
+    if (!userResponse.ok) return res.status(502).send("Unable to verify GitHub identity. Please try again.");
+    if (user.login !== adminLogin) return res.status(403).send("This GitHub account is not the website administrator.");
+    res.setHeader("Set-Cookie", [clearState, sessionCookie(user.login)]);
+    return res.redirect(`${adminOrigin}/admin/`);
+  } catch {
+    return res.status(502).send("GitHub authentication is temporarily unavailable. Please try again.");
   }
-
-  const expectedState = getCookie(req, "kyoken_supply_oauth_state");
-  const returnOrigin = getCookie(req, "kyoken_supply_return_origin");
-  if (!expectedState || expectedState !== req.query.state) {
-    res.status(400).send("Invalid OAuth state.");
-    return;
-  }
-
-  if (!req.query.code) {
-    res.status(400).send("Missing OAuth code.");
-    return;
-  }
-
-  const tokenResponse = await fetch("https://github.com/login/oauth/access_token", {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      client_id: clientId,
-      client_secret: clientSecret,
-      code: req.query.code
-    })
-  });
-  const tokenPayload = await tokenResponse.json();
-
-  res.setHeader("Set-Cookie", [
-    "kyoken_supply_oauth_state=; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=0",
-    "kyoken_supply_return_origin=; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=0"
-  ]);
-
-  if (!tokenPayload.access_token) {
-    res.status(400).send(oauthResultPage("github", "error", tokenPayload, returnOrigin));
-    return;
-  }
-
-  res.setHeader("Content-Type", "text/html; charset=utf-8");
-  res.status(200).send(oauthResultPage("github", "success", { token: tokenPayload.access_token }, returnOrigin));
 }

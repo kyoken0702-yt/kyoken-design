@@ -284,6 +284,11 @@ const products = [
 
 const recordChannels = [
   {
+    id: "enamel",
+    hideWhenEmpty: true,
+    title: { ja: "ホーローマグネットパネル製造工場", zh: "珐琅磁吸板制作工厂", en: "Magnetic Enamel Panel Factory" }
+  },
+  {
     id: "advertising",
     title: { ja: "広告材料制作工場", zh: "广告材料制作工厂", en: "Advertising Material Production Factory" }
   },
@@ -1087,6 +1092,7 @@ function factoryChannelSections(code, compact = true) {
     const list = records
       .filter((record) => record.module === "factory")
       .filter((record) => (record.channel || inferChannel(record)) === channel.id);
+    if (channel.hideWhenEmpty && !list.length) return "";
     const body = list.length
       ? list.map((record) => recordCard(record, code, compact, { showHeader: false })).join("")
       : `<div class="record-card empty">${mediaGrid({ media: [] }, code)}</div>`;
@@ -1099,6 +1105,7 @@ function factoryChannelSections(code, compact = true) {
 
 function inferChannel(record) {
   const value = `${record.channel || ""} ${record.id || ""} ${record.title || ""}`.toLowerCase();
+  if (value.includes("enamel") || value.includes("珐琅") || value.includes("ホーロー")) return "enamel";
   if (value.includes("wpc") || value.includes("塑木") || value.includes("人工木")) return "wpc";
   if (value.includes("curtain") || value.includes("窗帘") || value.includes("カーテン")) return "curtain";
   return "advertising";

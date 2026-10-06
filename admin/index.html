@@ -231,7 +231,7 @@
   <header>
     <div>
       <h1>京建供应链记录后台</h1>
-      <p class="top-note">直接进入后台。先选前台模块，再选材料通道；发布后前台同名模块会显示。</p>
+      <p class="top-note">管理员登录后可上传和管理记录。先选前台模块，再选材料通道。</p>
     </div>
     <div class="actions">
       <button id="reloadBtn" class="secondary" type="button">刷新记录</button>
@@ -241,10 +241,11 @@
   <main>
     <section class="panel">
       <h2>发布新记录</h2>
-      <div id="status" class="status">后台已打开，可以先选择图片预览。</div>
+      <div id="status" class="status">正在检查登录状态，可以先选择图片预览。</div>
       <div id="progress" class="progress"><div></div></div>
       <div id="loginStrip" class="login-strip">
-        <span id="loginText">免 GitHub 弹窗登录。发布会通过本站服务端提交到 GitHub。</span>
+        <span id="loginText">正在检查管理员登录状态。</span>
+        <a id="loginLink" href="https://kyoken.design/api/auth">使用 GitHub 管理员账号登录</a>
       </div>
 
       <label>
@@ -261,6 +262,7 @@
           <option value="advertising">广告材料制作工厂</option>
           <option value="curtain">窗帘加工制作工厂</option>
           <option value="wpc">塑木板材料工厂</option>
+          <option value="enamel">珐琅磁吸板制作工厂</option>
         </select>
         <span class="hint">选择后会自动填写标题和说明；前台会显示在同名工厂模块里。</span>
       </label>
@@ -325,6 +327,15 @@
       };
 
       var channelLabels = {
+        enamel: {
+          title: "珐琅磁吸板制作工厂",
+          summary: "珐琅磁吸板制作、加工、包装与出货前状态记录。",
+          i18n: {
+            ja: { title: "ホーローマグネットパネル製造工場", summary: "ホーローマグネットパネルの製造、加工、梱包、出荷前の状態の記録。" },
+            zh: { title: "珐琅磁吸板制作工厂", summary: "珐琅磁吸板制作、加工、包装与出货前状态记录。" },
+            en: { title: "Magnetic Enamel Panel Factory", summary: "Magnetic enamel panel production, processing, packing, and pre-shipment status record." }
+          }
+        },
         advertising: {
           title: "广告材料制作工厂",
           summary: "广告材料制作、出货前确认、包装状态记录。",
@@ -365,8 +376,8 @@
       }
 
       function updateLoginUi() {
-        loginStrip.className = "login-strip ok";
-        loginText.textContent = "后台已打开。发布和删除会通过本站服务端提交，不再弹 GitHub 登录窗口。";
+        try { window.sessionStorage.removeItem("kyoken_supply_admin_token"); } catch (error) {}
+        loginText.textContent = "上传和删除需管理员登录；登录有效期为 8 小时。";
       }
 
       function syncModuleFields(forceTitle) {
@@ -392,6 +403,10 @@
         } : {};
         var res = await fetch("/api/admin-records", options);
         var data = await res.json().catch(function () { return null; });
+        if (res.status === 401) {
+          $("loginLink").hidden = false;
+          loginText.textContent = "登录已过期或尚未登录，请使用 kyoken0702-yt 登录。";
+        }
         if (!res.ok || !data || !data.ok) throw new Error((data && data.message) || ("Admin API error: " + res.status));
         return data;
       }
@@ -406,6 +421,9 @@
         recordList.innerHTML = "";
         try {
           var data = await adminApi();
+          $("loginLink").hidden = true;
+          loginStrip.className = "login-strip ok";
+          loginText.textContent = "管理员已登录。";
           records = data.records || [];
           renderRecords();
           if (data.writable === false) {
