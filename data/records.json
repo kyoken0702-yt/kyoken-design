@@ -1,5 +1,30 @@
 [
   {
+    "id": "record-20261006171706",
+    "module": "factory",
+    "channel": "enamel",
+    "title": "后台上传功能测试",
+    "summary": "后台上传功能测试",
+    "i18n": {
+      "ja": {
+        "title": "ホーローマグネットパネル製造工場",
+        "summary": "ホーローマグネットパネルの製造、加工、梱包、出荷前の状態の記録。"
+      },
+      "zh": {
+        "title": "珐琅磁吸板制作工厂",
+        "summary": "珐琅磁吸板制作、加工、包装与出货前状态记录。"
+      },
+      "en": {
+        "title": "Magnetic Enamel Panel Factory",
+        "summary": "Magnetic enamel panel production, processing, packing, and pre-shipment status record."
+      }
+    },
+    "createdAt": "2026-10-06T08:17:07.560Z",
+    "media": [
+      "/media/records/factory/enamel/record-20261006171706/20261006171706-01-admin-upload-test.jpg"
+    ]
+  },
+  {
     "id": "record-20260712100907",
     "module": "site",
     "channel": "site",
