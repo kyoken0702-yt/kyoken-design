@@ -2,6 +2,8 @@
   "buildCommand": "node scripts/rebuild-v5.mjs",
   "outputDirectory": ".",
   "redirects": [
+    { "source": "/admin", "has": [{ "type": "host", "value": "kyoken.design" }], "destination": "https://www.kyoken.design/admin/", "permanent": false },
+    { "source": "/admin/", "has": [{ "type": "host", "value": "kyoken.design" }], "destination": "https://www.kyoken.design/admin/", "permanent": false },
     { "source": "/admin/:path*", "has": [{ "type": "host", "value": "kyoken.design" }], "destination": "https://www.kyoken.design/admin/:path*", "permanent": false },
     { "source": "/acrylic-sign-details.html", "destination": "/advertising-materials-details.html", "permanent": true },
     { "source": "/lightbox-details.html", "destination": "/advertising-materials-details.html", "permanent": true },
