@@ -176,6 +176,23 @@ export default async function handler(req, res) {
     if (body.action === "publish") {
       const record = body.record;
       if (!record || !record.id || !Array.isArray(record.media)) throw new Error("缺少发布记录。");
+      if (!["factory", "site"].includes(record.module) ||
+          (record.module === "factory" && !["advertising", "curtain", "wpc", "enamel"].includes(record.channel))) {
+        res.status(400).send(JSON.stringify({ ok: false, message: "请选择有效的记录模块和材料通道。" }));
+        return;
+      }
+      if (records.some((item) => item && item.id === record.id)) {
+        res.status(409).send(JSON.stringify({ ok: false, message: "记录 ID 已存在，请刷新后重试；追加照片请使用已有记录的“编辑图片”。" }));
+        return;
+      }
+      const related = records.filter((item) => item && item.module === record.module &&
+        (record.module === "site" || item.channel === record.channel));
+      if (related.length && body.confirmSeparateRecord !== true) {
+        res.status(409).send(JSON.stringify({ ok: false, message: "该分类已有记录。追加照片请使用已有记录的“编辑图片”；如需新建独立记录，请刷新列表后确认。" }));
+        return;
+      }
+      // This is the record creation time, not the photo capture or project date.
+      record.createdAt = new Date().toISOString();
       const existing = records.filter((item) => item && item.id !== record.id);
       const nextRecords = [record].concat(existing);
       const commit = await commitBundle(body.uploadFiles || [], nextRecords, "publish kyoken supply record");

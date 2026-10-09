@@ -1,7 +1,7 @@
 {
   "scripts": {
     "build": "node scripts/rebuild-v5.mjs",
-    "test": "node scripts/seo-check.mjs && node scripts/upload-channel-check.mjs && node scripts/admin-security-check.mjs && node scripts/admin-controls-check.mjs"
+    "test": "node scripts/seo-check.mjs && node scripts/upload-channel-check.mjs && node scripts/admin-security-check.mjs && node scripts/admin-controls-check.mjs && node scripts/record-publish-check.mjs"
   },
   "dependencies": {
     "vercel": "^54.6.1"

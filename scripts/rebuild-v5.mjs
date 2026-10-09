@@ -1071,8 +1071,9 @@ function mediaGrid(record, code, compact = false, options = {}) {
 function recordCard(record, code, compact = true, options = {}) {
   const showHeader = options.showHeader !== false;
   const showSummary = options.showSummary !== false;
-  return `<article class="record-card">
-    ${showHeader ? `<div class="record-card-head">
+  return `<article class="record-card"${options.recordLabel ? ` data-record-id="${escapeHtml(record.id)}"` : ""}>${options.recordLabel ? `
+    <div class="record-card-head"><strong>${escapeHtml(options.recordLabel)}</strong></div>` : ""}${showHeader ? `
+    <div class="record-card-head">
       <span>${record.module === "site" ? lang[code].siteTitle : lang[code].factoryTitle}</span>
       <strong>${escapeHtml(recordTitle(record, code))}</strong>
     </div>` : ""}
@@ -1094,13 +1095,25 @@ function factoryChannelSections(code, compact = true) {
       .filter((record) => (record.channel || inferChannel(record)) === channel.id);
     if (channel.hideWhenEmpty && !list.length) return "";
     const body = list.length
-      ? list.map((record) => recordCard(record, code, compact, { showHeader: false })).join("")
+      ? list.map((record, index) => {
+        const date = recordDate(record);
+        const dateLabel = { ja: "記録日", zh: "记录日期", en: "Record date" }[code];
+        const unknown = { ja: "未登録", zh: "未提供", en: "Not provided" }[code];
+        const sameDate = list.filter((item) => recordDate(item) === date).length > 1;
+        const suffix = sameDate ? ` · ${{ ja: "記録", zh: "记录", en: "Record" }[code]} ${index + 1}` : "";
+        return recordCard(record, code, compact, { showHeader: false, recordLabel: `${dateLabel}: ${date || unknown}${suffix}` });
+      }).join("")
       : `<div class="record-card empty">${mediaGrid({ media: [] }, code)}</div>`;
     return `<section class="channel-section">
       <h3>${channel.title[code]}</h3>
       <div class="record-grid${compact ? "" : " wide"}">${body}</div>
     </section>`;
   }).join("");
+}
+
+function recordDate(record) {
+  if (!record.createdAt || !Number.isFinite(Date.parse(record.createdAt))) return "";
+  return new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Tokyo", year: "numeric", month: "2-digit", day: "2-digit" }).format(new Date(record.createdAt));
 }
 
 function inferChannel(record) {
