@@ -264,7 +264,7 @@
           <option value="wpc">塑木板材料工厂</option>
           <option value="enamel">珐琅磁吸板制作工厂</option>
         </select>
-        <span class="hint">选择后会自动填写标题和说明；前台会显示在同名工厂模块里。</span>
+        <span class="hint">此处新建独立记录。给已有记录追加照片，请在右侧“当前前台记录”中选择“编辑图片”。前台按记录日期区分，日期不代表拍摄或完工日期。</span>
       </label>
 
       <label>
@@ -288,7 +288,7 @@
       <div id="previewGrid" class="preview-grid"></div>
 
       <div class="actions">
-        <button id="publishBtn" type="button">上传并发布</button>
+        <button id="publishBtn" type="button">上传并新建记录</button>
         <button id="clearBtn" class="secondary" type="button">清空表单</button>
       </div>
     </section>
@@ -490,6 +490,7 @@
 	            '<small>' + escapeHtml(moduleText + channelText) + '</small>' +
 	            '<div><strong>' + mediaCount + '</strong> 个媒体</div>' +
 	            '<small>' + escapeHtml(record.id || "") + '</small>' +
+                '<small>记录日期（日本时间）：' + escapeHtml(record.createdAt && Number.isFinite(Date.parse(record.createdAt)) ? new Date(record.createdAt).toLocaleDateString("sv-SE", { timeZone: "Asia/Tokyo" }) : "未提供") + '</small>' +
 	            '<div class="actions">' +
 	            '<button class="secondary edit-media" type="button">编辑图片</button>' +
 	            '<button class="danger remove-record" type="button">从前台移除</button>' +
@@ -744,6 +745,14 @@
         if (unsupported.length) return setStatus("不支持这些文件：" + unsupported.map(function (file) { return file.name; }).join("、") + "。请使用手机照片、JPG / PNG / WebP 或 MP4 / WebM。", "warn");
         var oversizedVideos = files.filter(function (file) { return isVideo(file) && file.size > 25 * 1024 * 1024; });
         if (oversizedVideos.length) return setStatus("视频太大，请先压缩到 25MB 以下 MP4 / WebM。", "warn");
+        var related = records.filter(function (record) {
+          return record.module === moduleName && (moduleName === "site" || record.channel === channelName);
+        });
+        var confirmSeparateRecord = false;
+        if (related.length) {
+          confirmSeparateRecord = window.confirm("该分类已有 " + related.length + " 条记录。\n若是给已有记录追加照片，请取消，并使用该记录的“编辑图片”。\n只有需要单独展示时才新建；系统不会认定为同一工厂或不同工厂。\n是否仍要新建独立记录？");
+          if (!confirmSeparateRecord) return;
+        }
 
         setBusy(true);
         setProgress(0, 1);
@@ -786,7 +795,7 @@
           };
           setProgress(files.length + 1, files.length + 2);
           setStatus("正在发布记录索引：媒体 " + uploadFiles.length + " 个 + records.json 1 个。");
-          var result = await adminApi({ action: "publish", record: record, uploadFiles: uploadFiles });
+          var result = await adminApi({ action: "publish", record: record, uploadFiles: uploadFiles, confirmSeparateRecord: confirmSeparateRecord });
           records = result.records || [record].concat(records);
           renderRecords();
           clearForm();
